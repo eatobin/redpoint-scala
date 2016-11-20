@@ -9,6 +9,11 @@ object RosterUtility {
     rosterLines.map(l => l.split(" ,").toList)
   }
 
+  def makeRosterInfo(rosterList: List[List[String]]): List[String] =
+    rosterList.head
+
+  def makePlayersList(rosterList: List[List[String]]): List[List[String]] =
+    rosterList.tail
 }
 
 
