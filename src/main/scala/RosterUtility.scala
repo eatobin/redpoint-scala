@@ -6,7 +6,7 @@ object RosterUtility {
 
   def makeRosterList(rosterString: String): List[List[String]] = {
     val rosterLines = rosterString.split("\n").toList
-    rosterLines.map(l => l.split(" ,").toList)
+    rosterLines.map(l => l.split(", ").toList)
   }
 
   def makeRosterInfo(rosterList: List[List[String]]): List[String] =
