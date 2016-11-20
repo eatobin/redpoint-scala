@@ -1,5 +1,3 @@
-package redpointScala
-
 /**
   * Created by eatobin on 11/20/16.
   */
