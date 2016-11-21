@@ -14,7 +14,23 @@ object RosterUtility {
 
   def makePlayersList(rosterList: List[List[String]]): List[List[String]] =
     rosterList.tail
+
+  def f(ab: (Int, Int)): Int =
+    ab match {
+      case (a, b) => a + b
+    }
+
+  def makePlayerKV(kv: (String, String, String, String)): (Symbol, Player) =
+    kv match {
+      case (s, pn, ge, gr) =>
+        val gp = GiftPair(Symbol(ge), Symbol(gr))
+        val plr = Player(pn, List(gp))
+        (Symbol(s), plr)
+    }
+
 }
 
 
 // :load /Users/eatobin/scala_projects/redpoint-scala/src/main/scala/RosterUtility.scala
+// :load /home/eric/scala_projects/redpoint-scala/src/main/scala/RosterUtility.scala
+// testRosterList = [["The Beatles","2014"],["RinSta","Ringo Starr","JohLen","GeoHar"],["JohLen","John Lennon","PauMcc","RinSta"],["GeoHar","George Harrison","RinSta","PauMcc"],["PauMcc","Paul McCartney","GeoHar","JohLen"]]
