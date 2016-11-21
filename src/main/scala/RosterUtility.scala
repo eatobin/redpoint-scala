@@ -20,13 +20,26 @@ object RosterUtility {
       case (a, b) => a + b
     }
 
-  def makePlayerMap(kv: (String, String, String, String)): Map[Symbol, Player] =
+  def makePlayerKV(kv: (String, String, String, String)): (String, Player) =
     kv match {
       case (s, pn, ge, gr) =>
         val gp = GiftPair(Symbol(ge), Symbol(gr))
         val plr = Player(pn, List(gp))
-        Map(Symbol(s) -> plr)
+        (s, plr)
     }
+
+  def makePlayersKVList(playersList: List[List[String]]) =
+    playersList.productIterator.map { case (k, v) => k.toString -> Player }
+
+  //  def makePlayerMap(kv: (String, String, String, String)): Map[Symbol, Player] =
+  //    kv match {
+  //      case (s, pn, ge, gr) =>
+  //        val gp = GiftPair(Symbol(ge), Symbol(gr))
+  //        val plr = Player(pn, List(gp))
+  //        Map(Symbol(s) -> plr)
+  //    }
+  //
+  //  def makePlayersMap(List[List[String]])
 
 }
 
