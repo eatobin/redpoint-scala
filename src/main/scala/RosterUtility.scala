@@ -24,7 +24,7 @@ object RosterUtility {
     }
 
   def makePlayersMapList(rosterList: List[List[String]]): Map[Symbol, Player] =
-    rosterList.map(kv => makePlayerKV(kv)).toMap
+    rosterList.map(kvt => makePlayerKV(kvt)).toMap
 
 }
 
