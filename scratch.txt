@@ -1,0 +1,5 @@
+def f(s: String): Double = s.toDouble
+
+def g(i: Int): String = i.toString
+
+val fComposeG: (Int) => Double = f _ compose g

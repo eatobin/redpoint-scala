@@ -26,13 +26,15 @@ object RosterUtility {
   def makePlayersMapList(rosterList: List[List[String]]): Map[Symbol, Player] =
     rosterList.map(kvt => makePlayerKV(kvt)).toMap
 
+  val makePlayersMap: (List[List[String]]) => Map[Symbol, Player] =
+    makePlayersMapList _ compose makePlayersList
+
 }
 
 
 // :load /Users/eatobin/scala_projects/redpoint-scala/src/main/scala/RosterUtility.scala
 // :load /home/eric/scala_projects/redpoint-scala/src/main/scala/RosterUtility.scala
-// val bs = "The Beatles, 2014\nRinSta, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc\nPauMcc, Paul McCartney, GeoHar, JohLen"
-// val rl = RosterUtility.makeRosterList(bs)
-// val pl = RosterUtility.makePlayersList(rl)
-// val hd = pl.head
-// val kv = RosterUtility.makePlayerKV(hd)
+
+//val bs = "The Beatles, 2014\nRinSta, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc\nPauMcc, Paul McCartney, GeoHar, JohLen"
+//val rl: List[List[String]] = List(List("The Beatles", "2014"), List("RinSta", "Ringo Starr", "JohLen", "GeoHar"), List("JohLen", "John Lennon", "PauMcc", "RinSta"), List("GeoHar", "George Harrison", "RinSta", "PauMcc"), List("PauMcc", "Paul McCartney", "GeoHar", "JohLen"))
+//val rl: List[List[String]] = List(List("The Beatles", "2014"), List("RinSta", "Ringo Starr", "JohLen", "GeoHar"), List("JohLen", "John Lennon", "PauMcc", "RinSta"), List("GeoHar", "George Harrison", "RinSta", "PauMcc"), List("PauMcc", "Paul McCartney", "GeoHar", "JohLen"))//val pl: List[List[String]] = List(List("RinSta", "Ringo Starr", "JohLen", "GeoHar"), List("JohLen", "John Lennon", "PauMcc", "RinSta"), List("GeoHar", "George Harrison", "RinSta", "PauMcc"), List("PauMcc", "Paul McCartney", "GeoHar", "JohLen"))
