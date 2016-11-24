@@ -29,6 +29,16 @@ object RosterUtility {
   val makePlayersMap: (List[List[String]]) => Map[Symbol, Player] =
     makePlayersMapList _ compose makePlayersList
 
+  def third(d: Double): Boolean = d < 10.0
+
+  def second(s: String): Double = s.toDouble
+
+  def first(i: Int): String = i.toString
+
+  val secondComposeFirst: (Int) => Double = second _ compose first
+
+  val thirdComposeFirst: (Int) => Boolean = third _ compose second compose first
+
 }
 
 
