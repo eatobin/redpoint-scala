@@ -1,5 +1,7 @@
-def f(s: String): Double = s.toDouble
+def third(d: Double): Boolean = d < 10.0
 
-def g(i: Int): String = i.toString
+def second(s: String): Double = s.toDouble
 
-val fComposeG: (Int) => Double = f _ compose g
+def first(i: Int): String = i.toString
+
+val secondComposeFirst: (Int) => Double = second _ compose first
