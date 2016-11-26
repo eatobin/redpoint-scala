@@ -1,18 +1,20 @@
-case class GiftPair(givee: Symbol, giver: Symbol)
+package redpoint
+
+case class GiftPair(givee: Givee, giver: Giver)
 
 case class Player(pName: String, giftHist: Vector[GiftPair])
 
 object RosterUtility {
 
-  def makeRosterList(rosterString: String): List[List[String]] = {
+  def makeRosterList(rosterString: String): RosterList = {
     val rosterLines = rosterString.split("\n").toList
     rosterLines.map(l => l.split(", ").toList)
   }
 
-  def makeRosterInfo(rosterList: List[List[String]]): List[String] =
+  def makeRosterInfo(rosterList: RosterList): List[String] =
     rosterList.head
 
-  def makePlayersList(rosterList: List[List[String]]): List[List[String]] =
+  def makePlayersList(rosterList: RosterList): RosterList =
     rosterList.tail
 
   def makePlayerKV(kv: List[String]): (Symbol, Player) =
@@ -23,10 +25,10 @@ object RosterUtility {
         (Symbol(s), plr)
     }
 
-  def makePlayersMapList(rosterList: List[List[String]]): Map[Symbol, Player] =
+  def makePlayersMapList(rosterList: RosterList): Map[Symbol, Player] =
     rosterList.map(kvt => makePlayerKV(kvt)).toMap
 
-  val makePlayersMap: (List[List[String]]) => Map[Symbol, Player] =
+  val makePlayersMap: (RosterList) => Map[Symbol, Player] =
     makePlayersMapList _ compose makePlayersList
 
   def third(d: Double): Boolean = d < 10.0
