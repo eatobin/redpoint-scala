@@ -2,22 +2,22 @@ package redpoint
 
 case class GiftPair(givee: Givee, giver: Giver)
 
-case class Player(pName: String, giftHist: Vector[GiftPair])
+case class Player(pName: PName, giftHist: GiftHist)
 
 object RosterUtility {
 
-  def makeRosterList(rosterString: String): RosterList = {
+  def makeRosterList(rosterString: RosterString): RosterList = {
     val rosterLines = rosterString.split("\n").toList
     rosterLines.map(l => l.split(", ").toList)
   }
 
-  def makeRosterInfo(rosterList: RosterList): List[String] =
+  def makeRosterInfo(rosterList: RosterList): RosterLine =
     rosterList.head
 
   def makePlayersList(rosterList: RosterList): RosterList =
     rosterList.tail
 
-  def makePlayerKV(kv: List[String]): (Symbol, Player) =
+  def makePlayerKV(kv: RosterLine): PlayerKV =
     kv match {
       case List(s, pn, ge, gr) =>
         val gp = GiftPair(Symbol(ge), Symbol(gr))
@@ -25,10 +25,10 @@ object RosterUtility {
         (Symbol(s), plr)
     }
 
-  def makePlayersMapList(rosterList: RosterList): Map[Symbol, Player] =
+  def makePlayersMapList(rosterList: RosterList): PlayersMap =
     rosterList.map(kvt => makePlayerKV(kvt)).toMap
 
-  val makePlayersMap: (RosterList) => Map[Symbol, Player] =
+  val makePlayersMap: (RosterList) => PlayersMap =
     makePlayersMapList _ compose makePlayersList
 
   def third(d: Double): Boolean = d < 10.0
