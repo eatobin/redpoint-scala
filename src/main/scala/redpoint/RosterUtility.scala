@@ -26,7 +26,7 @@ object RosterUtility {
     }
 
   def makePlayersMapList(rosterList: RosterList): PlayersMap =
-    rosterList.map(kvt => makePlayerKV(kvt)).toMap
+    rosterList.map(kvp => makePlayerKV(kvp)).toMap
 
   val makePlayersMap: (RosterList) => PlayersMap =
     makePlayersMapList _ compose makePlayersList
