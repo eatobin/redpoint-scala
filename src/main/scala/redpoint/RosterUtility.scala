@@ -33,7 +33,6 @@ object RosterUtility {
 
 }
 
-
 // :load /Users/eatobin/scala_projects/redpoint-scala/src/main/scala/RosterUtility.scala
 // :load /home/eric/scala_projects/redpoint-scala/src/main/scala/RosterUtility.scala
 
