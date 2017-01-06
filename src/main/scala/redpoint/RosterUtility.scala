@@ -31,6 +31,9 @@ object RosterUtility {
   val makePlayersMap: (RosterList) => PlayersMap =
     makePlayersMapList _ compose makePlayersList
 
+  def getPlayerInRoster(ps: PlrSym, pm: PlayersMap): Player =
+    pm(ps)
+
 }
 
 // :load /Users/eatobin/scala_projects/redpoint-scala/src/main/scala/RosterUtility.scala
