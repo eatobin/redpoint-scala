@@ -9,16 +9,10 @@ class RosterSpec extends FlatSpec {
 
   "A RosterList" should "create itself properly" in {
     assert(RosterUtility.makeRosterList(bs) == rl)
-    //    assert(Borrower.getMaxBooks(br1) == 1)
   }
 
-  //  it should "set a new name and maxBooks" in {
-  //    assert(Borrower.setName("Borrower1", Borrower("Jack", 1)) == br1)
-  //    assert(Borrower.setMaxBooks(1, Borrower("Borrower1", 11)) == br1)
-  //  }
-  //
-  //  it should "return a string \"Borrower1 (1 books)\"" in {
-  //    assert(Borrower.borrowerToString(br1) == "Borrower1 (1 books)")
-  //  }
+  "A RosterInfo" should "create itself properly" in {
+    assert(RosterUtility.makeRosterInfo(rl) == List("The Beatles", "2014"))
+  }
 
 }
