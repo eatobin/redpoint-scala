@@ -41,3 +41,23 @@ object RosterUtility {
 // val bs = "The Beatles, 2014\nRinSta, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc\nPauMcc, Paul McCartney, GeoHar, JohLen"
 // val rl: List[List[String]] = List(List("The Beatles", "2014"), List("RinSta", "Ringo Starr", "JohLen", "GeoHar"), List("JohLen", "John Lennon", "PauMcc", "RinSta"), List("GeoHar", "George Harrison", "RinSta", "PauMcc"), List("PauMcc", "Paul McCartney", "GeoHar", "JohLen"))
 // val rl: List[List[String]] = List(List("The Beatles", "2014"), List("RinSta", "Ringo Starr", "JohLen", "GeoHar"), List("JohLen", "John Lennon", "PauMcc", "RinSta"), List("GeoHar", "George Harrison", "RinSta", "PauMcc"), List("PauMcc", "Paul McCartney", "GeoHar", "JohLen"))//val pl: List[List[String]] = List(List("RinSta", "Ringo Starr", "JohLen", "GeoHar"), List("JohLen", "John Lennon", "PauMcc", "RinSta"), List("GeoHar", "George Harrison", "RinSta", "PauMcc"), List("PauMcc", "Paul McCartney", "GeoHar", "JohLen"))
+
+//scala> def f(s: String) = "f(" + s + ")"
+//f: (s: String)String
+//
+//scala> f("one")
+//res0: String = f(one)
+//
+//scala> def g(s: String) = "g(" + s + ")"
+//g: (s: String)String
+//
+//scala> g("two")
+//res1: String = g(two)
+//
+//scala> val fComposeG = f _ compose g _
+//fComposeG: String => String = scala.Function1$$Lambda$1005/1149652670@5383bf08
+//
+//scala> fComposeG("yay")
+//res2: String = f(g(yay))
+//
+//scala>
