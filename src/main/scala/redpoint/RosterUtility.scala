@@ -11,8 +11,12 @@ object RosterUtility {
     rosterLines.map(l => l.split(", ").toList)
   }
 
-  def makeRosterInfo(rosterList: RosterList): RosterLine =
-    rosterList.head
+  def makeRosterInfo(rosterList: RosterList): RosterLine = {
+    rosterList.headOption match {
+      case None => List("Is", "Empty")
+      case _ => rosterList.head
+    }
+  }
 
   def makePlayersList(rosterList: RosterList): RosterList =
     rosterList.tail
