@@ -20,9 +20,9 @@ object RosterUtility {
   }
 
   def makePlayersList(rosterList: RosterList): RosterList = {
-    rosterList.headOption match {
-      case None => List(List("Is"), List("Empty"))
-      case _ => rosterList.tail
+    rosterList.tail match {
+      case List() => List(List("Is"), List("Empty"))
+      case rl => rl
     }
   }
 
