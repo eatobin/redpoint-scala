@@ -12,14 +12,19 @@ object RosterUtility {
   }
 
   def makeRosterInfo(rosterList: RosterList): RosterLine = {
-    rosterList.headOption match {
-      case None => List("Is", "Empty")
-      case Some(rl) => rl
+    rosterList.head match {
+      case List("") => List("Is", "Empty")
+      case rl => rl
+
     }
   }
 
-  def makePlayersList(rosterList: RosterList): RosterList =
-    rosterList.tail
+  def makePlayersList(rosterList: RosterList): RosterList = {
+    rosterList.headOption match {
+      case None => List(List("Is"), List("Empty"))
+      case _ => rosterList.tail
+    }
+  }
 
   def makePlayerKV(kv: RosterLine): PlayerKV =
     kv match {
