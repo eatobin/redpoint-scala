@@ -2,7 +2,9 @@ package object redpoint {
 
   type RosterString = String
   type RosterList = List[List[String]]
-  type RosterLine = List[String]
+  type InfoLine = List[String]
+  type PlayersList = List[List[String]]
+  type PlayerLine = List[String]
 
   type PlrSym = Symbol
   type Givee = PlrSym
