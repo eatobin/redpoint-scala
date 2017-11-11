@@ -14,7 +14,7 @@ object RosterUtility {
   def makeRosterInfo(rosterList: RosterList): RosterLine = {
     rosterList.headOption match {
       case None => List("Is", "Empty")
-      case _ => rosterList.head
+      case Some(rl) => rl
     }
   }
 
