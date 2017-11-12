@@ -49,6 +49,7 @@ object RosterUtility {
 }
 
 // :paste /home/eric/scala_projects/redpoint-scala/src/main/scala/redpoint/RosterUtility.scala
+// :paste /Users/eatobin/scala_projects/redpoint-scala/src/main/scala/redpoint/RosterUtility.scala
 
 // val bs = "The Beatles, 2014\nRinSta, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc\nPauMcc, Paul McCartney, GeoHar, JohLen"
 // val rl = List(List("The Beatles", "2014"), List("RinSta", "Ringo Starr", "JohLen", "GeoHar"), List("JohLen", "John Lennon", "PauMcc", "RinSta"), List("GeoHar", "George Harrison", "RinSta", "PauMcc"), List("PauMcc", "Paul McCartney", "GeoHar", "JohLen"))
@@ -57,6 +58,7 @@ object RosterUtility {
 // val pline = List("RinSta", "Ringo Starr", "JohLen", "GeoHar")
 // val pkv: redpoint.PlayerKV = ('RinSta,Player("Ringo Starr",Vector(GiftPair('JohLen,'GeoHar))))
 // val pkvl: List[redpoint.PlayerKV] = List(('RinSta,Player(Ringo Starr,Vector(GiftPair('JohLen,'GeoHar)))))
+// val redpoint.PlayersMap = Map('RinSta -> Player(Ringo Starr,Vector(GiftPair('JohLen,'GeoHar))), 'JohLen -> Player(John Lennon,Vector(GiftPair('PauMcc,'RinSta))), 'GeoHar -> Player(George Harrison,Vector(GiftPair('RinSta,'PauMcc))), 'PauMcc -> Player(Paul McCartney,Vector(GiftPair('GeoHar,'JohLen))))
 
 //scala> def f(s: String) = "f(" + s + ")"
 //f: (s: String)String

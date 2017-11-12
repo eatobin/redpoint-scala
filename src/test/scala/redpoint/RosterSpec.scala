@@ -8,6 +8,7 @@ class RosterSpec extends FlatSpec {
   val rl = List(List("The Beatles", "2014"), List("RinSta", "Ringo Starr", "JohLen", "GeoHar"), List("JohLen", "John Lennon", "PauMcc", "RinSta"), List("GeoHar", "George Harrison", "RinSta", "PauMcc"), List("PauMcc", "Paul McCartney", "GeoHar", "JohLen"))
   val badRL = List(List(""))
   val plist = List(List("RinSta", "Ringo Starr", "JohLen", "GeoHar"), List("JohLen", "John Lennon", "PauMcc", "RinSta"), List("GeoHar", "George Harrison", "RinSta", "PauMcc"), List("PauMcc", "Paul McCartney", "GeoHar", "JohLen"))
+  val pmap: redpoint.PlayersMap = Map('RinSta -> Player("Ringo Starr", Vector(GiftPair('JohLen, 'GeoHar))), 'JohLen -> Player("John Lennon", Vector(GiftPair('PauMcc, 'RinSta))), 'GeoHar -> Player("George Harrison", Vector(GiftPair('RinSta, 'PauMcc))), 'PauMcc -> Player("Paul McCartney", Vector(GiftPair('GeoHar, 'JohLen))))
 
   "A RosterList" should "create itself properly" in {
     assert(RosterUtility.makeRosterList(bs) == rl)
@@ -21,5 +22,9 @@ class RosterSpec extends FlatSpec {
   "A PlayersList" should "create itself properly" in {
     assert(RosterUtility.makePlayersList(rl) == plist)
     assert(RosterUtility.makePlayersList(badRL) == List(List("Is"), List("Empty")))
+  }
+
+  "A PlayersMap" should "create itself properly" in {
+    assert(RosterUtility.makePlayersMap(plist) == pmap)
   }
 }
