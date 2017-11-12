@@ -46,6 +46,18 @@ object RosterUtility {
   def getPlayerInRoster(ps: PlrSym)(pm: PlayersMap): Player =
     pm(ps)
 
+  def getGiftHistoryInPlayer(plr: Player): GiftHist =
+    plr.giftHist
+
+  def getGiftPairInGiftHistory(gh: GiftHist)(gy: GYear): GiftPair =
+    gh(gy)
+
+  def getGiftPairInRoster(ps: PlrSym)(pm: PlayersMap)(gy: GYear): GiftPair = {
+    val plr = getPlayerInRoster(ps)(pm)
+    val gh = getGiftHistoryInPlayer(plr)
+    getGiftPairInGiftHistory(gh)(gy)
+  }
+
 }
 
 // :paste /home/eric/scala_projects/redpoint-scala/src/main/scala/redpoint/RosterUtility.scala
