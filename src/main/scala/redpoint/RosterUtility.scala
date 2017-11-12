@@ -58,6 +58,16 @@ object RosterUtility {
     getGiftPairInGiftHistory(gh)(gy)
   }
 
+  def getGiveeInGiftPair(gp: GiftPair): Givee =
+    gp.givee
+
+  def getGiverInGiftPair(gp: GiftPair): Giver =
+    gp.giver
+
+  def setGiftPairInGiftHistory(gy: GYear)(gp: GiftPair)(gh: GiftHist): GiftHist = {
+    gh.updated(gy, gp)
+  }
+
 }
 
 // :paste /home/eric/scala_projects/redpoint-scala/src/main/scala/redpoint/RosterUtility.scala
