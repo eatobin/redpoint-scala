@@ -27,4 +27,8 @@ class RosterSpec extends FlatSpec {
   "A PlayersMap" should "create itself properly" in {
     assert(RosterUtility.makePlayersMap(plist) == pmap)
   }
+
+  "getPlayerInRoster" should "return Paul McCartney" in {
+    assert(RosterUtility.getPlayerInRoster('PauMcc, pmap) == Player("Paul McCartney", Vector(GiftPair('GeoHar, 'JohLen))))
+  }
 }
