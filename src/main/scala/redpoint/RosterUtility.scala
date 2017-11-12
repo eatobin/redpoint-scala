@@ -43,7 +43,7 @@ object RosterUtility {
   val makePlayersMap: (PlayersList) => PlayersMap =
     makePlayerKVMap _ compose makePlayerKVList
 
-  def getPlayerInRoster(ps: PlrSym, pm: PlayersMap): Player =
+  def getPlayerInRoster(ps: PlrSym)(pm: PlayersMap): Player =
     pm(ps)
 
 }

@@ -29,6 +29,6 @@ class RosterSpec extends FlatSpec {
   }
 
   "getPlayerInRoster" should "return Paul McCartney" in {
-    assert(RosterUtility.getPlayerInRoster('PauMcc, pmap) == Player("Paul McCartney", Vector(GiftPair('GeoHar, 'JohLen))))
+    assert(RosterUtility.getPlayerInRoster('PauMcc)(pmap) == Player("Paul McCartney", Vector(GiftPair('GeoHar, 'JohLen))))
   }
 }
