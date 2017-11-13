@@ -31,4 +31,12 @@ class RosterSpec extends FlatSpec {
   "getPlayerInRoster" should "return Paul McCartney" in {
     assert(RosterUtility.getPlayerInRoster('PauMcc)(pmap) == Player("Paul McCartney", Vector(GiftPair('GeoHar, 'JohLen))))
   }
+
+  "A giftPair" should "update correctly" in {
+    assert(RosterUtility.setGiftPairInRoster('RinSta)(0)(GiftPair('RinSta, 'RinSta))(pmap) ==
+      Map('RinSta -> Player("Ringo Starr", Vector(GiftPair('RinSta, 'RinSta))),
+        'JohLen -> Player("John Lennon", Vector(GiftPair('PauMcc, 'RinSta))),
+        'GeoHar -> Player("George Harrison", Vector(GiftPair('RinSta, 'PauMcc))),
+        'PauMcc -> Player("Paul McCartney", Vector(GiftPair('GeoHar, 'JohLen)))))
+  }
 }

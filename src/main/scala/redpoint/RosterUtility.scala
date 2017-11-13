@@ -68,6 +68,16 @@ object RosterUtility {
     gh.updated(gy, gp)
   }
 
+  def setGiftHistoryInPlayer(gh: GiftHist)(plr: Player): Player =
+    plr.copy(giftHist = gh)
+
+  def setGiftPairInRoster(ps: PlrSym)(gy: GYear)(gp: GiftPair)(pm: PlayersMap): PlayersMap = {
+    val plr = getPlayerInRoster(ps)(pm)
+    val gh = getGiftHistoryInPlayer(plr)
+    val ngh = setGiftPairInGiftHistory(gy)(gp)(gh)
+    val nplr = setGiftHistoryInPlayer(ngh)(plr)
+    pm.updated(ps, nplr)
+  }
 }
 
 // :paste /home/eric/scala_projects/redpoint-scala/src/main/scala/redpoint/RosterUtility.scala
