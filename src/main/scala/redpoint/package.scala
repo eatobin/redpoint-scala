@@ -1,5 +1,12 @@
 package object redpoint {
 
+  type RawString = String
+  type Scrubbed = String
+  type ErrorString = String
+  type ResultString = String
+
+
+
   type RosterString = String
   type RosterList = List[List[String]]
   type InfoLine = List[String]
