@@ -25,4 +25,13 @@ object RosterStringCheck {
       Right(scrubbed)
     }
   }
+
+  // Got an info line?
+  def rosterInfoLinePresent(scrubbed: Scrubbed): Either[ErrorString, ResultString] = {
+    if (nonBlankString(lines(scrubbed)(0)).isLeft) {
+      Left("the roster info line is blank")
+    } else {
+      Right(scrubbed)
+    }
+  }
 }
