@@ -57,6 +57,6 @@ object RosterStringCheck {
 
   // Ensure that raw-string is scrubbed and fully valid
   def scrubbedRosterString(rawString: RawString): Either[ErrorString, Scrubbed] = {
-    validLengthString(nonBlankString(rawString))
+    rosterInfoLinePresent(validLengthString(nonBlankString(rawString)))
   }
 }
