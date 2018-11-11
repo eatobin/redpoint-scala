@@ -88,8 +88,23 @@ object RosterStringCheck {
     }
   }
 
+  // Return the raw-info-string if the year text all digits
+  def yearTextAllDigits(eScrubbed: Either[ErrorString, Scrubbed]): Either[ErrorString, Scrubbed] = {
+    eScrubbed match {
+      case Right(r) => {
+        if (!lines(r)(0).split(",")(1).forall(c => c.isDigit)) {
+          Left("the year value is not all digits")
+        } else {
+          Right(r)
+        }
+      }
+      case Left(l) =>
+        Left(l)
+    }
+  }
+
   // Ensure that raw-string is scrubbed and fully valid
   def scrubbedRosterString(rawString: RawString): Either[ErrorString, Scrubbed] = {
-    yearPresent(namePresent(rosterInfoLinePresent(validLengthString(nonBlankString(rawString)))))
+    yearTextAllDigits(yearPresent(namePresent(rosterInfoLinePresent(validLengthString(nonBlankString(rawString))))))
   }
 }
