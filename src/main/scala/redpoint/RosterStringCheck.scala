@@ -103,8 +103,24 @@ object RosterStringCheck {
     }
   }
 
+  // Return the info-string if 1956 <= year <= 2056
+  def yearInRange(eScrubbed: Either[ErrorString, Scrubbed]): Either[ErrorString, Scrubbed] = {
+    eScrubbed match {
+      case Right(r) => {
+        val year = lines(r)(0).split(",")(1).toInt
+        if (1956 <= year && year <= 2056) {
+          Left("Not 1956 <= year <= 2056")
+        } else {
+          Right(r)
+        }
+      }
+      case Left(l) =>
+        Left(l)
+    }
+  }
+
   // Ensure that raw-string is scrubbed and fully valid
   def scrubbedRosterString(rawString: RawString): Either[ErrorString, Scrubbed] = {
-    yearTextAllDigits(yearPresent(namePresent(rosterInfoLinePresent(validLengthString(nonBlankString(rawString))))))
+    yearInRange(yearTextAllDigits(yearPresent(namePresent(rosterInfoLinePresent(validLengthString(nonBlankString(rawString)))))))
   }
 }
