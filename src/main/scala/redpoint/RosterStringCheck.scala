@@ -2,6 +2,8 @@ package redpoint
 
 object RosterStringCheck {
 
+  val bs = "The Beatles, 2014\nRinSta, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc\nPauMcc, Paul McCartney, GeoHar, JohLen\n"
+
   // Remove the spaces between CSVs and any final \n
   def scrub(rawString: RawString): Scrubbed = {
     rawString
@@ -39,13 +41,29 @@ object RosterStringCheck {
     }
   }
 
-  // Got an info line?
+  // Got an info string?
   def rosterInfoLinePresent(eScrubbed: Either[ErrorString, Scrubbed]): Either[ErrorString, Scrubbed] = {
     eScrubbed match {
       case Right(r) => {
-        val infoLine = nonBlankString(lines(r)(0))
-        if (infoLine.isLeft) {
+        val mInfoString = nonBlankString(lines(r)(0))
+        if (mInfoString.isLeft) {
           Left("the roster info line is blank")
+        } else {
+          Right(r)
+        }
+      }
+      case Left(l) =>
+        Left(l)
+    }
+  }
+
+  // Got a roster name?
+  def namePresent(eScrubbed: Either[ErrorString, Scrubbed]): Either[ErrorString, Scrubbed] = {
+    eScrubbed match {
+      case Right(r) => {
+        val mRosterName = nonBlankString(lines(r)(0).split(",")(0))
+        if (mRosterName.isLeft) {
+          Left("the name value is missing")
         } else {
           Right(r)
         }
@@ -57,6 +75,6 @@ object RosterStringCheck {
 
   // Ensure that raw-string is scrubbed and fully valid
   def scrubbedRosterString(rawString: RawString): Either[ErrorString, Scrubbed] = {
-    rosterInfoLinePresent(validLengthString(nonBlankString(rawString)))
+    namePresent(rosterInfoLinePresent(validLengthString(nonBlankString(rawString))))
   }
 }
