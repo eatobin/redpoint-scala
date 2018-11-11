@@ -56,13 +56,7 @@ object RosterStringCheck {
   }
 
   // Ensure that raw-string is scrubbed and fully valid
-  def scrubbedRosterString(rawString: RawString): Either[ErrorString, ResultString] = {
-    if (nonBlankString(rawString).isRight &&
-      validLengthString(scrub(rawString)).isRight &&
-      rosterInfoLinePresent(scrub(rawString)).isRight) {
-      Left("the roster info line is blank")
-    } else {
-      Right(scrubbed)
-    }
+  def scrubbedRosterString(rawString: RawString): Either[ErrorString, Scrubbed] = {
+    validLengthString(nonBlankString(rawString))
   }
 }
