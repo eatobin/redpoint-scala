@@ -3,7 +3,6 @@ package object redpoint {
   type RawString = String
   type Scrubbed = String
   type ErrorString = String
-  type ResultString = String
 
 
 
