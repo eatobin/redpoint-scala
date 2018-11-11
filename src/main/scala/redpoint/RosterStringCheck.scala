@@ -73,8 +73,23 @@ object RosterStringCheck {
     }
   }
 
+  // Got a roster year?
+  def yearPresent(eScrubbed: Either[ErrorString, Scrubbed]): Either[ErrorString, Scrubbed] = {
+    eScrubbed match {
+      case Right(r) => {
+        if (lines(r)(0).split(",").length != 2) {
+          Left("the year value is missing")
+        } else {
+          Right(r)
+        }
+      }
+      case Left(l) =>
+        Left(l)
+    }
+  }
+
   // Ensure that raw-string is scrubbed and fully valid
   def scrubbedRosterString(rawString: RawString): Either[ErrorString, Scrubbed] = {
-    namePresent(rosterInfoLinePresent(validLengthString(nonBlankString(rawString))))
+    yearPresent(namePresent(rosterInfoLinePresent(validLengthString(nonBlankString(rawString)))))
   }
 }
