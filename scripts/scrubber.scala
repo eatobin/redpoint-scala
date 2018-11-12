@@ -151,8 +151,6 @@ def playersValid(eScrubbed: Either[ErrorString, Scrubbed]): Either[ErrorString, 
   }
 }
 
-
-
 // Ensure that raw-string is scrubbed and fully valid
 def scrubbedRosterString(rawString: RawString): Either[ErrorString, Scrubbed] = {
   playersValid(yearInRange(yearTextAllDigits(yearPresent(namePresent(rosterInfoLinePresent(validLengthString(nonBlankString(rawString))))))))
