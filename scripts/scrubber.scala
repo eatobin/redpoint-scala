@@ -2,8 +2,6 @@ type RawString = String
 type Scrubbed = String
 type ErrorString = String
 
-val bs = "The Beatles, 2014\nRinSta, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc\nPauMcc, Paul McCartney, GeoHar, JohLen\n"
-
 // Remove the spaces between CSVs and any final \n
 def scrub(rawString: RawString): Scrubbed = {
   rawString
@@ -156,6 +154,7 @@ def scrubbedRosterString(rawString: RawString): Either[ErrorString, Scrubbed] = 
   playersValid(yearInRange(yearTextAllDigits(yearPresent(namePresent(rosterInfoLinePresent(validLengthString(nonBlankString(rawString))))))))
 }
 
+val bs = "The Beatles, 2014\nRinSta, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc\nPauMcc, Paul McCartney, GeoHar, JohLen\n"
 scrubbedRosterString(bs)
 scrubbedRosterString(null)
 scrubbedRosterString("The Beatles, 2014\nRinSta, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc")

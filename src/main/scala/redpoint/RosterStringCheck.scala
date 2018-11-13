@@ -2,6 +2,10 @@ package redpoint
 
 object RosterStringCheck {
 
+  type RawString = String
+  type Scrubbed = String
+  type ErrorString = String
+
   // Remove the spaces between CSVs and any final \n
   def scrub(rawString: RawString): Scrubbed = {
     rawString
