@@ -12,7 +12,7 @@ def scrub(rawString: RawString): Scrubbed = {
 }
 
 // Split string into lines
-def lines(scrubbed: Scrubbed): Array[String] = scrubbed.split('\n')
+def lines(scrubbed: Scrubbed): Array[String] = scrubbed.split('\n').toList
 
 // Remove name from player Array
 def removeName(player: Array[String]): Array[String] = player.head +: player.tail.tail
