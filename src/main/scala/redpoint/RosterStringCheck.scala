@@ -10,10 +10,10 @@ object RosterStringCheck {
   }
 
   // Split string into lines
-  def lines(scrubbed: Scrubbed): Array[String] = scrubbed.split('\n')
+  def lines(scrubbed: Scrubbed): List[String] = scrubbed.split('\n').toList
 
   // Remove name from player Array
-  def removeName(player: Array[String]): Array[String] = player.head +: player.tail.tail
+  def removeName(player: List[String]): List[String] = player.head +: player.tail.tail
 
   // Ensure string is not nil, empty or only spaces. Returns a scrubbed string
   def nonBlankString(rawString: RawString): Either[ErrorString, Scrubbed] = {
@@ -115,22 +115,22 @@ object RosterStringCheck {
   }
 
   // Given a valid scrubbed-string, return an array of player strings
-  def makePlayerArrays(scrubbed: Scrubbed): Array[String] = lines(scrubbed).tail
+  def makePlayerArrays(scrubbed: Scrubbed): List[String] = lines(scrubbed).tail
 
   // Returns all player vectors void of names - symbols only
-  def makeOnlySymbols(playersArray: Array[String]): Array[Array[String]] = {
-    playersArray.map(_.split(",")).map(i => removeName(i))
+  def makeOnlySymbols(playersArray: List[String]): List[List[String]] = {
+    playersArray.map(_.split(",").toList).map(i => removeName(i))
   }
 
   // All strings in the arrays are 6 chars long
-  def allSixChars(playerSymbols: Array[String]): Boolean = {
+  def allSixChars(playerSymbols: List[String]): Boolean = {
     val count = playerSymbols.length
     val six = playerSymbols.filter(p => p.length == 6)
     count == 3 && six.length == 3
   }
 
   // All of the arrays only symbols
-  def allArraysAllSix(playerArrays: Array[Array[String]]): Boolean = {
+  def allArraysAllSix(playerArrays: List[List[String]]): Boolean = {
     val theBools = playerArrays.map(a => allSixChars(a))
     theBools.contains(false)
   }
