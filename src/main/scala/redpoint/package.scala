@@ -4,7 +4,6 @@ package object redpoint {
   //  type Scrubbed = String
   //  type ErrorString = String
 
-
   type RosterString = String
   type RosterList = List[List[String]]
   type InfoLine = List[String]

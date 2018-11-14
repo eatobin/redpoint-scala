@@ -13,7 +13,7 @@ def scrub(rawString: RawString): Scrubbed = {
 def lines(scrubbed: Scrubbed): List[String] = scrubbed.split('\n').toList
 
 // Remove name from player Array
-def removeName(player: List[String]): List[String] = player.head +: player.tail.tail
+def removeName(player: List[String]): List[String] = player.head :: player.tail.tail
 
 // Ensure string is not nil, empty or only spaces. Returns a scrubbed string
 def nonBlankString(rawString: RawString): Either[ErrorString, Scrubbed] = {
@@ -151,7 +151,14 @@ def playersValid(eScrubbed: Either[ErrorString, Scrubbed]): Either[ErrorString, 
 
 // Ensure that raw-string is scrubbed and fully valid
 def scrubbedRosterString(rawString: RawString): Either[ErrorString, Scrubbed] = {
-  playersValid(yearInRange(yearTextAllDigits(yearPresent(namePresent(rosterInfoLinePresent(validLengthString(nonBlankString(rawString))))))))
+  val nonBlankStringV = nonBlankString(rawString)
+  val validLengthStringV = validLengthString(nonBlankStringV)
+  val rosterInfoLinePresentV = rosterInfoLinePresent(validLengthStringV)
+  val namePresentV = namePresent(rosterInfoLinePresentV)
+  val yearPresentV = yearPresent(namePresentV)
+  val yearTextAllDigitsV = yearTextAllDigits(yearPresentV)
+  val yearInRangeV = yearInRange(yearTextAllDigitsV)
+  playersValid(yearInRangeV)
 }
 
 val bs = "The Beatles, 2014\nRinSta, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc\nPauMcc, Paul McCartney, GeoHar, JohLen\n"
