@@ -151,14 +151,14 @@ def playersValid(eScrubbed: Either[ErrorString, Scrubbed]): Either[ErrorString, 
 
 // Ensure that raw-string is scrubbed and fully valid
 def scrubbedRosterString(rawString: RawString): Either[ErrorString, Scrubbed] = {
-  val nonBlankStringV = nonBlankString(rawString)
-  val validLengthStringV = validLengthString(nonBlankStringV)
-  val rosterInfoLinePresentV = rosterInfoLinePresent(validLengthStringV)
-  val namePresentV = namePresent(rosterInfoLinePresentV)
-  val yearPresentV = yearPresent(namePresentV)
-  val yearTextAllDigitsV = yearTextAllDigits(yearPresentV)
-  val yearInRangeV = yearInRange(yearTextAllDigitsV)
-  playersValid(yearInRangeV)
+  var result = nonBlankString(rawString)
+  result = validLengthString(result)
+  result = rosterInfoLinePresent(result)
+  result = namePresent(result)
+  result = yearPresent(result)
+  result = yearTextAllDigits(result)
+  result = yearInRange(result)
+  playersValid(result)
 }
 
 val bs = "The Beatles, 2014\nRinSta, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc\nPauMcc, Paul McCartney, GeoHar, JohLen\n"
