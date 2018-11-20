@@ -21,7 +21,7 @@ object RosterStringCheck {
       rawString
         .trim
         .isEmpty) {
-      Left("the roster string was nil, empty or only spaces")
+      Left("the roster string was null, empty or only spaces")
     } else {
       Right(scrub(rawString))
     }
