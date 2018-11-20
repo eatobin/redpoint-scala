@@ -29,6 +29,10 @@ class RosterSpec extends FlatSpec {
     assert(scrubbedRosterString(ss) == valid)
     assert(scrubbedRosterString(null) ==
       Left("the roster string was null, empty or only spaces"))
+    assert(scrubbedRosterString("") ==
+      Left("the roster string was null, empty or only spaces"))
+    assert(scrubbedRosterString("   ") ==
+      Left("the roster string was null, empty or only spaces"))
     assert(scrubbedRosterString(tooShort) ==
       Left("roster string is not long enough"))
     assert(scrubbedRosterString(noInfo) ==
