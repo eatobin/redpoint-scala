@@ -2,12 +2,10 @@ package redpoint
 
 import redpoint.RosterStringCheck._
 
-import scala.collection.immutable.HashMap
 
+case class GiftPair(givee: Givee, giver: Giver)
 
-//case class GiftPair(givee: Givee, giver: Giver)
-//
-//case class Player(pName: PName, giftHist: GiftHist)
+case class Player(pName: PName, giftHist: GiftHist)
 
 object Roster {
 
@@ -21,6 +19,7 @@ object Roster {
     lines(scrubbed).head.split(",").last.toInt
   }
 
+  // Given a scrubbed return the player-list
   def makePlayersList(scrubbed: Scrubbed): PlayersList = {
     scrubbed
       .split("\n")
@@ -30,17 +29,15 @@ object Roster {
         .toList)
   }
 
-  def makeGiftPair(givee: String, giver: String): GiftPair =
-    HashMap(('givee, Symbol(givee)), ('giver, Symbol(giver)))
 
-  //  def makePlayerKV(kv: PlayerLine): PlayerKV =
-  //    kv match {
-  //      case List(s, pn, ge, gr) =>
-  //        val gp = GiftPair(Symbol(ge), Symbol(gr))
-  //        val plr = Player(pn, Vector(gp))
-  //        (Symbol(s), plr)
-  //    }
-  //
+  def makePlayerKV(kv: PlayerLine): PlayerKV =
+    kv match {
+      case List(s, pn, ge, gr) =>
+        val gp = GiftPair(Symbol(ge), Symbol(gr))
+        val plr = Player(pn, Vector(gp))
+        (Symbol(s), plr)
+    }
+
   //  def makePlayerKVList(playersList: PlayersList): PlayersKVList =
   //    playersList.map(kvp => makePlayerKV(kvp))
   //
