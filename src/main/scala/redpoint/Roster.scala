@@ -40,12 +40,12 @@ object Roster {
   def makePlayerKVList(playersList: PlayersList): PlayersKVList =
     playersList.map(kvp => makePlayerKV(kvp))
 
-  //  def makePlayerKVMap(playersKVList: PlayersKVList): PlayersMap =
-  //    playersKVList.toMap
-  //
-  //  val makePlayersMap: PlayersList => PlayersMap =
-  //    makePlayerKVMap _ compose makePlayerKVList
-  //
+  def makePlayerKVMap(playersKVList: PlayersKVList): PlayersMap =
+    playersKVList.toMap
+
+  val makePlayersMap: PlayersList => PlayersMap =
+    makePlayerKVMap _ compose makePlayerKVList
+
   //  def getPlayerInRoster(ps: PlrSym)(pm: PlayersMap): Player =
   //    pm(ps)
   //

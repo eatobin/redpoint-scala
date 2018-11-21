@@ -53,9 +53,18 @@ type PlayersKVList = List[(PlrSym, Player)]
 def makePlayerKVList(playersList: PlayersList): PlayersKVList =
   playersList.map(kvp => makePlayerKV(kvp))
 
+type PlayersMap = Map[PlrSym, Player]
+
+def makePlayerKVMap(playersKVList: PlayersKVList): PlayersMap =
+  playersKVList.toMap
+
+val makePlayersMap: PlayersList => PlayersMap =
+  makePlayerKVMap _ compose makePlayerKVList
+
 val ss = "The Beatles,2014\nRinSta,Ringo Starr,JohLen,GeoHar\nJohLen,John Lennon,PauMcc,RinSta\nGeoHar,George Harrison,RinSta,PauMcc\nPauMcc,Paul McCartney,GeoHar,JohLen"
 
 getRosterName(ss)
 getRosterYear(ss)
 makePlayersList(ss)
-makePlayerKVList(makePlayersList(ss))
+makePlayersMap(makePlayersList(ss))
+makePlayersMap(makePlayersList(ss))('PauMcc)
