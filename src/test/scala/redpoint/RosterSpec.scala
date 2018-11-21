@@ -66,11 +66,6 @@ class RosterSpec extends FlatSpec {
     assert(makePlayersList(ss) == plist)
   }
 
-  it should "have GiftPairs" in {
-    assert(makeGiftPair("me", "you") ==
-      Map('givee -> 'me, 'giver -> 'you))
-  }
-
   //  "A PlayersMap" should "create itself properly" in {
   //    assert(Roster.makePlayersMap(plist) == pmap)
   //  }
