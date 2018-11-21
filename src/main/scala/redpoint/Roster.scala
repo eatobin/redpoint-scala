@@ -2,6 +2,8 @@ package redpoint
 
 import redpoint.RosterStringCheck._
 
+import scala.collection.immutable.HashMap
+
 
 //case class GiftPair(givee: Givee, giver: Giver)
 //
@@ -28,21 +30,9 @@ object Roster {
         .toList)
   }
 
-  //  def makeRosterInfo(rosterList: RosterList): InfoLine = {
-  //    rosterList.head match {
-  //      case List("") => List("Is", "Empty")
-  //      case rl => rl
-  //
-  //    }
-  //  }
-  //
-  //  def makePlayersList(rosterList: RosterList): PlayersList = {
-  //    rosterList.tail match {
-  //      case List() => List(List("Is"), List("Empty"))
-  //      case rl => rl
-  //    }
-  //  }
-  //
+  def makeGiftPair(givee: String, giver: String): GiftPair =
+    HashMap(('givee, Symbol(givee)), ('giver, Symbol(giver)))
+
   //  def makePlayerKV(kv: PlayerLine): PlayerKV =
   //    kv match {
   //      case List(s, pn, ge, gr) =>

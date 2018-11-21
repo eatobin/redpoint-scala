@@ -1,3 +1,5 @@
+import scala.collection.immutable.HashMap
+
 package object redpoint {
 
   type RawString = String
@@ -7,11 +9,14 @@ package object redpoint {
   type RName = String
   type RYear = Int
   type PlayersList = List[List[String]]
+  type PlrSym = Symbol
+  type Givee = PlrSym
+  type Giver = PlrSym
+  type GiftPair = HashMap[PlrSym, PlrSym]
+
   //  type PlayerLine = List[String]
   //
-  //  type PlrSym = Symbol
-  //  type Givee = PlrSym
-  //  type Giver = PlrSym
+
   //
   //  type PName = String
   //  type GiftHist = Vector[GiftPair]

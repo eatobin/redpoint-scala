@@ -1,13 +1,19 @@
 import redpoint.RosterStringCheck._
 
+import scala.collection.immutable.HashMap
+
 type RawString = String
 type Scrubbed = String
 type ErrorString = String
 
 type RName = String
 type RYear = Int
-type RosterList = List[List[String]]
 type PlayersList = List[List[String]]
+type PlrSym = Symbol
+type Givee = PlrSym
+type Giver = PlrSym
+type GiftPair = HashMap[PlrSym, PlrSym]
+
 //  type PlayerLine = List[String]
 //
 //  type PlrSym = Symbol
@@ -42,8 +48,12 @@ def makePlayersList(scrubbed: Scrubbed): PlayersList = {
       .toList)
 }
 
+def makeGiftPair(givee: String, giver: String): GiftPair =
+  HashMap(('givee, Symbol(givee)), ('giver, Symbol(giver)))
+
 val ss = "The Beatles,2014\nRinSta,Ringo Starr,JohLen,GeoHar\nJohLen,John Lennon,PauMcc,RinSta\nGeoHar,George Harrison,RinSta,PauMcc\nPauMcc,Paul McCartney,GeoHar,JohLen"
 
 getRosterName(ss)
 getRosterYear(ss)
 makePlayersList(ss)
+makeGiftPair("me", "you")
