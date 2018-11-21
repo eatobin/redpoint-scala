@@ -14,7 +14,7 @@ package object redpoint {
   type GiftHist = Vector[GiftPair]
   type PlayerLine = List[String]
   type PlayerKV = (PlrSym, Player)
-  //
+  type PlayersKVList = List[(PlrSym, Player)]
 
   //
 
@@ -22,7 +22,7 @@ package object redpoint {
 
   //
 
-  //  type PlayersKVList = List[(PlrSym, Player)]
+
   //  type PlayersMap = Map[PlrSym, Player]
 
 }

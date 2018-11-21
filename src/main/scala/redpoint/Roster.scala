@@ -29,7 +29,6 @@ object Roster {
         .toList)
   }
 
-
   def makePlayerKV(kv: PlayerLine): PlayerKV =
     kv match {
       case List(s, pn, ge, gr) =>
@@ -38,9 +37,9 @@ object Roster {
         (Symbol(s), plr)
     }
 
-  //  def makePlayerKVList(playersList: PlayersList): PlayersKVList =
-  //    playersList.map(kvp => makePlayerKV(kvp))
-  //
+  def makePlayerKVList(playersList: PlayersList): PlayersKVList =
+    playersList.map(kvp => makePlayerKV(kvp))
+
   //  def makePlayerKVMap(playersKVList: PlayersKVList): PlayersMap =
   //    playersKVList.toMap
   //
