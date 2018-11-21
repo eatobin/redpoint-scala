@@ -6,10 +6,7 @@ package object redpoint {
 
   type RName = String
   type RYear = Int
-  //    type RosterString = String
-  //  type RosterList = List[List[String]]
-  //  type InfoLine = List[String]
-  //  type PlayersList = List[List[String]]
+  type PlayersList = List[List[String]]
   //  type PlayerLine = List[String]
   //
   //  type PlrSym = Symbol

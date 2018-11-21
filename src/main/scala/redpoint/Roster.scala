@@ -19,11 +19,15 @@ object Roster {
     lines(scrubbed).head.split(",").last.toInt
   }
 
-  //  def makeRosterList(rosterString: RosterString): RosterList = {
-  //    val rosterLines = rosterString.split("\n").toList
-  //    rosterLines.map(l => l.split(", ").toList)
-  //  }
-  //
+  def makePlayersList(scrubbed: Scrubbed): PlayersList = {
+    scrubbed
+      .split("\n")
+      .toList
+      .tail
+      .map(l => l.split(",")
+        .toList)
+  }
+
   //  def makeRosterInfo(rosterList: RosterList): InfoLine = {
   //    rosterList.head match {
   //      case List("") => List("Is", "Empty")
