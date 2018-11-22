@@ -22,7 +22,14 @@ class RosterSpec extends FlatSpec {
 
   val rl = List(List("The Beatles", "2014"), List("RinSta", "Ringo Starr", "JohLen", "GeoHar"), List("JohLen", "John Lennon", "PauMcc", "RinSta"), List("GeoHar", "George Harrison", "RinSta", "PauMcc"), List("PauMcc", "Paul McCartney", "GeoHar", "JohLen"))
   val plist = List(List("RinSta", "Ringo Starr", "JohLen", "GeoHar"), List("JohLen", "John Lennon", "PauMcc", "RinSta"), List("GeoHar", "George Harrison", "RinSta", "PauMcc"), List("PauMcc", "Paul McCartney", "GeoHar", "JohLen"))
-
+  val pline = List("RinSta", "Ringo Starr", "JohLen", "GeoHar")
+  val pkv: PlayerKV = ('RinSta, Player("Ringo Starr", Vector(GiftPair('JohLen, 'GeoHar))))
+  val plistShort = List(List("RinSta", "Ringo Starr", "JohLen", "GeoHar"))
+  val pkvl: List[PlayerKV] = List(('RinSta, Player("Ringo Starr", Vector(GiftPair('JohLen, 'GeoHar)))))
+  val pmap: Map[PlrSym, Player] = Map('RinSta -> Player("Ringo Starr", Vector(GiftPair('JohLen, 'GeoHar))),
+    'JohLen -> Player("John Lennon", Vector(GiftPair('PauMcc, 'RinSta))),
+    'GeoHar -> Player("George Harrison", Vector(GiftPair('RinSta, 'PauMcc))),
+    'PauMcc -> Player("Paul McCartney", Vector(GiftPair('GeoHar, 'JohLen))))
 
   //  val pmap: redpoint.PlayersMap = Map('RinSta -> Player("Ringo Starr", Vector(GiftPair('JohLen, 'GeoHar))), 'JohLen -> Player("John Lennon", Vector(GiftPair('PauMcc, 'RinSta))), 'GeoHar -> Player("George Harrison", Vector(GiftPair('RinSta, 'PauMcc))), 'PauMcc -> Player("Paul McCartney", Vector(GiftPair('GeoHar, 'JohLen))))
 
@@ -64,6 +71,14 @@ class RosterSpec extends FlatSpec {
 
   it should "have players" in {
     assert(makePlayersList(ss) == plist)
+  }
+
+  it should "make a Player from a playerLine" in {
+    assert(makePlayerKV(pline) == pkv)
+  }
+
+  it should "make a PlayerKVList from a playersList" in {
+    assert(makePlayerKVList(plistShort) == pkvl)
   }
 
   it should "put its players in a Map" in {
