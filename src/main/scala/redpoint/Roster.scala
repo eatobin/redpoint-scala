@@ -46,41 +46,41 @@ object Roster {
   val makePlayersMap: PlayersList => PlayersMap =
     makePlayerKVMap _ compose makePlayerKVList
 
-  //  def getPlayerInRoster(ps: PlrSym)(pm: PlayersMap): Player =
-  //    pm(ps)
-  //
-  //  def getGiftHistoryInPlayer(plr: Player): GiftHist =
-  //    plr.giftHist
-  //
-  //  def getGiftPairInGiftHistory(gh: GiftHist)(gy: GYear): GiftPair =
-  //    gh(gy)
-  //
-  //  def getGiftPairInRoster(ps: PlrSym)(pm: PlayersMap)(gy: GYear): GiftPair = {
-  //    val plr = getPlayerInRoster(ps)(pm)
-  //    val gh = getGiftHistoryInPlayer(plr)
-  //    getGiftPairInGiftHistory(gh)(gy)
-  //  }
-  //
-  //  def getGiveeInGiftPair(gp: GiftPair): Givee =
-  //    gp.givee
-  //
-  //  def getGiverInGiftPair(gp: GiftPair): Giver =
-  //    gp.giver
-  //
-  //  def setGiftPairInGiftHistory(gy: GYear)(gp: GiftPair)(gh: GiftHist): GiftHist = {
-  //    gh.updated(gy, gp)
-  //  }
-  //
-  //  def setGiftHistoryInPlayer(gh: GiftHist)(plr: Player): Player =
-  //    plr.copy(giftHist = gh)
-  //
-  //  def setGiftPairInRoster(ps: PlrSym)(gy: GYear)(gp: GiftPair)(pm: PlayersMap): PlayersMap = {
-  //    val plr = getPlayerInRoster(ps)(pm)
-  //    val gh = getGiftHistoryInPlayer(plr)
-  //    val ngh = setGiftPairInGiftHistory(gy)(gp)(gh)
-  //    val nplr = setGiftHistoryInPlayer(ngh)(plr)
-  //    pm.updated(ps, nplr)
-  //  }
+  def getPlayerInRoster(ps: PlrSym)(pm: PlayersMap): Player =
+    pm(ps)
+
+  def getGiftHistoryInPlayer(plr: Player): GiftHist =
+    plr.giftHist
+
+  def getGiftPairInGiftHistory(gh: GiftHist)(gy: GYear): GiftPair =
+    gh(gy)
+
+  def getGiftPairInRoster(ps: PlrSym)(pm: PlayersMap)(gy: GYear): GiftPair = {
+    val plr = getPlayerInRoster(ps)(pm)
+    val gh = getGiftHistoryInPlayer(plr)
+    getGiftPairInGiftHistory(gh)(gy)
+  }
+
+  def getGiveeInGiftPair(gp: GiftPair): Givee =
+    gp.givee
+
+  def getGiverInGiftPair(gp: GiftPair): Giver =
+    gp.giver
+
+  def setGiftPairInGiftHistory(gy: GYear)(gp: GiftPair)(gh: GiftHist): GiftHist = {
+    gh.updated(gy, gp)
+  }
+
+  def setGiftHistoryInPlayer(gh: GiftHist)(plr: Player): Player =
+    plr.copy(giftHist = gh)
+
+  def setGiftPairInRoster(ps: PlrSym)(gy: GYear)(gp: GiftPair)(pm: PlayersMap): PlayersMap = {
+    val plr = getPlayerInRoster(ps)(pm)
+    val gh = getGiftHistoryInPlayer(plr)
+    val ngh = setGiftPairInGiftHistory(gy)(gp)(gh)
+    val nplr = setGiftHistoryInPlayer(ngh)(plr)
+    pm.updated(ps, nplr)
+  }
 }
 
 // :paste /home/eric/scala_projects/redpoint-scala/src/main/scala/redpoint/Roster.scala

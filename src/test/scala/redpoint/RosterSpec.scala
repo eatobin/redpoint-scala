@@ -89,19 +89,17 @@ class RosterSpec extends FlatSpec {
         'PauMcc -> Player("Paul McCartney", Vector(GiftPair('GeoHar, 'JohLen)))))
   }
 
-  //  "A PlayersMap" should "create itself properly" in {
-  //    assert(Roster.makePlayersMap(plist) == pmap)
-  //  }
-  //
-  //  "getPlayerInRoster" should "return Paul McCartney" in {
-  //    assert(Roster.getPlayerInRoster('PauMcc)(pmap) == Player("Paul McCartney", Vector(GiftPair('GeoHar, 'JohLen))))
-  //  }
-  //
-  //  "A giftPair" should "update correctly" in {
-  //    assert(Roster.setGiftPairInRoster('RinSta)(0)(GiftPair('RinSta, 'RinSta))(pmap) ==
-  //      Map('RinSta -> Player("Ringo Starr", Vector(GiftPair('RinSta, 'RinSta))),
-  //        'JohLen -> Player("John Lennon", Vector(GiftPair('PauMcc, 'RinSta))),
-  //        'GeoHar -> Player("George Harrison", Vector(GiftPair('RinSta, 'PauMcc))),
-  //        'PauMcc -> Player("Paul McCartney", Vector(GiftPair('GeoHar, 'JohLen)))))
-  //  }
+
+  it should "return Paul McCartney if asked" in {
+    assert(getPlayerInRoster('PauMcc)(pmap) ==
+      Player("Paul McCartney", Vector(GiftPair('GeoHar, 'JohLen))))
+  }
+
+  it should "update a giftPair correctly" in {
+    assert(setGiftPairInRoster('RinSta)(0)(GiftPair('RinSta, 'RinSta))(pmap) ==
+      Map('RinSta -> Player("Ringo Starr", Vector(GiftPair('RinSta, 'RinSta))),
+        'JohLen -> Player("John Lennon", Vector(GiftPair('PauMcc, 'RinSta))),
+        'GeoHar -> Player("George Harrison", Vector(GiftPair('RinSta, 'PauMcc))),
+        'PauMcc -> Player("Paul McCartney", Vector(GiftPair('GeoHar, 'JohLen)))))
+  }
 }

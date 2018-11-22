@@ -16,11 +16,5 @@ package object redpoint {
   type PlayerKV = (PlrSym, Player)
   type PlayersKVList = List[(PlrSym, Player)]
   type PlayersMap = Map[PlrSym, Player]
-  //
-
-  //  type GYear = Int
-
-  //
-
-
+  type GYear = Int
 }
