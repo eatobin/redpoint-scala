@@ -1,13 +1,29 @@
+// :paste ./src/main/scala/redpoint/Roster.scala
+// redpoint.Roster.getRosterName(redpoint.Roster.ss)
+
 package redpoint
 
 import redpoint.RosterStringCheck._
-
 
 case class GiftPair(givee: Givee, giver: Giver)
 
 case class Player(pName: PName, giftHist: GiftHist)
 
 object Roster {
+
+  val bs = "The Beatles, 2014\nRinSta, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc\nPauMcc, Paul McCartney, GeoHar, JohLen\n"
+  val ss = "The Beatles,2014\nRinSta,Ringo Starr,JohLen,GeoHar\nJohLen,John Lennon,PauMcc,RinSta\nGeoHar,George Harrison,RinSta,PauMcc\nPauMcc,Paul McCartney,GeoHar,JohLen"
+
+  val rl = List(List("The Beatles", "2014"), List("RinSta", "Ringo Starr", "JohLen", "GeoHar"), List("JohLen", "John Lennon", "PauMcc", "RinSta"), List("GeoHar", "George Harrison", "RinSta", "PauMcc"), List("PauMcc", "Paul McCartney", "GeoHar", "JohLen"))
+  val plist = List(List("RinSta", "Ringo Starr", "JohLen", "GeoHar"), List("JohLen", "John Lennon", "PauMcc", "RinSta"), List("GeoHar", "George Harrison", "RinSta", "PauMcc"), List("PauMcc", "Paul McCartney", "GeoHar", "JohLen"))
+  val pline = List("RinSta", "Ringo Starr", "JohLen", "GeoHar")
+  val pkv: PlayerKV = ('RinSta, Player("Ringo Starr", Vector(GiftPair('JohLen, 'GeoHar))))
+  val plistShort = List(List("RinSta", "Ringo Starr", "JohLen", "GeoHar"))
+  val pkvl: List[PlayerKV] = List(('RinSta, Player("Ringo Starr", Vector(GiftPair('JohLen, 'GeoHar)))))
+  val pmap: Map[PlrSym, Player] = Map('RinSta -> Player("Ringo Starr", Vector(GiftPair('JohLen, 'GeoHar))),
+    'JohLen -> Player("John Lennon", Vector(GiftPair('PauMcc, 'RinSta))),
+    'GeoHar -> Player("George Harrison", Vector(GiftPair('RinSta, 'PauMcc))),
+    'PauMcc -> Player("Paul McCartney", Vector(GiftPair('GeoHar, 'JohLen))))
 
   // Given a scrubbed return the roster name
   def getRosterName(scrubbed: Scrubbed): RName = {
@@ -46,19 +62,19 @@ object Roster {
   val makePlayersMap: PlayersList => PlayersMap =
     makePlayerKVMap _ compose makePlayerKVList
 
-  def getPlayerInRoster(ps: PlrSym)(pm: PlayersMap): Player =
+  def getPlayerInRoster(ps: PlrSym, pm: PlayersMap): Player =
     pm(ps)
 
   def getGiftHistoryInPlayer(plr: Player): GiftHist =
     plr.giftHist
 
-  def getGiftPairInGiftHistory(gh: GiftHist)(gy: GYear): GiftPair =
+  def getGiftPairInGiftHistory(gh: GiftHist, gy: GYear): GiftPair =
     gh(gy)
 
-  def getGiftPairInRoster(ps: PlrSym)(pm: PlayersMap)(gy: GYear): GiftPair = {
-    val plr = getPlayerInRoster(ps)(pm)
+  def getGiftPairInRoster(ps: PlrSym)(pm: PlayersMap, gy: GYear): GiftPair = {
+    val plr = getPlayerInRoster(ps, pm)
     val gh = getGiftHistoryInPlayer(plr)
-    getGiftPairInGiftHistory(gh)(gy)
+    getGiftPairInGiftHistory(gh, gy)
   }
 
   def getGiveeInGiftPair(gp: GiftPair): Givee =
@@ -67,50 +83,18 @@ object Roster {
   def getGiverInGiftPair(gp: GiftPair): Giver =
     gp.giver
 
-  def setGiftPairInGiftHistory(gy: GYear)(gp: GiftPair)(gh: GiftHist): GiftHist = {
+  def setGiftPairInGiftHistory(gy: GYear, gp: GiftPair, gh: GiftHist): GiftHist = {
     gh.updated(gy, gp)
   }
 
-  def setGiftHistoryInPlayer(gh: GiftHist)(plr: Player): Player =
+  def setGiftHistoryInPlayer(gh: GiftHist, plr: Player): Player =
     plr.copy(giftHist = gh)
 
-  def setGiftPairInRoster(ps: PlrSym)(gy: GYear)(gp: GiftPair)(pm: PlayersMap): PlayersMap = {
-    val plr = getPlayerInRoster(ps)(pm)
+  def setGiftPairInRoster(ps: PlrSym, gy: GYear, gp: GiftPair, pm: PlayersMap): PlayersMap = {
+    val plr = getPlayerInRoster(ps, pm)
     val gh = getGiftHistoryInPlayer(plr)
-    val ngh = setGiftPairInGiftHistory(gy)(gp)(gh)
-    val nplr = setGiftHistoryInPlayer(ngh)(plr)
+    val ngh = setGiftPairInGiftHistory(gy, gp, gh)
+    val nplr = setGiftHistoryInPlayer(ngh, plr)
     pm.updated(ps, nplr)
   }
 }
-
-// :paste /home/eric/scala_projects/redpoint-scala/src/main/scala/redpoint/Roster.scala
-// :paste /Users/eatobin/scala_projects/redpoint-scala/src/main/scala/redpoint/Roster.scala
-
-// val bs = "The Beatles, 2014\nRinSta, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc\nPauMcc, Paul McCartney, GeoHar, JohLen"
-// val rl = List(List("The Beatles", "2014"), List("RinSta", "Ringo Starr", "JohLen", "GeoHar"), List("JohLen", "John Lennon", "PauMcc", "RinSta"), List("GeoHar", "George Harrison", "RinSta", "PauMcc"), List("PauMcc", "Paul McCartney", "GeoHar", "JohLen"))
-// val rl = List(List("The Beatles", "2014"), List("RinSta", "Ringo Starr", "JohLen", "GeoHar"), List("JohLen", "John Lennon", "PauMcc", "RinSta"), List("GeoHar", "George Harrison", "RinSta", "PauMcc"), List("PauMcc", "Paul McCartney", "GeoHar", "JohLen"))
-// val plist = List(List("RinSta", "Ringo Starr", "JohLen", "GeoHar"), List("JohLen", "John Lennon", "PauMcc", "RinSta"), List("GeoHar", "George Harrison", "RinSta", "PauMcc"), List("PauMcc", "Paul McCartney", "GeoHar", "JohLen"))
-// val pline = List("RinSta", "Ringo Starr", "JohLen", "GeoHar")
-// val pkv: redpoint.PlayerKV = ('RinSta,Player("Ringo Starr",Vector(GiftPair('JohLen,'GeoHar))))
-// val pkvl: List[redpoint.PlayerKV] = List(('RinSta,Player(Ringo Starr,Vector(GiftPair('JohLen,'GeoHar)))))
-// val pmap: redpoint.PlayersMap = Map('RinSta -> Player(Ringo Starr,Vector(GiftPair('JohLen,'GeoHar))), 'JohLen -> Player(John Lennon,Vector(GiftPair('PauMcc,'RinSta))), 'GeoHar -> Player(George Harrison,Vector(GiftPair('RinSta,'PauMcc))), 'PauMcc -> Player(Paul McCartney,Vector(GiftPair('GeoHar,'JohLen))))
-
-//scala> def f(s: String) = "f(" + s + ")"
-//f: (s: String)String
-//
-//scala> f("one")
-//res0: String = f(one)
-//
-//scala> def g(s: String) = "g(" + s + ")"
-//g: (s: String)String
-//
-//scala> g("two")
-//res1: String = g(two)
-//
-//scala> val fComposeG = f _ compose g _
-//fComposeG: String => String = scala.Function1$$Lambda$1005/1149652670@5383bf08
-//
-//scala> fComposeG("yay")
-//res2: String = f(g(yay))
-//
-//scala>
