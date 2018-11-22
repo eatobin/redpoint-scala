@@ -66,6 +66,14 @@ class RosterSpec extends FlatSpec {
     assert(makePlayersList(ss) == plist)
   }
 
+  it should "put its players in a Map" in {
+    assert(makePlayersMap(makePlayersList(ss)) ==
+      Map('RinSta -> Player("Ringo Starr", Vector(GiftPair('JohLen, 'GeoHar))),
+        'JohLen -> Player("John Lennon", Vector(GiftPair('PauMcc, 'RinSta))),
+        'GeoHar -> Player("George Harrison", Vector(GiftPair('RinSta, 'PauMcc))),
+        'PauMcc -> Player("Paul McCartney", Vector(GiftPair('GeoHar, 'JohLen)))))
+  }
+
   //  "A PlayersMap" should "create itself properly" in {
   //    assert(Roster.makePlayersMap(plist) == pmap)
   //  }
