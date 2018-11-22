@@ -45,6 +45,7 @@ object Roster {
         .toList)
   }
 
+  // test
   def makePlayerKV(kv: PlayerLine): PlayerKV =
     kv match {
       case List(s, pn, ge, gr) =>
@@ -53,43 +54,56 @@ object Roster {
         (Symbol(s), plr)
     }
 
+  // test
   def makePlayerKVList(playersList: PlayersList): PlayersKVList =
     playersList.map(kvp => makePlayerKV(kvp))
 
+  // Returns a hash map linking a player symbol (key) to a player hash map (value)
+  //  given a player symbol, name, initial givee and initial giver - all strings
   def makePlayerKVMap(playersKVList: PlayersKVList): PlayersMap =
     playersKVList.toMap
 
+  // Returns a hash map of multiple players given a players-vector
   val makePlayersMap: PlayersList => PlayersMap =
     makePlayerKVMap _ compose makePlayerKVList
 
+  // Returns a player given a players map and a player symbol
   def getPlayerInRoster(ps: PlrSym, pm: PlayersMap): Player =
     pm(ps)
 
+  // Returns a gift history given a player
   def getGiftHistoryInPlayer(plr: Player): GiftHist =
     plr.giftHist
 
+  // Returns a gift pair given a gift history and a gift year
   def getGiftPairInGiftHistory(gh: GiftHist, gy: GYear): GiftPair =
     gh(gy)
 
+  // Returns a gift pair given a player map, a player symbol and a gift year
   def getGiftPairInRoster(ps: PlrSym)(pm: PlayersMap, gy: GYear): GiftPair = {
     val plr = getPlayerInRoster(ps, pm)
     val gh = getGiftHistoryInPlayer(plr)
     getGiftPairInGiftHistory(gh, gy)
   }
 
+  // Returns a givee given a gift pair
   def getGiveeInGiftPair(gp: GiftPair): Givee =
     gp.givee
 
+  // Returns a giver given a gift pair
   def getGiverInGiftPair(gp: GiftPair): Giver =
     gp.giver
 
+  // Returns a gift history with the provided gift pair at the supplied year
   def setGiftPairInGiftHistory(gy: GYear, gp: GiftPair, gh: GiftHist): GiftHist = {
     gh.updated(gy, gp)
   }
 
+  // Sets a gift history into the provided player
   def setGiftHistoryInPlayer(gh: GiftHist, plr: Player): Player =
     plr.copy(giftHist = gh)
 
+  // Returns a gift history with the provided gift pair at the supplied year
   def setGiftPairInRoster(ps: PlrSym, gy: GYear, gp: GiftPair, pm: PlayersMap): PlayersMap = {
     val plr = getPlayerInRoster(ps, pm)
     val gh = getGiftHistoryInPlayer(plr)
