@@ -1,15 +1,12 @@
-  def third(d: Double): Boolean = d < 10.0
+def third(d: Double): Boolean = d < 10.0
 
-  def second(s: String): Double = s.toDouble
+def second(s: String): Double = s.toDouble
 
-  def first(i: Int): String = i.toString
+def first(i: Int): String = i.toString
 
-  val secondComposeFirst: (Int) => Double = second _ compose first
+val secondComposeFirst: Int => Double = second _ compose first
 
-  val thirdComposeFirst: (Int) => Boolean = third _ compose second compose first
+val thirdComposeFirst: Int => Boolean = third _ compose second compose first
 
-scala> RosterUtility.thirdComposeFirst(3)
-res0: Boolean = true
-
-scala> RosterUtility.thirdComposeFirst(13)
-res1: Boolean = false
+thirdComposeFirst(3)
+thirdComposeFirst(13)
