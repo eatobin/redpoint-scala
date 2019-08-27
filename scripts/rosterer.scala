@@ -1,3 +1,5 @@
+//:load "scripts/rosterer.scala"
+
 import redpoint.RosterStringCheck._
 
 type Scrubbed = String

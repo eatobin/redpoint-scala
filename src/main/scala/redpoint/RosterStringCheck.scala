@@ -1,3 +1,5 @@
+//can't load in REPL because of package stmt
+
 package redpoint
 
 object RosterStringCheck {

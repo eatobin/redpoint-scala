@@ -1,3 +1,5 @@
+//scala> :load "scripts/scrubber.scala"
+
 type RawString = String
 type Scrubbed = String
 type ErrorString = String
