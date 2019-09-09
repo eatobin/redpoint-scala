@@ -1,37 +1,34 @@
-//scala> :load "scripts/scrubber.scala"
-
 type RawString = String
 type Scrubbed = String
 type ErrorString = String
+type ErrorOrScrubbed = Either[ErrorString, Scrubbed]
+type RosterAsStringList = List[String]
 
 // Remove the spaces between CSVs and any final \n
 def scrub(rawString: RawString): Scrubbed = {
   rawString
-    .stripLineEnd
     .replaceAll(", ", ",")
+    .stripLineEnd
 }
 
-// Split string into lines
-def lines(scrubbed: Scrubbed): List[String] = scrubbed.split('\n').toList
-
-// Remove name from player Array
-def removeName(player: List[String]): List[String] = player.head :: player.tail.tail
-
 // Ensure string is not nil, empty or only spaces. Returns a scrubbed string
-def nonBlankString(rawString: RawString): Either[ErrorString, Scrubbed] = {
-  if (rawString == null ||
-    rawString
-      .trim
-      .isEmpty) {
+def nonBlankString(rawString: RawString): ErrorOrScrubbed = {
+  if (rawString == null || rawString.trim.isEmpty) {
     Left("the roster string was nil, empty or only spaces")
   } else {
     Right(scrub(rawString))
   }
 }
 
+val rs: RawString = "The Beatles, 2014\nRinSta, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc\nPauMcc, Paul McCartney, GeoHar, JohLen\n"
+val validScrubbed: ErrorOrScrubbed = nonBlankString(rs)
+val invalidScrubbed: ErrorOrScrubbed = nonBlankString(null)
+nonBlankString("")
+nonBlankString("   ")
+
 // A string of newlines >= 4?
-def validLengthString(eScrubbed: Either[ErrorString, Scrubbed]): Either[ErrorString, Scrubbed] = {
-  eScrubbed match {
+def validLengthString(errorOrScrubbed: ErrorOrScrubbed): ErrorOrScrubbed = {
+  errorOrScrubbed match {
     case Right(r) =>
       if (r.filter(_ == '\n').length < 4) {
         Left("roster string is not long enough")
@@ -43,9 +40,17 @@ def validLengthString(eScrubbed: Either[ErrorString, Scrubbed]): Either[ErrorStr
   }
 }
 
+validLengthString(validScrubbed)
+validLengthString(invalidScrubbed)
+val badLength = scrub("The Beatles, 2014\nRinSta, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc")
+validLengthString(Right(badLength))
+
+// Split scrubbed roster string into lines
+def lines(scrubbed: Scrubbed): RosterAsStringList = scrubbed.split('\n').toList
+
 // Got an info string?
-def rosterInfoLinePresent(eScrubbed: Either[ErrorString, Scrubbed]): Either[ErrorString, Scrubbed] = {
-  eScrubbed match {
+def rosterInfoLinePresent(errorOrScrubbed: ErrorOrScrubbed): ErrorOrScrubbed = {
+  errorOrScrubbed match {
     case Right(r) =>
       val mInfoString = nonBlankString(lines(r).head)
       if (mInfoString.isLeft) {
@@ -58,9 +63,14 @@ def rosterInfoLinePresent(eScrubbed: Either[ErrorString, Scrubbed]): Either[Erro
   }
 }
 
+rosterInfoLinePresent(validScrubbed)
+rosterInfoLinePresent(invalidScrubbed)
+val emptyFirstLine = scrub("\nRinSta, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc\nPauMcc, Paul McCartney, GeoHar, JohLen")
+rosterInfoLinePresent(Right(emptyFirstLine))
+
 // Got a roster name?
-def namePresent(eScrubbed: Either[ErrorString, Scrubbed]): Either[ErrorString, Scrubbed] = {
-  eScrubbed match {
+def namePresent(errorOrScrubbed: ErrorOrScrubbed): ErrorOrScrubbed = {
+  errorOrScrubbed match {
     case Right(r) =>
       val mRosterName = nonBlankString(lines(r).head.split(",").head)
       if (mRosterName.isLeft) {
@@ -73,9 +83,14 @@ def namePresent(eScrubbed: Either[ErrorString, Scrubbed]): Either[ErrorString, S
   }
 }
 
+namePresent(validScrubbed)
+namePresent(invalidScrubbed)
+val noName = scrub(",2014\nRinSta, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc\nPauMcc, Paul McCartney, GeoHar, JohLen")
+namePresent(Right(noName))
+
 // Got a roster year?
-def yearPresent(eScrubbed: Either[ErrorString, Scrubbed]): Either[ErrorString, Scrubbed] = {
-  eScrubbed match {
+def yearPresent(errorOrScrubbed: ErrorOrScrubbed): ErrorOrScrubbed = {
+  errorOrScrubbed match {
     case Right(r) =>
       if (lines(r).head.split(",").length != 2) {
         Left("the year value is missing")
@@ -86,6 +101,27 @@ def yearPresent(eScrubbed: Either[ErrorString, Scrubbed]): Either[ErrorString, S
       Left(l)
   }
 }
+
+yearPresent(validScrubbed)
+yearPresent(invalidScrubbed)
+val noYear = scrub("The Beatles\nRinSta, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc\nPauMcc, Paul McCartney, GeoHar, JohLen")
+yearPresent(Right(noYear))
+
+
+
+// Remove name from player Array
+def removeName(player: List[String]): List[String] = player.head :: player.tail.tail
+
+
+
+
+
+
+
+
+
+
+
 
 // Return the raw-info-string if the year text all digits
 def yearTextAllDigits(eScrubbed: Either[ErrorString, Scrubbed]): Either[ErrorString, Scrubbed] = {
@@ -163,8 +199,7 @@ def scrubbedRosterString(rawString: RawString): Either[ErrorString, Scrubbed] = 
   playersValid(result)
 }
 
-val bs = "The Beatles, 2014\nRinSta, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc\nPauMcc, Paul McCartney, GeoHar, JohLen\n"
-scrubbedRosterString(bs)
+scrubbedRosterString(rs)
 scrubbedRosterString(null)
 scrubbedRosterString("The Beatles, 2014\nRinSta, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc")
 scrubbedRosterString("\nRinSta, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc\nPauMcc, Paul McCartney, GeoHar, JohLen")
