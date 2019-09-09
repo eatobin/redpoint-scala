@@ -107,7 +107,24 @@ yearPresent(invalidScrubbed)
 val noYear = scrub("The Beatles\nRinSta, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc\nPauMcc, Paul McCartney, GeoHar, JohLen")
 yearPresent(Right(noYear))
 
+// Return the raw-info-string if the year text all digits
+def yearTextAllDigits(errorOrScrubbed: ErrorOrScrubbed): ErrorOrScrubbed = {
+  errorOrScrubbed match {
+    case Right(r) =>
+      if (!lines(r).head.split(",").last.forall(c => c.isDigit)) {
+        Left("the year value is not all digits")
+      } else {
+        Right(r)
+      }
+    case Left(l) =>
+      Left(l)
+  }
+}
 
+yearTextAllDigits(validScrubbed)
+yearTextAllDigits(invalidScrubbed)
+val yearHasLetter = scrub("The Beatles, 2014P\nRinSta, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc\nPauMcc, Paul McCartney, GeoHar, JohLen")
+yearTextAllDigits(Right(yearHasLetter))
 
 // Remove name from player Array
 def removeName(player: List[String]): List[String] = player.head :: player.tail.tail
@@ -123,19 +140,7 @@ def removeName(player: List[String]): List[String] = player.head :: player.tail.
 
 
 
-// Return the raw-info-string if the year text all digits
-def yearTextAllDigits(eScrubbed: Either[ErrorString, Scrubbed]): Either[ErrorString, Scrubbed] = {
-  eScrubbed match {
-    case Right(r) =>
-      if (!lines(r).head.split(",").last.forall(c => c.isDigit)) {
-        Left("the year value is not all digits")
-      } else {
-        Right(r)
-      }
-    case Left(l) =>
-      Left(l)
-  }
-}
+
 
 // Return the info-string if 1956 <= year <= 2056
 def yearInRange(eScrubbed: Either[ErrorString, Scrubbed]): Either[ErrorString, Scrubbed] = {
