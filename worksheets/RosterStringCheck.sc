@@ -184,7 +184,6 @@ def allListsAllSix(playerArrays: PlayersAsListOfSymbolsLists): Boolean = {
 
 allListsAllSix(pss)
 
-
 // Test
 def playersValid(errorOrScrubbed: ErrorOrScrubbed): ErrorOrScrubbed = {
   errorOrScrubbed match {
