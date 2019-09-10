@@ -178,26 +178,33 @@ def allSixChars(playerSymbols: PlayerAsListOfSymbols): Boolean = {
 allSixChars(ps)
 
 // All of the arrays only symbols
-def allArraysAllSix(playerArrays: PlayersAsListOfSymbolsLists): Boolean = {
+def allListsAllSix(playerArrays: PlayersAsListOfSymbolsLists): Boolean = {
   playerArrays.forall(a => allSixChars(a))
 }
-//pss.forall(a => allSixChars(a))
-allArraysAllSix(pss)
+
+allListsAllSix(pss)
 
 
 // Test
-//def playersValid(eScrubbed: Either[ErrorString, Scrubbed]): Either[ErrorString, Scrubbed] = {
-//  eScrubbed match {
-//    case Right(r) =>
-//      if (allArraysAllSix(makeOnlySymbols(makePlayerArrays(r)))) {
-//        Left("the players sub-string is invalid")
-//      } else {
-//        Right(r)
-//      }
-//    case Left(l) =>
-//      Left(l)
-//  }
-//}
+def playersValid(errorOrScrubbed: ErrorOrScrubbed): ErrorOrScrubbed = {
+  errorOrScrubbed match {
+    case Right(r) =>
+      if (!allListsAllSix(makeOnlySymbols(makePlayersList(r)))) {
+        Left("the players sub-string is invalid")
+      } else {
+        Right(r)
+      }
+    case Left(l) =>
+      Left(l)
+  }
+}
+
+playersValid(validScrubbed)
+playersValid(invalidScrubbed)
+val badSymbol = scrub("The Beatles, 2014\nRinStaX, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc\nPauMcc, Paul McCartney, GeoHar, JohLen")
+val missingSymbol = scrub("The Beatles, 2014\nRinSta, Ringo Starr, JohLen\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc\nPauMcc, Paul McCartney, GeoHar, JohLen")
+playersValid(Right(badSymbol))
+playersValid(Right(missingSymbol))
 
 // Ensure that raw-string is scrubbed and fully valid
 //def scrubbedRosterString(rawString: RawString): Either[ErrorString, Scrubbed] = {
