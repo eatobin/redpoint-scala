@@ -3,6 +3,9 @@ type Scrubbed = String
 type ErrorString = String
 type ErrorOrScrubbed = Either[ErrorString, Scrubbed]
 type RosterAsStringList = List[String]
+type PlayersAsStringList = List[String]
+type PlayersAsListOfSymbolsLists = List[List[String]]
+type PlayerAsListOfSymbols = List[String]
 
 // Remove the spaces between CSVs and any final \n
 def scrub(rawString: RawString): Scrubbed = {
@@ -148,87 +151,74 @@ val yearTooSmall = scrub("The Beatles, 1896\nRinSta, Ringo Starr, JohLen, GeoHar
 yearInRange(Right(yearTooBig))
 yearInRange(Right(yearTooSmall))
 
+// Given a valid scrubbed-string, return an array of player strings
+def makePlayersList(scrubbed: Scrubbed): PlayersAsStringList = lines(scrubbed).tail
 
-
-
-
-
-
-
+val playersAsStringList = makePlayersList(scrub(rs))
+//val playerString = playersAsStringList.head
 
 // Remove name from player Array
-def removeName(player: List[String]): List[String] = player.head :: player.tail.tail
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Given a valid scrubbed-string, return an array of player strings
-def makePlayerArrays(scrubbed: Scrubbed): List[String] = lines(scrubbed).tail
+def removeName(players: PlayersAsStringList): PlayersAsStringList = players.head :: players.tail.tail
 
 // Returns all player vectors void of names - symbols only
-def makeOnlySymbols(playersArray: List[String]): List[List[String]] = {
-  playersArray.map(_.split(",").toList).map(i => removeName(i))
+def makeOnlySymbols(players: PlayersAsStringList): PlayersAsListOfSymbolsLists = {
+  players.map(_.split(",").toList).map(i => removeName(i))
 }
 
+val pss = makeOnlySymbols(playersAsStringList)
+val ps = pss.head
+
 // All strings in the arrays are 6 chars long
-def allSixChars(playerSymbols: List[String]): Boolean = {
+def allSixChars(playerSymbols: PlayerAsListOfSymbols): Boolean = {
   val count = playerSymbols.length
   val six = playerSymbols.filter(p => p.length == 6)
   count == 3 && six.length == 3
 }
 
+allSixChars(ps)
+
 // All of the arrays only symbols
-def allArraysAllSix(playerArrays: List[List[String]]): Boolean = {
-  val theBools = playerArrays.map(a => allSixChars(a))
-  theBools.contains(false)
+def allArraysAllSix(playerArrays: PlayersAsListOfSymbolsLists): Boolean = {
+  playerArrays.forall(a => allSixChars(a))
 }
+//pss.forall(a => allSixChars(a))
+allArraysAllSix(pss)
+
 
 // Test
-def playersValid(eScrubbed: Either[ErrorString, Scrubbed]): Either[ErrorString, Scrubbed] = {
-  eScrubbed match {
-    case Right(r) =>
-      if (allArraysAllSix(makeOnlySymbols(makePlayerArrays(r)))) {
-        Left("the players sub-string is invalid")
-      } else {
-        Right(r)
-      }
-    case Left(l) =>
-      Left(l)
-  }
-}
+//def playersValid(eScrubbed: Either[ErrorString, Scrubbed]): Either[ErrorString, Scrubbed] = {
+//  eScrubbed match {
+//    case Right(r) =>
+//      if (allArraysAllSix(makeOnlySymbols(makePlayerArrays(r)))) {
+//        Left("the players sub-string is invalid")
+//      } else {
+//        Right(r)
+//      }
+//    case Left(l) =>
+//      Left(l)
+//  }
+//}
 
 // Ensure that raw-string is scrubbed and fully valid
-def scrubbedRosterString(rawString: RawString): Either[ErrorString, Scrubbed] = {
-  var result = nonBlankString(rawString)
-  result = validLengthString(result)
-  result = rosterInfoLinePresent(result)
-  result = namePresent(result)
-  result = yearPresent(result)
-  result = yearTextAllDigits(result)
-  result = yearInRange(result)
-  playersValid(result)
-}
+//def scrubbedRosterString(rawString: RawString): Either[ErrorString, Scrubbed] = {
+//  var result = nonBlankString(rawString)
+//  result = validLengthString(result)
+//  result = rosterInfoLinePresent(result)
+//  result = namePresent(result)
+//  result = yearPresent(result)
+//  result = yearTextAllDigits(result)
+//  result = yearInRange(result)
+//  playersValid(result)
+//}
 
-scrubbedRosterString(rs)
-scrubbedRosterString(null)
-scrubbedRosterString("The Beatles, 2014\nRinSta, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc")
-scrubbedRosterString("\nRinSta, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc\nPauMcc, Paul McCartney, GeoHar, JohLen")
-scrubbedRosterString(",2014\nRinSta, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc\nPauMcc, Paul McCartney, GeoHar, JohLen")
-scrubbedRosterString("The Beatles\nRinSta, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc\nPauMcc, Paul McCartney, GeoHar, JohLen")
-scrubbedRosterString("The Beatles, 2014P\nRinSta, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc\nPauMcc, Paul McCartney, GeoHar, JohLen")
-scrubbedRosterString("The Beatles, 2096\nRinSta, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc\nPauMcc, Paul McCartney, GeoHar, JohLen")
-scrubbedRosterString("The Beatles, 1896\nRinSta, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc\nPauMcc, Paul McCartney, GeoHar, JohLen")
-scrubbedRosterString("The Beatles, 2014\nRinStaX, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc\nPauMcc, Paul McCartney, GeoHar, JohLen")
-scrubbedRosterString("The Beatles, 2014\nRinSta, Ringo Starr, JohLen\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc\nPauMcc, Paul McCartney, GeoHar, JohLen")
+//scrubbedRosterString(rs)
+//scrubbedRosterString(null)
+//scrubbedRosterString("The Beatles, 2014\nRinSta, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc")
+//scrubbedRosterString("\nRinSta, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc\nPauMcc, Paul McCartney, GeoHar, JohLen")
+//scrubbedRosterString(",2014\nRinSta, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc\nPauMcc, Paul McCartney, GeoHar, JohLen")
+//scrubbedRosterString("The Beatles\nRinSta, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc\nPauMcc, Paul McCartney, GeoHar, JohLen")
+//scrubbedRosterString("The Beatles, 2014P\nRinSta, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc\nPauMcc, Paul McCartney, GeoHar, JohLen")
+//scrubbedRosterString("The Beatles, 2096\nRinSta, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc\nPauMcc, Paul McCartney, GeoHar, JohLen")
+//scrubbedRosterString("The Beatles, 1896\nRinSta, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc\nPauMcc, Paul McCartney, GeoHar, JohLen")
+//scrubbedRosterString("The Beatles, 2014\nRinStaX, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc\nPauMcc, Paul McCartney, GeoHar, JohLen")
+//scrubbedRosterString("The Beatles, 2014\nRinSta, Ringo Starr, JohLen\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc\nPauMcc, Paul McCartney, GeoHar, JohLen")
