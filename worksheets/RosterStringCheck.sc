@@ -126,6 +126,36 @@ yearTextAllDigits(invalidScrubbed)
 val yearHasLetter = scrub("The Beatles, 2014P\nRinSta, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc\nPauMcc, Paul McCartney, GeoHar, JohLen")
 yearTextAllDigits(Right(yearHasLetter))
 
+// Return the info-string if 1956 <= year <= 2056
+def yearInRange(errorOrScrubbed: ErrorOrScrubbed): ErrorOrScrubbed = {
+  errorOrScrubbed match {
+    case Right(r) =>
+      val year = lines(r).head.split(",").last.toInt
+      if (1956 > year || year > 2056) {
+        Left("not 1956 <= year <= 2056")
+      } else {
+        Right(r)
+      }
+    case Left(l) =>
+      Left(l)
+  }
+}
+
+yearInRange(validScrubbed)
+yearInRange(invalidScrubbed)
+val yearTooBig = scrub("The Beatles, 2096\nRinSta, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc\nPauMcc, Paul McCartney, GeoHar, JohLen")
+val yearTooSmall = scrub("The Beatles, 1896\nRinSta, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc\nPauMcc, Paul McCartney, GeoHar, JohLen")
+yearInRange(Right(yearTooBig))
+yearInRange(Right(yearTooSmall))
+
+
+
+
+
+
+
+
+
 // Remove name from player Array
 def removeName(player: List[String]): List[String] = player.head :: player.tail.tail
 
@@ -142,20 +172,7 @@ def removeName(player: List[String]): List[String] = player.head :: player.tail.
 
 
 
-// Return the info-string if 1956 <= year <= 2056
-def yearInRange(eScrubbed: Either[ErrorString, Scrubbed]): Either[ErrorString, Scrubbed] = {
-  eScrubbed match {
-    case Right(r) =>
-      val year = lines(r).head.split(",").last.toInt
-      if (1956 > year || year > 2056) {
-        Left("not 1956 <= year <= 2056")
-      } else {
-        Right(r)
-      }
-    case Left(l) =>
-      Left(l)
-  }
-}
+
 
 // Given a valid scrubbed-string, return an array of player strings
 def makePlayerArrays(scrubbed: Scrubbed): List[String] = lines(scrubbed).tail
