@@ -61,45 +61,47 @@ class RosterSpec extends FlatSpec {
       Left("the players sub-string is invalid"))
   }
 
-  "A Roster" should "have a name" in {
-    assert(getRosterName(ss) == "The Beatles")
-  }
-
-  it should "have a year" in {
-    assert(getRosterYear(ss) == 2014)
-  }
-
-  it should "have players" in {
-    assert(makePlayersList(ss) == plist)
-  }
-
-  it should "make a Player from a playerLine" in {
-    assert(makePlayerKV(pline) == pkv)
-  }
-
-  it should "make a PlayerKVList from a playersList" in {
-    assert(makePlayerKVList(plistShort) == pkvl)
-  }
-
-  it should "put its players in a Map" in {
-    assert(makePlayersMap(makePlayersList(ss)) ==
-      Map('RinSta -> Player("Ringo Starr", Vector(GiftPair('JohLen, 'GeoHar))),
-        'JohLen -> Player("John Lennon", Vector(GiftPair('PauMcc, 'RinSta))),
-        'GeoHar -> Player("George Harrison", Vector(GiftPair('RinSta, 'PauMcc))),
-        'PauMcc -> Player("Paul McCartney", Vector(GiftPair('GeoHar, 'JohLen)))))
-  }
-
-
-  it should "return Paul McCartney if asked" in {
-    assert(getPlayerInRoster('PauMcc, pmap) ==
-      Player("Paul McCartney", Vector(GiftPair('GeoHar, 'JohLen))))
-  }
-
-  it should "update a giftPair correctly" in {
-    assert(setGiftPairInRoster('RinSta, 0, GiftPair('RinSta, 'RinSta), pmap) ==
-      Map('RinSta -> Player("Ringo Starr", Vector(GiftPair('RinSta, 'RinSta))),
-        'JohLen -> Player("John Lennon", Vector(GiftPair('PauMcc, 'RinSta))),
-        'GeoHar -> Player("George Harrison", Vector(GiftPair('RinSta, 'PauMcc))),
-        'PauMcc -> Player("Paul McCartney", Vector(GiftPair('GeoHar, 'JohLen)))))
-  }
+//  "A Roster" should "have a name" in {
+//    assert(getRosterName(ss) == "The Beatles")
+//  }
+//
+//  it should "have a year" in {
+//    assert(getRosterYear(ss) == 2014)
+//  }
+//
+//  it should "have players" in {
+//    assert(
+//
+//      makePlayersList(ss) == plist)
+//  }
+//
+//  it should "make a Player from a playerLine" in {
+//    assert(makePlayerKV(pline) == pkv)
+//  }
+//
+//  it should "make a PlayerKVList from a playersList" in {
+//    assert(makePlayerKVList(plistShort) == pkvl)
+//  }
+//
+//  it should "put its players in a Map" in {
+//    assert(makePlayersMap(makePlayersList(ss)) ==
+//      Map('RinSta -> Player("Ringo Starr", Vector(GiftPair('JohLen, 'GeoHar))),
+//        'JohLen -> Player("John Lennon", Vector(GiftPair('PauMcc, 'RinSta))),
+//        'GeoHar -> Player("George Harrison", Vector(GiftPair('RinSta, 'PauMcc))),
+//        'PauMcc -> Player("Paul McCartney", Vector(GiftPair('GeoHar, 'JohLen)))))
+//  }
+//
+//
+//  it should "return Paul McCartney if asked" in {
+//    assert(getPlayerInRoster('PauMcc, pmap) ==
+//      Player("Paul McCartney", Vector(GiftPair('GeoHar, 'JohLen))))
+//  }
+//
+//  it should "update a giftPair correctly" in {
+//    assert(setGiftPairInRoster('RinSta, 0, GiftPair('RinSta, 'RinSta), pmap) ==
+//      Map('RinSta -> Player("Ringo Starr", Vector(GiftPair('RinSta, 'RinSta))),
+//        'JohLen -> Player("John Lennon", Vector(GiftPair('PauMcc, 'RinSta))),
+//        'GeoHar -> Player("George Harrison", Vector(GiftPair('RinSta, 'PauMcc))),
+//        'PauMcc -> Player("Paul McCartney", Vector(GiftPair('GeoHar, 'JohLen)))))
+//  }
 }

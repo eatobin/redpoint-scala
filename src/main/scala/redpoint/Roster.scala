@@ -36,14 +36,14 @@ object Roster {
   }
 
   // Given a scrubbed return the player-list
-  def makePlayersList(scrubbed: Scrubbed): PlayersList = {
-    scrubbed
-      .split("\n")
-      .toList
-      .tail
-      .map(l => l.split(",")
-        .toList)
-  }
+//  def makePlayersList(scrubbed: Scrubbed): PlayersList = {
+//    scrubbed
+//      .split("\n")
+//      .toList
+//      .tail
+//      .map(l => l.split(",")
+//        .toList)
+//  }
 
   // test
   def makePlayerKV(kv: PlayerLine): PlayerKV =
