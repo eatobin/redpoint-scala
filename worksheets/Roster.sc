@@ -1,25 +1,42 @@
-//:load "scripts/rosterer.scala"
-
 import redpoint.RosterStringCheck._
 
+type RawString = String
 type Scrubbed = String
+type ErrorString = String
+type ErrorOrScrubbed = Either[ErrorString, Scrubbed]
+type RosterAsStringList = List[String]
+type PlayersAsStringList = List[String]
+type PlayersAsListOfSymbolsLists = List[List[String]]
+type PlayerAsListOfSymbols = List[String]
 type RName = String
+type RYear = Int
+type PlrSym = Symbol
+type Givee = PlrSym
+type Giver = PlrSym
+type PlayersList = List[List[String]]
+type PName = String
+type GiftHist = Vector[GiftPair]
+
+case class GiftPair(givee: Givee, giver: Giver)
 
 // Given a scrubbed return the roster name
 def getRosterName(scrubbed: Scrubbed): RName = {
   lines(scrubbed).head.split(",").head
 }
 
-type RYear = Int
+val rs: RawString = "The Beatles, 2014\nRinSta, Ringo Starr, JohLen, GeoHar\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc\nPauMcc, Paul McCartney, GeoHar, JohLen\n"
+getRosterName(scrub(rs))
 
 // Given a scrubbed return the roster year
 def getRosterYear(scrubbed: Scrubbed): RYear = {
   lines(scrubbed).head.split(",").last.toInt
 }
 
-type PlayersList = List[List[String]]
+getRosterYear(scrub(rs))
 
-def makePlayersList(scrubbed: Scrubbed): PlayersList = {
+
+
+def makePlayersLists(scrubbed: Scrubbed): PlayersList = {
   scrubbed
     .split("\n")
     .toList
@@ -28,14 +45,11 @@ def makePlayersList(scrubbed: Scrubbed): PlayersList = {
       .toList)
 }
 
-type PlrSym = Symbol
-type Givee = PlrSym
-type Giver = PlrSym
+val playersList = makePlayersLists(scrub(rs))
 
-case class GiftPair(givee: Givee, giver: Giver)
 
-type PName = String
-type GiftHist = Vector[GiftPair]
+
+
 
 case class Player(pName: PName, giftHist: GiftHist)
 
@@ -67,6 +81,6 @@ val ss = "The Beatles,2014\nRinSta,Ringo Starr,JohLen,GeoHar\nJohLen,John Lennon
 
 getRosterName(ss)
 getRosterYear(ss)
-makePlayersList(ss)
-makePlayersMap(makePlayersList(ss))
-makePlayersMap(makePlayersList(ss))('PauMcc)
+makePlayersLists(ss)
+makePlayersMap(makePlayersLists(ss))
+makePlayersMap(makePlayersLists(ss))('PauMcc)

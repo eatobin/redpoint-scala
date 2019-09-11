@@ -155,7 +155,6 @@ yearInRange(Right(yearTooSmall))
 def makePlayersList(scrubbed: Scrubbed): PlayersAsStringList = lines(scrubbed).tail
 
 val playersAsStringList = makePlayersList(scrub(rs))
-//val playerString = playersAsStringList.head
 
 // Remove name from player Array
 def removeName(players: PlayersAsStringList): PlayersAsStringList = players.head :: players.tail.tail
