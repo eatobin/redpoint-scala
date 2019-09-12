@@ -3,9 +3,11 @@ type Scrubbed = String
 type ErrorString = String
 type ErrorOrScrubbed = Either[ErrorString, Scrubbed]
 type RosterAsStringList = List[String]
-type PlayersAsStringList = List[String]
-type PlayersAsListOfSymbolsLists = List[List[String]]
-type PlayerAsListOfSymbols = List[String]
+type Player = String
+type PlayerNoName = String
+type PlayerList = List[Player]
+type PlayerNoNameList = List[PlayerNoName]
+type PlayerNoNameListList = List[PlayerNoNameList]
 
 // Remove the spaces between CSVs and any final \n
 def scrub(rawString: RawString): Scrubbed = {
@@ -152,23 +154,24 @@ yearInRange(Right(yearTooBig))
 yearInRange(Right(yearTooSmall))
 
 // Given a valid scrubbed-string, return an array of player strings
-def makePlayersList(scrubbed: Scrubbed): PlayersAsStringList = lines(scrubbed).tail
+def makePlayersList(scrubbed: Scrubbed): PlayerList = lines(scrubbed).tail
 
 val playersAsStringList = makePlayersList(scrub(rs))
+val firstPlayer = playersAsStringList.head
 
-// Remove name from player Array
-def removeName(players: PlayersAsStringList): PlayersAsStringList = players.head :: players.tail.tail
+// Remove name from player List
+def removeName(players: PlayerList): PlayerNoNameList = players.head :: players.tail.tail
 
-// Returns all player vectors void of names - symbols only
-def makeOnlySymbols(players: PlayersAsStringList): PlayersAsListOfSymbolsLists = {
+// Returns all player Lists void of names - symbols only
+def makeOnlySymbols(players: PlayerList): PlayerNoNameListList = {
   players.map(_.split(",").toList).map(i => removeName(i))
 }
 
 val pss = makeOnlySymbols(playersAsStringList)
 val ps = pss.head
 
-// All strings in the arrays are 6 chars long
-def allSixChars(playerSymbols: PlayerAsListOfSymbols): Boolean = {
+// All strings in the Player are 6 chars long
+def allSixChars(playerSymbols: PlayerNoNameList): Boolean = {
   val count = playerSymbols.length
   val six = playerSymbols.filter(p => p.length == 6)
   count == 3 && six.length == 3
@@ -177,7 +180,7 @@ def allSixChars(playerSymbols: PlayerAsListOfSymbols): Boolean = {
 allSixChars(ps)
 
 // All of the arrays only symbols
-def allListsAllSix(playerArrays: PlayersAsListOfSymbolsLists): Boolean = {
+def allListsAllSix(playerArrays: PlayerNoNameListList): Boolean = {
   playerArrays.forall(a => allSixChars(a))
 }
 

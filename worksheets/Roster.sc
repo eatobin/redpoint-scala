@@ -1,5 +1,6 @@
 import redpoint.RosterStringCheck._
 
+// RosterStringCheck.scala
 type RawString = String
 type Scrubbed = String
 type ErrorString = String
@@ -8,6 +9,8 @@ type RosterAsStringList = List[String]
 type PlayersAsStringList = List[String]
 type PlayersAsListOfSymbolsLists = List[List[String]]
 type PlayerAsListOfSymbols = List[String]
+
+//Roster.scala
 type RName = String
 type RYear = Int
 type PlrSym = Symbol
