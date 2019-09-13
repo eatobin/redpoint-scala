@@ -53,6 +53,10 @@ validLengthString(Right(badLength))
 // Split scrubbed roster string into lines
 def lines(scrubbed: Scrubbed): RosterAsStringList = scrubbed.split('\n').toList
 
+val rosterSL: RosterAsStringList = lines(scrub(rs))
+"one, two, three".toList
+//val rosterAsLists: List[List[String]] = rosterSL.iterator.map(ps => toL)
+
 // Got an info string?
 def rosterInfoLinePresent(errorOrScrubbed: ErrorOrScrubbed): ErrorOrScrubbed = {
   errorOrScrubbed match {
