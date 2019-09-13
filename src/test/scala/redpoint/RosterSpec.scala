@@ -1,7 +1,6 @@
 package redpoint
 
 import org.scalatest.FlatSpec
-import redpoint.Roster._
 import redpoint.RosterStringCheck._
 
 class RosterSpec extends FlatSpec {
@@ -20,16 +19,16 @@ class RosterSpec extends FlatSpec {
   val missingSym = "The Beatles, 2014\nRinSta, Ringo Starr, JohLen\nJohLen, John Lennon, PauMcc, RinSta\nGeoHar, George Harrison, RinSta, PauMcc\nPauMcc, Paul McCartney, GeoHar, JohLen"
 
 
-  val rl = List(List("The Beatles", "2014"), List("RinSta", "Ringo Starr", "JohLen", "GeoHar"), List("JohLen", "John Lennon", "PauMcc", "RinSta"), List("GeoHar", "George Harrison", "RinSta", "PauMcc"), List("PauMcc", "Paul McCartney", "GeoHar", "JohLen"))
-  val plist = List(List("RinSta", "Ringo Starr", "JohLen", "GeoHar"), List("JohLen", "John Lennon", "PauMcc", "RinSta"), List("GeoHar", "George Harrison", "RinSta", "PauMcc"), List("PauMcc", "Paul McCartney", "GeoHar", "JohLen"))
-  val pline = List("RinSta", "Ringo Starr", "JohLen", "GeoHar")
-  val pkv: PlayerKV = ('RinSta, Player("Ringo Starr", Vector(GiftPair('JohLen, 'GeoHar))))
-  val plistShort = List(List("RinSta", "Ringo Starr", "JohLen", "GeoHar"))
-  val pkvl: List[PlayerKV] = List(('RinSta, Player("Ringo Starr", Vector(GiftPair('JohLen, 'GeoHar)))))
-  val pmap: Map[PlrSym, Player] = Map('RinSta -> Player("Ringo Starr", Vector(GiftPair('JohLen, 'GeoHar))),
-    'JohLen -> Player("John Lennon", Vector(GiftPair('PauMcc, 'RinSta))),
-    'GeoHar -> Player("George Harrison", Vector(GiftPair('RinSta, 'PauMcc))),
-    'PauMcc -> Player("Paul McCartney", Vector(GiftPair('GeoHar, 'JohLen))))
+  private val rl = List(List("The Beatles", "2014"), List("RinSta", "Ringo Starr", "JohLen", "GeoHar"), List("JohLen", "John Lennon", "PauMcc", "RinSta"), List("GeoHar", "George Harrison", "RinSta", "PauMcc"), List("PauMcc", "Paul McCartney", "GeoHar", "JohLen"))
+  private val plist = List(List("RinSta", "Ringo Starr", "JohLen", "GeoHar"), List("JohLen", "John Lennon", "PauMcc", "RinSta"), List("GeoHar", "George Harrison", "RinSta", "PauMcc"), List("PauMcc", "Paul McCartney", "GeoHar", "JohLen"))
+  private val pline = List("RinSta", "Ringo Starr", "JohLen", "GeoHar")
+  private val pkv: PlayerKV = (Symbol("RinSta"), Player("Ringo Starr", Vector(GiftPair(Symbol("JohLen"), Symbol("GeoHar")))))
+  private val plistShort: List[List[RName]] = List(List("RinSta", "Ringo Starr", "JohLen", "GeoHar"))
+  private val pkvl: List[PlayerKV] = List((Symbol("RinSta"), Player("Ringo Starr", Vector(GiftPair(Symbol("JohLen"), Symbol("GeoHar"))))))
+  private val pmap: Map[PlrSym, Player] = Map(Symbol("RinSta") -> Player("Ringo Starr", Vector(GiftPair(Symbol("JohLen"), Symbol("GeoHar")))),
+    Symbol("JohLen") -> Player("John Lennon", Vector(GiftPair(Symbol("PauMcc"), Symbol("RinSta")))),
+    Symbol("GeoHar") -> Player("George Harrison", Vector(GiftPair(Symbol("RinSta"), Symbol("PauMcc")))),
+    Symbol("PauMcc") -> Player("Paul McCartney", Vector(GiftPair(Symbol("GeoHar"), Symbol("JohLen")))))
 
   //  val pmap: redpoint.PlayersMap = Map('RinSta -> Player("Ringo Starr", Vector(GiftPair('JohLen, 'GeoHar))), 'JohLen -> Player("John Lennon", Vector(GiftPair('PauMcc, 'RinSta))), 'GeoHar -> Player("George Harrison", Vector(GiftPair('RinSta, 'PauMcc))), 'PauMcc -> Player("Paul McCartney", Vector(GiftPair('GeoHar, 'JohLen))))
 
