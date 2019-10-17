@@ -39,8 +39,8 @@ object RosterStringCheck {
   def rosterInfoLinePresent(errorOrScrubbed: ErrorOrScrubbed): ErrorOrScrubbed = {
     errorOrScrubbed match {
       case Right(scrubbed) =>
-        val mInfoList = makeEntityList(scrubbed).head.length
-        if (mInfoList == 1) {
+        val mInfoList = makeEntityList(scrubbed).head
+        if (mInfoList.equals(List(""))) {
           Left("the roster info line is blank")
         } else {
           Right(scrubbed)
@@ -54,8 +54,8 @@ object RosterStringCheck {
   def namePresent(errorOrScrubbed: ErrorOrScrubbed): ErrorOrScrubbed = {
     errorOrScrubbed match {
       case Right(scrubbed) =>
-        val mRosterName = makeEntityList(scrubbed).head.head.length
-        if (mRosterName == 0) {
+        val mRosterName = makeEntityList(scrubbed).head.head
+        if (mRosterName.isEmpty) {
           Left("the name value is missing")
         } else {
           Right(scrubbed)
@@ -122,42 +122,42 @@ object RosterStringCheck {
     players.map(p => removeName(p))
   }
 
-//  // All strings in the arrays are 6 chars long
-//  def allSixChars(playerSymbols: PlayerAsListOfSymbols): Boolean = {
-//    val count = playerSymbols.length
-//    val six = playerSymbols.filter(p => p.length == 6)
-//    count == 3 && six.length == 3
-//  }
-//
-//  // All of the arrays only symbols
-//  def allListsAllSix(playerArrays: PlayersAsListOfSymbolsLists): Boolean = {
-//    playerArrays.forall(a => allSixChars(a))
-//  }
-//
-//  // Test
-//  def playersValid(errorOrScrubbed: ErrorOrScrubbed): ErrorOrScrubbed = {
-//    errorOrScrubbed match {
-//      case Right(r) =>
-//        if (!allListsAllSix(makeOnlySymbols(makePlayersList(r)))) {
-//          Left("the players sub-string is invalid")
-//        } else {
-//          Right(r)
-//        }
-//      case Left(l) =>
-//        Left(l)
-//    }
-//  }
-//
-//  // Ensure that raw-string is scrubbed and fully valid
-//  def scrubbedRosterString(rawString: RawString): ErrorOrScrubbed = {
-//    var result = nonBlankString(rawString)
-//    result = validLengthString(result)
-//    result = rosterInfoLinePresent(result)
-//    result = namePresent(result)
-//    result = yearPresent(result)
-//    result = yearTextAllDigits(result)
-//    result = yearInRange(result)
-//    playersValid(result)
-//  }
+  // All strings in the lists are 6 chars long
+  def allSixChars(playerSymbols: PlayerAsListOfSymbols): Boolean = {
+    val count = playerSymbols.length
+    val six = playerSymbols.filter(p => p.length == 6)
+    count == 3 && six.length == 3
+  }
+
+  // All of the arrays only symbols
+  def allListsAllSix(playerArrays: PlayersListSymbols): Boolean = {
+    playerArrays.forall(a => allSixChars(a))
+  }
+
+  // Test
+  def playersValid(errorOrScrubbed: ErrorOrScrubbed): ErrorOrScrubbed = {
+    errorOrScrubbed match {
+      case Right(scrubbed) =>
+        if (!allListsAllSix(makeOnlySymbols(makePlayersList(scrubbed)))) {
+          Left("the players sub-string is invalid")
+        } else {
+          Right(scrubbed)
+        }
+      case Left(error) =>
+        Left(error)
+    }
+  }
+
+  // Ensure that raw-string is scrubbed and fully valid
+  def scrubbedRosterString(rawString: RawString): ErrorOrScrubbed = {
+    var result = nonBlankString(rawString)
+    result = validLengthString(result)
+    result = rosterInfoLinePresent(result)
+    result = namePresent(result)
+    result = yearPresent(result)
+    result = yearTextAllDigits(result)
+    result = yearInRange(result)
+    playersValid(result)
+  }
 
 }
