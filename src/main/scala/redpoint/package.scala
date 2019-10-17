@@ -1,10 +1,16 @@
 package object redpoint {
+//   Entity = InfoLine (String)
   type RawString = String
   type Scrubbed = String
   type ErrorString = String
   type ErrorOrScrubbed = Either[ErrorString, Scrubbed]
-  type RosterAsStringList = List[String]
-  type PlayersAsStringList = List[String]
+  type EntityList = List[List[String]]
+//  type RosterLine = String
+//  type RosterInfo = RosterLine
+//  type Player = List[String]
+//  type Roster = List[RosterLine]
+  type PlayersAsListOfStringList = List[List[String]]
+//type PlayerAsStringList = ???
   type PlayersAsListOfSymbolsLists = List[List[String]]
   type PlayerAsListOfSymbols = List[String]
 

@@ -32,33 +32,33 @@ class RosterSpec extends FlatSpec {
 
   //  val pmap: redpoint.PlayersMap = Map('RinSta -> Player("Ringo Starr", Vector(GiftPair('JohLen, 'GeoHar))), 'JohLen -> Player("John Lennon", Vector(GiftPair('PauMcc, 'RinSta))), 'GeoHar -> Player("George Harrison", Vector(GiftPair('RinSta, 'PauMcc))), 'PauMcc -> Player("Paul McCartney", Vector(GiftPair('GeoHar, 'JohLen))))
 
-  "A rawString" should "be scrubbed and fully valid" in {
-    assert(scrubbedRosterString(ss) == valid)
-    assert(scrubbedRosterString(null) ==
-      Left("the roster string was null, empty or only spaces"))
-    assert(scrubbedRosterString("") ==
-      Left("the roster string was null, empty or only spaces"))
-    assert(scrubbedRosterString("   ") ==
-      Left("the roster string was null, empty or only spaces"))
-    assert(scrubbedRosterString(tooShort) ==
-      Left("roster string is not long enough"))
-    assert(scrubbedRosterString(noInfo) ==
-      Left("the roster info line is blank"))
-    assert(scrubbedRosterString(noName) ==
-      Left("the name value is missing"))
-    assert(scrubbedRosterString(noYear) ==
-      Left("the year value is missing"))
-    assert(scrubbedRosterString(yearLetter) ==
-      Left("the year value is not all digits"))
-    assert(scrubbedRosterString(yearBig) ==
-      Left("not 1956 <= year <= 2056"))
-    assert(scrubbedRosterString(yearSmall) ==
-      Left("not 1956 <= year <= 2056"))
-    assert(scrubbedRosterString(badSym) ==
-      Left("the players sub-string is invalid"))
-    assert(scrubbedRosterString(missingSym) ==
-      Left("the players sub-string is invalid"))
-  }
+//  "A rawString" should "be scrubbed and fully valid" in {
+//    assert(scrubbedRosterString(ss) == valid)
+//    assert(scrubbedRosterString(null) ==
+//      Left("the roster string was null, empty or only spaces"))
+//    assert(scrubbedRosterString("") ==
+//      Left("the roster string was null, empty or only spaces"))
+//    assert(scrubbedRosterString("   ") ==
+//      Left("the roster string was null, empty or only spaces"))
+//    assert(scrubbedRosterString(tooShort) ==
+//      Left("roster string is not long enough"))
+//    assert(scrubbedRosterString(noInfo) ==
+//      Left("the roster info line is blank"))
+//    assert(scrubbedRosterString(noName) ==
+//      Left("the name value is missing"))
+//    assert(scrubbedRosterString(noYear) ==
+//      Left("the year value is missing"))
+//    assert(scrubbedRosterString(yearLetter) ==
+//      Left("the year value is not all digits"))
+//    assert(scrubbedRosterString(yearBig) ==
+//      Left("not 1956 <= year <= 2056"))
+//    assert(scrubbedRosterString(yearSmall) ==
+//      Left("not 1956 <= year <= 2056"))
+//    assert(scrubbedRosterString(badSym) ==
+//      Left("the players sub-string is invalid"))
+//    assert(scrubbedRosterString(missingSym) ==
+//      Left("the players sub-string is invalid"))
+//  }
 
 //  "A Roster" should "have a name" in {
 //    assert(getRosterName(ss) == "The Beatles")

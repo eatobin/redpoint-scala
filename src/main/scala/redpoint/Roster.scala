@@ -25,15 +25,15 @@ object Roster {
     'GeoHar -> Player("George Harrison", Vector(GiftPair('RinSta, 'PauMcc))),
     'PauMcc -> Player("Paul McCartney", Vector(GiftPair('GeoHar, 'JohLen))))
 
-  // Given a scrubbed return the roster name
-  def getRosterName(scrubbed: Scrubbed): RName = {
-    lines(scrubbed).head.split(",").head
-  }
-
-  // Given a scrubbed return the roster year
-  def getRosterYear(scrubbed: Scrubbed): RYear = {
-    lines(scrubbed).head.split(",").last.toInt
-  }
+//  // Given a scrubbed return the roster name
+//  def getRosterName(scrubbed: Scrubbed): RName = {
+//    lines(scrubbed).head.split(",").head
+//  }
+//
+//  // Given a scrubbed return the roster year
+//  def getRosterYear(scrubbed: Scrubbed): RYear = {
+//    lines(scrubbed).head.split(",").last.toInt
+//  }
 
   // Given a scrubbed return the player-list
 //  def makePlayersList(scrubbed: Scrubbed): PlayersList = {
