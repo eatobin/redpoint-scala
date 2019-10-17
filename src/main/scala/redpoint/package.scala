@@ -5,18 +5,18 @@ package object redpoint {
   type ErrorString = String
   type ErrorOrScrubbed = Either[ErrorString, Scrubbed]
   type EntityList = List[List[String]]
+  type PlayersList = List[List[String]]
 //  type RosterLine = String
 //  type RosterInfo = RosterLine
-//  type Player = List[String]
+  type PlayerAsList = List[String]
 //  type Roster = List[RosterLine]
-  type PlayersAsListOfStringList = List[List[String]]
+//  type PlayersAsListOfStringList = List[List[String]]
 //type PlayerAsStringList = ???
-  type PlayersAsListOfSymbolsLists = List[List[String]]
+  type PlayersListSymbols = List[List[String]]
   type PlayerAsListOfSymbols = List[String]
 
   type RName = String
   type RYear = Int
-  type PlayersList = List[List[String]]
   type PlrSym = Symbol
   type Givee = PlrSym
   type Giver = PlrSym

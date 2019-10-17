@@ -110,34 +110,18 @@ object RosterStringCheck {
     }
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   // Given a valid scrubbed-string, return an array of player strings
-//  def makePlayersList(scrubbed: Scrubbed): PlayersAsListOfStringList = lines(scrubbed).tail.map(_.split(",").toList)
-//
-//  // Remove name from player Array
-//  def removeName(player: PlayersAsStringList): PlayersAsStringList = player.head :: player.tail.tail
-//
-//  // Returns all player vectors void of names - symbols only
-//  def makeOnlySymbols(players: PlayersAsStringList): PlayersAsListOfSymbolsLists = {
-//    players.map(_.split(",").toList).map(i => removeName(i))
-//  }
-//
+  def makePlayersList(scrubbed: Scrubbed): PlayersList = makeEntityList(scrubbed).tail
+
+  // Remove name from player Array
+  def removeName(player: PlayerAsList): PlayerAsList = player.head :: player.tail.tail
+
+
+  // Returns all player vectors void of names - symbols only
+  def makeOnlySymbols(players: PlayersList): PlayersListSymbols = {
+    players.map(p => removeName(p))
+  }
+
 //  // All strings in the arrays are 6 chars long
 //  def allSixChars(playerSymbols: PlayerAsListOfSymbols): Boolean = {
 //    val count = playerSymbols.length
