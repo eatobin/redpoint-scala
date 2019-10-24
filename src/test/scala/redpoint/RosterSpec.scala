@@ -26,7 +26,7 @@ class RosterSpec extends FlatSpec {
   //  private val playersExt: Players =
   //  mutableMapOf("RinSta" to rinStaExt, "JohLen" to johLenExt, "GeoHar" to geoHarExt, "PauMcc" to pauMccExt)
 
-  "A roster" should "return \"The Beatles\" rosterName" in {
+  "A Roster" should "return \"The Beatles\" rosterName" in {
     assert(roster.rosterName == "The Beatles")
   }
 
@@ -38,8 +38,12 @@ class RosterSpec extends FlatSpec {
     assert(roster.players == players)
   }
 
-  it should "return a player for a playerKey" in {
+  it should "have getPlayerInRoster return a player for a playerKey" in {
     assert(Roster.getPlayerInRoster(roster, 'PauMcc) == pauMcc)
+  }
+
+  "A Player" should "have getGiftPairInGiftHistory return a giftPair for a giftYear" in {
+    assert(Player.getGiftPairInGiftHistory(pauMcc.giftHistory, 0) == GiftPair("GeoHar", "JohLen"))
   }
 
 }
