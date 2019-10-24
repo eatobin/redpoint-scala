@@ -14,8 +14,12 @@ class RosterSpec extends FlatSpec {
 
   private val roster: Roster = Roster("The Beatles", 2014, players)
 
-  "A rosterName" should "return \"The Beatles\"" in {
+  "A roster" should "return \"The Beatles\" rosterName" in {
     assert(roster.rosterName == "The Beatles")
+  }
+
+  it should "return 2014 rosterYear" in {
+    assert(roster.rosterYear == 2014)
   }
 
   //  private val rinStaExt: Player =
