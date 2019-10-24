@@ -38,4 +38,8 @@ class RosterSpec extends FlatSpec {
     assert(roster.players == players)
   }
 
+  it should "return a player for a playerKey" in {
+    assert(Roster.getPlayerInRoster(roster, 'PauMcc) == pauMcc)
+  }
+
 }
