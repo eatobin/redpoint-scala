@@ -3,12 +3,12 @@ package redpoint
 case class Player(playerName: PlayerName, giftHistory: GiftHistory)
 
 object Player {
-  def getGiftPairInGiftHistory(giftHistory: GiftHistory, giftYear: GiftYear): GiftPair =
-    giftHistory(giftYear)
+  def getGiftPair(player: Player, giftYear: GiftYear): GiftPair =
+    player.giftHistory(giftYear)
 
-  def setGiftPairInGiftHistory(giftHistory: GiftHistory, giftYear: GiftYear, giftPair: GiftPair): GiftHistory =
-    giftHistory.updated(giftYear, giftPair)
+  def setGiftPair(player: Player, giftYear: GiftYear, giftPair: GiftPair): Player = {
+    val ngh: GiftHistory = player.giftHistory.updated(giftYear, giftPair)
+    player.copy(giftHistory = ngh)
+  }
 
-  def setGiftHistoryInPlayer(player: Player, giftHistory: GiftHistory): Player =
-    player.copy(giftHistory = giftHistory)
 }
