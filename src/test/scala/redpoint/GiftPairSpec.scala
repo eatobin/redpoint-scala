@@ -1,6 +1,7 @@
 package redpoint
 
 import org.scalatest.FlatSpec
+import redpoint.GiftPair._
 
 class GiftPairSpec extends FlatSpec {
 
@@ -12,5 +13,9 @@ class GiftPairSpec extends FlatSpec {
 
   it should "return its giver" in {
     assert(giftPair.giver == "GeoHar")
+  }
+
+  it should "return an updated givee" in {
+    assert(setGivee(giftPair, "NewBee") == GiftPair("NewBee", "GeoHar"))
   }
 }
