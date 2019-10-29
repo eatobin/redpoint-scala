@@ -11,10 +11,10 @@ class GiftHistorySpec extends FlatSpec {
     assert(addYear(giftHistory, 'NewBee) == Vector(GiftPair('JohLen, 'GeoHar), GiftPair('NewBee, 'NewBee)))
   }
 
-  //  it should "return its giver" in {
-  //    assert(giftPair.giver == 'GeoHar)
-  //  }
-  //
+  it should "return a giftPair" in {
+    assert(getGiftPair(giftHistory, 0) == GiftPair('JohLen, 'GeoHar))
+  }
+
   //  it should "return an updated givee" in {
   //    assert(setGivee(giftPair, 'NewBee) == GiftPair('NewBee, 'GeoHar))
   //  }
