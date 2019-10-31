@@ -10,19 +10,19 @@ class PlayersSpec extends FlatSpec {
   private val geoHar: Player = Player("George Harrison", Vector(GiftPair('RinSta, 'PauMcc)))
   private val pauMcc: Player = Player("Paul McCartney", Vector(GiftPair('GeoHar, 'JohLen)))
 
+  private val newBee: Player = Player("New Bee", Vector(GiftPair('NewBee, 'NewBee)))
+
   private val players: Players =
     Map('RinSta -> rinSta, 'JohLen -> johLen, 'GeoHar -> geoHar, 'PauMcc -> pauMcc)
+
+  private val newBeePlayers: Players =
+    Map('RinSta -> newBee, 'JohLen -> johLen, 'GeoHar -> geoHar, 'PauMcc -> pauMcc)
 
   "Players" should "return a player" in {
     assert(getPlayer(players, 'GeoHar) == Player("George Harrison", Vector(GiftPair('RinSta, 'PauMcc))))
   }
 
-  //  it should "return its giftHistory" in {
-  //    assert(player.giftHistory == Vector(GiftPair('JohLen, 'GeoHar)))
-  //  }
-  //
-  //  it should "return an updated giftHistory" in {
-  //    assert(setGiftHistory(player, Vector(GiftPair('nope, 'yup))) ==
-  //      Player("Ringo Starr", Vector(GiftPair('nope, 'yup))))
-  //  }
+  it should "return an updated players" in {
+    assert(setPlayer(players, 'RinSta, Player("New Bee", Vector(GiftPair('NewBee, 'NewBee)))) == newBeePlayers)
+  }
 }
