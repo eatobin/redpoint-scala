@@ -9,12 +9,10 @@ class PlayersSpec extends FlatSpec {
   private val johLen: Player = Player("John Lennon", Vector(GiftPair('PauMcc, 'RinSta)))
   private val geoHar: Player = Player("George Harrison", Vector(GiftPair('RinSta, 'PauMcc)))
   private val pauMcc: Player = Player("Paul McCartney", Vector(GiftPair('GeoHar, 'JohLen)))
-
-  private val newBee: Player = Player("New Bee", Vector(GiftPair('NewBee, 'NewBee)))
-
   private val players: Players =
     Map('RinSta -> rinSta, 'JohLen -> johLen, 'GeoHar -> geoHar, 'PauMcc -> pauMcc)
 
+  private val newBee: Player = Player("New Bee", Vector(GiftPair('NewBee, 'NewBee)))
   private val newBeePlayers: Players =
     Map('RinSta -> newBee, 'JohLen -> johLen, 'GeoHar -> geoHar, 'PauMcc -> pauMcc)
 
@@ -22,9 +20,15 @@ class PlayersSpec extends FlatSpec {
   private val johLenExt: Player = Player("John Lennon", Vector(GiftPair('PauMcc, 'RinSta), GiftPair('JohLen, 'JohLen)))
   private val geoHarExt: Player = Player("George Harrison", Vector(GiftPair('RinSta, 'PauMcc), GiftPair('GeoHar, 'GeoHar)))
   private val pauMccExt: Player = Player("Paul McCartney", Vector(GiftPair('GeoHar, 'JohLen), GiftPair('PauMcc, 'PauMcc)))
-
   private val playersExt: Players =
     Map('RinSta -> rinStaExt, 'JohLen -> johLenExt, 'GeoHar -> geoHarExt, 'PauMcc -> pauMccExt)
+
+  private val geoHarGivee: Player = Player("George Harrison", Vector(GiftPair('you, 'PauMcc)))
+  private val geoHarGiver: Player = Player("George Harrison", Vector(GiftPair('RinSta, 'you)))
+  private val playersGivee: Players =
+    Map('RinSta -> rinSta, 'JohLen -> johLen, 'GeoHar -> geoHarGivee, 'PauMcc -> pauMcc)
+  private val playersGiver: Players =
+    Map('RinSta -> rinSta, 'JohLen -> johLen, 'GeoHar -> geoHarGiver, 'PauMcc -> pauMcc)
 
   "Players" should "return a player" in {
     assert(getPlayer(players, 'GeoHar) == Player("George Harrison", Vector(GiftPair('RinSta, 'PauMcc))))
@@ -48,5 +52,13 @@ class PlayersSpec extends FlatSpec {
 
   it should "return a giver" in {
     assert(getGiverPlayers(players, 'GeoHar, 0) == 'PauMcc)
+  }
+
+  it should "set a givee" in {
+    assert(setGiveePlayers(players, 'GeoHar, 0, 'you) == playersGivee)
+  }
+
+  it should "set a giver" in {
+    assert(setGiverPlayers(players, 'GeoHar, 0, 'you) == playersGiver)
   }
 }
