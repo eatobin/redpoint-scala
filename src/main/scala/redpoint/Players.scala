@@ -8,6 +8,10 @@ object Players {
     players.updated(playerKey, player)
   }
 
-  //  TODO
-  def addYearPlayers(players: Players): Players = ???
+  def addYearPlayers(players: Players): Players =
+    for ((playerKey, player) <- players) yield {
+      {
+        playerKey -> Player.addYearPlayer(player, playerKey)
+      }
+    }
 }
