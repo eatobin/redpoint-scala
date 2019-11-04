@@ -41,4 +41,8 @@ class PlayersSpec extends FlatSpec {
   it should "return a player's name" in {
     assert(getPlayerNamePlayers(players, 'GeoHar) == "George Harrison")
   }
+
+  it should "return a givee" in {
+    assert(getGiveePlayers(players, 'GeoHar, 0) == 'RinSta)
+  }
 }
