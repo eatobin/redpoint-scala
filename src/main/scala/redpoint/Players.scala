@@ -16,4 +16,7 @@ object Players {
 
   def getGiveePlayers(players: Players, playerKey: PlayerKey, giftYear: GiftYear): Givee =
     getPlayer(players, playerKey).giftHistory(giftYear).givee
+
+  def getGiverPlayers(players: Players, playerKey: PlayerKey, giftYear: GiftYear): Giver =
+    getPlayer(players, playerKey).giftHistory(giftYear).giver
 }

@@ -45,4 +45,8 @@ class PlayersSpec extends FlatSpec {
   it should "return a givee" in {
     assert(getGiveePlayers(players, 'GeoHar, 0) == 'RinSta)
   }
+
+  it should "return a giver" in {
+    assert(getGiverPlayers(players, 'GeoHar, 0) == 'PauMcc)
+  }
 }
