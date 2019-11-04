@@ -10,4 +10,7 @@ object Players {
   def addYearPlayers(players: Players): Players =
     for ((playerKey, player) <- players) yield
       playerKey -> Player.addYearPlayer(player, playerKey)
+
+  def getPlayerNamePlayers(players: Players, playerKey: PlayerKey): PlayerName =
+    getPlayer(players, playerKey).playerName
 }

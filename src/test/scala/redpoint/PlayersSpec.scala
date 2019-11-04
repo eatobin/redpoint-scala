@@ -37,4 +37,8 @@ class PlayersSpec extends FlatSpec {
   it should "return an extended year players" in {
     assert(addYearPlayers(players) == playersExt)
   }
+
+  it should "return a player's name" in {
+    assert(getPlayerNamePlayers(players, 'GeoHar) == "George Harrison")
+  }
 }
