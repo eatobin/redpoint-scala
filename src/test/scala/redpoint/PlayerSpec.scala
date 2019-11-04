@@ -19,4 +19,9 @@ class PlayerSpec extends FlatSpec {
     assert(setGiftHistory(player, Vector(GiftPair('nope, 'yup))) ==
       Player("Ringo Starr", Vector(GiftPair('nope, 'yup))))
   }
+
+  it should "return an extended giftHistory in player" in {
+    assert(addYearPlayer(player, 'mee) ==
+      Player("Ringo Starr", Vector(GiftPair('JohLen, 'GeoHar), GiftPair('mee, 'mee))))
+  }
 }
