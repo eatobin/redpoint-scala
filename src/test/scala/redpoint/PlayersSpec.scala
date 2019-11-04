@@ -54,11 +54,11 @@ class PlayersSpec extends FlatSpec {
     assert(getGiverPlayers(players, 'GeoHar, 0) == 'PauMcc)
   }
 
-  it should "set a givee" in {
-    assert(setGiveePlayers(players, 'GeoHar, 0, 'you) == playersGivee)
+  it should "set a givEe" in {
+    assert(setGivEeErPlayers(players, 'GeoHar, 0, 'you, 'ee) == playersGivee)
   }
 
-  it should "set a giver" in {
-    assert(setGiverPlayers(players, 'GeoHar, 0, 'you) == playersGiver)
+  it should "set a givEr" in {
+    assert(setGivEeErPlayers(players, 'GeoHar, 0, 'you, 'er) == playersGiver)
   }
 }
