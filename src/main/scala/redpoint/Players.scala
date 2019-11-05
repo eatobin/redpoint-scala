@@ -14,12 +14,6 @@ object Players {
   def getPlayerNamePlayers(players: Players, playerKey: PlayerKey): PlayerName =
     getPlayer(players, playerKey).playerName
 
-  def getGiveePlayers(players: Players, playerKey: PlayerKey, giftYear: GiftYear): Givee =
-    getPlayer(players, playerKey).giftHistory(giftYear).givee
-
-  def getGiverPlayers(players: Players, playerKey: PlayerKey, giftYear: GiftYear): Giver =
-    getPlayer(players, playerKey).giftHistory(giftYear).giver
-
   def getGivEeErPlayers(players: Players, playerKey: PlayerKey, giftYear: GiftYear, eEeR: EeEr): Giv = {
     val plr = getPlayer(players, playerKey)
     val gh = plr.giftHistory
