@@ -46,19 +46,13 @@ class PlayersSpec extends FlatSpec {
     assert(getPlayerNamePlayers(players, 'GeoHar) == "George Harrison")
   }
 
-  it should "return a givee" in {
-    assert(getGiveePlayers(players, 'GeoHar, 0) == 'RinSta)
+  it should "return a givEeEr" in {
+    assert(getGivEeErPlayers(players, 'GeoHar, 0, 'ee) == 'RinSta)
+    assert(getGivEeErPlayers(players, 'GeoHar, 0, 'er) == 'PauMcc)
   }
 
-  it should "return a giver" in {
-    assert(getGiverPlayers(players, 'GeoHar, 0) == 'PauMcc)
-  }
-
-  it should "set a givEe" in {
+  it should "set a givEeEr" in {
     assert(setGivEeErPlayers(players, 'GeoHar, 0, 'you, 'ee) == playersGivee)
-  }
-
-  it should "set a givEr" in {
     assert(setGivEeErPlayers(players, 'GeoHar, 0, 'you, 'er) == playersGiver)
   }
 }

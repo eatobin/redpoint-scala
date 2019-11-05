@@ -20,6 +20,13 @@ object Players {
   def getGiverPlayers(players: Players, playerKey: PlayerKey, giftYear: GiftYear): Giver =
     getPlayer(players, playerKey).giftHistory(giftYear).giver
 
+  def getGivEeErPlayers(players: Players, playerKey: PlayerKey, giftYear: GiftYear, eEeR: EeEr): Giv = {
+    val plr = getPlayer(players, playerKey)
+    val gh = plr.giftHistory
+    val gp = gh(giftYear)
+    if (eEeR == 'ee) gp.givee else gp.giver
+  }
+
   def setGivEeErPlayers(players: Players, playerKey: PlayerKey, giftYear: GiftYear, giv: Giv, eEeR: EeEr): Players = {
     val plr = getPlayer(players, playerKey)
     val gh = plr.giftHistory
