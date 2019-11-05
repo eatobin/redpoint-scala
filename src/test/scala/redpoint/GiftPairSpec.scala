@@ -15,11 +15,8 @@ class GiftPairSpec extends FlatSpec {
     assert(giftPair.giver == 'GeoHar)
   }
 
-  it should "return an updated givEe" in {
+  it should "return an updated givEeEr" in {
     assert(setGivEeEr(giftPair, 'NewBee, 'ee) == GiftPair('NewBee, 'GeoHar))
-  }
-
-  it should "return an updated givEr" in {
     assert(setGivEeEr(giftPair, 'NewBee, 'er) == GiftPair('JohLen, 'NewBee))
   }
 }
