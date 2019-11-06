@@ -1,27 +1,24 @@
 package redpoint
 
 object Players {
-  def getPlayer(players: Players, playerKey: PlayerKey): Player =
-    players(playerKey)
-
-  def setPlayer(players: Players, playerKey: PlayerKey, player: Player): Players =
-    players.updated(playerKey, player)
-
-  def addYearPlayers(players: Players): Players =
+  def addYearPlayers(players: PlayersT): PlayersT =
     for ((playerKey, player) <- players) yield
       playerKey -> Player.addYearPlayer(player, playerKey)
 
-  def getPlayerNamePlayers(players: Players, playerKey: PlayerKey): PlayerName =
+  def getPlayerNamePlayers(players: PlayersT, playerKey: PlayerKeyT): PlayerNameT =
     getPlayer(players, playerKey).playerName
 
-  def getGivEeErPlayers(players: Players, playerKey: PlayerKey, giftYear: GiftYear, eEeR: EeEr): Giv = {
+  def getPlayer(players: PlayersT, playerKey: PlayerKeyT): Player =
+    players(playerKey)
+
+  def getGivEeErPlayers(players: PlayersT, playerKey: PlayerKeyT, giftYear: GiftYearT, eEeR: EeErT): GivT = {
     val plr = getPlayer(players, playerKey)
     val gh = plr.giftHistory
     val gp = gh(giftYear)
     if (eEeR == 'ee) gp.givee else gp.giver
   }
 
-  def setGivEeErPlayers(players: Players, playerKey: PlayerKey, giftYear: GiftYear, giv: Giv, eEeR: EeEr): Players = {
+  def setGivEeErPlayers(players: PlayersT, playerKey: PlayerKeyT, giftYear: GiftYearT, giv: GivT, eEeR: EeErT): PlayersT = {
     val plr = getPlayer(players, playerKey)
     val gh = plr.giftHistory
     val gp = gh(giftYear)
@@ -30,4 +27,7 @@ object Players {
     val nplr = Player.setGiftHistory(plr, ngh)
     setPlayer(players, playerKey, nplr)
   }
+
+  def setPlayer(players: PlayersT, playerKey: PlayerKeyT, player: Player): PlayersT =
+    players.updated(playerKey, player)
 }

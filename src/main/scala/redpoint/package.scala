@@ -1,17 +1,17 @@
 package object redpoint {
-  type Givee = Symbol
-  type Giver = Symbol
-  type Giv = Symbol
-  type EeEr = Symbol
+  type GiveeT = Symbol
+  type GiverT = Symbol
+  type GivT = Symbol
+  type EeErT = Symbol
 
-  type GiftHistory = Vector[GiftPair]
-  type PlayerKey = Symbol
-  type GiftYear = Int
+  type GiftHistoryT = Vector[GiftPair]
+  type PlayerKeyT = Symbol
+  type GiftYearT = Int
 
-  type PlayerName = String
+  type PlayerNameT = String
 
-  type Players = Map[PlayerKey, Player]
+  type PlayersT = Map[PlayerKeyT, Player]
 
-  type RosterName = String
-  type RosterYear = Int
+  type RosterNameT = String
+  type RosterYearT = Int
 }

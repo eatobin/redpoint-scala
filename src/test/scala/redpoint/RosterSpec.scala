@@ -9,7 +9,7 @@ class RosterSpec extends FlatSpec {
   private val geoHar: Player = Player("George Harrison", Vector(GiftPair('RinSta, 'PauMcc)))
   private val pauMcc: Player = Player("Paul McCartney", Vector(GiftPair('GeoHar, 'JohLen)))
 
-  private val players: Players =
+  private val players: PlayersT =
     Map('RinSta -> rinSta, 'JohLen -> johLen, 'GeoHar -> geoHar, 'PauMcc -> pauMcc)
 
   private val roster: Roster = Roster("The Beatles", 2014, players)
