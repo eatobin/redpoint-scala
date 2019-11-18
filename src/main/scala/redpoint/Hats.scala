@@ -5,5 +5,8 @@ object Hats {
     players.keySet
 
   def removePuck(hat: HatT, playerKey: PlayerKeyT): HatT =
-    hat.filterNot(pk => pk == playerKey)
+    hat - playerKey
+
+  def discardGivee(discards: DiscardsT, givee: GiveeT): DiscardsT =
+    discards + givee
 }

@@ -19,11 +19,12 @@ class HatSpec extends FlatSpec {
     assert(makeHat(players) == testHat)
   }
 
-    it should "remove a puck" in {
-      assert(removePuck(testHat, 'RinSta) == Set('JohLen, 'GeoHar, 'PauMcc))
-    }
+  it should "remove a puck" in {
+    assert(removePuck(testHat, 'RinSta) == Set('JohLen, 'GeoHar, 'PauMcc))
+    assert(removePuck(Set(), 'RinSta) == Set())
+  }
 
-  //  it should "return players" in {
-  //    assert(roster.players == players)
-  //  }
+  it should "discard a givee" in {
+    assert(discardGivee(Set('PauMcc), 'JohLen) == Set('JohLen, 'PauMcc))
+  }
 }
