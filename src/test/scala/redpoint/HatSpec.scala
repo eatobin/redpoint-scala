@@ -19,10 +19,10 @@ class HatSpec extends FlatSpec {
     assert(makeHat(players) == testHat)
   }
 
-  //  it should "return 2014 rosterYear" in {
-  //    assert(roster.rosterYear == 2014)
-  //  }
-  //
+    it should "remove a puck" in {
+      assert(removePuck(testHat, 'RinSta) == Set('JohLen, 'GeoHar, 'PauMcc))
+    }
+
   //  it should "return players" in {
   //    assert(roster.players == players)
   //  }
