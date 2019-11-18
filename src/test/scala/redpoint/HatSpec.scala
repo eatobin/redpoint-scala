@@ -24,7 +24,7 @@ class HatSpec extends FlatSpec {
     assert(removePuck(Set(), 'RinSta) == Set())
   }
 
-  it should "discard a givee" in {
-    assert(discardGivee(Set('PauMcc), 'JohLen) == Set('JohLen, 'PauMcc))
+  it should "return discarded givees" in {
+    assert(returnDiscards(Set('PauMcc, 'JohLen), Set('GeoHar)) == Set('JohLen, 'PauMcc, 'GeoHar))
   }
 }

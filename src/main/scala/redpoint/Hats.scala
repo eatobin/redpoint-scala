@@ -9,4 +9,7 @@ object Hats {
 
   def discardGivee(discards: DiscardsT, givee: GiveeT): DiscardsT =
     discards + givee
+
+  def returnDiscards(geHat: HatT, discards: DiscardsT): HatT =
+    geHat ++ discards
 }
