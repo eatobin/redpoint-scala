@@ -12,4 +12,7 @@ object Hats {
 
   def returnDiscards(geHat: HatT, discards: DiscardsT): HatT =
     geHat ++ discards
+
+  def emptyDiscards(): HatT =
+    Set()
 }
