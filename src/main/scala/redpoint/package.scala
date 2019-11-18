@@ -14,4 +14,6 @@ package object redpoint {
 
   type RosterNameT = String
   type RosterYearT = Int
+
+  type HatT = Set[PlayerKeyT]
 }
