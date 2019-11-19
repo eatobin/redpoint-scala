@@ -1,9 +1,9 @@
 package redpoint
 
-case class GiftPair(giveeT: Givee, giverT: Giver)
+case class GiftPair(givee: Givee, giver: Giver)
 
 object GiftPair {
-  def setGivEeEr(giftPair: GiftPair, givT: Giv, eeErT: EeEr): GiftPair = {
-    if (eeErT == 'ee) giftPair.copy(giveeT = givT) else giftPair.copy(giverT = givT)
+  def setGivEeEr(giftPair: GiftPair, giv: Giv, eEeR: EeEr): GiftPair = {
+    if (eEeR == 'ee) giftPair.copy(givee = giv) else giftPair.copy(giver = giv)
   }
 }

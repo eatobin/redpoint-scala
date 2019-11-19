@@ -15,7 +15,7 @@ object Players {
     val plr = getPlayer(players, playerKey)
     val gh = plr.giftHistory
     val gp = gh(giftYear)
-    if (eEeR == 'ee) gp.giveeT else gp.giverT
+    if (eEeR == 'ee) gp.givee else gp.giver
   }
 
   def setGivEeErPlayers(players: Players, playerKey: PlayerKey, giftYear: GiftYear, giv: Giv, eEeR: EeEr): Players = {
