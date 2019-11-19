@@ -9,25 +9,25 @@ class PlayersSpec extends FlatSpec {
   private val johLen: Player = Player("John Lennon", Vector(GiftPair('PauMcc, 'RinSta)))
   private val geoHar: Player = Player("George Harrison", Vector(GiftPair('RinSta, 'PauMcc)))
   private val pauMcc: Player = Player("Paul McCartney", Vector(GiftPair('GeoHar, 'JohLen)))
-  private val players: PlayersT =
+  private val players: Players =
     Map('RinSta -> rinSta, 'JohLen -> johLen, 'GeoHar -> geoHar, 'PauMcc -> pauMcc)
 
   private val newBee: Player = Player("New Bee", Vector(GiftPair('NewBee, 'NewBee)))
-  private val newBeePlayers: PlayersT =
+  private val newBeePlayers: Players =
     Map('RinSta -> newBee, 'JohLen -> johLen, 'GeoHar -> geoHar, 'PauMcc -> pauMcc)
 
   private val rinStaExt: Player = Player("Ringo Starr", Vector(GiftPair('JohLen, 'GeoHar), GiftPair('RinSta, 'RinSta)))
   private val johLenExt: Player = Player("John Lennon", Vector(GiftPair('PauMcc, 'RinSta), GiftPair('JohLen, 'JohLen)))
   private val geoHarExt: Player = Player("George Harrison", Vector(GiftPair('RinSta, 'PauMcc), GiftPair('GeoHar, 'GeoHar)))
   private val pauMccExt: Player = Player("Paul McCartney", Vector(GiftPair('GeoHar, 'JohLen), GiftPair('PauMcc, 'PauMcc)))
-  private val playersExt: PlayersT =
+  private val playersExt: Players =
     Map('RinSta -> rinStaExt, 'JohLen -> johLenExt, 'GeoHar -> geoHarExt, 'PauMcc -> pauMccExt)
 
   private val geoHarGivee: Player = Player("George Harrison", Vector(GiftPair('you, 'PauMcc)))
   private val geoHarGiver: Player = Player("George Harrison", Vector(GiftPair('RinSta, 'you)))
-  private val playersGivee: PlayersT =
+  private val playersGivee: Players =
     Map('RinSta -> rinSta, 'JohLen -> johLen, 'GeoHar -> geoHarGivee, 'PauMcc -> pauMcc)
-  private val playersGiver: PlayersT =
+  private val playersGiver: Players =
     Map('RinSta -> rinSta, 'JohLen -> johLen, 'GeoHar -> geoHarGiver, 'PauMcc -> pauMcc)
 
   "Players" should "return a player" in {

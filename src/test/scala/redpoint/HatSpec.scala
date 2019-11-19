@@ -10,10 +10,10 @@ class HatSpec extends FlatSpec {
   private val geoHar: Player = Player("George Harrison", Vector(GiftPair('RinSta, 'PauMcc)))
   private val pauMcc: Player = Player("Paul McCartney", Vector(GiftPair('GeoHar, 'JohLen)))
 
-  private val players: PlayersT =
+  private val players: Players =
     Map('RinSta -> rinSta, 'JohLen -> johLen, 'GeoHar -> geoHar, 'PauMcc -> pauMcc)
 
-  private val testHat: HatT = Set('RinSta, 'JohLen, 'GeoHar, 'PauMcc)
+  private val testHat: Hat = Set('RinSta, 'JohLen, 'GeoHar, 'PauMcc)
 
   "A Hat" should "make itself given players" in {
     assert(makeHat(players) == testHat)
