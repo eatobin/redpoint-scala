@@ -8,11 +8,11 @@ class GiftPairSpec extends FlatSpec {
   private val giftPair: GiftPair = GiftPair('JohLen, 'GeoHar)
 
   "A GiftPair" should "return its givee" in {
-    assert(giftPair.givee == 'JohLen)
+    assert(giftPair.giveeT == 'JohLen)
   }
 
   it should "return its giver" in {
-    assert(giftPair.giver == 'GeoHar)
+    assert(giftPair.giverT == 'GeoHar)
   }
 
   it should "return an updated givEeEr" in {
