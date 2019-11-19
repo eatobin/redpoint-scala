@@ -47,8 +47,8 @@ class PlayersSpec extends FlatSpec {
   }
 
   it should "return a givEeEr" in {
-    assert(getGivEeErPlayers(players, 'GeoHar, 0, 'ee) == 'RinSta)
-    assert(getGivEeErPlayers(players, 'GeoHar, 0, 'er) == 'PauMcc)
+    assert(getGivEeErPlayers(players, 'GeoHar, 'ee, 0) == 'RinSta)
+    assert(getGivEeErPlayers(players, 'GeoHar, 'er, 0) == 'PauMcc)
   }
 
   it should "set a givEeEr" in {

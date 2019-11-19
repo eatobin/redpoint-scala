@@ -11,7 +11,7 @@ object Players {
   def getPlayer(players: Players, playerKey: PlayerKey): Player =
     players(playerKey)
 
-  def getGivEeErPlayers(players: Players, playerKey: PlayerKey, giftYear: GiftYear, eEeR: EeEr): Giv = {
+  def getGivEeErPlayers(players: Players, playerKey: PlayerKey, eEeR: EeEr, giftYear: GiftYear): Giv = {
     val plr = getPlayer(players, playerKey)
     val gh = plr.giftHistory
     val gp = gh(giftYear)

@@ -7,7 +7,14 @@ object Rules {
     selfKey != givee
 
   def giveeNotRecip(selfKey: PlayerKey, givee: Givee, giftYear: GiftYear, players: Players): Boolean = {
-    val recip = getGivEeErPlayers(players, givee, giftYear, 'ee)
+    val recip = getGivEeErPlayers(players, givee, 'ee, giftYear)
     selfKey != recip
+  }
+
+  def giveeNotRepeat(selfKey: PlayerKey, givee: Givee, giftYear: GiftYear, players: Players): Boolean = {
+    val past = (giftYear - 1).to(giftYear - 4).by(-1).filterNot(y => y < 0)
+    val geY = getGivEeErPlayers(players, selfKey, 'ee, _: GiftYear)
+    val geInYrs = past.map(gy => geY(gy))
+    !geInYrs.contains(givee)
   }
 }
