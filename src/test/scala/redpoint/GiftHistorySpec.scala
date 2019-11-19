@@ -5,17 +5,17 @@ import redpoint.GiftHistory._
 
 class GiftHistorySpec extends FlatSpec {
 
-  private val giftHistoryT: GiftHistory = Vector(GiftPair('JohLen, 'GeoHar))
+  private val giftHistory: GiftHistory = Vector(GiftPair('JohLen, 'GeoHar))
 
   "A GiftHistory" should "add a new year" in {
-    assert(addYear(giftHistoryT, 'NewBee) == Vector(GiftPair('JohLen, 'GeoHar), GiftPair('NewBee, 'NewBee)))
+    assert(addYear(giftHistory, 'NewBee) == Vector(GiftPair('JohLen, 'GeoHar), GiftPair('NewBee, 'NewBee)))
   }
 
   it should "return a giftPair" in {
-    assert(getGiftPair(giftHistoryT, 0) == GiftPair('JohLen, 'GeoHar))
+    assert(getGiftPair(giftHistory, 0) == GiftPair('JohLen, 'GeoHar))
   }
 
   it should "return an updated giftHistory" in {
-    assert(setGiftPair(giftHistoryT, 0, GiftPair('me, 'you)) == Vector(GiftPair('me, 'you)))
+    assert(setGiftPair(giftHistory, 0, GiftPair('me, 'you)) == Vector(GiftPair('me, 'you)))
   }
 }

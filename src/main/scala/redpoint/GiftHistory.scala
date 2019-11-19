@@ -1,13 +1,13 @@
 package redpoint
 
 object GiftHistory {
-  def addYear(giftHistoryT: GiftHistory, playerKeyT: PlayerKey): GiftHistory =
-    giftHistoryT :+ GiftPair(playerKeyT, playerKeyT)
+  def addYear(giftHistory: GiftHistory, playerKey: PlayerKey): GiftHistory =
+    giftHistory :+ GiftPair(playerKey, playerKey)
 
-  def getGiftPair(giftHistoryT: GiftHistory, giftYearT: GiftYear): GiftPair =
-    giftHistoryT(giftYearT)
+  def getGiftPair(giftHistory: GiftHistory, giftYearT: GiftYear): GiftPair =
+    giftHistory(giftYearT)
 
-  def setGiftPair(giftHistoryT: GiftHistory, giftYearT: GiftYear, giftPair: GiftPair): GiftHistory = {
-    giftHistoryT.updated(giftYearT, giftPair)
+  def setGiftPair(giftHistory: GiftHistory, giftYearT: GiftYear, giftPair: GiftPair): GiftHistory = {
+    giftHistory.updated(giftYearT, giftPair)
   }
 }
