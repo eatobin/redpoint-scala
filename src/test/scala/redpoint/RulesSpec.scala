@@ -1,6 +1,7 @@
 package redpoint
 
 import org.scalatest.FlatSpec
+import redpoint.Players.{addYearPlayers, setGivEeErPlayers}
 import redpoint.Rules._
 
 class RulesSpec extends FlatSpec {
@@ -14,6 +15,12 @@ class RulesSpec extends FlatSpec {
   private val beatlesPlusPM: Players =
     Map('RinSta -> rinSta, 'JohLen -> johLen, 'GeoHar -> geoHar, 'PauMcc -> pauMcc, 'EriTob -> eriTob, 'KarLav -> karLav)
 
+  private val extended = addYearPlayers(addYearPlayers(addYearPlayers(addYearPlayers(beatlesPlusPM))))
+  private var beatlesPlus4 = setGivEeErPlayers(extended, 'RinSta, 1, 'GeoHar, 'ee)
+  beatlesPlus4 = setGivEeErPlayers(extended, 'RinSta, 2, 'PauMcc, 'ee)
+  beatlesPlus4 = setGivEeErPlayers(extended, 'RinSta, 3, 'EriTob, 'ee)
+  beatlesPlus4 = setGivEeErPlayers(extended, 'RinSta, 4, 'KarLav, 'ee)
+
   "A Player" should "not give to itself" in {
     assert(giveeNotSelf('RinSta, 'GeoHar))
     assert(!giveeNotSelf('RinSta, 'RinSta))
@@ -24,13 +31,7 @@ class RulesSpec extends FlatSpec {
     assert(!giveeNotRecip('RinSta, 'KarLav, 0, beatlesPlusPM))
   }
 
-  //  it should "return an updated giftHistory" in {
-  //    assert(setGiftHistory(player, Vector(GiftPair('nope, 'yup))) ==
-  //      Player("Ringo Starr", Vector(GiftPair('nope, 'yup))))
-  //  }
-  //
-  //  it should "return an extended giftHistory in player" in {
-  //    assert(addYearPlayer(player, 'mee) ==
-  //      Player("Ringo Starr", Vector(GiftPair('JohLen, 'GeoHar), GiftPair('mee, 'mee))))
-  //  }
+  it should "not repeat for three years" in {
+    assert(!giveeNotRepeat('RinSta, 'JohLen, 2, beatlesPlus4))
+  }
 }
