@@ -14,12 +14,15 @@ class RulesSpec extends FlatSpec {
   private val karLav: Player = Player("Karen Lavengood", Vector(GiftPair(giver = 'EriTob, givee = 'RinSta)))
   private val beatlesPlusPM: Players =
     Map('RinSta -> rinSta, 'JohLen -> johLen, 'GeoHar -> geoHar, 'PauMcc -> pauMcc, 'EriTob -> eriTob, 'KarLav -> karLav)
-
-  private val extended = addYearPlayers(addYearPlayers(addYearPlayers(addYearPlayers(beatlesPlusPM))))
+//TODO
+  private var extended = addYearPlayers(beatlesPlusPM)
   private var beatlesPlus4 = setGivEeErPlayers(extended, 'RinSta, 1, 'GeoHar, 'ee)
+  extended = addYearPlayers(extended)
   beatlesPlus4 = setGivEeErPlayers(extended, 'RinSta, 2, 'PauMcc, 'ee)
-  beatlesPlus4 = setGivEeErPlayers(extended, 'RinSta, 3, 'EriTob, 'ee)
-  beatlesPlus4 = setGivEeErPlayers(extended, 'RinSta, 4, 'KarLav, 'ee)
+//  extended = addYearPlayers(extended)
+//  beatlesPlus4 = setGivEeErPlayers(extended, 'RinSta, 3, 'EriTob, 'ee)
+//  extended = addYearPlayers(extended)
+//  beatlesPlus4 = setGivEeErPlayers(extended, 'RinSta, 4, 'KarLav, 'ee)
 
   "A Player" should "not give to itself" in {
     assert(giveeNotSelf('RinSta, 'GeoHar))
@@ -32,6 +35,8 @@ class RulesSpec extends FlatSpec {
   }
 
   it should "not repeat for three years" in {
-    assert(!giveeNotRepeat('RinSta, 'JohLen, 2, beatlesPlus4))
+    println(beatlesPlus4)
+//    assert(!giveeNotRepeat('RinSta, 'JohLen, 2, beatlesPlus4))
+//    assert(giveeNotRepeat('RinSta, 'GeoHar, 2, beatlesPlus4))
   }
 }
