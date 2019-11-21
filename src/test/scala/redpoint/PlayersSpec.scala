@@ -23,6 +23,13 @@ class PlayersSpec extends FlatSpec {
   private val playersExt: Players =
     Map('RinSta -> rinStaExt, 'JohLen -> johLenExt, 'GeoHar -> geoHarExt, 'PauMcc -> pauMccExt)
 
+  private val rinStaExt2: Player = Player("Ringo Starr", Vector(GiftPair('JohLen, 'GeoHar), GiftPair('RinSta, 'RinSta), GiftPair('RinSta, 'RinSta)))
+  private val johLenExt2: Player = Player("John Lennon", Vector(GiftPair('PauMcc, 'RinSta), GiftPair('JohLen, 'JohLen), GiftPair('JohLen, 'JohLen)))
+  private val geoHarExt2: Player = Player("George Harrison", Vector(GiftPair('RinSta, 'PauMcc), GiftPair('GeoHar, 'GeoHar), GiftPair('GeoHar, 'GeoHar)))
+  private val pauMccExt2: Player = Player("Paul McCartney", Vector(GiftPair('GeoHar, 'JohLen), GiftPair('PauMcc, 'PauMcc), GiftPair('PauMcc, 'PauMcc)))
+  private val playersExt2: Players =
+    Map('RinSta -> rinStaExt2, 'JohLen -> johLenExt2, 'GeoHar -> geoHarExt2, 'PauMcc -> pauMccExt2)
+
   private val geoHarGivee: Player = Player("George Harrison", Vector(GiftPair('you, 'PauMcc)))
   private val geoHarGiver: Player = Player("George Harrison", Vector(GiftPair('RinSta, 'you)))
   private val playersGivee: Players =
@@ -40,6 +47,7 @@ class PlayersSpec extends FlatSpec {
 
   it should "return an extended year players" in {
     assert(addYearPlayers(players) == playersExt)
+    assert(addYearPlayers(playersExt) == playersExt2)
   }
 
   it should "return a player's name" in {
