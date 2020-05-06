@@ -1,10 +1,10 @@
 package redpoint
 
-import org.scalatest.FlatSpec
+import org.scalatest.flatspec.AnyFlatSpec
 import redpoint.Players.{addYearPlayers, setGivEeErPlayers}
 import redpoint.Rules._
 
-class RulesSpec extends FlatSpec {
+class RulesSpec extends AnyFlatSpec {
 
   private val rinSta: Player = Player("Ringo Starr", Vector(GiftPair(giver = 'KarLav, givee = 'JohLen)))
   private val johLen: Player = Player("John Lennon", Vector(GiftPair(giver = 'RinSta, givee = 'GeoHar)))

@@ -1,9 +1,9 @@
 package redpoint
 
-import org.scalatest.FlatSpec
+import org.scalatest.flatspec.AnyFlatSpec
 import redpoint.Player._
 
-class PlayerSpec extends FlatSpec {
+class PlayerSpec extends AnyFlatSpec {
 
   private val player: Player = Player("Ringo Starr", Vector(GiftPair('JohLen, 'GeoHar)))
 

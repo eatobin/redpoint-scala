@@ -1,8 +1,8 @@
 package redpoint
 
-import org.scalatest.FlatSpec
+import org.scalatest.flatspec.AnyFlatSpec
 
-class RosterSpec extends FlatSpec {
+class RosterSpec extends AnyFlatSpec {
 
   private val rinSta: Player = Player("Ringo Starr", Vector(GiftPair('JohLen, 'GeoHar)))
   private val johLen: Player = Player("John Lennon", Vector(GiftPair('PauMcc, 'RinSta)))

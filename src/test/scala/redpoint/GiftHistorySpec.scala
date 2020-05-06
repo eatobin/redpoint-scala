@@ -1,9 +1,9 @@
 package redpoint
 
-import org.scalatest.FlatSpec
+import org.scalatest.flatspec.AnyFlatSpec
 import redpoint.GiftHistory._
 
-class GiftHistorySpec extends FlatSpec {
+class GiftHistorySpec extends AnyFlatSpec {
 
   private val giftHistory: GiftHistory = Vector(GiftPair('JohLen, 'GeoHar))
 

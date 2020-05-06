@@ -1,9 +1,9 @@
 package redpoint
 
-import org.scalatest.FlatSpec
+import org.scalatest.flatspec.AnyFlatSpec
 import redpoint.GiftPair._
 
-class GiftPairSpec extends FlatSpec {
+class GiftPairSpec extends AnyFlatSpec {
 
   private val giftPair: GiftPair = GiftPair('JohLen, 'GeoHar)
 
