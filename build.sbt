@@ -3,6 +3,7 @@ ThisBuild / version := "0.1.0-SNAPSHOT"
 ThisBuild / organization := "com.example"
 ThisBuild / organizationName := "example"
 
+//noinspection Annotator,Annotator,Annotator
 lazy val root = (project in file("."))
   .settings(
     name := "redpoint-scala",
