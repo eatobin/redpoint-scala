@@ -5,18 +5,15 @@ import redpoint.GiftPair._
 
 class GiftPairSpec extends AnyFlatSpec {
 
-  private val giftPair: GiftPair = GiftPair('JohLen, 'GeoHar)
+  private val giftPair: GiftPair = GiftPair(Symbol("JohLen"), Symbol("GeoHar"))
 
-  "A GiftPair" should "return its givee" in {
-    assert(getGivEeEr(giftPair, Symbol("ee")) == 'JohLen)
-  }
-  //TODO This should fail
-  it should "return its giver" in {
-    assert(getGivEeEr(giftPair, Symbol("erX")) == 'GeoHar)
+  "A GiftPair" should "get its parts" in {
+    assert(giftPair.givee == Symbol("JohLen"))
+    assert(giftPair.giver == Symbol("GeoHar"))
   }
 
-  it should "return an updated givEeEr" in {
-    assert(setGivEeEr(giftPair, 'NewBee, 'ee) == GiftPair('NewBee, 'GeoHar))
-    assert(setGivEeEr(giftPair, 'NewBee, 'er) == GiftPair('JohLen, 'NewBee))
+  it should "set its parts" in {
+    assert(setGivee(giftPair, Symbol("NewBee")) == GiftPair(Symbol("NewBee"), Symbol("GeoHar")))
+    assert(setGiver(giftPair, Symbol("NewBee")) == GiftPair(Symbol("JohLen"), Symbol("NewBee")))
   }
 }
