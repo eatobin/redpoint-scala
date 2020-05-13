@@ -8,11 +8,11 @@ class GiftPairSpec extends AnyFlatSpec {
   private val giftPair: GiftPair = GiftPair('JohLen, 'GeoHar)
 
   "A GiftPair" should "return its givee" in {
-    assert(giftPair.givee == 'JohLen)
+    assert(getGivEeEr(giftPair, Symbol("ee")) == 'JohLen)
   }
-
+  //TODO This should fail
   it should "return its giver" in {
-    assert(giftPair.giver == 'GeoHar)
+    assert(getGivEeEr(giftPair, Symbol("erX")) == 'GeoHar)
   }
 
   it should "return an updated givEeEr" in {
