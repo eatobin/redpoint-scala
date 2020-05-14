@@ -13,7 +13,7 @@ class GiftPairSpec extends AnyFlatSpec {
   //  }
 
   "A GiftPair" should "set its parts" in {
-    assert(setGivee(giftPair, Symbol("NewBee")) == GiftPair(Symbol("NewBee"), Symbol("GeoHar")))
-    assert(setGiver(giftPair, Symbol("NewBee")) == GiftPair(Symbol("JohLen"), Symbol("NewBee")))
+    assert(giftPairSetGivee(giftPair, Symbol("NewBee")) == GiftPair(Symbol("NewBee"), Symbol("GeoHar")))
+    assert(giftPairSetGiver(giftPair, Symbol("NewBee")) == GiftPair(Symbol("JohLen"), Symbol("NewBee")))
   }
 }
