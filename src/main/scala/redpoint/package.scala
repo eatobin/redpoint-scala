@@ -1,5 +1,6 @@
 package object redpoint {
-  type GivEeEr = Symbol
+  type Givee = Symbol
+  type Giver = Symbol
 
   type GiftHistory = Vector[GiftPair]
   type PlayerKey = Symbol
