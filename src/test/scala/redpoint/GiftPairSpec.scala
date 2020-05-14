@@ -8,8 +8,8 @@ class GiftPairSpec extends AnyFlatSpec {
   private val giftPair: GiftPair = GiftPair(Symbol("JohLen"), Symbol("GeoHar"))
 
   "A GiftPair" should "get its parts" in {
-    assert(giftPair.givee == Symbol("JohLen"))
-    assert(giftPair.giver == Symbol("GeoHar"))
+    assert(getGivee(giftPair) == Symbol("JohLen"))
+    assert(getGiver(giftPair) == Symbol("GeoHar"))
   }
 
   it should "set its parts" in {
