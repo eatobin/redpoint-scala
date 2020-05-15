@@ -41,6 +41,11 @@ class PlayersSpec extends AnyFlatSpec {
     assert(playersGetPlayerName(players, Symbol("GeoHar")) == "George Harrison")
   }
 
+  it should "return a givee and a giver" in {
+    assert(playersGetGivee(players, Symbol("GeoHar"), 0) == Symbol("RinSta"))
+    assert(playersGetGiver(players, Symbol("GeoHar"), 0) == Symbol("PauMcc"))
+  }
+
   //  it should "return an updated players" in {
   //    assert(setPlayer(players, Symbol("RinSta, Player("New Bee", Vector(GiftPair(Symbol("NewBee, Symbol("NewBee)))) == newBeePlayers)
   //  }
@@ -54,10 +59,7 @@ class PlayersSpec extends AnyFlatSpec {
   //    assert(getPlayerNamePlayers(players, Symbol("GeoHar) == "George Harrison")
   //  }
   //
-  //  it should "return a givEeEr" in {
-  //    assert(getGivEeErPlayers(players, Symbol("GeoHar, Symbol("ee, 0) == Symbol("RinSta)
-  //    assert(getGivEeErPlayers(players, Symbol("GeoHar, Symbol("er, 0) == Symbol("PauMcc)
-  //  }
+
   //
   //  it should "set a givEeEr" in {
   //    assert(setGivEeErPlayers(players, Symbol("GeoHar, 0, Symbol("you, Symbol("ee) == playersGivee)

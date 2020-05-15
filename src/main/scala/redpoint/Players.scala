@@ -8,10 +8,20 @@ object Players {
     for ((playerKey, player) <- players) yield
       playerKey -> Player.playerAddYear(player, playerKey)
 
+  private def playersGetGiftPair(players: Players, playerKey: PlayerKey, giftYear: GiftYear): GiftPair = {
+    val plr = players(playerKey)
+    val gh = plr.giftHistory
+    gh(giftYear)
+  }
 
-  //  def getPlayer(players: Players, playerKey: PlayerKey): Player =
-  //    players(playerKey)
-  //
+  def playersGetGivee(players: Players, playerKey: PlayerKey, giftYear: GiftYear): Givee = {
+    playersGetGiftPair(players, playerKey, giftYear).givee
+  }
+
+  def playersGetGiver(players: Players, playerKey: PlayerKey, giftYear: GiftYear): Giver = {
+    playersGetGiftPair(players, playerKey, giftYear).giver
+  }
+
   //  def getGivEeErPlayers(players: Players, playerKey: PlayerKey, eEeR: EeEr, giftYear: GiftYear): Giv = {
   //    val plr = getPlayer(players, playerKey)
   //    val gh = plr.giftHistory
