@@ -1,13 +1,14 @@
 package redpoint
 
 object Players {
-  //  def addYearPlayers(players: Players): Players =
-  //    for ((playerKey, player) <- players) yield
-  //      playerKey -> Player.addYearPlayer(player, playerKey)
-  //
-  //  def getPlayerNamePlayers(players: Players, playerKey: PlayerKey): PlayerName =
-  //    getPlayer(players, playerKey).playerName
-  //
+  def playersGetPlayerName(players: Players, playerKey: PlayerKey): PlayerName =
+    players(playerKey).playerName
+
+  def playersAddYear(players: Players): Players =
+    for ((playerKey, player) <- players) yield
+      playerKey -> Player.playerAddYear(player, playerKey)
+
+
   //  def getPlayer(players: Players, playerKey: PlayerKey): Player =
   //    players(playerKey)
   //
