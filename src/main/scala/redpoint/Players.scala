@@ -22,23 +22,25 @@ object Players {
     playersGetGiftPair(players, playerKey, giftYear).giver
   }
 
-  //  def getGivEeErPlayers(players: Players, playerKey: PlayerKey, eEeR: EeEr, giftYear: GiftYear): Giv = {
-  //    val plr = getPlayer(players, playerKey)
-  //    val gh = plr.giftHistory
-  //    val gp = gh(giftYear)
-  //    if (eEeR == 'ee) gp.givee else gp.giver
-  //  }
-  //
-  //  def setGivEeErPlayers(players: Players, playerKey: PlayerKey, giftYear: GiftYear, giv: Giv, eEeR: EeEr): Players = {
-  //    val plr = getPlayer(players, playerKey)
-  //    val gh = plr.giftHistory
-  //    val gp = gh(giftYear)
-  //    val ngp = GiftPair.setGivEeEr(gp, giv, eEeR)
-  //    val ngh = GiftHistory.setGiftPair(gh, giftYear, ngp)
-  //    val nplr = Player.setGiftHistory(plr, ngh)
-  //    setPlayer(players, playerKey, nplr)
-  //  }
-  //
-  //  def setPlayer(players: Players, playerKey: PlayerKey, player: Player): Players =
-  //    players.updated(playerKey, player)
+  private def playersUpdatePlayer(players: Players, playerKey: PlayerKey, player: Player): Players =
+    players.updated(playerKey, player)
+
+  private def playersUpdateGiftPair(players: Players, playerKey: PlayerKey, giftYear: GiftYear, giftPair: GiftPair): Players = {
+    val plr = players(playerKey)
+    val gh = plr.giftHistory
+    val ngh = GiftHistory.giftHistoryUpdateGiftPair(gh, giftYear, giftPair)
+    val nplr = Player.playerUpdateGiftHistory(plr, ngh)
+    playersUpdatePlayer(players, playerKey, nplr)
+  }
+
+  def playersUpdateGivee(players: Players, playerKey: PlayerKey, giftYear: GiftYear, givee: Givee): Players = {
+    val ngp = GiftPair.giftPairUpdateGivee(playersGetGiftPair(players, playerKey, giftYear), givee)
+    playersUpdateGiftPair(players, playerKey, giftYear, ngp)
+  }
+
+  def playersUpdateGiver(players: Players, playerKey: PlayerKey, giftYear: GiftYear, giver: Giver): Players = {
+    val ngp = GiftPair.giftPairUpdateGivee(playersGetGiftPair(players, playerKey, giftYear), giver)
+    playersUpdateGiftPair(players, playerKey, giftYear, ngp)
+  }
+
 }

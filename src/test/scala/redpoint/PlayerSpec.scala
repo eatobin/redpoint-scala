@@ -7,14 +7,6 @@ class PlayerSpec extends AnyFlatSpec {
 
   private val player: Player = Player("Ringo Starr", Vector(GiftPair(Symbol("JohLen"), Symbol("GeoHar"))))
 
-  //  "A Player" should "return its playerName" in {
-  //    assert(player.playerName == "Ringo Starr")
-  //  }
-  //
-  //  it should "return its giftHistory" in {
-  //    assert(player.giftHistory == Vector(GiftPair(Symbol("JohLen"), Symbol("GeoHar"))))
-  //  }
-
   "A Player" should "return an updated giftHistory" in {
     assert(playerUpdateGiftHistory(player, Vector(GiftPair(Symbol("nope"), Symbol("yup")))) ==
       Player("Ringo Starr", Vector(GiftPair(Symbol("nope"), Symbol("yup")))))
