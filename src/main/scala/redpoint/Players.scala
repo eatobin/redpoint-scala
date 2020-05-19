@@ -39,7 +39,7 @@ object Players {
   }
 
   def playersUpdateGiver(players: Players, playerKey: PlayerKey, giftYear: GiftYear, giver: Giver): Players = {
-    val ngp = GiftPair.giftPairUpdateGivee(playersGetGiftPair(players, playerKey, giftYear), giver)
+    val ngp = GiftPair.giftPairUpdateGiver(playersGetGiftPair(players, playerKey, giftYear), giver)
     playersUpdateGiftPair(players, playerKey, giftYear, ngp)
   }
 
