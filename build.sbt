@@ -8,5 +8,6 @@ lazy val root = (project in file("."))
     name := "redpoint-scala",
     libraryDependencies ++= Seq(
       "org.scalatest" %% "scalatest" % "3.1.2" % "test"
-    )
+    ),
+    scalacOptions += "-deprecation"
   )
