@@ -37,14 +37,14 @@ class PlayersSpec extends AnyFlatSpec {
   //  private val playersGiver: Players =
   //    Map(Symbol("RinSta -> rinSta, Symbol("JohLen -> johLen, Symbol("GeoHar -> geoHarGiver, Symbol("PauMcc -> pauMcc)
 
-  "Players" should "return a player's name" in {
-    assert(playersGetPlayerName(players, Symbol("GeoHar")) == "George Harrison")
-  }
-
-  it should "return a givee and a giver" in {
-    assert(playersGetGivee(players, Symbol("GeoHar"), 0) == Symbol("RinSta"))
-    assert(playersGetGiver(players, Symbol("GeoHar"), 0) == Symbol("PauMcc"))
-  }
+//  "Players" should "return a player's name" in {
+//    assert(playersGetPlayerName(players, Symbol("GeoHar")) == "George Harrison")
+//  }
+//
+//  it should "return a givee and a giver" in {
+//    assert(playersGetGivee(players, Symbol("GeoHar"), 0) == Symbol("RinSta"))
+//    assert(playersGetGiver(players, Symbol("GeoHar"), 0) == Symbol("PauMcc"))
+//  }
 
   //  it should "return an updated players" in {
   //    assert(setPlayer(players, Symbol("RinSta, Player("New Bee", Vector(GiftPair(Symbol("NewBee, Symbol("NewBee)))) == newBeePlayers)
