@@ -7,8 +7,12 @@ object Roster {
     roster.players(playerKey).playerName
 
   def addYear(roster: Roster): Roster = {
-    val nplrs = for ((playerKey, player) <- roster.players) yield
-      playerKey -> Player.playerAddYear(player, playerKey)
+    val nplrs = for ((playerKey, player) <- roster.players) yield {
+      val gh = player.giftHistory
+      val ngh = GiftHistory.giftHistoryAddYear(gh, playerKey)
+      val nplr = Player.playerUpdateGiftHistory(player, ngh)
+      playerKey -> nplr
+    }
     Roster(rosterName = roster.rosterName, rosterYear = roster.rosterYear, players = nplrs)
   }
 

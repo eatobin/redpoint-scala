@@ -12,8 +12,8 @@ class PlayerSpec extends AnyFlatSpec {
       Player("Ringo Starr", Vector(GiftPair(Symbol("nope"), Symbol("yup")))))
   }
 
-  it should "add a year" in {
-    assert(playerAddYear(player, Symbol("mee")) ==
-      Player("Ringo Starr", Vector(GiftPair(Symbol("JohLen"), Symbol("GeoHar")), GiftPair(Symbol("mee"), Symbol("mee")))))
-  }
+  //  it should "add a year" in {
+  //    assert(playerAddYear(player, Symbol("mee")) ==
+  //      Player("Ringo Starr", Vector(GiftPair(Symbol("JohLen"), Symbol("GeoHar")), GiftPair(Symbol("mee"), Symbol("mee")))))
+  //  }
 }
