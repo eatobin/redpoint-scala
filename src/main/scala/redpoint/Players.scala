@@ -22,7 +22,7 @@ object Players {
     playersGetGiftPair(players, playerKey, giftYear).giver
   }
 
-  private def playersUpdatePlayer(players: Players, playerKey: PlayerKey, player: Player): Players =
+  def updatePlayer(players: Players, playerKey: PlayerKey, player: Player): Players =
     players.updated(playerKey, player)
 
   private def playersUpdateGiftPair(players: Players, playerKey: PlayerKey, giftYear: GiftYear, giftPair: GiftPair): Players = {
