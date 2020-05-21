@@ -25,4 +25,8 @@ class RosterSpec extends AnyFlatSpec {
   it should "return players" in {
     assert(roster.players == players)
   }
+
+  it should "return a player name" in {
+    assert(Roster.rosterGetPlayerName(roster, Symbol("PauMcc")) == "Paul McCartney")
+  }
 }
