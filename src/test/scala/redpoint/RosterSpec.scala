@@ -19,6 +19,7 @@ class RosterSpec extends AnyFlatSpec {
   private val pauMccExt: Player = Player("Paul McCartney", Vector(GiftPair(Symbol("GeoHar"), Symbol("JohLen")), GiftPair(Symbol("PauMcc"), Symbol("PauMcc"))))
   private val playersExt: Players =
     Map(Symbol("RinSta") -> rinStaExt, Symbol("JohLen") -> johLenExt, Symbol("GeoHar") -> geoHarExt, Symbol("PauMcc") -> pauMccExt)
+  private val rosterExt: Roster = Roster("The Beatles", 2014, playersExt)
 
   "A Roster" should "return \"The Beatles\" rosterName" in {
     assert(roster.rosterName == "The Beatles")
@@ -34,5 +35,10 @@ class RosterSpec extends AnyFlatSpec {
 
   it should "return a player name" in {
     assert(Roster.rosterGetPlayerName(roster, Symbol("PauMcc")) == "Paul McCartney")
+  }
+
+  it should "return an extended year players" in {
+    assert(rosterAddYear(roster) == rosterExt)
+    //    assert(addYearPlayers(playersExt) == playersExt2)
   }
 }

@@ -52,10 +52,6 @@ class PlayersSpec extends AnyFlatSpec {
   //  }
 
 
-  //  it should "return an extended year players" in {
-  //    assert(addYearPlayers(players) == playersExt)
-  //    assert(addYearPlayers(playersExt) == playersExt2)
-  //  }
   //
   //  it should "return a playerSymbol("s name" in {
   //    assert(getPlayerNamePlayers(players, Symbol("GeoHar) == "George Harrison")
