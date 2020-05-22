@@ -37,8 +37,12 @@ class RosterSpec extends AnyFlatSpec {
     assert(Roster.rosterGetPlayerName(roster, Symbol("PauMcc")) == "Paul McCartney")
   }
 
-  it should "return an extended year players" in {
+  it should "add a new year" in {
     assert(rosterAddYear(roster) == rosterExt)
-    //    assert(addYearPlayers(playersExt) == playersExt2)
+  }
+
+  it should "return a givee and a giver" in {
+    assert(rosterGetGivee(roster, Symbol("GeoHar"), 0) == Symbol("RinSta"))
+    assert(rosterGetGiver(roster, Symbol("GeoHar"), 0) == Symbol("PauMcc"))
   }
 }

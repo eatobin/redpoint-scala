@@ -46,10 +46,7 @@ class PlayersSpec extends AnyFlatSpec {
   //    assert(playersGetPlayerName(players, Symbol("GeoHar")) == "George Harrison")
   //  }
   //
-  //  it should "return a givee and a giver" in {
-  //    assert(playersGetGivee(players, Symbol("GeoHar"), 0) == Symbol("RinSta"))
-  //    assert(playersGetGiver(players, Symbol("GeoHar"), 0) == Symbol("PauMcc"))
-  //  }
+
 
 
   //
