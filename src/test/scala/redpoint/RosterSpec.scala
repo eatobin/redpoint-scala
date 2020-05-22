@@ -21,6 +21,15 @@ class RosterSpec extends AnyFlatSpec {
     Map(Symbol("RinSta") -> rinStaExt, Symbol("JohLen") -> johLenExt, Symbol("GeoHar") -> geoHarExt, Symbol("PauMcc") -> pauMccExt)
   private val rosterExt: Roster = Roster("The Beatles", 2014, playersExt)
 
+  private val geoHarGivee: Player = Player("George Harrison", Vector(GiftPair(Symbol("you"), Symbol("PauMcc"))))
+  private val geoHarGiver: Player = Player("George Harrison", Vector(GiftPair(Symbol("RinSta"), Symbol("you"))))
+  private val playersGivee: Players =
+    Map(Symbol("RinSta") -> rinSta, Symbol("JohLen") -> johLen, Symbol("GeoHar") -> geoHarGivee, Symbol("PauMcc") -> pauMcc)
+  private val rosterGivee: Roster = Roster("The Beatles", 2014, playersGivee)
+  private val playersGiver: Players =
+    Map(Symbol("RinSta") -> rinSta, Symbol("JohLen") -> johLen, Symbol("GeoHar") -> geoHarGiver, Symbol("PauMcc") -> pauMcc)
+  private val rosterGiver: Roster = Roster("The Beatles", 2014, playersGiver)
+
   "A Roster" should "return \"The Beatles\" rosterName" in {
     assert(roster.rosterName == "The Beatles")
   }
@@ -44,5 +53,10 @@ class RosterSpec extends AnyFlatSpec {
   it should "return a givee and a giver" in {
     assert(rosterGetGivee(roster, Symbol("GeoHar"), 0) == Symbol("RinSta"))
     assert(rosterGetGiver(roster, Symbol("GeoHar"), 0) == Symbol("PauMcc"))
+  }
+
+  it should "update a givee and a giver" in {
+    assert(rosterUpdateGivee(roster, Symbol("GeoHar"), 0, Symbol("you")) == rosterGivee)
+    assert(rosterUpdateGiver(roster, Symbol("GeoHar"), 0, Symbol("you")) == rosterGiver)
   }
 }
