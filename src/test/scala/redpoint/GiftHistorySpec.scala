@@ -12,6 +12,6 @@ class GiftHistorySpec extends AnyFlatSpec {
   }
 
   it should "return an updated giftHistory" in {
-    assert(giftHistoryUpdateGiftPair(giftHistory, 0, GiftPair(Symbol("me"), Symbol("you"))) == Vector(GiftPair(Symbol("me"), Symbol("you"))))
+    assert(giftHistoryUpdateGiftHistory(giftHistory, 0, GiftPair(Symbol("me"), Symbol("you"))) == Vector(GiftPair(Symbol("me"), Symbol("you"))))
   }
 }
