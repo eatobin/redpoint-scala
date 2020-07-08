@@ -19,7 +19,6 @@ class RosterSpec extends AnyFlatSpec {
   private val pauMccExt: Player = Player("Paul McCartney", Vector(GiftPair(Symbol("GeoHar"), Symbol("JohLen")), GiftPair(Symbol("PauMcc"), Symbol("PauMcc"))))
   private val playersExt: Players =
     Map(Symbol("RinSta") -> rinStaExt, Symbol("JohLen") -> johLenExt, Symbol("GeoHar") -> geoHarExt, Symbol("PauMcc") -> pauMccExt)
-  private val rosterExt: Roster = Roster("The Beatles", 2014, playersExt)
 
   private val geoHarGivee: Player = Player("George Harrison", Vector(GiftPair(Symbol("you"), Symbol("PauMcc"))))
   private val geoHarGiver: Player = Player("George Harrison", Vector(GiftPair(Symbol("RinSta"), Symbol("you"))))
@@ -28,7 +27,6 @@ class RosterSpec extends AnyFlatSpec {
   private val rosterGivee: Roster = Roster("The Beatles", 2014, playersGivee)
   private val playersGiver: Players =
     Map(Symbol("RinSta") -> rinSta, Symbol("JohLen") -> johLen, Symbol("GeoHar") -> geoHarGiver, Symbol("PauMcc") -> pauMcc)
-  private val rosterGiver: Roster = Roster("The Beatles", 2014, playersGiver)
 
   "A Roster" should "return \"The Beatles\" rosterName" in {
     assert(roster.rosterName == "The Beatles")
@@ -38,25 +36,21 @@ class RosterSpec extends AnyFlatSpec {
     assert(roster.rosterYear == 2014)
   }
 
-  it should "return players" in {
-    assert(roster.players == players)
-  }
-
   it should "return a player name" in {
-    assert(Roster.getPlayerName(roster, Symbol("PauMcc")) == "Paul McCartney")
+    assert(Roster.getPlayerName(players, Symbol("PauMcc")) == "Paul McCartney")
   }
 
   it should "add a new year" in {
-    assert(addYear(roster) == rosterExt)
+    assert(addYear(players) == playersExt)
   }
 
   it should "return a givee and a giver" in {
-    assert(getGivee(roster, Symbol("GeoHar"), 0) == Symbol("RinSta"))
-    assert(getGiver(roster, Symbol("GeoHar"), 0) == Symbol("PauMcc"))
+    assert(getGivee(players, Symbol("GeoHar"), 0) == Symbol("RinSta"))
+    assert(getGiver(players, Symbol("GeoHar"), 0) == Symbol("PauMcc"))
   }
 
   it should "update a givee and a giver" in {
-    assert(updateGivee(roster, Symbol("GeoHar"), 0, Symbol("you")) == rosterGivee)
-    assert(updateGiver(roster, Symbol("GeoHar"), 0, Symbol("you")) == rosterGiver)
+    assert(updateGivee(players, Symbol("GeoHar"), 0, Symbol("you")) == playersGivee)
+    assert(updateGiver(players, Symbol("GeoHar"), 0, Symbol("you")) == playersGiver)
   }
 }
