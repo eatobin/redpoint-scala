@@ -43,20 +43,20 @@ class RosterSpec extends AnyFlatSpec {
   }
 
   it should "return a player name" in {
-    assert(Roster.rosterGetPlayerName(roster, Symbol("PauMcc")) == "Paul McCartney")
+    assert(Roster.getPlayerName(roster, Symbol("PauMcc")) == "Paul McCartney")
   }
 
   it should "add a new year" in {
-    assert(rosterAddYear(roster) == rosterExt)
+    assert(addYear(roster) == rosterExt)
   }
 
   it should "return a givee and a giver" in {
-    assert(rosterGetGivee(roster, Symbol("GeoHar"), 0) == Symbol("RinSta"))
-    assert(rosterGetGiver(roster, Symbol("GeoHar"), 0) == Symbol("PauMcc"))
+    assert(getGivee(roster, Symbol("GeoHar"), 0) == Symbol("RinSta"))
+    assert(getGiver(roster, Symbol("GeoHar"), 0) == Symbol("PauMcc"))
   }
 
   it should "update a givee and a giver" in {
-    assert(rosterUpdateGivee(roster, Symbol("GeoHar"), 0, Symbol("you")) == rosterGivee)
-    assert(rosterUpdateGiver(roster, Symbol("GeoHar"), 0, Symbol("you")) == rosterGiver)
+    assert(updateGivee(roster, Symbol("GeoHar"), 0, Symbol("you")) == rosterGivee)
+    assert(updateGiver(roster, Symbol("GeoHar"), 0, Symbol("you")) == rosterGiver)
   }
 }
