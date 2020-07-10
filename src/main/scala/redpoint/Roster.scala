@@ -25,7 +25,7 @@ object Roster {
   private def setGiftPair(players: Players, playerKey: PlayerKey, giftYear: GiftYear, giftPair: GiftPair): Players = {
     val ngh = GiftHistory.giftHistoryUpdateGiftHistory(players(playerKey).giftHistory, giftYear, giftPair)
     val nplr = Player.playerUpdateGiftHistory(players(playerKey), ngh)
-    Players.playersUpdatePlayer(players, playerKey, nplr)
+    Players.updatePlayer(players, playerKey, nplr)
   }
 
   def updateGivee(players: Players, playerKey: PlayerKey, giftYear: GiftYear, givee: Givee): Players = {
