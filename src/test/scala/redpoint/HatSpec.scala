@@ -1,30 +1,31 @@
-// package redpoint
+package redpoint
 
-// import org.scalatest.flatspec.AnyFlatSpec
-// import redpoint.Hats._
+import org.scalatest.flatspec.AnyFlatSpec
+import redpoint.Hats._
 
-// class HatSpec extends AnyFlatSpec {
+class HatSpec extends AnyFlatSpec {
 
-//   private val rinSta: Player = Player("Ringo Starr", Vector(GiftPair('JohLen, 'GeoHar)))
-//   private val johLen: Player = Player("John Lennon", Vector(GiftPair('PauMcc, 'RinSta)))
-//   private val geoHar: Player = Player("George Harrison", Vector(GiftPair('RinSta, 'PauMcc)))
-//   private val pauMcc: Player = Player("Paul McCartney", Vector(GiftPair('GeoHar, 'JohLen)))
+  private val testHat: Hat = Set(Symbol("RinSta"), Symbol("JohLen"), Symbol("GeoHar"), Symbol("PauMcc"))
 
-//   private val players: Players =
-//     Map('RinSta -> rinSta, 'JohLen -> johLen, 'GeoHar -> geoHar, 'PauMcc -> pauMcc)
+  private val rinSta: Player = Player("Ringo Starr", Vector(GiftPair(Symbol("JohLen"), Symbol("GeoHar"))))
+  private val johLen: Player = Player("John Lennon", Vector(GiftPair(Symbol("PauMcc"), Symbol("RinSta"))))
+  private val geoHar: Player = Player("George Harrison", Vector(GiftPair(Symbol("RinSta"), Symbol("PauMcc"))))
+  private val pauMcc: Player = Player("Paul McCartney", Vector(GiftPair(Symbol("GeoHar"), Symbol("JohLen"))))
 
-//   private val testHat: Hat = Set('RinSta, 'JohLen, 'GeoHar, 'PauMcc)
+  private val players: Players =
+    Map(Symbol("RinSta") -> rinSta, Symbol("JohLen") -> johLen, Symbol("GeoHar") -> geoHar, Symbol("PauMcc") -> pauMcc)
 
-//   "A Hat" should "make itself given players" in {
-//     assert(makeHat(players) == testHat)
-//   }
 
-//   it should "remove a puck" in {
-//     assert(removePuck(testHat, 'RinSta) == Set('JohLen, 'GeoHar, 'PauMcc))
-//     assert(removePuck(Set(), 'RinSta) == Set())
-//   }
+  "A Hat" should "make itself given players" in {
+    assert(makeHat(players) == testHat)
+  }
 
-//   it should "return discarded givees" in {
-//     assert(returnDiscards(Set('PauMcc, 'JohLen), Set('GeoHar)) == Set('JohLen, 'PauMcc, 'GeoHar))
-//   }
-// }
+  //   it should "remove a puck" in {
+  //     assert(removePuck(testHat, 'RinSta) == Set('JohLen, 'GeoHar, 'PauMcc))
+  //     assert(removePuck(Set(), 'RinSta) == Set())
+  //   }
+
+  //   it should "return discarded givees" in {
+  //     assert(returnDiscards(Set('PauMcc, 'JohLen), Set('GeoHar)) == Set('JohLen, 'PauMcc, 'GeoHar))
+  //   }
+}

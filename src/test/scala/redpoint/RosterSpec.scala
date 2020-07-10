@@ -24,7 +24,6 @@ class RosterSpec extends AnyFlatSpec {
   private val geoHarGiver: Player = Player("George Harrison", Vector(GiftPair(Symbol("RinSta"), Symbol("you"))))
   private val playersGivee: Players =
     Map(Symbol("RinSta") -> rinSta, Symbol("JohLen") -> johLen, Symbol("GeoHar") -> geoHarGivee, Symbol("PauMcc") -> pauMcc)
-  private val rosterGivee: Roster = Roster("The Beatles", 2014, playersGivee)
   private val playersGiver: Players =
     Map(Symbol("RinSta") -> rinSta, Symbol("JohLen") -> johLen, Symbol("GeoHar") -> geoHarGiver, Symbol("PauMcc") -> pauMcc)
 
