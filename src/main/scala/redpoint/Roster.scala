@@ -9,8 +9,7 @@ object Roster {
 
 
 
-  def getGiver(players: Players, playerKey: PlayerKey, giftYear: GiftYear): Giver =
-    players(playerKey).giftHistory(giftYear).giver
+
 
   private def setGiftPair(players: Players, playerKey: PlayerKey, giftYear: GiftYear, giftPair: GiftPair): Players = {
     val ngh = GiftHistory.giftHistoryUpdateGiftHistory(players(playerKey).giftHistory, giftYear, giftPair)

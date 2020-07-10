@@ -32,10 +32,7 @@ class RosterSpec extends AnyFlatSpec {
 
 
 
-  it should "return a givee and a giver" in {
-    assert(getGivee(players, Symbol("GeoHar"), 0) == Symbol("RinSta"))
-    assert(getGiver(players, Symbol("GeoHar"), 0) == Symbol("PauMcc"))
-  }
+
 
   it should "update a givee and a giver" in {
     assert(updateGivee(players, Symbol("GeoHar"), 0, Symbol("you")) == playersGivee)

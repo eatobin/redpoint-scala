@@ -34,4 +34,9 @@ class PlayersSpec extends AnyFlatSpec {
   it should "add a new year" in {
     assert(addYear(players) == playersExt)
   }
+
+  it should "return a givee and a giver" in {
+    assert(getGivee(players, Symbol("GeoHar"), 0) == Symbol("RinSta"))
+    assert(getGiver(players, Symbol("GeoHar"), 0) == Symbol("PauMcc"))
+  }
 }
