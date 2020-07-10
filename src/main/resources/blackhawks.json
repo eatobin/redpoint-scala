@@ -1,0 +1,168 @@
+{
+  "roster-name": "Blackhawks",
+  "roster-year": 2010,
+  "players": {
+    "TroBro": {
+      "player-name": "Troy Brouwer",
+      "gift-history": [
+        {
+          "givee": "DavBol",
+          "giver": "JoeQue"
+        }
+      ]
+    },
+    "JoeQue": {
+      "player-name": "Joel Quenneville",
+      "gift-history": [
+        {
+          "givee": "TroBro",
+          "giver": "AndLad"
+        }
+      ]
+    },
+    "AdaBur": {
+      "player-name": "Adam Burish",
+      "gift-history": [
+        {
+          "givee": "DunKei",
+          "giver": "JonToe"
+        }
+      ]
+    },
+    "AndLad": {
+      "player-name": "Andrew Ladd",
+      "gift-history": [
+        {
+          "givee": "JoeQue",
+          "giver": "KriVer"
+        }
+      ]
+    },
+    "AntNie": {
+      "player-name": "Antti Niemi",
+      "gift-history": [
+        {
+          "givee": "JonToe",
+          "giver": "MarHos"
+        }
+      ]
+    },
+    "BreSea": {
+      "player-name": "Brent Seabrook",
+      "gift-history": [
+        {
+          "givee": "KriVer",
+          "giver": "NikHja"
+        }
+      ]
+    },
+    "BryBic": {
+      "player-name": "Bryan Bickell",
+      "gift-history": [
+        {
+          "givee": "MarHos",
+          "giver": "PatKan"
+        }
+      ]
+    },
+    "CriHue": {
+      "player-name": "Cristobal Huet",
+      "gift-history": [
+        {
+          "givee": "PatKan",
+          "giver": "TomKop"
+        }
+      ]
+    },
+    "DavBol": {
+      "player-name": "Dave Bolland",
+      "gift-history": [
+        {
+          "givee": "PatSha",
+          "giver": "TroBro"
+        }
+      ]
+    },
+    "DunKei": {
+      "player-name": "Duncan Keith",
+      "gift-history": [
+        {
+          "givee": "TomKop",
+          "giver": "AdaBur"
+        }
+      ]
+    },
+    "JonToe": {
+      "player-name": "Jonathan Toews",
+      "gift-history": [
+        {
+          "givee": "AdaBur",
+          "giver": "AntNie"
+        }
+      ]
+    },
+    "KriVer": {
+      "player-name": "Kris Versteeg",
+      "gift-history": [
+        {
+          "givee": "AndLad",
+          "giver": "BreSea"
+        }
+      ]
+    },
+    "MarHos": {
+      "player-name": "Marian Hossa",
+      "gift-history": [
+        {
+          "givee": "AntNie",
+          "giver": "BryBic"
+        }
+      ]
+    },
+    "NikHja": {
+      "player-name": "Niklas Hjalmarsson",
+      "gift-history": [
+        {
+          "givee": "BreSea",
+          "giver": "BriCam"
+        }
+      ]
+    },
+    "PatKan": {
+      "player-name": "Patrick Kane",
+      "gift-history": [
+        {
+          "givee": "BryBic",
+          "giver": "CriHue"
+        }
+      ]
+    },
+    "PatSha": {
+      "player-name": "Patrick Sharp",
+      "gift-history": [
+        {
+          "givee": "BriCam",
+          "giver": "DavBol"
+        }
+      ]
+    },
+    "TomKop": {
+      "player-name": "Tomas Kopecky",
+      "gift-history": [
+        {
+          "givee": "CriHue",
+          "giver": "DunKei"
+        }
+      ]
+    },
+    "BriCam": {
+      "player-name": "Brian Campbell",
+      "gift-history": [
+        {
+          "givee": "NikHja",
+          "giver": "PatSha"
+        }
+      ]
+    }
+  }
+}
