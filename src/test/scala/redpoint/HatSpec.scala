@@ -25,6 +25,10 @@ class HatSpec extends AnyFlatSpec {
     assert(removePuck(Set(), Symbol("RinStaX")) == Set())
   }
 
+  it should "discard a puck" in {
+    assert(discardGivee(Set(Symbol("PauMcc")), Symbol("JohLen")) == Set(Symbol("PauMcc"), Symbol("JohLen")))
+  }
+
   //   it should "return discarded givees" in {
   //     assert(returnDiscards(Set('PauMcc, 'JohLen), Set('GeoHar)) == Set('JohLen, 'PauMcc, 'GeoHar))
   //   }
