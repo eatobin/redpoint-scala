@@ -20,10 +20,10 @@ class HatSpec extends AnyFlatSpec {
     assert(makeHat(players) == testHat)
   }
 
-  //   it should "remove a puck" in {
-  //     assert(removePuck(testHat, 'RinSta) == Set('JohLen, 'GeoHar, 'PauMcc))
-  //     assert(removePuck(Set(), 'RinSta) == Set())
-  //   }
+  it should "remove a puck" in {
+    assert(removePuck(testHat, Symbol("RinSta")) == Set(Symbol("JohLen"), Symbol("GeoHar"), Symbol("PauMcc")))
+    assert(removePuck(Set(), Symbol("RinStaX")) == Set())
+  }
 
   //   it should "return discarded givees" in {
   //     assert(returnDiscards(Set('PauMcc, 'JohLen), Set('GeoHar)) == Set('JohLen, 'PauMcc, 'GeoHar))
