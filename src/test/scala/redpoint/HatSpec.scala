@@ -29,7 +29,7 @@ class HatSpec extends AnyFlatSpec {
     assert(discardGivee(Set(Symbol("PauMcc")), Symbol("JohLen")) == Set(Symbol("PauMcc"), Symbol("JohLen")))
   }
 
-  //   it should "return discarded givees" in {
-  //     assert(returnDiscards(Set('PauMcc, 'JohLen), Set('GeoHar)) == Set('JohLen, 'PauMcc, 'GeoHar))
-  //   }
+  it should "return discarded givees" in {
+    assert(returnDiscards(Set(Symbol("PauMcc"), Symbol("JohLen")), Set(Symbol("GeoHar"))) == Set(Symbol("JohLen"), Symbol("PauMcc"), Symbol("GeoHar")))
+  }
 }
