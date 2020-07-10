@@ -28,11 +28,11 @@ class RulesSpec extends AnyFlatSpec {
     assert(!giveeNotSelf(Symbol("RinSta"), Symbol("RinSta")))
   }
 
-  //  it should "not give to it's recip" in {
-  //    assert(giveeNotRecip('RinSta, 'JohLen, 0, beatlesPlusPM))
-  //    assert(!giveeNotRecip('RinSta, 'KarLav, 0, beatlesPlusPM))
-  //  }
-  //
+  it should "not give to it's recip" in {
+    assert(giveeNotRecip(Symbol("RinSta"), Symbol("JohLen"), 0, beatlesPlusPM))
+    assert(!giveeNotRecip(Symbol("RinSta"), Symbol("KarLav"), 0, beatlesPlusPM))
+  }
+
   //  it should "not repeat for three years" in {
   //    assert(!giveeNotRepeat('RinSta, 'JohLen, 2, beatlesPlus4))
   //    assert(!giveeNotRepeat('RinSta, 'GeoHar, 2, beatlesPlus4))
