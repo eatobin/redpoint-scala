@@ -7,8 +7,7 @@ object Roster {
 
 
 
-  def getGivee(players: Players, playerKey: PlayerKey, giftYear: GiftYear): Givee =
-    players(playerKey).giftHistory(giftYear).givee
+
 
   def getGiver(players: Players, playerKey: PlayerKey, giftYear: GiftYear): Giver =
     players(playerKey).giftHistory(giftYear).giver

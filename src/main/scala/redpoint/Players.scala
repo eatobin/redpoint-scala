@@ -16,4 +16,7 @@ object Players {
     }
     nplrs
   }
+
+  def getGivee(players: Players, playerKey: PlayerKey, giftYear: GiftYear): Givee =
+    players(playerKey).giftHistory(giftYear).givee
 }
