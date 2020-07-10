@@ -14,14 +14,14 @@ class RulesSpec extends AnyFlatSpec {
   private val beatlesPlusPM: Players =
     Map(Symbol("RinSta") -> rinSta, Symbol("JohLen") -> johLen, Symbol("GeoHar") -> geoHar, Symbol("PauMcc") -> pauMcc, Symbol("EriTob") -> eriTob, Symbol("KarLav") -> karLav)
 
-  //  private var beatlesPlus4 = addYearPlayers(beatlesPlusPM)
-  //  beatlesPlus4 = setGivEeErPlayers(beatlesPlus4, 'RinSta, 1, 'GeoHar, 'ee)
-  //  beatlesPlus4 = addYearPlayers(beatlesPlus4)
-  //  beatlesPlus4 = setGivEeErPlayers(beatlesPlus4, 'RinSta, 2, 'PauMcc, 'ee)
-  //  beatlesPlus4 = addYearPlayers(beatlesPlus4)
-  //  beatlesPlus4 = setGivEeErPlayers(beatlesPlus4, 'RinSta, 3, 'EriTob, 'ee)
-  //  beatlesPlus4 = addYearPlayers(beatlesPlus4)
-  //  beatlesPlus4 = setGivEeErPlayers(beatlesPlus4, 'RinSta, 4, 'KarLav, 'ee)
+  private var beatlesPlus4 = Roster.addYear(beatlesPlusPM)
+  beatlesPlus4 = Roster.updateGivee(beatlesPlus4, Symbol("RinSta"), 1, Symbol("GeoHar"))
+  beatlesPlus4 = Roster.addYear(beatlesPlus4)
+  beatlesPlus4 = Roster.updateGivee(beatlesPlus4, Symbol("RinSta"), 2, Symbol("PauMcc"))
+  beatlesPlus4 = Roster.addYear(beatlesPlus4)
+  beatlesPlus4 = Roster.updateGivee(beatlesPlus4, Symbol("RinSta"), 3, Symbol("EriTob"))
+  beatlesPlus4 = Roster.addYear(beatlesPlus4)
+  beatlesPlus4 = Roster.updateGivee(beatlesPlus4, Symbol("RinSta"), 4, Symbol("KarLav"))
 
   "A Player" should "not give to itself" in {
     assert(giveeNotSelf(Symbol("RinSta"), Symbol("GeoHar")))
