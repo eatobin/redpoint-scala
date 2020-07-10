@@ -33,14 +33,14 @@ class RulesSpec extends AnyFlatSpec {
     assert(!giveeNotRecip(Symbol("RinSta"), Symbol("KarLav"), 0, beatlesPlusPM))
   }
 
-  //  it should "not repeat for three years" in {
-  //    assert(!giveeNotRepeat('RinSta, 'JohLen, 2, beatlesPlus4))
-  //    assert(!giveeNotRepeat('RinSta, 'GeoHar, 2, beatlesPlus4))
-  //    assert(giveeNotRepeat('RinSta, 'KarLav, 2, beatlesPlus4))
-  //    assert(giveeNotRepeat('RinSta, 'JohLen, 5, beatlesPlus4))
-  //    assert(giveeNotRepeat('RinSta, 'GeoHar, 5, beatlesPlus4))
-  //    assert(!giveeNotRepeat('RinSta, 'PauMcc, 5, beatlesPlus4))
-  //    assert(!giveeNotRepeat('RinSta, 'EriTob, 5, beatlesPlus4))
-  //    assert(!giveeNotRepeat('RinSta, 'KarLav, 5, beatlesPlus4))
-  //  }
+  it should "not repeat for three years" in {
+    assert(!giveeNotRepeat(Symbol("RinSta"), Symbol("JohLen"), 2, beatlesPlus4))
+    assert(!giveeNotRepeat(Symbol("RinSta"), Symbol("GeoHar"), 2, beatlesPlus4))
+    assert(giveeNotRepeat(Symbol("RinSta"), Symbol("KarLav"), 2, beatlesPlus4))
+    assert(giveeNotRepeat(Symbol("RinSta"), Symbol("JohLen"), 5, beatlesPlus4))
+    assert(giveeNotRepeat(Symbol("RinSta"), Symbol("GeoHar"), 5, beatlesPlus4))
+    assert(!giveeNotRepeat(Symbol("RinSta"), Symbol("PauMcc"), 5, beatlesPlus4))
+    assert(!giveeNotRepeat(Symbol("RinSta"), Symbol("EriTob"), 5, beatlesPlus4))
+    assert(!giveeNotRepeat(Symbol("RinSta"), Symbol("KarLav"), 5, beatlesPlus4))
+  }
 }
