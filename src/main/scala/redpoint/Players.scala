@@ -6,4 +6,14 @@ object Players {
 
   def getPlayerName(players: Players, playerKey: PlayerKey): PlayerName =
     players(playerKey).playerName
+
+  def addYear(players: Players): Players = {
+    val nplrs = for ((playerKey, player) <- players) yield {
+      val gh = player.giftHistory
+      val ngh = GiftHistory.giftHistoryAddYear(gh, playerKey)
+      val nplr = Player.playerUpdateGiftHistory(player, ngh)
+      playerKey -> nplr
+    }
+    nplrs
+  }
 }
