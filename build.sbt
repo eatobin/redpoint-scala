@@ -8,7 +8,8 @@ lazy val root = (project in file("."))
   .settings(
     name := "redpoint-scala",
     libraryDependencies ++= Seq(
-      "org.scalatest" %% "scalatest" % "3.1.2" % "test"
+      "org.scalatest" %% "scalatest" % "3.1.2" % "test",
+      "io.spray" %% "spray-json" % "1.3.5"
     ),
     scalacOptions += "-deprecation"
   )
