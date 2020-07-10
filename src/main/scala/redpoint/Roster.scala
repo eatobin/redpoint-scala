@@ -3,8 +3,7 @@ package redpoint
 case class Roster(rosterName: RosterName, rosterYear: RosterYear, players: Players)
 
 object Roster {
-  def getPlayerName(players: Players, playerKey: PlayerKey): PlayerName =
-    players(playerKey).playerName
+
 
   def addYear(players: Players): Players = {
     val nplrs = for ((playerKey, player) <- players) yield {

@@ -19,4 +19,8 @@ class PlayersSpec extends AnyFlatSpec {
   "Players" should "return an updated player" in {
     assert(updatePlayer(players, Symbol("RinSta"), Player("New Bee", Vector(GiftPair(Symbol("NewBee"), Symbol("NewBee"))))) == newBeePlayers)
   }
+
+  it should "return a player name" in {
+    assert(getPlayerName(players, Symbol("PauMcc")) == "Paul McCartney")
+  }
 }
