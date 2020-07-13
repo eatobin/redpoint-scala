@@ -1,6 +1,9 @@
 package redpoint
 
-object GiftHistory {
+import spray.json._
+import spray.json.DefaultJsonProtocol._
+
+object GiftHistory extends DefaultJsonProtocol {
   def giftHistoryAddYear(giftHistory: GiftHistory, playerKey: PlayerKey): GiftHistory =
     giftHistory :+ GiftPair(playerKey, playerKey)
 
