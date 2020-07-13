@@ -1,4 +1,4 @@
-package redpoint
+ package redpoint
 
 import spray.json._
 

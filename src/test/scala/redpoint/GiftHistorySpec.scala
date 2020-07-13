@@ -2,6 +2,7 @@ package redpoint
 
 import org.scalatest.flatspec.AnyFlatSpec
 import redpoint.GiftHistory._
+import spray.json._
 
 class GiftHistorySpec extends AnyFlatSpec {
 
@@ -13,5 +14,15 @@ class GiftHistorySpec extends AnyFlatSpec {
 
   it should "return an updated giftHistory" in {
     assert(giftHistoryUpdateGiftHistory(giftHistory, 0, GiftPair(Symbol("me"), Symbol("you"))) == Vector(GiftPair(Symbol("me"), Symbol("you"))))
+  }
+
+  it should "convert to JSON" in {
+    val ghJson = giftHistory.toJson
+    assert(ghJson == """[{"givee":"JohLen","giver":"GeoHar"}]""".parseJson)
+  }
+
+  it should "convert from JSON" in {
+    val ghJson = giftHistory.toJson
+    assert(ghJson.convertTo[GiftHistory] == giftHistory)
   }
 }
