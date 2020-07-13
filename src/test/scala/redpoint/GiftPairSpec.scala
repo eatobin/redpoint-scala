@@ -15,6 +15,12 @@ class GiftPairSpec extends AnyFlatSpec {
   }
 
   it should "convert to JSON" in {
-    assert(giftPair.toJson == """{"givee":"JohLen","giver":"GeoHar"}""".parseJson)
+    val gpJson = giftPair.toJson
+    assert(gpJson == """{"givee":"JohLen","giver":"GeoHar"}""".parseJson)
+  }
+
+  it should "convert from JSON" in {
+    val gpJson = giftPair.toJson
+    assert(gpJson.convertTo[GiftPair] == giftPair)
   }
 }
