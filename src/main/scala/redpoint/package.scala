@@ -1,3 +1,5 @@
+import spray.json.JsValue
+
 package object redpoint {
   type Givee = Symbol
   type Giver = Symbol
@@ -17,6 +19,6 @@ package object redpoint {
   type Discards = Set[PlayerKey]
 
   type FilePath = String
-  type JsonString = String
+  type JsRoster = JsValue
   type ErrorString = String
 }
