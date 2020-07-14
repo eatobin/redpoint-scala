@@ -14,8 +14,6 @@ class RosterSpec extends AnyFlatSpec {
     Map(Symbol("RinSta") -> rinSta, Symbol("JohLen") -> johLen, Symbol("GeoHar") -> geoHar, Symbol("PauMcc") -> pauMcc)
   private val roster: Roster = Roster("The Beatles", 2014, players)
 
-  private val jsBeatles: "{  \"roster-name\": \"The Beatles\",  \"roster-year\": 2014,  \"players\": {    \"RinSta\": {      \"player-name\": \"Ringo Starr\",      \"gift-history\": [        {          \"givee\": \"JohLen\",          \"giver\": \"GeoHar\"        }      ]    }  },  \"JohLen\": {    \"player-name\": \"John Lennon\",    \"gift-history\": [      {        \"givee\": \"PauMcc\",        \"giver\": \"RinSta\"      }    ]  },  \"GeoHar\": {    \"player-name\": \"George Harrison\",    \"gift-history\": [      {        \"givee\": \"RinSta\",        \"giver\": \"PauMcc\"      }    ]  },  \"PauMcc\": {    \"player-name\": \"Paul McCartney\",    \"gift-history\": [      {        \"givee\": \"GeoHar\",        \"giver\": \"JohLen\"      }    ]  }}" = """{  "roster-name": "The Beatles",  "roster-year": 2014,  "players": {    "RinSta": {      "player-name": "Ringo Starr",      "gift-history": [        {          "givee": "JohLen",          "giver": "GeoHar"        }      ]    }  },  "JohLen": {    "player-name": "John Lennon",    "gift-history": [      {        "givee": "PauMcc",        "giver": "RinSta"      }    ]  },  "GeoHar": {    "player-name": "George Harrison",    "gift-history": [      {        "givee": "RinSta",        "giver": "PauMcc"      }    ]  },  "PauMcc": {    "player-name": "Paul McCartney",    "gift-history": [      {        "givee": "GeoHar",        "giver": "JohLen"      }    ]  }}"""
-
   "A Roster" should "return \"The Beatles\" rosterName" in {
     assert(roster.rosterName == "The Beatles")
   }
