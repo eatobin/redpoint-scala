@@ -1,6 +1,7 @@
 package redpoint
 
 import org.scalatest.flatspec.AnyFlatSpec
+import spray.json._
 
 class RosterSpec extends AnyFlatSpec {
 
@@ -18,5 +19,15 @@ class RosterSpec extends AnyFlatSpec {
 
   it should "return 2014 rosterYear" in {
     assert(roster.rosterYear == 2014)
+  }
+
+  it should "convert to JSON" in {
+    val rosterJson = roster.toJson
+    assert(rosterJson == """{"players":{"RinSta":{"giftHistory":[{"givee":"JohLen","giver":"GeoHar"}],"playerName":"Ringo Starr"},"JohLen":{"giftHistory":[{"givee":"PauMcc","giver":"RinSta"}],"playerName":"John Lennon"},"GeoHar":{"giftHistory":[{"givee":"RinSta","giver":"PauMcc"}],"playerName":"George Harrison"},"PauMcc":{"giftHistory":[{"givee":"GeoHar","giver":"JohLen"}],"playerName":"Paul McCartney"}},"rosterName":"The Beatles","rosterYear":2014}""".parseJson)
+  }
+
+  it should "convert from JSON" in {
+    val rosterJson = roster.toJson
+    assert(rosterJson.convertTo[Roster] == roster)
   }
 }
