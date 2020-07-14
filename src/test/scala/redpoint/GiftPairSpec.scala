@@ -1,9 +1,8 @@
- package redpoint
-
-import spray.json._
+package redpoint
 
 import org.scalatest.flatspec.AnyFlatSpec
 import redpoint.GiftPair._
+import spray.json._
 
 class GiftPairSpec extends AnyFlatSpec {
 
