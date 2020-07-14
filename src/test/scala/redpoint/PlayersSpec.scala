@@ -2,6 +2,7 @@ package redpoint
 
 import org.scalatest.flatspec.AnyFlatSpec
 import redpoint.Players._
+import spray.json._
 
 class PlayersSpec extends AnyFlatSpec {
 
@@ -50,5 +51,15 @@ class PlayersSpec extends AnyFlatSpec {
   it should "update a givee and a giver" in {
     assert(updateGivee(players, Symbol("GeoHar"), 0, Symbol("you")) == playersGivee)
     assert(updateGiver(players, Symbol("GeoHar"), 0, Symbol("you")) == playersGiver)
+  }
+
+  it should "convert to JSON" in {
+    val plrsJson = players.toJson
+    assert(plrsJson == """{"RinSta":{"giftHistory":[{"givee":"JohLen","giver":"GeoHar"}],"playerName":"Ringo Starr"},"JohLen":{"giftHistory":[{"givee":"PauMcc","giver":"RinSta"}],"playerName":"John Lennon"},"GeoHar":{"giftHistory":[{"givee":"RinSta","giver":"PauMcc"}],"playerName":"George Harrison"},"PauMcc":{"giftHistory":[{"givee":"GeoHar","giver":"JohLen"}],"playerName":"Paul McCartney"}}""".parseJson)
+  }
+
+  it should "convert from JSON" in {
+    val plrsJson = players.toJson
+    assert(plrsJson.convertTo[Players] == players)
   }
 }

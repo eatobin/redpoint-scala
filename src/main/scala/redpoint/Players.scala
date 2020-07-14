@@ -1,6 +1,8 @@
 package redpoint
 
-object Players {
+import spray.json._
+
+object Players extends DefaultJsonProtocol {
   def updatePlayer(players: Players, playerKey: PlayerKey, player: Player): Players =
     players.updated(playerKey, player)
 
