@@ -24,10 +24,10 @@ class RosterSpec extends AnyFlatSpec {
     assert(roster.rosterYear == 2014)
   }
 
-  it should "convert a JSON string to a Roster - or not" in {
+  it should "convert a JSON value to a Roster - or not" in {
     val rosterJson: JsRoster = roster.toJson
-    assert(jsonStringToRoster(Right(rosterJson)) == Right(roster))
-    assert(jsonStringToRoster(Right(jsBeatlesBad)) == Left("JSON parse error."))
-    assert(jsonStringToRoster(Left("nope")) == Left("nope"))
+    assert(jsRosterToRoster(Right(rosterJson)) == Right(roster))
+    assert(jsRosterToRoster(Right(jsBeatlesBad)) == Left("JSON parse error."))
+    assert(jsRosterToRoster(Left("nope")) == Left("nope"))
   }
 }
