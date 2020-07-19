@@ -24,4 +24,17 @@ object Main {
     } catch {
       case _: Exception => Left("File read error. File: " ++ fp ++ " does not exist.")
     }
+
+  def random[T](s: Set[T]): T = {
+    val n = util.Random.nextInt(s.size)
+    s.iterator.drop(n).next
+  }
+
+  def drawPuck(hat: Hat): Option[PlayerKey] = {
+    if (hat.nonEmpty) {
+      Some(random(hat))
+    } else {
+      None
+    }
+  }
 }
