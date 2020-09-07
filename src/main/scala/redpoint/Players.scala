@@ -3,13 +3,13 @@ package redpoint
 import spray.json._
 
 object Players extends DefaultJsonProtocol {
-  def updatePlayer(players: Players, playerKey: PlayerKey, player: Player): Players =
+  def playersUpdatePlayer(players: Players, playerKey: PlayerKey, player: Player): Players =
     players.updated(playerKey, player)
 
-  def getPlayerName(players: Players, playerKey: PlayerKey): PlayerName =
+  def playersGetPlayerName(players: Players, playerKey: PlayerKey): PlayerName =
     players(playerKey).playerName
 
-  def addYear(players: Players): Players = {
+  def playersAddYear(players: Players): Players = {
     val nplrs = for ((playerKey, player) <- players) yield {
       val gh = player.giftHistory
       val ngh = GiftHistory.giftHistoryAddYear(gh, playerKey)
@@ -19,25 +19,25 @@ object Players extends DefaultJsonProtocol {
     nplrs
   }
 
-  def getGivee(players: Players, playerKey: PlayerKey, giftYear: GiftYear): Givee =
+  def playersGetGivee(players: Players, playerKey: PlayerKey, giftYear: GiftYear): Givee =
     players(playerKey).giftHistory(giftYear).givee
 
-  def getGiver(players: Players, playerKey: PlayerKey, giftYear: GiftYear): Giver =
+  def playersGetGiver(players: Players, playerKey: PlayerKey, giftYear: GiftYear): Giver =
     players(playerKey).giftHistory(giftYear).giver
 
-  private def setGiftPair(players: Players, playerKey: PlayerKey, giftYear: GiftYear, giftPair: GiftPair): Players = {
+  private def playersSetGiftPair(players: Players, playerKey: PlayerKey, giftYear: GiftYear, giftPair: GiftPair): Players = {
     val ngh = GiftHistory.giftHistoryUpdateGiftHistory(players(playerKey).giftHistory, giftYear, giftPair)
     val nplr = Player.playerUpdateGiftHistory(players(playerKey), ngh)
-    Players.updatePlayer(players, playerKey, nplr)
+    Players.playersUpdatePlayer(players, playerKey, nplr)
   }
 
-  def updateGivee(players: Players, playerKey: PlayerKey, giftYear: GiftYear, givee: Givee): Players = {
+  def playersUpdateGivee(players: Players, playerKey: PlayerKey, giftYear: GiftYear, givee: Givee): Players = {
     val ngp = GiftPair.giftPairUpdateGivee(players(playerKey).giftHistory(giftYear), givee)
-    setGiftPair(players, playerKey, giftYear, ngp)
+    playersSetGiftPair(players, playerKey, giftYear, ngp)
   }
 
-  def updateGiver(players: Players, playerKey: PlayerKey, giftYear: GiftYear, giver: Giver): Players = {
+  def playersUpdateGiver(players: Players, playerKey: PlayerKey, giftYear: GiftYear, giver: Giver): Players = {
     val ngp = GiftPair.giftPairUpdateGiver(players(playerKey).giftHistory(giftYear), giver)
-    setGiftPair(players, playerKey, giftYear, ngp)
+    playersSetGiftPair(players, playerKey, giftYear, ngp)
   }
 }
