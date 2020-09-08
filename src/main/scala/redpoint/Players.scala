@@ -1,11 +1,9 @@
 package redpoint
 
-import spray.json._
-import redpoint.GiftHistory.giftHistoryAddYear
+import redpoint.GiftHistory.{giftHistoryAddYear, giftHistoryUpdateGiftHistory}
+import redpoint.GiftPair.{giftPairUpdateGivee, giftPairUpdateGiver}
 import redpoint.Player.playerUpdateGiftHistory
-import redpoint.GiftHistory.giftHistoryUpdateGiftHistory
-import redpoint.GiftPair.giftPairUpdateGivee
-import redpoint.GiftPair.giftPairUpdateGiver
+import spray.json._
 
 object Players extends DefaultJsonProtocol {
   def playersUpdatePlayer(players: Players, playerKey: PlayerKey, player: Player): Players =

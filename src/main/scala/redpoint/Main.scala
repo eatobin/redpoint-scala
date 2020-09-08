@@ -1,7 +1,8 @@
 package redpoint
 
-import scala.io.Source
 import spray.json._
+
+import scala.io.Source
 
 object Main {
   var agYear = 0
