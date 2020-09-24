@@ -26,7 +26,7 @@ object Main {
       case _: Exception => Left("File read error. File: " ++ fp ++ " does not exist.")
     }
 
-  def random[T](s: Set[T]): T = {
+  private def random[T](s: Set[T]): T = {
     val n = util.Random.nextInt(s.size)
     s.iterator.drop(n).next
   }
