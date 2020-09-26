@@ -5,7 +5,7 @@ import spray.json._
 case class Roster(rosterName: RosterName, rosterYear: RosterYear, players: Players)
 
 object Roster extends DefaultJsonProtocol {
-  def jsRosterToRoster(s: Either[ErrorString, JsRoster]): Either[ErrorString, Roster] = {
+  def jsRosterToRoster(s: Either[ErrorString, JsValue]): Either[ErrorString, Roster] = {
     s match {
       case Right(r) =>
         try {

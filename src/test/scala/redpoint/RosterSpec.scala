@@ -14,7 +14,7 @@ class RosterSpec extends AnyFlatSpec {
     Map(Symbol("RinSta") -> rinSta, Symbol("JohLen") -> johLen, Symbol("GeoHar") -> geoHar, Symbol("PauMcc") -> pauMcc)
   private val roster: Roster = Roster("The Beatles", 2014, players)
 
-  private val jsBeatlesBad: JsRoster = """{  "roster-name": "The Beatles",  "roster-year": 2014,  "players": {    "RinSta": {      "player-name": "Ringo Starr",      "gift-history": [        {          "givee": "JohLen",          "giver": "GeoHar"        }      ]    }  },  "JohLen": {    "player-name": "John Lennon",    "gift-history": [      {        "givee": "PauMcc",        "giver": "RinSta"      }    ]  },  "GeoHar": {    "player-name": "George Harrison",    "gift-history": [      {        "givee": "RinSta",        "giver": "PauMcc"      }    ]  },  "PauMcc": {    "player-name": "Paul McCartney",    "gift-history": [      {        "givee": "GeoHar",        "giver": "JohLen"      }    ]  }}""".parseJson
+  private val jsBeatlesBad: JsValue = """{  "roster-name": "The Beatles",  "roster-year": 2014,  "players": {    "RinSta": {      "player-name": "Ringo Starr",      "gift-history": [        {          "givee": "JohLen",          "giver": "GeoHar"        }      ]    }  },  "JohLen": {    "player-name": "John Lennon",    "gift-history": [      {        "givee": "PauMcc",        "giver": "RinSta"      }    ]  },  "GeoHar": {    "player-name": "George Harrison",    "gift-history": [      {        "givee": "RinSta",        "giver": "PauMcc"      }    ]  },  "PauMcc": {    "player-name": "Paul McCartney",    "gift-history": [      {        "givee": "GeoHar",        "giver": "JohLen"      }    ]  }}""".parseJson
 
   "A Roster" should "return \"The Beatles\" rosterName" in {
     assert(roster.rosterName == "The Beatles")
@@ -25,7 +25,7 @@ class RosterSpec extends AnyFlatSpec {
   }
 
   it should "convert a JSON value to a Roster - or not" in {
-    val rosterJson: JsRoster = roster.toJson
+    val rosterJson: JsValue = roster.toJson
     assert(jsRosterToRoster(Right(rosterJson)) == Right(roster))
     assert(jsRosterToRoster(Right(jsBeatlesBad)) == Left("JSON parse error."))
     assert(jsRosterToRoster(Left("nope")) == Left("nope"))
