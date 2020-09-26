@@ -9,5 +9,7 @@ object GiftPair extends DefaultJsonProtocol {
 
   def giftPairUpdateGiver(giftPair: GiftPair, newGiver: Giver): GiftPair = giftPair.copy(giver = newGiver)
 
+  def giftPairJsonStringToGiftPair(gpString: String): GiftPair = gpString.parseJson.convertTo[GiftPair]
+
   implicit val giftPairFormat: RootJsonFormat[GiftPair] = jsonFormat2(GiftPair.apply)
 }
