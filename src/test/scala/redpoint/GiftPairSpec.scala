@@ -5,12 +5,12 @@ import redpoint.GiftPair._
 
 class GiftPairSpec extends AnyFlatSpec {
 
-  private val jsonStringGP: String = """{"givee":"JohLen","giver":"GeoHar"}"""
-  private val giftPair: GiftPair = GiftPair(Symbol("JohLen"), Symbol("GeoHar"))
+  private val jsonStringGP: String = "{\"givee\":\"GeoHar\",\"giver\":\"JohLen\"}"
+  private val giftPair: GiftPair = GiftPair(Symbol("GeoHar"), Symbol("JohLen"))
 
   "A GiftPair" should "update a giver/givee" in {
-    assert(giftPairUpdateGivee(giftPair, Symbol("NewBee")) == GiftPair(Symbol("NewBee"), Symbol("GeoHar")))
-    assert(giftPairUpdateGiver(giftPair, Symbol("NewBee")) == GiftPair(Symbol("JohLen"), Symbol("NewBee")))
+    assert(giftPairUpdateGivee(giftPair, Symbol("NewBee")) == GiftPair(Symbol("NewBee"), Symbol("JohLen")))
+    assert(giftPairUpdateGiver(giftPair, Symbol("NewBee")) == GiftPair(Symbol("GeoHar"), Symbol("NewBee")))
   }
 
   it should "convert from JSON" in {
