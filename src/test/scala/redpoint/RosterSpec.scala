@@ -2,7 +2,6 @@ package redpoint
 
 import org.scalatest.flatspec.AnyFlatSpec
 import redpoint.Roster._
-import spray.json._
 
 class RosterSpec extends AnyFlatSpec {
 

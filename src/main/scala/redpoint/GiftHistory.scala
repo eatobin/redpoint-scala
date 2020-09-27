@@ -8,4 +8,6 @@ object GiftHistory extends DefaultJsonProtocol {
 
   def giftHistoryUpdateGiftHistory(giftHistory: GiftHistory, giftYear: GiftYear, giftPair: GiftPair): GiftHistory =
     giftHistory.updated(giftYear, giftPair)
+
+  def giftHistoryJsonStringToGiftHistory(ghString: String): GiftHistory = ghString.parseJson.convertTo[GiftHistory]
 }
