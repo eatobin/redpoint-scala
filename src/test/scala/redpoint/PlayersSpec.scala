@@ -2,7 +2,6 @@ package redpoint
 
 import org.scalatest.flatspec.AnyFlatSpec
 import redpoint.Players._
-import spray.json._
 
 class PlayersSpec extends AnyFlatSpec {
 

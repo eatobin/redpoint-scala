@@ -2,7 +2,6 @@ package redpoint
 
 import org.scalatest.flatspec.AnyFlatSpec
 import redpoint.Main._
-import spray.json._
 
 class MainSpec extends AnyFlatSpec {
 
