@@ -1,7 +1,5 @@
 package redpoint
 
-import spray.json._
-
 import scala.io.Source
 
 object Main {
@@ -16,12 +14,12 @@ object Main {
   var aRosterYear = 0
   var filePath = "resources/blackhawks.json"
 
-  def readFileIntoJsValue(fp: FilePath): Either[ErrorString, JsValue] =
+  def readFileIntoString(fp: FilePath): Either[ErrorString, String] =
     try {
       val bufferedSource = Source.fromFile(fp)
       val js = bufferedSource.getLines.mkString
       bufferedSource.close
-      Right(js.parseJson)
+      Right(js)
     } catch {
       case _: Exception => Left("File read error. File: " ++ fp ++ " does not exist.")
     }
