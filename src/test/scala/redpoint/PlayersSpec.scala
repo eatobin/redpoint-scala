@@ -6,6 +6,8 @@ import spray.json._
 
 class PlayersSpec extends AnyFlatSpec {
 
+  private val jsonStringPlrs: String = "{\"PauMcc\":{\"playerName\":\"Paul McCartney\",\"giftHistory\":[{\"givee\":\"GeoHar\",\"giver\":\"JohLen\"}]},\"GeoHar\":{\"playerName\":\"George Harrison\",\"giftHistory\":[{\"givee\":\"RinSta\",\"giver\":\"PauMcc\"}]},\"JohLen\":{\"playerName\":\"John Lennon\",\"giftHistory\":[{\"givee\":\"PauMcc\",\"giver\":\"RinSta\"}]},\"RinSta\":{\"playerName\":\"Ringo Starr\",\"giftHistory\":[{\"givee\":\"JohLen\",\"giver\":\"GeoHar\"}]}}"
+
   private val rinSta: Player = Player("Ringo Starr", Vector(GiftPair(Symbol("JohLen"), Symbol("GeoHar"))))
   private val johLen: Player = Player("John Lennon", Vector(GiftPair(Symbol("PauMcc"), Symbol("RinSta"))))
   private val geoHar: Player = Player("George Harrison", Vector(GiftPair(Symbol("RinSta"), Symbol("PauMcc"))))
@@ -53,13 +55,8 @@ class PlayersSpec extends AnyFlatSpec {
     assert(playersUpdateGiver(players, Symbol("GeoHar"), 0, Symbol("you")) == playersGiver)
   }
 
-  it should "convert to JSON" in {
-    val plrsJson = players.toJson
-    assert(plrsJson == """{"RinSta":{"giftHistory":[{"givee":"JohLen","giver":"GeoHar"}],"playerName":"Ringo Starr"},"JohLen":{"giftHistory":[{"givee":"PauMcc","giver":"RinSta"}],"playerName":"John Lennon"},"GeoHar":{"giftHistory":[{"givee":"RinSta","giver":"PauMcc"}],"playerName":"George Harrison"},"PauMcc":{"giftHistory":[{"givee":"GeoHar","giver":"JohLen"}],"playerName":"Paul McCartney"}}""".parseJson)
-  }
-
   it should "convert from JSON" in {
-    val plrsJson = players.toJson
-    assert(plrsJson.convertTo[Players] == players)
+    val plrsJson: Players = playersJsonStringToPlayers(jsonStringPlrs)
+    assert(plrsJson == players)
   }
 }

@@ -43,4 +43,6 @@ object Players extends DefaultJsonProtocol {
     val ngp = giftPairUpdateGiver(players(playerKey).giftHistory(giftYear), giver)
     playersSetGiftPair(players, playerKey, giftYear, ngp)
   }
+
+  def playersJsonStringToPlayers(plrsString: String): Players = plrsString.parseJson.convertTo[Players]
 }
