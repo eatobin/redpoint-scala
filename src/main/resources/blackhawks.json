@@ -1,10 +1,10 @@
 {
-  "roster-name": "Blackhawks",
-  "roster-year": 2010,
+  "rosterName": "Blackhawks",
+  "rosterYear": 2010,
   "players": {
     "TroBro": {
-      "player-name": "Troy Brouwer",
-      "gift-history": [
+      "playerName": "Troy Brouwer",
+      "giftHistory": [
         {
           "givee": "DavBol",
           "giver": "JoeQue"
@@ -12,8 +12,8 @@
       ]
     },
     "JoeQue": {
-      "player-name": "Joel Quenneville",
-      "gift-history": [
+      "playerName": "Joel Quenneville",
+      "giftHistory": [
         {
           "givee": "TroBro",
           "giver": "AndLad"
@@ -21,8 +21,8 @@
       ]
     },
     "AdaBur": {
-      "player-name": "Adam Burish",
-      "gift-history": [
+      "playerName": "Adam Burish",
+      "giftHistory": [
         {
           "givee": "DunKei",
           "giver": "JonToe"
@@ -30,8 +30,8 @@
       ]
     },
     "AndLad": {
-      "player-name": "Andrew Ladd",
-      "gift-history": [
+      "playerName": "Andrew Ladd",
+      "giftHistory": [
         {
           "givee": "JoeQue",
           "giver": "KriVer"
@@ -39,8 +39,8 @@
       ]
     },
     "AntNie": {
-      "player-name": "Antti Niemi",
-      "gift-history": [
+      "playerName": "Antti Niemi",
+      "giftHistory": [
         {
           "givee": "JonToe",
           "giver": "MarHos"
@@ -48,8 +48,8 @@
       ]
     },
     "BreSea": {
-      "player-name": "Brent Seabrook",
-      "gift-history": [
+      "playerName": "Brent Seabrook",
+      "giftHistory": [
         {
           "givee": "KriVer",
           "giver": "NikHja"
@@ -57,8 +57,8 @@
       ]
     },
     "BryBic": {
-      "player-name": "Bryan Bickell",
-      "gift-history": [
+      "playerName": "Bryan Bickell",
+      "giftHistory": [
         {
           "givee": "MarHos",
           "giver": "PatKan"
@@ -66,8 +66,8 @@
       ]
     },
     "CriHue": {
-      "player-name": "Cristobal Huet",
-      "gift-history": [
+      "playerName": "Cristobal Huet",
+      "giftHistory": [
         {
           "givee": "PatKan",
           "giver": "TomKop"
@@ -75,8 +75,8 @@
       ]
     },
     "DavBol": {
-      "player-name": "Dave Bolland",
-      "gift-history": [
+      "playerName": "Dave Bolland",
+      "giftHistory": [
         {
           "givee": "PatSha",
           "giver": "TroBro"
@@ -84,8 +84,8 @@
       ]
     },
     "DunKei": {
-      "player-name": "Duncan Keith",
-      "gift-history": [
+      "playerName": "Duncan Keith",
+      "giftHistory": [
         {
           "givee": "TomKop",
           "giver": "AdaBur"
@@ -93,8 +93,8 @@
       ]
     },
     "JonToe": {
-      "player-name": "Jonathan Toews",
-      "gift-history": [
+      "playerName": "Jonathan Toews",
+      "giftHistory": [
         {
           "givee": "AdaBur",
           "giver": "AntNie"
@@ -102,8 +102,8 @@
       ]
     },
     "KriVer": {
-      "player-name": "Kris Versteeg",
-      "gift-history": [
+      "playerName": "Kris Versteeg",
+      "giftHistory": [
         {
           "givee": "AndLad",
           "giver": "BreSea"
@@ -111,8 +111,8 @@
       ]
     },
     "MarHos": {
-      "player-name": "Marian Hossa",
-      "gift-history": [
+      "playerName": "Marian Hossa",
+      "giftHistory": [
         {
           "givee": "AntNie",
           "giver": "BryBic"
@@ -120,8 +120,8 @@
       ]
     },
     "NikHja": {
-      "player-name": "Niklas Hjalmarsson",
-      "gift-history": [
+      "playerName": "Niklas Hjalmarsson",
+      "giftHistory": [
         {
           "givee": "BreSea",
           "giver": "BriCam"
@@ -129,8 +129,8 @@
       ]
     },
     "PatKan": {
-      "player-name": "Patrick Kane",
-      "gift-history": [
+      "playerName": "Patrick Kane",
+      "giftHistory": [
         {
           "givee": "BryBic",
           "giver": "CriHue"
@@ -138,8 +138,8 @@
       ]
     },
     "PatSha": {
-      "player-name": "Patrick Sharp",
-      "gift-history": [
+      "playerName": "Patrick Sharp",
+      "giftHistory": [
         {
           "givee": "BriCam",
           "giver": "DavBol"
@@ -147,8 +147,8 @@
       ]
     },
     "TomKop": {
-      "player-name": "Tomas Kopecky",
-      "gift-history": [
+      "playerName": "Tomas Kopecky",
+      "giftHistory": [
         {
           "givee": "CriHue",
           "giver": "DunKei"
@@ -156,8 +156,8 @@
       ]
     },
     "BriCam": {
-      "player-name": "Brian Campbell",
-      "gift-history": [
+      "playerName": "Brian Campbell",
+      "giftHistory": [
         {
           "givee": "NikHja",
           "giver": "PatSha"
