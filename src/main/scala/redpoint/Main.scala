@@ -17,7 +17,7 @@ object Main {
   def readFileIntoString(fp: FilePath): Either[ErrorString, String] =
     try {
       val bufferedSource = Source.fromFile(fp)
-      val js = bufferedSource.getLines.mkString
+      val js = bufferedSource.getLines().mkString
       bufferedSource.close
       Right(js)
     } catch {
@@ -26,7 +26,7 @@ object Main {
 
   private def random[T](s: Set[T]): T = {
     val n = util.Random.nextInt(s.size)
-    s.iterator.drop(n).next
+    s.iterator.drop(n).next()
   }
 
   def drawPuck(hat: Hat): Option[PlayerKey] = {
