@@ -26,11 +26,9 @@ class RosterSpec extends AnyFlatSpec {
   }
 
   it should "convert from JSON - or not" in {
-    val rosJson: Either[ErrorString, Roster] = rosterJsonStringToRoster(Right(jsonStringRos))
-    val rosJsonBad: Either[ErrorString, Roster] = rosterJsonStringToRoster(Right(jsBeatlesBad))
-    val rosJsonNoFile: Either[ErrorString, Roster] = rosterJsonStringToRoster(Left("nope"))
+    val rosJson: Either[ErrorString, Roster] = rosterJsonStringToRoster(jsonStringRos)
+    val rosJsonBad: Either[ErrorString, Roster] = rosterJsonStringToRoster(jsBeatlesBad)
     assert(rosJson == Right(roster))
     assert(rosJsonBad == Left("JSON parse error."))
-    assert(rosJsonNoFile == Left("nope"))
   }
 }

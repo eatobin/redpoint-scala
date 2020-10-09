@@ -17,5 +17,6 @@ package object redpoint {
   type Discards = Set[PlayerKey]
 
   type FilePath = String
+  type JsonString = String
   type ErrorString = String
 }
