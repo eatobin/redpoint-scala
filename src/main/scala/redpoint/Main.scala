@@ -14,14 +14,16 @@ object Main {
   var aRosterYear = 0
   var filePath = "resources/blackhawks.json"
 
-  def readFileIntoString(fp: FilePath): Either[ErrorString, String] =
+  def readFileIntoString(fp: FilePath): Either[Unit, JsonString] =
     try {
       val bufferedSource = Source.fromFile(fp)
       val js = bufferedSource.getLines().mkString
       bufferedSource.close
       Right(js)
     } catch {
-      case _: Exception => Left("File read error. File: " ++ fp ++ " does not exist.")
+      case _: Exception =>
+        println("File read error. File: " ++ fp ++ " does not exist.")
+        Left(sys.exit(0))
     }
 
   private def random[T](s: Set[T]): T = {

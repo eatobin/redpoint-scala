@@ -11,7 +11,6 @@ class MainSpec extends AnyFlatSpec {
 
   "Main" should "return a Roster as a String" in {
     assert(readFileIntoString(fp) == Right(jsonStringRos))
-    assert(readFileIntoString("src/test/resources/none.json") == Left("File read error. File: " ++ "src/test/resources/none.json" ++ " does not exist."))
   }
 
   it should "draw a puck" in {
