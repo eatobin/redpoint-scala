@@ -22,10 +22,10 @@ object Players extends DefaultJsonProtocol {
     nplrs
   }
 
-  def playersGetGivee(players: Players, playerKey: PlayerKey, giftYear: GiftYear): Givee =
+  def playersGetGivee(players: Players, playerKey: PlayerKey, giftYear: GiftYear): Symbol =
     players(playerKey).giftHistory(giftYear).givee
 
-  def playersGetGiver(players: Players, playerKey: PlayerKey, giftYear: GiftYear): Giver =
+  def playersGetGiver(players: Players, playerKey: PlayerKey, giftYear: GiftYear): Symbol =
     players(playerKey).giftHistory(giftYear).giver
 
   private def playersSetGiftPair(players: Players, playerKey: PlayerKey, giftYear: GiftYear, giftPair: GiftPair): Players = {
@@ -34,12 +34,12 @@ object Players extends DefaultJsonProtocol {
     playersUpdatePlayer(players, playerKey, nplr)
   }
 
-  def playersUpdateGivee(players: Players, playerKey: PlayerKey, giftYear: GiftYear, givee: Givee): Players = {
+  def playersUpdateGivee(players: Players, playerKey: PlayerKey, giftYear: GiftYear, givee: Symbol): Players = {
     val ngp = giftPairUpdateGivee(players(playerKey).giftHistory(giftYear), givee)
     playersSetGiftPair(players, playerKey, giftYear, ngp)
   }
 
-  def playersUpdateGiver(players: Players, playerKey: PlayerKey, giftYear: GiftYear, giver: Giver): Players = {
+  def playersUpdateGiver(players: Players, playerKey: PlayerKey, giftYear: GiftYear, giver: Symbol): Players = {
     val ngp = giftPairUpdateGiver(players(playerKey).giftHistory(giftYear), giver)
     playersSetGiftPair(players, playerKey, giftYear, ngp)
   }
