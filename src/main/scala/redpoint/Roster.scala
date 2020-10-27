@@ -2,10 +2,10 @@ package redpoint
 
 import spray.json._
 
-case class Roster(rosterName: RosterName, rosterYear: RosterYear, players: Players)
+case class Roster(rosterName: String, rosterYear: Int, players: Map[Symbol, Player])
 
 object Roster extends DefaultJsonProtocol {
-  def rosterJsonStringToRoster(s: Either[Unit, JsonString]): Either[ErrorString, Roster] = {
+  def rosterJsonStringToRoster(s: Either[Unit, String]): Either[String, Roster] = {
     s match {
       case Right(r) =>
         try {

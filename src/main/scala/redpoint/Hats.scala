@@ -1,15 +1,15 @@
 package redpoint
 
 object Hats {
-  def makeHat(players: Players): Hat =
+  def makeHat(players: Map[Symbol, Player]): Set[Symbol] =
     players.keySet
 
-  def removePuck(hat: Hat, playerKey: PlayerKey): Hat =
+  def removePuck(hat: Set[Symbol], playerKey: Symbol): Set[Symbol] =
     hat - playerKey
 
-  def discardGivee(discards: Discards, givee: Symbol): Discards =
+  def discardGivee(discards: Set[Symbol], givee: Symbol): Set[Symbol] =
     discards + givee
 
-  def returnDiscards(geHat: Hat, discards: Discards): Hat =
+  def returnDiscards(geHat: Set[Symbol], discards: Set[Symbol]): Set[Symbol] =
     geHat ++ discards
 }

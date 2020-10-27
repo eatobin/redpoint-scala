@@ -2,10 +2,10 @@ package redpoint
 
 import spray.json._
 
-case class Player(playerName: PlayerName, giftHistory: GiftHistory)
+case class Player(playerName: String, giftHistory: Vector[GiftPair])
 
 object Player extends DefaultJsonProtocol {
-  def playerUpdateGiftHistory(player: Player, giftHistory: GiftHistory): Player =
+  def playerUpdateGiftHistory(player: Player, giftHistory: Vector[GiftPair]): Player =
     player.copy(giftHistory = giftHistory)
 
   def playerJsonStringToPlayer(plrString: String): Player = plrString.parseJson.convertTo[Player]

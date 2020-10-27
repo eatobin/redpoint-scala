@@ -6,7 +6,7 @@ import redpoint.GiftHistory._
 class GiftHistorySpec extends AnyFlatSpec {
 
   private val jsonStringGH: String = "[{\"givee\":\"GeoHar\",\"giver\":\"JohLen\"}]"
-  private val giftHistory: GiftHistory = Vector(GiftPair(Symbol("GeoHar"), Symbol("JohLen")))
+  private val giftHistory: Vector[GiftPair] = Vector(GiftPair(Symbol("GeoHar"), Symbol("JohLen")))
 
   "A GiftHistory" should "add a new year" in {
     assert(giftHistoryAddYear(giftHistory, Symbol("NewBee")) == Vector(GiftPair(Symbol("GeoHar"), Symbol("JohLen")), GiftPair(Symbol("NewBee"), Symbol("NewBee"))))
@@ -17,7 +17,7 @@ class GiftHistorySpec extends AnyFlatSpec {
   }
 
   it should "convert from JSON" in {
-    val ghJson: GiftHistory = giftHistoryJsonStringToGiftHistory(jsonStringGH)
+    val ghJson: Vector[GiftPair] = giftHistoryJsonStringToGiftHistory(jsonStringGH)
     assert(ghJson == giftHistory)
   }
 }

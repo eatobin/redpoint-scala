@@ -14,7 +14,7 @@ object Main {
   var aRosterYear = 0
   var filePath = "resources/blackhawks.json"
 
-  def readFileIntoString(fp: FilePath): Either[Unit, JsonString] =
+  def readFileIntoString(fp: String): Either[Unit, String] =
     try {
       val bufferedSource = Source.fromFile(fp)
       val js = bufferedSource.getLines().mkString
@@ -31,7 +31,7 @@ object Main {
     s.iterator.drop(n).next()
   }
 
-  def drawPuck(hat: Hat): Option[PlayerKey] = {
+  def drawPuck(hat: Set[Symbol]): Option[Symbol] = {
     if (hat.nonEmpty) {
       Some(random(hat))
     } else {

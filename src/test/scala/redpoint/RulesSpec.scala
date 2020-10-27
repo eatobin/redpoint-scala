@@ -11,7 +11,7 @@ class RulesSpec extends AnyFlatSpec {
   private val pauMcc: Player = Player("Paul McCartney", Vector(GiftPair(giver = Symbol("GeoHar"), givee = Symbol("EriTob"))))
   private val eriTob: Player = Player("Eric Tobin", Vector(GiftPair(giver = Symbol("PaulMcc"), givee = Symbol("KarLav"))))
   private val karLav: Player = Player("Karen Lavengood", Vector(GiftPair(giver = Symbol("EriTob"), givee = Symbol("RinSta"))))
-  private val beatlesPlusPM: Players =
+  private val beatlesPlusPM: Map[Symbol, Player] =
     Map(Symbol("RinSta") -> rinSta, Symbol("JohLen") -> johLen, Symbol("GeoHar") -> geoHar, Symbol("PauMcc") -> pauMcc, Symbol("EriTob") -> eriTob, Symbol("KarLav") -> karLav)
 
   private var beatlesPlus4 = Players.playersAddYear(beatlesPlusPM)

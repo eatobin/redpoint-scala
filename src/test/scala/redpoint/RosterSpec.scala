@@ -11,7 +11,7 @@ class RosterSpec extends AnyFlatSpec {
   private val johLen: Player = Player("John Lennon", Vector(GiftPair(Symbol("PauMcc"), Symbol("RinSta"))))
   private val geoHar: Player = Player("George Harrison", Vector(GiftPair(Symbol("RinSta"), Symbol("PauMcc"))))
   private val pauMcc: Player = Player("Paul McCartney", Vector(GiftPair(Symbol("GeoHar"), Symbol("JohLen"))))
-  private val players: Players =
+  private val players: Map[Symbol, Player] =
     Map(Symbol("RinSta") -> rinSta, Symbol("JohLen") -> johLen, Symbol("GeoHar") -> geoHar, Symbol("PauMcc") -> pauMcc)
   private val roster: Roster = Roster("The Beatles", 2014, players)
 
@@ -26,8 +26,8 @@ class RosterSpec extends AnyFlatSpec {
   }
 
   it should "convert from JSON - or not" in {
-    val rosJson: Either[ErrorString, Roster] = rosterJsonStringToRoster(Right(jsonStringRos))
-    val rosJsonBad: Either[ErrorString, Roster] = rosterJsonStringToRoster(Right(jsBeatlesBad))
+    val rosJson: Either[String, Roster] = rosterJsonStringToRoster(Right(jsonStringRos))
+    val rosJsonBad: Either[String, Roster] = rosterJsonStringToRoster(Right(jsBeatlesBad))
     assert(rosJson == Right(roster))
     assert(rosJsonBad == Left("JSON parse error."))
   }
