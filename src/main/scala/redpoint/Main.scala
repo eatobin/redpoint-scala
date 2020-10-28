@@ -14,7 +14,7 @@ object Main {
   var aRosterYear = 0
   var filePath = "resources/blackhawks.json"
 
-  def readFileIntoString(fp: String): Either[Unit, String] =
+  def readFileIntoString(fp: String): Either[Unit, JsonString] =
     try {
       val bufferedSource = Source.fromFile(fp)
       val js = bufferedSource.getLines().mkString
