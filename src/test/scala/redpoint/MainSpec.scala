@@ -10,7 +10,7 @@ class MainSpec extends AnyFlatSpec {
   private val testHat: Set[Symbol] = Set(Symbol("RinSta"))
 
   "Main" should "return a Roster as a String" in {
-    assert(readFileIntoString(fp) == Right(jsonStringRos))
+    assert(readFileIntoJsonString(fp) == Right(jsonStringRos))
   }
 
   it should "draw a puck" in {
