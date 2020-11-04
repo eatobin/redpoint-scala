@@ -4,8 +4,8 @@ import scala.io.Source
 
 object Main {
   var agYear: Int = 0
-  var aGiver: Option[Symbol] = _
-  var aGivee: Option[Symbol] = _
+  var aGiver: Option[Symbol] = None
+  var aGivee: Option[Symbol] = None
   var aPlayers: Map[Symbol, Player] = Map()
   var agrHat: Set[Symbol] = Set()
   var ageHat: Set[Symbol] = Set()
@@ -59,7 +59,7 @@ object Main {
   }
 
   def startNewYear(): Unit = {
-    aRosterYear = aRosterYear + 1
+    agYear = agYear + 1
     aPlayers = Players.playersAddYear(aPlayers)
     agrHat = Hats.makeHat(aPlayers)
     ageHat = Hats.makeHat(aPlayers)

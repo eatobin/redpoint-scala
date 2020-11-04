@@ -33,4 +33,13 @@ class MainSpec extends AnyFlatSpec {
     assert(drawPuck(testHat).contains(Symbol("RinSta")))
     assert(drawPuck(Set()).isEmpty)
   }
+
+  it should "start a new year" in {
+    agYear = 0
+    aGiver = None
+    aGivee = None
+    rosterOrQuit(fp)
+    startNewYear()
+    assert(agYear == 1)
+  }
 }
