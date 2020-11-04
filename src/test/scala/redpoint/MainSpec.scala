@@ -16,6 +16,7 @@ class MainSpec extends AnyFlatSpec {
   private val players: Map[Symbol, Player] =
     Map(Symbol("RinSta") -> rinSta, Symbol("JohLen") -> johLen, Symbol("GeoHar") -> geoHar, Symbol("PauMcc") -> pauMcc)
 
+  private val rinStaPlus: Player = Player("Ringo Starr", Vector(GiftPair(Symbol("JohLen"), Symbol("GeoHar")), GiftPair(Symbol("RinSta"), Symbol("RinSta"))))
   private val testHat: Set[Symbol] = Set(Symbol("RinSta"))
 
   "Main" should "return a Roster as a String" in {
@@ -41,5 +42,9 @@ class MainSpec extends AnyFlatSpec {
     rosterOrQuit(fp)
     startNewYear()
     assert(agYear == 1)
+    assert(aGiver.isDefined)
+    assert(aGivee.isDefined)
+    assert(rinStaPlus == aPlayers(Symbol("RinSta")))
+    assert(aDiscards.isEmpty)
   }
 }
