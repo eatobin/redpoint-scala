@@ -3,18 +3,18 @@ package redpoint
 import scala.io.Source
 
 object Main {
-  var agYear = 0
+  var agYear: Int = 0
   var aGiver: Symbol = _
   var aGivee: Symbol = _
-  var aPlayers = Map()
-  var agrHat = Set()
-  var ageHat = Set()
-  var aDiscards = Set()
-  var aRosterName = ""
-  var aRosterYear = 0
-  var filePath = "resources/blackhawks.json"
+  var aPlayers: Map[Symbol, Player] = Map()
+  var agrHat: Set[Symbol] = Set()
+  var ageHat: Set[Symbol] = Set()
+  var aDiscards: Set[Symbol] = Set()
+  var aRosterName: String = ""
+  var aRosterYear: Int = 0
+  var filePath: String = "resources/blackhawks.json"
 
-  def readFileIntoJsonString(fp: String): Either[Unit, JsonString] =
+  def readFileIntoJsonString(fp: String): Either[ErrorString, JsonString] =
     try {
       val bufferedSource = Source.fromFile(fp)
       val js = bufferedSource.getLines().mkString
@@ -22,9 +22,28 @@ object Main {
       Right(js)
     } catch {
       case _: Exception =>
-        println("File read error. File: " ++ fp ++ " does not exist.")
-        Left(sys.exit(0))
+        Left("File read error. File: " ++ fp ++ " does not exist.")
     }
+
+  def rosterOrQuit(fp: String): Unit = {
+    val rosterStringEither = readFileIntoJsonString(fp)
+    rosterStringEither match {
+      case Right(rs) =>
+        val rosterEither = Roster.rosterJsonStringToRoster(rs)
+        rosterEither match {
+          case Right(r) =>
+            aRosterName = r.rosterName
+            aRosterYear = r.rosterYear
+            aPlayers = r.players
+          case Left(pe) =>
+            println(pe)
+            sys.exit(0)
+        }
+      case Left(fe) =>
+        println(fe)
+        sys.exit(0)
+    }
+  }
 
   private def random[T](s: Set[T]): T = {
     val n = util.Random.nextInt(s.size)
