@@ -9,8 +9,8 @@ object Roster extends DefaultJsonProtocol {
     try {
       Right(s.parseJson.convertTo[Roster])
     } catch {
-      case _: Exception =>
-        Left("JSON parse error.")
+      case e: Exception =>
+        Left(e.getMessage)
     }
   }
 
