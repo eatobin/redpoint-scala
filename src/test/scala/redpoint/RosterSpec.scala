@@ -26,10 +26,11 @@ class RosterSpec extends AnyFlatSpec {
   }
 
   it should "convert from JSON - or not" in {
-    val rosJson: Either[String, Roster] = rosterJsonStringToRoster(jsonStringRos)
-    val rosJsonBad: Either[String, Roster] = rosterJsonStringToRoster(jsBeatlesBad)
+    val rosJson: Either[String, Roster] = rosterJsonStringToRoster(Right(jsonStringRos))
+    val rosJsonBad: Either[String, Roster] = rosterJsonStringToRoster(Right(jsBeatlesBad))
     assert(rosJson == Right(roster))
-    assert(rosJsonBad == Left("""Unexpected character '"' at input index 13 (line 1, position 14), expected ':':
+    assert(rosJsonBad == Left(
+      """Unexpected character '"' at input index 13 (line 1, position 14), expected ':':
 {"rosterName""The Beatles","rosterYear":2014,"players":{"PauMcc":{"playerName":"Paul McCartney","giftHistory":[{"givee":"GeoHar","giver":"JohLen"}]},"GeoHar":{"playerName":"George Harrison","giftHistory":[{"givee":"RinSta","giver":"PauMcc"}]},"JohLen":{"playerName":"John Lennon","giftHistory":[{"givee":"PauMcc","giver":"RinSta"}]},"RinSta":{"playerName":"Ringo Starr","giftHistory":[{"givee":"JohLen","giver":"GeoHar"}]}}}
              ^
 """))

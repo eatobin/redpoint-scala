@@ -21,15 +21,15 @@ object Main {
       bufferedSource.close
       Right(js)
     } catch {
-      case _: Exception =>
-        Left("File read error. File: " ++ fp ++ " does not exist.")
+      case e: Exception =>
+        Left(e.getMessage)
     }
 
   def rosterOrQuit(fp: String): Unit = {
     val rosterStringEither = readFileIntoJsonString(fp)
     rosterStringEither match {
       case Right(rs) =>
-        val rosterEither = Roster.rosterJsonStringToRoster(rs)
+        val rosterEither = Roster.rosterJsonStringToRoster(Right(rs))
         rosterEither match {
           case Right(r) =>
             aRosterName = r.rosterName
@@ -37,11 +37,9 @@ object Main {
             aPlayers = r.players
           case Left(pe) =>
             println(pe)
-            sys.exit(0)
         }
       case Left(fe) =>
         println(fe)
-        sys.exit(0)
     }
   }
 
