@@ -1,13 +1,14 @@
 package redpoint
 
 import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers.{a, convertToAnyShouldWrapper}
 import redpoint.Main._
 
 class MainSpec extends AnyFlatSpec {
 
-  private val fp = "src/test/resources/beatles.json"
-
-  private val jsonStringRos: String = "{  \"rosterName\": \"The Beatles\",  \"rosterYear\": 2014,  \"players\": {    \"PauMcc\": {      \"playerName\": \"Paul McCartney\",      \"giftHistory\": [        {          \"givee\": \"GeoHar\",          \"giver\": \"JohLen\"        }      ]    },    \"GeoHar\": {      \"playerName\": \"George Harrison\",      \"giftHistory\": [        {          \"givee\": \"RinSta\",          \"giver\": \"PauMcc\"        }      ]    },    \"JohLen\": {      \"playerName\": \"John Lennon\",      \"giftHistory\": [        {          \"givee\": \"PauMcc\",          \"giver\": \"RinSta\"        }      ]    },    \"RinSta\": {      \"playerName\": \"Ringo Starr\",      \"giftHistory\": [        {          \"givee\": \"JohLen\",          \"giver\": \"GeoHar\"        }      ]    }  }}"
+  private val filePath: String = "src/test/resources/beatles.json"
+  private val badFilePath: String = "nope.json"
+  private val badJsonFile: String = "src/test/resources/bad-json.json"
 
   private val rinSta: Player = Player("Ringo Starr", Vector(GiftPair(Symbol("JohLen"), Symbol("GeoHar"))))
   private val johLen: Player = Player("John Lennon", Vector(GiftPair(Symbol("PauMcc"), Symbol("RinSta"))))
@@ -19,15 +20,19 @@ class MainSpec extends AnyFlatSpec {
   private val rinStaPlus: Player = Player("Ringo Starr", Vector(GiftPair(Symbol("JohLen"), Symbol("GeoHar")), GiftPair(Symbol("RinSta"), Symbol("RinSta"))))
   private val testHat: Set[Symbol] = Set(Symbol("RinSta"))
 
-  "Main" should "return a Roster as a String" in {
-    assert(readFileIntoJsonString(fp) == Right(jsonStringRos))
-  }
-
-  it should "build a Roster" in {
-    rosterOrQuit(fp)
+  "Main" should "build a Roster" in {
+    rosterOrQuit(filePath)
     assert(aRosterName == "The Beatles")
     assert(aRosterYear == 2014)
     assert(aPlayers == players)
+  }
+
+  it should "detect a bad file path" in {
+    rosterOrQuit(badFilePath) shouldBe a[Unit]
+  }
+
+  it should "detect a bad JSON parse" in {
+    rosterOrQuit(badJsonFile) shouldBe a[Unit]
   }
 
   it should "draw a puck" in {
@@ -39,7 +44,7 @@ class MainSpec extends AnyFlatSpec {
     agYear = 0
     aGiver = None
     aGivee = None
-    rosterOrQuit(fp)
+    rosterOrQuit(filePath)
     startNewYear()
     assert(agYear == 1)
     assert(aGiver.isDefined)
