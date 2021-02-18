@@ -1,48 +1,51 @@
 package redpoint
 
-//import redpoint.GiftHistory.{giftHistoryAddYear, giftHistoryUpdateGiftHistory}
-//import redpoint.GiftPair.{giftPairUpdateGivee, giftPairUpdateGiver}
-//import redpoint.Player.playerUpdateGiftHistory
-//import spray.json._
-//
-//object Players extends DefaultJsonProtocol {
-//  def playersUpdatePlayer(players: Map[Symbol, Player], playerKey: Symbol, player: Player): Map[Symbol, Player] =
-//    players.updated(playerKey, player)
-//
-//  def playersGetPlayerName(players: Map[Symbol, Player], playerKey: Symbol): String =
-//    players(playerKey).playerName
-//
-//  def playersAddYear(players: Map[Symbol, Player]): Map[Symbol, Player] = {
-//    val nplrs = for ((playerKey, player) <- players) yield {
-//      val gh = player.giftHistory
-//      val ngh = giftHistoryAddYear(gh, playerKey)
-//      val nplr = playerUpdateGiftHistory(player, ngh)
-//      playerKey -> nplr
-//    }
-//    nplrs
-//  }
-//
-//  def playersGetGivee(players: Map[Symbol, Player], playerKey: Symbol, giftYear: Int): Symbol =
-//    players(playerKey).giftHistory(giftYear).givee
-//
-//  def playersGetGiver(players: Map[Symbol, Player], playerKey: Symbol, giftYear: Int): Symbol =
-//    players(playerKey).giftHistory(giftYear).giver
-//
-//  private def playersSetGiftPair(players: Map[Symbol, Player], playerKey: Symbol, giftYear: Int, giftPair: GiftPair): Map[Symbol, Player] = {
-//    val ngh = giftHistoryUpdateGiftHistory(players(playerKey).giftHistory, giftYear, giftPair)
-//    val nplr = playerUpdateGiftHistory(players(playerKey), ngh)
-//    playersUpdatePlayer(players, playerKey, nplr)
-//  }
-//
-//  def playersUpdateGivee(players: Map[Symbol, Player], playerKey: Symbol, giftYear: Int, givee: Symbol): Map[Symbol, Player] = {
-//    val ngp = giftPairUpdateGivee(players(playerKey).giftHistory(giftYear), givee)
-//    playersSetGiftPair(players, playerKey, giftYear, ngp)
-//  }
-//
-//  def playersUpdateGiver(players: Map[Symbol, Player], playerKey: Symbol, giftYear: Int, giver: Symbol): Map[Symbol, Player] = {
-//    val ngp = giftPairUpdateGiver(players(playerKey).giftHistory(giftYear), giver)
-//    playersSetGiftPair(players, playerKey, giftYear, ngp)
-//  }
-//
-//  def playersJsonStringToPlayers(plrsString: String): Map[Symbol, Player] = plrsString.parseJson.convertTo[Map[Symbol, Player]]
-//}
+import io.circe.Error
+import io.circe.generic.decoding.DerivedDecoder.deriveDecoder
+import io.circe.parser._
+import redpoint.GiftHistory.{giftHistoryAddYear, giftHistoryUpdateGiftHistory}
+import redpoint.GiftPair.{giftPairUpdateGivee, giftPairUpdateGiver}
+import redpoint.Player.playerUpdateGiftHistory
+
+object Players {
+  def playersUpdatePlayer(players: Map[String, Player], playerKey: String, player: Player): Map[String, Player] =
+    players.updated(playerKey, player)
+
+  def playersGetPlayerName(players: Map[String, Player], playerKey: String): String =
+    players(playerKey).playerName
+
+  def playersAddYear(players: Map[String, Player]): Map[String, Player] = {
+    val nplrs = for ((playerKey, player) <- players) yield {
+      val gh = player.giftHistory
+      val ngh = giftHistoryAddYear(gh, playerKey)
+      val nplr = playerUpdateGiftHistory(player, ngh)
+      playerKey -> nplr
+    }
+    nplrs
+  }
+
+  def playersGetGivee(players: Map[String, Player], playerKey: String, giftYear: Int): String =
+    players(playerKey).giftHistory(giftYear).givee
+
+  def playersGetGiver(players: Map[String, Player], playerKey: String, giftYear: Int): String =
+    players(playerKey).giftHistory(giftYear).giver
+
+  private def playersSetGiftPair(players: Map[String, Player], playerKey: String, giftYear: Int, giftPair: GiftPair): Map[String, Player] = {
+    val ngh = giftHistoryUpdateGiftHistory(players(playerKey).giftHistory, giftYear, giftPair)
+    val nplr = playerUpdateGiftHistory(players(playerKey), ngh)
+    playersUpdatePlayer(players, playerKey, nplr)
+  }
+
+  def playersUpdateGivee(players: Map[String, Player], playerKey: String, giftYear: Int, givee: String): Map[String, Player] = {
+    val ngp = giftPairUpdateGivee(players(playerKey).giftHistory(giftYear), givee)
+    playersSetGiftPair(players, playerKey, giftYear, ngp)
+  }
+
+  def playersUpdateGiver(players: Map[String, Player], playerKey: String, giftYear: Int, giver: String): Map[String, Player] = {
+    val ngp = giftPairUpdateGiver(players(playerKey).giftHistory(giftYear), giver)
+    playersSetGiftPair(players, playerKey, giftYear, ngp)
+  }
+
+  def playersJsonStringToPlayers(plrsString: String): Either[Error, Map[String, Player]] =
+    decode[Map[String, Player]](plrsString)
+}
