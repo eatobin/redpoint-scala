@@ -1,15 +1,16 @@
 package redpoint
 
-import spray.json._
+import io.circe.Error
+import io.circe.generic.auto._
+import io.circe.parser._
 
-case class GiftPair(givee: Symbol, giver: Symbol)
+case class GiftPair(givee: String, giver: String)
 
-object GiftPair extends DefaultJsonProtocol {
-  def giftPairUpdateGivee(giftPair: GiftPair, newGivee: Symbol): GiftPair = giftPair.copy(givee = newGivee)
+object GiftPair {
+  def giftPairUpdateGivee(giftPair: GiftPair, newGivee: String): GiftPair = giftPair.copy(givee = newGivee)
 
-  def giftPairUpdateGiver(giftPair: GiftPair, newGiver: Symbol): GiftPair = giftPair.copy(giver = newGiver)
+  def giftPairUpdateGiver(giftPair: GiftPair, newGiver: String): GiftPair = giftPair.copy(giver = newGiver)
 
-  def giftPairJsonStringToGiftPair(gpString: String): GiftPair = gpString.parseJson.convertTo[GiftPair]
-
-  implicit val giftPairFormat: RootJsonFormat[GiftPair] = jsonFormat2(GiftPair.apply)
+  def giftPairJsonStringToGiftPair(gpString: String): Either[Error, GiftPair] =
+    decode[GiftPair](gpString)
 }
