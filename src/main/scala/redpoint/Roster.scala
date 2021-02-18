@@ -9,18 +9,13 @@ object Roster {
   def rosterJsonStringToRoster(s: Either[ErrorString, JsonString]): Either[ErrorString, Roster] = {
     s match {
       case Right(rFile) =>
-        try {
-          val res = decode[Roster](rFile)
-          res match {
-            case Right(rDecode) => Right(rDecode)
-            case Left(lDecode) => Left(lDecode.toString)
-          }
-        } catch {
-          case eFile: Exception =>
-            Left(eFile.getMessage)
+        val res = decode[Roster](rFile)
+        res match {
+          case Right(rDecode) => Right(rDecode)
+          case Left(lDecode) => Left(lDecode.toString)
         }
-      case Left(l) =>
-        Left(l)
+      case Left(lFile) =>
+        Left(lFile)
     }
   }
 }
