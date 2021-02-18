@@ -1,6 +1,5 @@
 package redpoint
 
-import io.circe.Error
 import org.scalatest.flatspec.AnyFlatSpec
 import redpoint.Roster._
 
@@ -8,12 +7,12 @@ class RosterSpec extends AnyFlatSpec {
 
   private val jsonStringRos: String = "{\"rosterName\":\"The Beatles\",\"rosterYear\":2014,\"players\":{\"PauMcc\":{\"playerName\":\"Paul McCartney\",\"giftHistory\":[{\"givee\":\"GeoHar\",\"giver\":\"JohLen\"}]},\"GeoHar\":{\"playerName\":\"George Harrison\",\"giftHistory\":[{\"givee\":\"RinSta\",\"giver\":\"PauMcc\"}]},\"JohLen\":{\"playerName\":\"John Lennon\",\"giftHistory\":[{\"givee\":\"PauMcc\",\"giver\":\"RinSta\"}]},\"RinSta\":{\"playerName\":\"Ringo Starr\",\"giftHistory\":[{\"givee\":\"JohLen\",\"giver\":\"GeoHar\"}]}}}"
 
-  private val rinSta: Player = Player("Ringo Starr", Vector(GiftPair(Symbol("JohLen"), Symbol("GeoHar"))))
-  private val johLen: Player = Player("John Lennon", Vector(GiftPair(Symbol("PauMcc"), Symbol("RinSta"))))
-  private val geoHar: Player = Player("George Harrison", Vector(GiftPair(Symbol("RinSta"), Symbol("PauMcc"))))
-  private val pauMcc: Player = Player("Paul McCartney", Vector(GiftPair(Symbol("GeoHar"), Symbol("JohLen"))))
-  private val players: Map[Symbol, Player] =
-    Map(Symbol("RinSta") -> rinSta, Symbol("JohLen") -> johLen, Symbol("GeoHar") -> geoHar, Symbol("PauMcc") -> pauMcc)
+  private val rinSta: Player = Player("Ringo Starr", Vector(GiftPair("JohLen", "GeoHar")))
+  private val johLen: Player = Player("John Lennon", Vector(GiftPair("PauMcc", "RinSta")))
+  private val geoHar: Player = Player("George Harrison", Vector(GiftPair("RinSta", "PauMcc")))
+  private val pauMcc: Player = Player("Paul McCartney", Vector(GiftPair("GeoHar", "JohLen")))
+  private val players: Map[String, Player] =
+    Map("RinSta" -> rinSta, "JohLen" -> johLen, "GeoHar" -> geoHar, "PauMcc" -> pauMcc)
   private val roster: Roster = Roster("The Beatles", 2014, players)
 
   private val jsBeatlesBad: String = "{\"rosterName\"\"The Beatles\",\"rosterYear\":2014,\"players\":{\"PauMcc\":{\"playerName\":\"Paul McCartney\",\"giftHistory\":[{\"givee\":\"GeoHar\",\"giver\":\"JohLen\"}]},\"GeoHar\":{\"playerName\":\"George Harrison\",\"giftHistory\":[{\"givee\":\"RinSta\",\"giver\":\"PauMcc\"}]},\"JohLen\":{\"playerName\":\"John Lennon\",\"giftHistory\":[{\"givee\":\"PauMcc\",\"giver\":\"RinSta\"}]},\"RinSta\":{\"playerName\":\"Ringo Starr\",\"giftHistory\":[{\"givee\":\"JohLen\",\"giver\":\"GeoHar\"}]}}}"
@@ -30,10 +29,6 @@ class RosterSpec extends AnyFlatSpec {
     val rosJson: Either[String, Roster] = rosterJsonStringToRoster(Right(jsonStringRos))
     val rosJsonBad: Either[String, Roster] = rosterJsonStringToRoster(Right(jsBeatlesBad))
     assert(rosJson == Right(roster))
-    assert(rosJsonBad == Left(
-      """Unexpected character '"' at input index 13 (line 1, position 14), expected ':':
-{"rosterName""The Beatles","rosterYear":2014,"players":{"PauMcc":{"playerName":"Paul McCartney","giftHistory":[{"givee":"GeoHar","giver":"JohLen"}]},"GeoHar":{"playerName":"George Harrison","giftHistory":[{"givee":"RinSta","giver":"PauMcc"}]},"JohLen":{"playerName":"John Lennon","giftHistory":[{"givee":"PauMcc","giver":"RinSta"}]},"RinSta":{"playerName":"Ringo Starr","giftHistory":[{"givee":"JohLen","giver":"GeoHar"}]}}}
-             ^
-"""))
+    assert(rosJsonBad == Left("""io.circe.ParsingFailure: expected : got '"The B...' (line 1, column 14)"""))
   }
 }

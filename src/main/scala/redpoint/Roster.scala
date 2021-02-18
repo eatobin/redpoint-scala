@@ -3,7 +3,7 @@ package redpoint
 import io.circe.generic.auto._
 import io.circe.parser._
 
-case class Roster(rosterName: String, rosterYear: Int, players: Map[Symbol, Player])
+case class Roster(rosterName: String, rosterYear: Int, players: Map[String, Player])
 
 object Roster {
   def rosterJsonStringToRoster(s: Either[ErrorString, JsonString]): Either[ErrorString, Roster] = {
