@@ -65,4 +65,12 @@ object Main {
     aGivee = drawPuck(ageHat)
     aDiscards = Set()
   }
+
+  def selectNewGiver(): Unit = ???
+
+  // (swap! a-gr-hat hat/remove-puck (deref a-giver))
+  // (swap! a-ge-hat hat/return-discards (deref a-discards))
+  // (reset! a-discards #{})
+  // (reset! a-giver (draw-puck (deref a-gr-hat)))
+  // (reset! a-givee (draw-puck (deref a-ge-hat))))
 }
