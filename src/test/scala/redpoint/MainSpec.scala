@@ -52,4 +52,17 @@ class MainSpec extends AnyFlatSpec {
     assert(rinStaPlus == aPlayers("RinSta"))
     assert(aDiscards.isEmpty)
   }
+
+  it should "select a new giver" in {
+    agYear = 0
+    maybeGiver = None
+    maybeGivee = None
+    rosterOrQuit(filePath)
+    startNewYear()
+    aDiscards = Hats.discardGivee(aDiscards, "GeoHar")
+    assert(aDiscards.size == 1)
+    selectNewGiver()
+    assert(agrHat.size == 3)
+    assert(aDiscards.isEmpty)
+  }
 }
