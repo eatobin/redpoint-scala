@@ -4,8 +4,8 @@ import scala.io.Source
 
 object Main {
   var agYear: Int = 0
-  var aGiver: Option[String] = None
-  var aGivee: Option[String] = None
+  var maybeGiver: Option[String] = None
+  var maybeGivee: Option[String] = None
   var aPlayers: Map[String, Player] = Map()
   var agrHat: Set[String] = Set()
   var ageHat: Set[String] = Set()
@@ -61,16 +61,19 @@ object Main {
     aPlayers = Players.playersAddYear(aPlayers)
     agrHat = Hats.makeHat(aPlayers)
     ageHat = Hats.makeHat(aPlayers)
-    aGiver = drawPuck(agrHat)
-    aGivee = drawPuck(ageHat)
+    maybeGiver = drawPuck(agrHat)
+    maybeGivee = drawPuck(ageHat)
     aDiscards = Set()
   }
 
-  def selectNewGiver(): Unit = ???
-
-  // (swap! a-gr-hat hat/remove-puck (deref a-giver))
-  // (swap! a-ge-hat hat/return-discards (deref a-discards))
-  // (reset! a-discards #{})
-  // (reset! a-giver (draw-puck (deref a-gr-hat)))
-  // (reset! a-givee (draw-puck (deref a-ge-hat))))
+  def selectNewGiver(): Unit = {
+    maybeGiver match {
+      case Some(giver) => agrHat = Hats.removePuck(agrHat, giver)
+      case None =>
+    }
+    ageHat = Hats.returnDiscards(ageHat, aDiscards)
+    aDiscards = Set()
+    maybeGiver = drawPuck(agrHat)
+    maybeGivee = drawPuck(ageHat)
+  }
 }

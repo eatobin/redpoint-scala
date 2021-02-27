@@ -42,13 +42,13 @@ class MainSpec extends AnyFlatSpec {
 
   it should "start a new year" in {
     agYear = 0
-    aGiver = None
-    aGivee = None
+    maybeGiver = None
+    maybeGivee = None
     rosterOrQuit(filePath)
     startNewYear()
     assert(agYear == 1)
-    assert(aGiver.isDefined)
-    assert(aGivee.isDefined)
+    assert(maybeGiver.isDefined)
+    assert(maybeGivee.isDefined)
     assert(rinStaPlus == aPlayers("RinSta"))
     assert(aDiscards.isEmpty)
   }
