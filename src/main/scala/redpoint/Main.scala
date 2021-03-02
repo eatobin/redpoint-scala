@@ -67,13 +67,27 @@ object Main {
   }
 
   def selectNewGiver(): Unit = {
-    maybeGiver match {
-      case Some(giver) => agrHat = Hats.removePuck(agrHat, giver)
-      case None =>
-    }
+    val giver: String = maybeGiver.get
+    agrHat = Hats.removePuck(agrHat, giver)
     ageHat = Hats.returnDiscards(ageHat, aDiscards)
     aDiscards = Set()
     maybeGiver = drawPuck(agrHat)
     maybeGivee = drawPuck(ageHat)
+  }
+
+  //  (defn givee-is-success
+  //    []
+  //      (swap! a-players plrs/players-update-givee (deref a-giver) (deref a-g-year) (deref a-givee))
+  //      (swap! a-players plrs/players-update-giver (deref a-givee) (deref a-g-year) (deref a-giver))
+  //      (swap! a-ge-hat hat/remove-puck (deref a-givee))
+  //      (reset! a-givee nil))
+
+  def giveeIsSuccess(): Unit = {
+    val giver: String = maybeGiver.get
+    val givee: String = maybeGivee.get
+    aPlayers = Players.playersUpdateGivee(aPlayers, giver, agYear, givee)
+    aPlayers = Players.playersUpdateGiver(aPlayers, givee, agYear, giver)
+    ageHat = Hats.removePuck(ageHat, givee)
+    maybeGivee = None
   }
 }

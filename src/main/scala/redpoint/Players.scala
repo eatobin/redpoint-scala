@@ -36,14 +36,14 @@ object Players {
     playersUpdatePlayer(players, playerKey, nplr)
   }
 
-  def playersUpdateGivee(players: Map[String, Player], playerKey: String, giftYear: Int, givee: String): Map[String, Player] = {
-    val ngp = giftPairUpdateGivee(players(playerKey).giftHistory(giftYear), givee)
-    playersSetGiftPair(players, playerKey, giftYear, ngp)
+  def playersUpdateGivee(players: Map[String, Player], giver: String, giftYear: Int, givee: String): Map[String, Player] = {
+    val ngp = giftPairUpdateGivee(players(giver).giftHistory(giftYear), givee)
+    playersSetGiftPair(players, giver, giftYear, ngp)
   }
 
-  def playersUpdateGiver(players: Map[String, Player], playerKey: String, giftYear: Int, giver: String): Map[String, Player] = {
-    val ngp = giftPairUpdateGiver(players(playerKey).giftHistory(giftYear), giver)
-    playersSetGiftPair(players, playerKey, giftYear, ngp)
+  def playersUpdateGiver(players: Map[String, Player], givee: String, giftYear: Int, giver: String): Map[String, Player] = {
+    val ngp = giftPairUpdateGiver(players(givee).giftHistory(giftYear), giver)
+    playersSetGiftPair(players, givee, giftYear, ngp)
   }
 
   def playersJsonStringToPlayers(plrsString: String): Either[Error, Map[String, Player]] =
