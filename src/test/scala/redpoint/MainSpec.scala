@@ -65,4 +65,29 @@ class MainSpec extends AnyFlatSpec {
     assert(agrHat.size == 3)
     assert(aDiscards.isEmpty)
   }
+
+  it should "have a successful givee" in {
+    agYear = 0
+    maybeGiver = None
+    maybeGivee = None
+    rosterOrQuit(filePath)
+    startNewYear()
+
+  }
+
+//  (deftest givee-is-success-test
+//  (reset! core/a-g-year 0)
+//  (reset! core/a-giver nil)
+//  (reset! core/a-givee nil)
+//  (core/roster-or-quit "resources-test/beatles.json")
+//  (core/start-new-year)
+//  (let [temp-ge (deref core/a-givee)]
+//  (core/givee-is-success)
+//  (is (= temp-ge
+//  (plrs/players-get-givee (deref core/a-players) (deref core/a-giver) (deref core/a-g-year))))
+//  (is (= (deref core/a-giver)
+//    (plrs/players-get-giver (deref core/a-players) temp-ge (deref core/a-g-year))))
+//  (is (= nil
+//  (some #{temp-ge} (deref core/a-ge-hat))))))
+
 }
