@@ -72,22 +72,26 @@ class MainSpec extends AnyFlatSpec {
     maybeGivee = None
     rosterOrQuit(filePath)
     startNewYear()
+    val tempGe = maybeGivee.get
+    val giver = maybeGiver.get
+    giveeIsSuccess()
+    assert(Players.playersGetGivee(aPlayers, giver, agYear) == tempGe)
 
   }
 
-//  (deftest givee-is-success-test
-//  (reset! core/a-g-year 0)
-//  (reset! core/a-giver nil)
-//  (reset! core/a-givee nil)
-//  (core/roster-or-quit "resources-test/beatles.json")
-//  (core/start-new-year)
-//  (let [temp-ge (deref core/a-givee)]
-//  (core/givee-is-success)
-//  (is (= temp-ge
-//  (plrs/players-get-givee (deref core/a-players) (deref core/a-giver) (deref core/a-g-year))))
-//  (is (= (deref core/a-giver)
-//    (plrs/players-get-giver (deref core/a-players) temp-ge (deref core/a-g-year))))
-//  (is (= nil
-//  (some #{temp-ge} (deref core/a-ge-hat))))))
+  //  (deftest givee-is-success-test
+  //  (reset! core/a-g-year 0)
+  //  (reset! core/a-giver nil)
+  //  (reset! core/a-givee nil)
+  //  (core/roster-or-quit "resources-test/beatles.json")
+  //  (core/start-new-year)
+  //  (let [temp-ge (deref core/a-givee)]
+  //  (core/givee-is-success)
+  //  (is (= temp-ge
+  //  (plrs/players-get-givee (deref core/a-players) (deref core/a-giver) (deref core/a-g-year))))
+  //  (is (= (deref core/a-giver)
+  //    (plrs/players-get-giver (deref core/a-players) temp-ge (deref core/a-g-year))))
+  //  (is (= nil
+  //  (some #{temp-ge} (deref core/a-ge-hat))))))
 
 }

@@ -24,11 +24,11 @@ object Players {
     nplrs
   }
 
-  def playersGetGivee(players: Map[String, Player], playerKey: String, giftYear: Int): String =
-    players(playerKey).giftHistory(giftYear).givee
+  def playersGetGivee(players: Map[String, Player], giver: String, giftYear: Int): String =
+    players(giver).giftHistory(giftYear).givee
 
-  def playersGetGiver(players: Map[String, Player], playerKey: String, giftYear: Int): String =
-    players(playerKey).giftHistory(giftYear).giver
+  def playersGetGiver(players: Map[String, Player], givee: String, giftYear: Int): String =
+    players(givee).giftHistory(giftYear).giver
 
   private def playersSetGiftPair(players: Map[String, Player], playerKey: String, giftYear: Int, giftPair: GiftPair): Map[String, Player] = {
     val ngh = giftHistoryUpdateGiftHistory(players(playerKey).giftHistory, giftYear, giftPair)
