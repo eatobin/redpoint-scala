@@ -1,5 +1,6 @@
 package redpoint
 
+import io.circe.Error
 import io.circe.generic.auto._
 import io.circe.parser._
 
@@ -9,7 +10,7 @@ object Roster {
   def rosterJsonStringToRoster(s: Either[ErrorString, JsonString]): Either[ErrorString, Roster] = {
     s match {
       case Right(rFile) =>
-        val res = decode[Roster](rFile)
+        val res: Either[Error, Roster] = decode[Roster](rFile)
         res match {
           case Right(rDecode) => Right(rDecode)
           case Left(lDecode) => Left(lDecode.toString)
