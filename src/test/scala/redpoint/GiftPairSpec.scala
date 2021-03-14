@@ -6,7 +6,7 @@ import redpoint.GiftPair._
 
 class GiftPairSpec extends AnyFlatSpec {
 
-  private val jsonStringGP: String = "{\"givee\":\"GeoHar\",\"giver\":\"JohLen\"}"
+  private val jsonStringGP: JsonString = "{\"givee\":\"GeoHar\",\"giver\":\"JohLen\"}"
   private val giftPair: GiftPair = GiftPair("GeoHar", "JohLen")
 
   "A GiftPair" should "update a giver/givee" in {

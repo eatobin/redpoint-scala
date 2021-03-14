@@ -29,7 +29,7 @@ object Main {
     val rosterStringEither = readFileIntoJsonString(fp)
     rosterStringEither match {
       case Right(rs) =>
-        val rosterEither = Roster.rosterJsonStringToRoster(Right(rs))
+        val rosterEither: Either[ErrorString, Roster] = Roster.rosterJsonStringToRoster(Right(rs))
         rosterEither match {
           case Right(r) =>
             aRosterName = r.rosterName

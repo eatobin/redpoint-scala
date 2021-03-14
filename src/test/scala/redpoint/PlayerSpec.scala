@@ -6,7 +6,7 @@ import redpoint.Player._
 
 class PlayerSpec extends AnyFlatSpec {
 
-  private val jsonStringPlr: String = "{\"playerName\":\"Paul McCartney\",\"giftHistory\":[{\"givee\":\"GeoHar\",\"giver\":\"JohLen\"}]}"
+  private val jsonStringPlr: JsonString = "{\"playerName\":\"Paul McCartney\",\"giftHistory\":[{\"givee\":\"GeoHar\",\"giver\":\"JohLen\"}]}"
   private val player: Player = Player("Paul McCartney", Vector(GiftPair("GeoHar", "JohLen")))
 
   "A Player" should "return an updated giftHistory" in {

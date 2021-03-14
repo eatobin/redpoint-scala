@@ -6,7 +6,7 @@ import redpoint.GiftHistory._
 
 class GiftHistorySpec extends AnyFlatSpec {
 
-  private val jsonStringGH: String = "[{\"givee\":\"GeoHar\",\"giver\":\"JohLen\"}]"
+  private val jsonStringGH: JsonString = "[{\"givee\":\"GeoHar\",\"giver\":\"JohLen\"}]"
   private val giftHistory: Vector[GiftPair] = Vector(GiftPair("GeoHar", "JohLen"))
 
   "A GiftHistory" should "add a new year" in {
