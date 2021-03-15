@@ -18,4 +18,9 @@ class GiftPairSpec extends AnyFlatSpec {
     val gpJson: Either[Error, GiftPair] = giftPairJsonStringToGiftPair(jsonStringGP)
     assert(gpJson == Right(giftPair))
   }
+
+  it should "convert to JSON" in {
+    val gpJson: JsonString = giftPairToJsonString(giftPair)
+    assert(gpJson == jsonStringGP)
+  }
 }
