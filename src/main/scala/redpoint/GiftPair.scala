@@ -8,9 +8,9 @@ import io.circe.syntax.EncoderOps
 case class GiftPair(givee: String, giver: String)
 
 object GiftPair {
-  def giftPairUpdateGivee(giftPair: GiftPair)(newGivee: String): GiftPair = giftPair.copy(givee = newGivee)
+  def giftPairUpdateGivee(newGivee: String)(giftPair: GiftPair): GiftPair = giftPair.copy(givee = newGivee)
 
-  def giftPairUpdateGiver(giftPair: GiftPair)(newGiver: String): GiftPair = giftPair.copy(giver = newGiver)
+  def giftPairUpdateGiver(newGiver: String)(giftPair: GiftPair): GiftPair = giftPair.copy(giver = newGiver)
 
   def giftPairJsonStringToGiftPair(gpString: JsonString): Either[Error, GiftPair] =
     decode[GiftPair](gpString)
