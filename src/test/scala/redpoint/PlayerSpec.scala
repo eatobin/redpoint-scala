@@ -2,7 +2,6 @@ package redpoint
 
 import io.circe.Error
 import org.scalatest.flatspec.AnyFlatSpec
-import redpoint.Player._
 
 class PlayerSpec extends AnyFlatSpec {
 
@@ -10,17 +9,17 @@ class PlayerSpec extends AnyFlatSpec {
   private val player: Player = Player("Paul McCartney", Vector(GiftPair("GeoHar", "JohLen")))
 
   "A Player" should "return an updated giftHistory" in {
-    assert(playerUpdateGiftHistory(Vector(GiftPair("nope", "yup")), player) ==
+    assert(Player.updateGiftHistory(Vector(GiftPair("nope", "yup")), player) ==
       Player("Paul McCartney", Vector(GiftPair("nope", "yup"))))
   }
 
   it should "convert from JSON" in {
-    val plrJson: Either[Error, Player] = playerJsonStringToPlayer(jsonStringPlr)
+    val plrJson: Either[Error, Player] = Player.jsonStringToPlayer(jsonStringPlr)
     assert(plrJson == Right(player))
   }
 
   it should "convert to JSON" in {
-    val plrJson: JsonString = playerToJsonString(player)
+    val plrJson: JsonString = Player.playerToJsonString(player)
     assert(plrJson == jsonStringPlr)
   }
 }
