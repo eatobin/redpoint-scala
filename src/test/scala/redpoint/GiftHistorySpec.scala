@@ -2,7 +2,6 @@ package redpoint
 
 import io.circe.Error
 import org.scalatest.flatspec.AnyFlatSpec
-import redpoint.GiftHistory._
 
 class GiftHistorySpec extends AnyFlatSpec {
 
@@ -10,20 +9,20 @@ class GiftHistorySpec extends AnyFlatSpec {
   private val giftHistory: Vector[GiftPair] = Vector(GiftPair("GeoHar", "JohLen"))
 
   "A GiftHistory" should "add a new year" in {
-    assert(giftHistoryAddYear("NewBee")(giftHistory) == Vector(GiftPair("GeoHar", "JohLen"), GiftPair("NewBee", "NewBee")))
+    assert(GiftHistory.addYear("NewBee")(giftHistory) == Vector(GiftPair("GeoHar", "JohLen"), GiftPair("NewBee", "NewBee")))
   }
 
   it should "return an updated giftHistory" in {
-    assert(giftHistoryUpdateGiftHistory(0)(GiftPair("me", "you"))(giftHistory) == Vector(GiftPair("me", "you")))
+    assert(GiftHistory.updateGiftHistory(0)(GiftPair("me", "you"))(giftHistory) == Vector(GiftPair("me", "you")))
   }
 
   it should "convert from JSON" in {
-    val ghJson: Either[Error, Vector[GiftPair]] = giftHistoryJsonStringToGiftHistory(jsonStringGH)
+    val ghJson: Either[Error, Vector[GiftPair]] = GiftHistory.jsonStringToGiftHistory(jsonStringGH)
     assert(ghJson == Right(giftHistory))
   }
 
   it should "convert to JSON" in {
-    val ghJson: JsonString = giftHistoryToJsonString(giftHistory)
+    val ghJson: JsonString = GiftHistory.giftHistoryToJsonString(giftHistory)
     assert(ghJson == jsonStringGH)
   }
 }

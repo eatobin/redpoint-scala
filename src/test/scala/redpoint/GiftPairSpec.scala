@@ -2,7 +2,6 @@ package redpoint
 
 import io.circe.Error
 import org.scalatest.flatspec.AnyFlatSpec
-import redpoint.GiftPair._
 
 class GiftPairSpec extends AnyFlatSpec {
 
@@ -10,17 +9,17 @@ class GiftPairSpec extends AnyFlatSpec {
   private val giftPair: GiftPair = GiftPair("GeoHar", "JohLen")
 
   "A GiftPair" should "update a giver/givee" in {
-    assert(giftPairUpdateGivee("NewBee")(giftPair) == GiftPair("NewBee", "JohLen"))
-    assert(giftPairUpdateGiver("NewBee")(giftPair) == GiftPair("GeoHar", "NewBee"))
+    assert(GiftPair.updateGivee("NewBee")(giftPair) == GiftPair("NewBee", "JohLen"))
+    assert(GiftPair.updateGiver("NewBee")(giftPair) == GiftPair("GeoHar", "NewBee"))
   }
 
   it should "convert from JSON" in {
-    val gpJson: Either[Error, GiftPair] = giftPairJsonStringToGiftPair(jsonStringGP)
+    val gpJson: Either[Error, GiftPair] = GiftPair.jsonStringToGiftPair(jsonStringGP)
     assert(gpJson == Right(giftPair))
   }
 
   it should "convert to JSON" in {
-    val gpJson: JsonString = giftPairToJsonString(giftPair)
+    val gpJson: JsonString = GiftPair.giftPairToJsonString(giftPair)
     assert(gpJson == jsonStringGP)
   }
 }

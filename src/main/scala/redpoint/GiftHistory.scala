@@ -6,13 +6,13 @@ import io.circe.parser._
 import io.circe.syntax.EncoderOps
 
 object GiftHistory {
-  def giftHistoryAddYear(playerKey: String)(giftHistory: Vector[GiftPair]): Vector[GiftPair] =
+  def addYear(playerKey: String)(giftHistory: Vector[GiftPair]): Vector[GiftPair] =
     giftHistory :+ GiftPair(playerKey, playerKey)
 
-  def giftHistoryUpdateGiftHistory(giftYear: Int)(giftPair: GiftPair)(giftHistory: Vector[GiftPair]): Vector[GiftPair] =
+  def updateGiftHistory(giftYear: Int)(giftPair: GiftPair)(giftHistory: Vector[GiftPair]): Vector[GiftPair] =
     giftHistory.updated(giftYear, giftPair)
 
-  def giftHistoryJsonStringToGiftHistory(ghString: String): Either[Error, Vector[GiftPair]] =
+  def jsonStringToGiftHistory(ghString: String): Either[Error, Vector[GiftPair]] =
     decode[Vector[GiftPair]](ghString)
 
   def giftHistoryToJsonString(giftHistory: Vector[GiftPair]): JsonString =
