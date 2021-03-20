@@ -2,7 +2,7 @@ package redpoint
 
 import scala.io.Source
 
-object Main {
+object Redpoint {
   var agYear: Int = 0
   var maybeGiver: Option[String] = None
   var maybeGivee: Option[String] = None
@@ -13,6 +13,10 @@ object Main {
   var aRosterName: String = ""
   var aRosterYear: Int = 0
   var filePath: String = "resources/blackhawks.json"
+
+  def main(args: Array[String]): Unit = {
+    println(agYear, maybeGiver, maybeGivee, aPlayers, agrHat, ageHat, aDiscards, aRosterName, aRosterYear, filePath)
+  }
 
   def readFileIntoJsonString(fp: String): Either[ErrorString, JsonString] =
     try {
