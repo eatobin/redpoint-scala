@@ -33,29 +33,29 @@ class PlayersSpec extends AnyFlatSpec {
     Map("RinSta" -> rinSta, "JohLen" -> johLen, "GeoHar" -> geoHarGiver, "PauMcc" -> pauMcc)
 
   "Players" should "return an updated player" in {
-    assert(playersUpdatePlayer(players, "RinSta", Player("New Bee", Vector(GiftPair("NewBee", "NewBee")))) == newBeePlayers)
+    assert(Players.updatePlayer("RinSta")(Player("New Bee", Vector(GiftPair("NewBee", "NewBee"))))(players) == newBeePlayers)
   }
 
   it should "return a player name" in {
-    assert(playersGetPlayerName(players, "PauMcc") == "Paul McCartney")
+    assert(Players.getPlayerName("PauMcc")(players) == "Paul McCartney")
   }
 
   it should "add a new year" in {
-    assert(playersAddYear(players) == playersExt)
+    assert(Players.addYear(players) == playersExt)
   }
 
   it should "return a givee and a giver" in {
-    assert(playersGetGivee(players, "GeoHar", 0) == "RinSta")
-    assert(playersGetGiver(players, "GeoHar", 0) == "PauMcc")
+    assert(Players.getGivee("GeoHar")(0)(players) == "RinSta")
+    assert(Players.getGiver("GeoHar")(0)(players) == "PauMcc")
   }
 
   it should "update a givee and a giver" in {
-    assert(playersUpdateGivee(players, "GeoHar", 0, "you") == playersGivee)
-    assert(playersUpdateGiver(players, "GeoHar", 0, "you") == playersGiver)
+    assert(Players.updateGivee("GeoHar")(0)("you")(players) == playersGivee)
+    assert(Players.updateGiver("GeoHar")(0)("you")(players) == playersGiver)
   }
 
   it should "convert from JSON" in {
-    val plrsJson: Either[Error, Map[String, Player]] = playersJsonStringToPlayers(jsonStringPlrs)
+    val plrsJson: Either[Error, Map[String, Player]] = Players.jsonStringToPlayers(jsonStringPlrs)
     assert(plrsJson == Right(players))
   }
 }
