@@ -47,7 +47,7 @@ object Redpoint {
     }
   }
 
-  private def random[T](s: Set[T]): T = {
+  private def random(s: Set[String]): String = {
     val n = util.Random.nextInt(s.size)
     s.iterator.drop(n).next()
   }
