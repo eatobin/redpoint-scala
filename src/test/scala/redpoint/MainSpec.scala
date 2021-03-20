@@ -20,63 +20,63 @@ class MainSpec extends AnyFlatSpec {
   private val testHat: Set[String] = Set("RinSta")
 
   "Main" should "build a Roster" in {
-    rosterOrQuit(filePath)
-    assert(aRosterName == "The Beatles")
-    assert(aRosterYear == 2014)
-    assert(aPlayers == players)
+    Main.rosterOrQuit(filePath)
+    assert(Main.aRosterName == "The Beatles")
+    assert(Main.aRosterYear == 2014)
+    assert(Main.aPlayers == players)
   }
 
   it should "detect a bad file path" in {
-    rosterOrQuit(badFilePath) shouldBe a[Unit]
+    Main.rosterOrQuit(badFilePath) shouldBe a[Unit]
   }
 
   it should "detect a bad JSON parse" in {
-    rosterOrQuit(badJsonFile) shouldBe a[Unit]
+    Main.rosterOrQuit(badJsonFile) shouldBe a[Unit]
   }
 
   it should "draw a puck" in {
-    assert(drawPuck(testHat).contains("RinSta"))
-    assert(drawPuck(Set()).isEmpty)
+    assert(Main.drawPuck(testHat).contains("RinSta"))
+    assert(Main.drawPuck(Set()).isEmpty)
   }
 
   it should "start a new year" in {
     Main.agYear = 0
-    maybeGiver = None
-    maybeGivee = None
-    rosterOrQuit(filePath)
-    startNewYear()
-    assert(agYear == 1)
-    assert(maybeGiver.isDefined)
-    assert(maybeGivee.isDefined)
-    assert(rinStaPlus == aPlayers("RinSta"))
-    assert(aDiscards.isEmpty)
+    Main.maybeGiver = None
+    Main.maybeGivee = None
+    Main.rosterOrQuit(filePath)
+    Main.startNewYear()
+    assert(Main.agYear == 1)
+    assert(Main.maybeGiver.isDefined)
+    assert(Main.maybeGivee.isDefined)
+    assert(rinStaPlus == Main.aPlayers("RinSta"))
+    assert(Main.aDiscards.isEmpty)
   }
 
   it should "select a new giver" in {
-    agYear = 0
-    maybeGiver = None
-    maybeGivee = None
-    rosterOrQuit(filePath)
-    startNewYear()
-    aDiscards = Hats.discardGivee(aDiscards, "GeoHar")
-    assert(aDiscards.size == 1)
-    selectNewGiver()
-    assert(agrHat.size == 3)
-    assert(aDiscards.isEmpty)
+    Main.agYear = 0
+    Main.maybeGiver = None
+    Main.maybeGivee = None
+    Main.rosterOrQuit(filePath)
+    Main.startNewYear()
+    Main.aDiscards = Hats.discardGivee("GeoHar")(Main.aDiscards)
+    assert(Main.aDiscards.size == 1)
+    Main.selectNewGiver()
+    assert(Main.agrHat.size == 3)
+    assert(Main.aDiscards.isEmpty)
   }
 
   it should "have a successful givee" in {
     Main.agYear = 0
-    maybeGiver = None
-    maybeGivee = None
-    rosterOrQuit(filePath)
-    startNewYear()
-    val givee = maybeGivee.get
-    val giver = maybeGiver.get
-    giveeIsSuccess()
-    assert(Players.playersGetGivee(aPlayers, giver, agYear) == givee)
-    assert(Players.playersGetGiver(aPlayers, givee, agYear) == giver)
-    assert(!ageHat.contains(givee))
+    Main.maybeGiver = None
+    Main.maybeGivee = None
+    Main.rosterOrQuit(filePath)
+    Main.startNewYear()
+    val givee = Main.maybeGivee.get
+    val giver = Main.maybeGiver.get
+    Main.giveeIsSuccess()
+    assert(Players.getGivee(giver)(Main.agYear)(Main.aPlayers) == givee)
+    assert(Players.getGiver(givee)(Main.agYear)(Main.aPlayers) == giver)
+    assert(!Main.ageHat.contains(givee))
   }
 
 }
