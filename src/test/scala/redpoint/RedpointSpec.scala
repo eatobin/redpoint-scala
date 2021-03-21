@@ -19,7 +19,7 @@ class RedpointSpec extends AnyFlatSpec {
   private val rinStaPlus: Player = Player("Ringo Starr", Vector(GiftPair("JohLen", "GeoHar"), GiftPair("RinSta", "RinSta")))
   private val testHat: Set[String] = Set("RinSta")
 
-  "Main" should "build a Roster" in {
+  "Redpoint" should "build a Roster" in {
     Redpoint.rosterOrQuit(filePath)
     assert(Redpoint.aRosterName == "The Beatles")
     assert(Redpoint.aRosterYear == 2014)
