@@ -87,4 +87,11 @@ object Redpoint {
     ageHat = Hats.removePuck(givee)(ageHat)
     maybeGivee = None
   }
+
+  def giveeIsFailure(): Unit = {
+    val givee: String = maybeGivee.get
+    ageHat = Hats.removePuck(givee)(ageHat)
+    aDiscards = Hats.discardGivee(givee)(aDiscards)
+    maybeGivee = drawPuck(ageHat)
+  }
 }

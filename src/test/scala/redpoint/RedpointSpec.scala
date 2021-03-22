@@ -79,4 +79,33 @@ class RedpointSpec extends AnyFlatSpec {
     assert(!Redpoint.ageHat.contains(givee))
   }
 
+  it should "have a failing givee" in {
+    Redpoint.agYear = 0
+    Redpoint.maybeGiver = None
+    Redpoint.maybeGivee = None
+    Redpoint.rosterOrQuit(filePath)
+    Redpoint.startNewYear()
+    val givee = Redpoint.maybeGivee.get
+    Redpoint.giveeIsFailure()
+    assert(Redpoint.aDiscards.contains(givee))
+    //    val giver = Redpoint.maybeGiver.get
+    //    Redpoint.giveeIsSuccess()
+    //    assert(Players.getGivee(giver)(Redpoint.agYear)(Redpoint.aPlayers) == givee)
+    //    assert(Players.getGiver(givee)(Redpoint.agYear)(Redpoint.aPlayers) == giver)
+    //    assert(!Redpoint.ageHat.contains(givee))
+  }
+
+  //  (deftest givee-is-failure-test
+  //  (reset! core/a-g-year 0)
+  //  (reset! core/a-giver nil)
+  //  (reset! core/a-givee nil)
+  //  (core/roster-or-quit "resources-test/beatles.json")
+  //  (core/start-new-year)
+  //  (let [temp-ge (deref core/a-givee)]
+  //  (core/givee-is-failure)
+  //  (is (= temp-ge
+  //  (some #{temp-ge} (deref core/a-discards))))
+  //  (is (= nil
+  //  (some #{temp-ge} (deref core/a-ge-hat))))))
+
 }
