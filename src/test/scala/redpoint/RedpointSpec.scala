@@ -16,6 +16,11 @@ class RedpointSpec extends AnyFlatSpec {
   private val players: Map[String, Player] =
     Map("RinSta" -> rinSta, "JohLen" -> johLen, "GeoHar" -> geoHar, "PauMcc" -> pauMcc)
 
+  private val geoWhoops: Player = Player("George Harrison", Vector(GiftPair("GeoHar", "Whoops")))
+  private val pauYikes: Player = Player("Paul McCartney", Vector(GiftPair("Yikes", "PauMcc")))
+  private val playersWeird: Map[String, Player] =
+    Map("RinSta" -> rinSta, "JohLen" -> johLen, "GeoHar" -> geoWhoops, "PauMcc" -> pauYikes)
+
   private val rinStaPlus: Player = Player("Ringo Starr", Vector(GiftPair("JohLen", "GeoHar"), GiftPair("RinSta", "RinSta")))
   private val testHat: Set[String] = Set("RinSta")
 
@@ -91,4 +96,9 @@ class RedpointSpec extends AnyFlatSpec {
     assert(!Redpoint.ageHat.contains(givee))
   }
 
+  it should "report player errors" in {
+    Redpoint.agYear = 0
+    Redpoint.aPlayers = playersWeird
+    assert(Redpoint.errors() == Seq("GeoHar", "PauMcc"))
+  }
 }
