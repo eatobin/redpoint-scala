@@ -94,40 +94,46 @@ object Redpoint {
     aDiscards = Hats.discardGivee(givee)(aDiscards)
     maybeGivee = drawPuck(ageHat)
   }
+  //(defn errors? []
+  //  (seq (for [plr-sym (keys (into (sorted-map) (deref a-players)))
+  //             :let [giver-code (plrs/players-get-giver (deref a-players) plr-sym (deref a-g-year))
+  //                   givee-code (plrs/players-get-givee (deref a-players) plr-sym (deref a-g-year))]
+  //             :when (or (= plr-sym giver-code) (= plr-sym givee-code))]
+  //         plr-sym)))
+  def errors(): Unit = {
+    val MoreThanTwenty = for (language <- LanguageBase
+                              if (language.article >= 20 && language.article < 30)) // Filters
+
+    // i.e. add this to a list
+      yield language.name
+  }
 }
 
 
+//// Creating case class
+//        case class Language(name: String, article: Int)
+//
+//        val LanguageBase = List(Language("Scala", 26),
+//                                Language("Csharp", 32),
+//                                Language("Perl", 42),
+//                                Language("Java", 22))
+//
+//        // Applying for comprehensions
+//        // Generator
+//        // Definition
+//        val MoreThanTwenty = for (language <- LanguageBase
+//        if (language.article >=20 && language.article < 30))// Filters
+//
+//         // i.e. add this to a list
+//          yield language.name
+//
+//        // Print more than twenty
+//        MoreThanTwenty.foreach(name => println(name))
+//
+//
+//        Output :
+//
+//Scala
+//Java
 
-// Creating case class    
-        case class Language(name: String, article: Int)
-          
-        val LanguageBase = List(Language("Scala", 26),
-                                Language("Csharp", 32),
-                                Language("Perl", 42),
-                                Language("Java", 22))
-          
-        // Applying for comprehensions
-        // Generator
-        // Definition
-        val MoreThanTwenty = for (language <- LanguageBase
-        if (language.article >=20 && language.article < 30))// Filters
-          
-         // i.e. add this to a list
-          yield language.name 
-          
-        // Print more than twenty 
-        MoreThanTwenty.foreach(name => println(name))
-
-
-        Output :
-
-Scala
-Java
-
-
-(defn errors? []
-  (seq (for [plr-sym (keys (into (sorted-map) (deref a-players)))
-             :let [giver-code (plrs/players-get-giver (deref a-players) plr-sym (deref a-g-year))
-                   givee-code (plrs/players-get-givee (deref a-players) plr-sym (deref a-g-year))]
-             :when (or (= plr-sym giver-code) (= plr-sym givee-code))]
-         plr-sym)))
+//
