@@ -102,7 +102,7 @@ object Redpoint {
         plrSym <- plrKeys
         giverCode = Players.getGiver(plrSym)(agYear)(aPlayers)
         giveeCode = Players.getGivee(plrSym)(agYear)(aPlayers)
-        if (plrSym == giverCode) || (plrSym == giveeCode)
+        if plrSym == giverCode || plrSym == giveeCode
       } yield plrSym
     }
     plrErrors.sorted
