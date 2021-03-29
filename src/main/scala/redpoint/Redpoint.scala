@@ -107,4 +107,24 @@ object Redpoint {
     }
     plrErrors.sorted
   }
+
+  def printResults(): Unit = {
+    val plrKeys: Seq[String] = aPlayers.keys.toSeq.sorted
+    for (plrSym <- plrKeys) yield {
+      val playerName = Players.getPlayerName(plrSym)(aPlayers)
+      val giveeCode = Players.getGivee(plrSym)(agYear)(aPlayers)
+      val giveeName = Players.getPlayerName(plrSym)(aPlayers)
+      val giverCode = Players.getGiver(plrSym)(agYear)(aPlayers)
+
+      if (plrSym == giveeCode && plrSym == giverCode) {
+        println("%s is **buying** for nor **receiving** from anyone - **ERROR**".format(playerName))
+      } else if (plrSym == giverCode) {
+        println("%s is **receiving** from no one - **ERROR**".format(playerName))
+      } else if (plrSym == giveeCode) {
+        println("%s is **buying** for no one - **ERROR**".format(playerName))
+      } else {
+        println("%s is buying for %s".format(playerName, giveeName))
+      }
+    }
+  }
 }
