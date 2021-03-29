@@ -113,7 +113,7 @@ object Redpoint {
     for (plrSym <- plrKeys) yield {
       val playerName = Players.getPlayerName(plrSym)(aPlayers)
       val giveeCode = Players.getGivee(plrSym)(agYear)(aPlayers)
-      val giveeName = Players.getPlayerName(plrSym)(aPlayers)
+      val giveeName = Players.getPlayerName(giveeCode)(aPlayers)
       val giverCode = Players.getGiver(plrSym)(agYear)(aPlayers)
 
       if (plrSym == giveeCode && plrSym == giverCode) {

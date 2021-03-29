@@ -101,4 +101,10 @@ class RedpointSpec extends AnyFlatSpec {
     Redpoint.aPlayers = playersWeird
     assert(Redpoint.errors() == Seq("GeoHar", "PauMcc"))
   }
+
+  it should "print" in {
+    Redpoint.agYear = 0
+    Redpoint.rosterOrQuit(filePath)
+    Redpoint.printResults()
+  }
 }
