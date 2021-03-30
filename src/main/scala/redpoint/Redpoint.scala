@@ -143,17 +143,3 @@ object Redpoint {
     printResults()
   }
 }
-
-//Blackhawks - Year 2010 Gifts:
-//(defn print-string-giving-roster [r-name r-year]
-//(println)
-//(println r-name "- Year" (+ r-year (deref a-g-year)) "Gifts:")
-//(println)
-//(when (errors?)
-//(println)
-//(println "There is a logic error in this year's pairings.")
-//(println "Do you see it?")
-//(println "If not... call me and I'll explain!")
-//(println)
-//(println))
-//(print-results))
