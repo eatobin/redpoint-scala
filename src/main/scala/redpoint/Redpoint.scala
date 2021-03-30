@@ -17,7 +17,26 @@ object Redpoint {
 
   def main(args: Array[String]): Unit = {
     rosterOrQuit(filePath)
-    println(agYear, maybeGiver, maybeGivee, aPlayers, agrHat, ageHat, aDiscards, aRosterName, aRosterYear, filePath)
+    while (printAndAsk(aRosterName)(aRosterYear).toLowerCase != "q") {
+      startNewYear()
+      while (maybeGiver.isDefined) {
+        while (maybeGivee.isDefined) {
+          if (Rules.giveeNotSelf(maybeGiver.get, maybeGivee.get) &&
+            Rules.giveeNotRecip(maybeGiver.get, maybeGivee.get, agYear, aPlayers) &&
+            Rules.giveeNotRepeat(maybeGiver.get, maybeGivee.get, agYear, aPlayers)) {
+            giveeIsSuccess()
+          } else {
+            giveeIsFailure()
+          }
+        }
+        selectNewGiver()
+      }
+    }
+    println()
+    println("This was fun!")
+    println("Talk about a position with Redpoint?")
+    println("Please call: Eric Tobin 773-679-6617")
+    println()
   }
 
   def readFileIntoJsonString(fp: String): Either[ErrorString, JsonString] =
@@ -151,30 +170,3 @@ object Redpoint {
     readLine("Continue? ('q' to quit): ")
   }
 }
-
-//(defn -main []
-//(reset! a-g-year 0)
-//(reset! a-giver nil)
-//(reset! a-givee nil)
-//(reset! a-gr-hat #{})
-//(reset! a-ge-hat #{})
-//(reset! a-discards #{})
-//(roster-or-quit file-path)
-//(let [r-name (deref a-roster-name)
-//r-year (deref a-roster-year)]
-//(while (not= (cs/lower-case (print-and-ask r-name r-year)) "q")
-//(start-new-year)
-//(while (some? (deref a-giver))
-//(while (some? (deref a-givee))
-//(if (and
-//(rule/givee-not-self? (deref a-giver) (deref a-givee))
-//(rule/givee-not-recip? (deref a-giver) (deref a-givee) (deref a-g-year) (deref a-players))
-//(rule/givee-not-repeat? (deref a-giver) (deref a-givee) (deref a-g-year) (deref a-players)))
-//(givee-is-success)
-//(givee-is-failure)))
-//(select-new-giver)))
-//(println)
-//(println "This was fun!")
-//(println "Talk about a position with Redpoint?")
-//(println "Please call: Eric Tobin 773-679-6617")
-//(println)))
