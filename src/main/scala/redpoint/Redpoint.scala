@@ -143,3 +143,9 @@ object Redpoint {
     printResults()
   }
 }
+//(defn print-and-ask [r-name r-year]
+//(print-string-giving-roster r-name r-year)
+//(println)
+//(print "Continue? ('q' to quit): ")
+//(flush)
+//(read-line))
