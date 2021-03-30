@@ -105,6 +105,9 @@ class RedpointSpec extends AnyFlatSpec {
   it should "print" in {
     Redpoint.agYear = 0
     Redpoint.rosterOrQuit(filePath)
-    Redpoint.printResults()
+    Redpoint.printStringGivingRoster("The Beatles")(2021)
+
+    Redpoint.aPlayers = playersWeird
+    Redpoint.printStringGivingRoster("The Weird Beatles")(2050)
   }
 }
