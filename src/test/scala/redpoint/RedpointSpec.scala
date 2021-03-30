@@ -16,8 +16,8 @@ class RedpointSpec extends AnyFlatSpec {
   private val players: Map[String, Player] =
     Map("RinSta" -> rinSta, "JohLen" -> johLen, "GeoHar" -> geoHar, "PauMcc" -> pauMcc)
 
-  private val geoWhoops: Player = Player("George Harrison", Vector(GiftPair("GeoHar", "Whoops")))
-  private val pauYikes: Player = Player("Paul McCartney", Vector(GiftPair("Yikes", "PauMcc")))
+  private val geoWhoops: Player = Player("George Harrison", Vector(GiftPair("GeoHar", "PauMcc")))
+  private val pauYikes: Player = Player("Paul McCartney", Vector(GiftPair("GeoHar", "PauMcc")))
   private val playersWeird: Map[String, Player] =
     Map("RinSta" -> rinSta, "JohLen" -> johLen, "GeoHar" -> geoWhoops, "PauMcc" -> pauYikes)
 
