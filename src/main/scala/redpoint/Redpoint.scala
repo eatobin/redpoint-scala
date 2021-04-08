@@ -13,7 +13,7 @@ object Redpoint {
   var aDiscards: Set[String] = Set()
   var aRosterName: String = ""
   var aRosterYear: Int = 0
-  var filePath: String = "src/main/resources/blackhawks.json"
+  val filePath: String = "src/main/resources/blackhawks.json"
 
   def main(args: Array[String]): Unit = {
     rosterOrQuit(filePath)
