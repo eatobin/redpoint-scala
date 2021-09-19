@@ -1,8 +1,7 @@
 package redpoint
 
 import io.circe.Error
-import io.circe.generic.auto._
-import io.circe.parser._
+import io.circe._, io.circe.generic.auto._, io.circe.parser._, io.circe.syntax._
 
 case class Roster(rosterName: String, rosterYear: Int, players: Map[String, Player])
 

@@ -1,8 +1,7 @@
 package redpoint
 
 import io.circe.Error
-import io.circe.generic.decoding.DerivedDecoder.deriveDecoder
-import io.circe.parser._
+import io.circe._, io.circe.generic.auto._, io.circe.parser._, io.circe.syntax._
 
 object Players {
   def updatePlayer(playerKey: String)(player: Player)(players: Map[String, Player]): Map[String, Player] =
