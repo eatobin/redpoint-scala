@@ -1,7 +1,9 @@
 package redpoint
 
 import io.circe.Error
-import io.circe._, io.circe.generic.auto._, io.circe.parser._, io.circe.syntax._
+import io.circe.generic.auto._
+import io.circe.parser._
+import io.circe.syntax._
 
 object GiftHistory {
   def addYear(playerKey: String)(giftHistory: Vector[GiftPair]): Vector[GiftPair] =

@@ -1,7 +1,7 @@
 package redpoint
 
 import org.scalatest.flatspec.AnyFlatSpec
-import org.scalatest.matchers.should.Matchers.{a, shouldBe}
+import org.scalatest.matchers.should.Matchers.{a, convertToAnyShouldWrapper}
 
 class RedpointSpec extends AnyFlatSpec {
 
