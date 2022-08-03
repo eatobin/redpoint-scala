@@ -1,14 +1,14 @@
 ThisBuild / scalaVersion := "2.13.8"
 ThisBuild / version := "0.1.0-SNAPSHOT"
-ThisBuild / organization := "com.example"
-ThisBuild / organizationName := "example"
+ThisBuild / organization := "com.eatobin"
+ThisBuild / organizationName := "eatobin"
 ThisBuild / useCoursier := true
 
 val circeVersion = "0.14.2"
 
 lazy val root = (project in file("."))
   .settings(
-    name := "redpoint-scala",
+    name := "redpointscala",
     libraryDependencies ++= Seq(
       "org.scalactic" %% "scalactic" % "3.2.12",
       "org.scalatest" %% "scalatest" % "3.2.12" % Test
