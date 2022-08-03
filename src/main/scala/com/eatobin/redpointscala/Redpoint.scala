@@ -83,7 +83,7 @@ object Redpoint {
 
   def startNewYear(): Unit = {
     agYear = agYear + 1
-    aPlayers = Players.addYear(aPlayers)
+    aPlayers = Players.playersAddYear(aPlayers)
     agrHat = Hats.makeHat(aPlayers)
     ageHat = Hats.makeHat(aPlayers)
     maybeGiver = drawPuck(agrHat)
@@ -103,8 +103,8 @@ object Redpoint {
   def giveeIsSuccess(): Unit = {
     val giver: String = maybeGiver.get
     val givee: String = maybeGivee.get
-    aPlayers = Players.updateGivee(giver, agYear, givee, aPlayers)
-    aPlayers = Players.updateGiver(givee, agYear, giver, aPlayers)
+    aPlayers = Players.playersUpdateGivee(giver, agYear, givee, aPlayers)
+    aPlayers = Players.playersUpdateGiver(givee, agYear, giver, aPlayers)
     ageHat = Hats.removePuck(givee, ageHat)
     maybeGivee = None
   }
@@ -121,8 +121,8 @@ object Redpoint {
     val plrErrors = {
       for {
         plrSym <- plrKeys
-        giverCode = Players.getGiver(plrSym, agYear, aPlayers)
-        giveeCode = Players.getGivee(plrSym, agYear, aPlayers)
+        giverCode = Players.playersGetGiver(plrSym, agYear, aPlayers)
+        giveeCode = Players.playersGetGivee(plrSym, agYear, aPlayers)
         if plrSym == giverCode || plrSym == giveeCode
       } yield plrSym
     }
@@ -132,10 +132,10 @@ object Redpoint {
   def printResults(): Unit = {
     val plrKeys: Seq[String] = aPlayers.keys.toSeq.sorted
     for (plrSym <- plrKeys) yield {
-      val playerName = Players.getPlayerName(plrSym, aPlayers)
-      val giveeCode = Players.getGivee(plrSym, agYear, aPlayers)
-      val giveeName = Players.getPlayerName(giveeCode, aPlayers)
-      val giverCode = Players.getGiver(plrSym, agYear, aPlayers)
+      val playerName = Players.playersGetPlayerName(plrSym, aPlayers)
+      val giveeCode = Players.playersGetGivee(plrSym, agYear, aPlayers)
+      val giveeName = Players.playersGetPlayerName(giveeCode, aPlayers)
+      val giverCode = Players.playersGetGiver(plrSym, agYear, aPlayers)
 
       if (plrSym == giveeCode && plrSym == giverCode) {
         println("%s is **buying** for nor **receiving** from anyone - **ERROR**".format(playerName))

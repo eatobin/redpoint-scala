@@ -1,5 +1,6 @@
 package com.eatobin.redpointscala
 
+import com.eatobin.redpointscala.Redpoint._
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers.{a, convertToAnyShouldWrapper}
 
@@ -25,89 +26,89 @@ class RedpointSpec extends AnyFlatSpec {
   private val testHat: Set[String] = Set("RinSta")
 
   "Redpoint" should "build a Roster" in {
-    Redpoint.rosterOrQuit(filePath)
-    assert(Redpoint.aRosterName == "The Beatles")
-    assert(Redpoint.aRosterYear == 2014)
-    assert(Redpoint.aPlayers == players)
+    rosterOrQuit(filePath)
+    assert(aRosterName == "The Beatles")
+    assert(aRosterYear == 2014)
+    assert(aPlayers == players)
   }
 
   it should "detect a bad file path" in {
-    Redpoint.rosterOrQuit(badFilePath) shouldBe a[Unit]
+    rosterOrQuit(badFilePath) shouldBe a[Unit]
   }
 
   it should "detect a bad JSON parse" in {
-    Redpoint.rosterOrQuit(badJsonFile) shouldBe a[Unit]
+    rosterOrQuit(badJsonFile) shouldBe a[Unit]
   }
 
   it should "draw a puck" in {
-    assert(Redpoint.drawPuck(testHat).contains("RinSta"))
-    assert(Redpoint.drawPuck(Set()).isEmpty)
+    assert(drawPuck(testHat).contains("RinSta"))
+    assert(drawPuck(Set()).isEmpty)
   }
 
   it should "start a new year" in {
-    Redpoint.agYear = 0
-    Redpoint.maybeGiver = None
-    Redpoint.maybeGivee = None
-    Redpoint.rosterOrQuit(filePath)
-    Redpoint.startNewYear()
-    assert(Redpoint.agYear == 1)
-    assert(Redpoint.maybeGiver.isDefined)
-    assert(Redpoint.maybeGivee.isDefined)
-    assert(rinStaPlus == Redpoint.aPlayers("RinSta"))
-    assert(Redpoint.aDiscards.isEmpty)
+    agYear = 0
+    maybeGiver = None
+    maybeGivee = None
+    rosterOrQuit(filePath)
+    startNewYear()
+    assert(agYear == 1)
+    assert(maybeGiver.isDefined)
+    assert(maybeGivee.isDefined)
+    assert(rinStaPlus == aPlayers("RinSta"))
+    assert(aDiscards.isEmpty)
   }
 
   it should "select a new giver" in {
-    Redpoint.agYear = 0
-    Redpoint.maybeGiver = None
-    Redpoint.maybeGivee = None
-    Redpoint.rosterOrQuit(filePath)
-    Redpoint.startNewYear()
-    Redpoint.aDiscards = Hats.discardGivee("GeoHar", Redpoint.aDiscards)
-    assert(Redpoint.aDiscards.size == 1)
-    Redpoint.selectNewGiver()
-    assert(Redpoint.agrHat.size == 3)
-    assert(Redpoint.aDiscards.isEmpty)
+    agYear = 0
+    maybeGiver = None
+    maybeGivee = None
+    rosterOrQuit(filePath)
+    startNewYear()
+    aDiscards = Hats.discardGivee("GeoHar", aDiscards)
+    assert(aDiscards.size == 1)
+    selectNewGiver()
+    assert(agrHat.size == 3)
+    assert(aDiscards.isEmpty)
   }
 
   it should "have a successful givee" in {
-    Redpoint.agYear = 0
-    Redpoint.maybeGiver = None
-    Redpoint.maybeGivee = None
-    Redpoint.rosterOrQuit(filePath)
-    Redpoint.startNewYear()
-    val givee = Redpoint.maybeGivee.get
-    val giver = Redpoint.maybeGiver.get
-    Redpoint.giveeIsSuccess()
-    assert(Players.getGivee(giver, Redpoint.agYear, Redpoint.aPlayers) == givee)
-    assert(Players.getGiver(givee, Redpoint.agYear, Redpoint.aPlayers) == giver)
-    assert(!Redpoint.ageHat.contains(givee))
+    agYear = 0
+    maybeGiver = None
+    maybeGivee = None
+    rosterOrQuit(filePath)
+    startNewYear()
+    val givee = maybeGivee.get
+    val giver = maybeGiver.get
+    giveeIsSuccess()
+    assert(Players.playersGetGivee(giver, agYear, aPlayers) == givee)
+    assert(Players.playersGetGiver(givee, agYear, aPlayers) == giver)
+    assert(!ageHat.contains(givee))
   }
 
   it should "have a failing givee" in {
-    Redpoint.agYear = 0
-    Redpoint.maybeGiver = None
-    Redpoint.maybeGivee = None
-    Redpoint.rosterOrQuit(filePath)
-    Redpoint.startNewYear()
-    val givee = Redpoint.maybeGivee.get
-    Redpoint.giveeIsFailure()
-    assert(Redpoint.aDiscards.contains(givee))
-    assert(!Redpoint.ageHat.contains(givee))
+    agYear = 0
+    maybeGiver = None
+    maybeGivee = None
+    rosterOrQuit(filePath)
+    startNewYear()
+    val givee = maybeGivee.get
+    giveeIsFailure()
+    assert(aDiscards.contains(givee))
+    assert(!ageHat.contains(givee))
   }
 
   it should "report player errors" in {
-    Redpoint.agYear = 0
-    Redpoint.aPlayers = playersWeird
-    assert(Redpoint.errors() == Seq("GeoHar", "PauMcc"))
+    agYear = 0
+    aPlayers = playersWeird
+    assert(errors() == Seq("GeoHar", "PauMcc"))
   }
 
   it should "print" in {
-    Redpoint.agYear = 0
-    Redpoint.rosterOrQuit(filePath)
-    Redpoint.printStringGivingRoster("The Beatles", 2021)
+    agYear = 0
+    rosterOrQuit(filePath)
+    printStringGivingRoster("The Beatles", 2021)
 
-    Redpoint.aPlayers = playersWeird
-    Redpoint.printStringGivingRoster("The Weird Beatles", 2050)
+    aPlayers = playersWeird
+    printStringGivingRoster("The Weird Beatles", 2050)
   }
 }

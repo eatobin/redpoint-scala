@@ -1,5 +1,6 @@
 package com.eatobin.redpointscala
 
+import com.eatobin.redpointscala.Players._
 import io.circe.Error
 import org.scalatest.flatspec.AnyFlatSpec
 
@@ -33,29 +34,29 @@ class PlayersSpec extends AnyFlatSpec {
     Map("RinSta" -> rinSta, "JohLen" -> johLen, "GeoHar" -> geoHarGiver, "PauMcc" -> pauMcc)
 
   "Players" should "return an updated player" in {
-    assert(Players.updatePlayer("RinSta", Player("New Bee", Vector(GiftPair("NewBee", "NewBee"))), players) == newBeePlayers)
+    assert(playersUpdatePlayer("RinSta", Player("New Bee", Vector(GiftPair("NewBee", "NewBee"))), players) == newBeePlayers)
   }
 
   it should "return a player name" in {
-    assert(Players.getPlayerName("PauMcc", players) == "Paul McCartney")
+    assert(playersGetPlayerName("PauMcc", players) == "Paul McCartney")
   }
 
   it should "add a new year" in {
-    assert(Players.addYear(players) == playersExt)
+    assert(playersAddYear(players) == playersExt)
   }
 
   it should "return a givee and a giver" in {
-    assert(Players.getGivee("GeoHar", 0, players) == "RinSta")
-    assert(Players.getGiver("GeoHar", 0, players) == "PauMcc")
+    assert(playersGetGivee("GeoHar", 0, players) == "RinSta")
+    assert(playersGetGiver("GeoHar", 0, players) == "PauMcc")
   }
 
   it should "update a givee and a giver" in {
-    assert(Players.updateGivee("GeoHar", 0, "you", players) == playersGivee)
-    assert(Players.updateGiver("GeoHar", 0, "you", players) == playersGiver)
+    assert(playersUpdateGivee("GeoHar", 0, "you", players) == playersGivee)
+    assert(playersUpdateGiver("GeoHar", 0, "you", players) == playersGiver)
   }
 
   it should "convert from JSON" in {
-    val plrsJson: Either[Error, Map[String, Player]] = Players.jsonStringToPlayers(jsonStringPlrs)
+    val plrsJson: Either[Error, Map[String, Player]] = jsonStringToPlayers(jsonStringPlrs)
     assert(plrsJson == Right(players))
   }
 }

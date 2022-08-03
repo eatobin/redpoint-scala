@@ -1,5 +1,6 @@
 package com.eatobin.redpointscala
 
+import com.eatobin.redpointscala.GiftPair.{giftPairToJsonString, giftPairUpdateGivee, giftPairUpdateGiver, jsonStringToGiftPair}
 import io.circe.Error
 import org.scalatest.flatspec.AnyFlatSpec
 
@@ -9,17 +10,17 @@ class GiftPairSpec extends AnyFlatSpec {
   private val giftPair: GiftPair = GiftPair("GeoHar", "JohLen")
 
   "A GiftPair" should "update a giver/givee" in {
-    assert(GiftPair.updateGivee("NewBee", giftPair) == GiftPair("NewBee", "JohLen"))
-    assert(GiftPair.updateGiver("NewBee", giftPair) == GiftPair("GeoHar", "NewBee"))
+    assert(giftPairUpdateGivee("NewBee", giftPair) == GiftPair("NewBee", "JohLen"))
+    assert(giftPairUpdateGiver("NewBee", giftPair) == GiftPair("GeoHar", "NewBee"))
   }
 
   it should "convert from JSON" in {
-    val gpJson: Either[Error, GiftPair] = GiftPair.jsonStringToGiftPair(jsonStringGP)
+    val gpJson: Either[Error, GiftPair] = jsonStringToGiftPair(jsonStringGP)
     assert(gpJson == Right(giftPair))
   }
 
   it should "convert to JSON" in {
-    val gpJson: JsonString = GiftPair.giftPairToJsonString(giftPair)
+    val gpJson: JsonString = giftPairToJsonString(giftPair)
     assert(gpJson == jsonStringGP)
   }
 }
