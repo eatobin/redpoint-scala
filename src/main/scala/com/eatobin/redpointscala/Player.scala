@@ -11,9 +11,9 @@ object Player {
   def playerUpdateGiftHistory(giftHistory: Vector[GiftPair], player: Player): Player =
     player.copy(giftHistory = giftHistory)
 
-  def jsonStringToPlayer(plrString: String): Either[Error, Player] =
-    decode[Player](plrString)
+  def playerJsonStringToPlayer(plrJsonString: String): Either[Error, Player] =
+    decode[Player](plrJsonString)
 
-  def playerToJsonString(player: Player): JsonString =
+  def playerPlayerToJsonString(player: Player): JsonString =
     player.asJson.noSpaces
 }

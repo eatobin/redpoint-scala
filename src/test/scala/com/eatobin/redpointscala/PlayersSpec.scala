@@ -56,7 +56,7 @@ class PlayersSpec extends AnyFlatSpec {
   }
 
   it should "convert from JSON" in {
-    val plrsJson: Either[Error, Map[String, Player]] = jsonStringToPlayers(jsonStringPlrs)
+    val plrsJson: Either[Error, Map[String, Player]] = playersJsonStringToPlayers(jsonStringPlrs)
     assert(plrsJson == Right(players))
   }
 }

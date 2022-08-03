@@ -21,9 +21,9 @@ object Redpoint {
       startNewYear()
       while (maybeGiver.isDefined) {
         while (maybeGivee.isDefined) {
-          if (Rules.giveeNotSelf(maybeGiver.get, maybeGivee.get) &&
-            Rules.giveeNotRecip(maybeGiver.get, maybeGivee.get, agYear, aPlayers) &&
-            Rules.giveeNotRepeat(maybeGiver.get, maybeGivee.get, agYear, aPlayers)) {
+          if (Rules.rulesGiveeNotSelf(maybeGiver.get, maybeGivee.get) &&
+            Rules.rulesGiveeNotRecip(maybeGiver.get, maybeGivee.get, agYear, aPlayers) &&
+            Rules.rulesGiveeNotRepeat(maybeGiver.get, maybeGivee.get, agYear, aPlayers)) {
             giveeIsSuccess()
           } else {
             giveeIsFailure()
@@ -54,7 +54,7 @@ object Redpoint {
     val rosterStringEither = readFileIntoJsonString(fp)
     rosterStringEither match {
       case Right(rs) =>
-        val rosterEither: Either[ErrorString, Roster] = Roster.jsonStringToRoster(Right(rs))
+        val rosterEither: Either[ErrorString, Roster] = Roster.rosterJsonStringToRoster(Right(rs))
         rosterEither match {
           case Right(r) =>
             aRosterName = r.rosterName
@@ -84,8 +84,8 @@ object Redpoint {
   def startNewYear(): Unit = {
     agYear = agYear + 1
     aPlayers = Players.playersAddYear(aPlayers)
-    agrHat = Hats.makeHat(aPlayers)
-    ageHat = Hats.makeHat(aPlayers)
+    agrHat = Hats.hatsMakeHat(aPlayers)
+    ageHat = Hats.hatsMakeHat(aPlayers)
     maybeGiver = drawPuck(agrHat)
     maybeGivee = drawPuck(ageHat)
     aDiscards = Set()
@@ -93,8 +93,8 @@ object Redpoint {
 
   def selectNewGiver(): Unit = {
     val giver: String = maybeGiver.get
-    agrHat = Hats.removePuck(giver, agrHat)
-    ageHat = Hats.returnDiscards(aDiscards, ageHat)
+    agrHat = Hats.hatsRemovePuck(giver, agrHat)
+    ageHat = Hats.hatsReturnDiscards(aDiscards, ageHat)
     aDiscards = Set()
     maybeGiver = drawPuck(agrHat)
     maybeGivee = drawPuck(ageHat)
@@ -105,14 +105,14 @@ object Redpoint {
     val givee: String = maybeGivee.get
     aPlayers = Players.playersUpdateGivee(giver, agYear, givee, aPlayers)
     aPlayers = Players.playersUpdateGiver(givee, agYear, giver, aPlayers)
-    ageHat = Hats.removePuck(givee, ageHat)
+    ageHat = Hats.hatsRemovePuck(givee, ageHat)
     maybeGivee = None
   }
 
   def giveeIsFailure(): Unit = {
     val givee: String = maybeGivee.get
-    ageHat = Hats.removePuck(givee, ageHat)
-    aDiscards = Hats.discardGivee(givee, aDiscards)
+    ageHat = Hats.hatsRemovePuck(givee, ageHat)
+    aDiscards = Hats.hatsDiscardGivee(givee, aDiscards)
     maybeGivee = drawPuck(ageHat)
   }
 

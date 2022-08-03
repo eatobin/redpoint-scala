@@ -17,12 +17,12 @@ class GiftHistorySpec extends AnyFlatSpec {
   }
 
   it should "convert from JSON" in {
-    val ghJson: Either[Error, Vector[GiftPair]] = GiftHistory.jsonStringToGiftHistory(jsonStringGH)
+    val ghJson: Either[Error, Vector[GiftPair]] = GiftHistory.giftHistoryJsonStringToGiftHistory(jsonStringGH)
     assert(ghJson == Right(giftHistory))
   }
 
   it should "convert to JSON" in {
-    val ghJson: JsonString = GiftHistory.giftHistoryToJsonString(giftHistory)
+    val ghJson: JsonString = GiftHistory.giftHistoryGiftHistoryToJsonString(giftHistory)
     assert(ghJson == jsonStringGH)
   }
 }

@@ -64,7 +64,7 @@ class RedpointSpec extends AnyFlatSpec {
     maybeGivee = None
     rosterOrQuit(filePath)
     startNewYear()
-    aDiscards = Hats.discardGivee("GeoHar", aDiscards)
+    aDiscards = Hats.hatsDiscardGivee("GeoHar", aDiscards)
     assert(aDiscards.size == 1)
     selectNewGiver()
     assert(agrHat.size == 3)

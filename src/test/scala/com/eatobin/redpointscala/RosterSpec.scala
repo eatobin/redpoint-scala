@@ -25,9 +25,9 @@ class RosterSpec extends AnyFlatSpec {
   }
 
   it should "convert from JSON - or not" in {
-    val rosJson: Either[ErrorString, Roster] = Roster.jsonStringToRoster(Right(jsonStringRos))
-    val rosJsonBad: Either[ErrorString, Roster] = Roster.jsonStringToRoster(Right(jsBeatlesBad))
-    val rosNoFile: Either[ErrorString, Roster] = Roster.jsonStringToRoster(Left("Just made this up"))
+    val rosJson: Either[ErrorString, Roster] = Roster.rosterJsonStringToRoster(Right(jsonStringRos))
+    val rosJsonBad: Either[ErrorString, Roster] = Roster.rosterJsonStringToRoster(Right(jsBeatlesBad))
+    val rosNoFile: Either[ErrorString, Roster] = Roster.rosterJsonStringToRoster(Left("Just made this up"))
     assert(rosJson == Right(roster))
     assert(rosJsonBad == Left("""io.circe.ParsingFailure: expected : got '"The B...' (line 1, column 14)"""))
     assert(rosNoFile == Left("Just made this up"))

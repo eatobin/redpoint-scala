@@ -23,23 +23,23 @@ class RulesSpec extends AnyFlatSpec {
   beatlesPlus4 = Players.playersUpdateGivee("RinSta", 4, "KarLav", beatlesPlus4)
 
   "A Player" should "not give to itself" in {
-    assert(Rules.giveeNotSelf("RinSta", "GeoHar"))
-    assert(!Rules.giveeNotSelf("RinSta", "RinSta"))
+    assert(Rules.rulesGiveeNotSelf("RinSta", "GeoHar"))
+    assert(!Rules.rulesGiveeNotSelf("RinSta", "RinSta"))
   }
 
   it should "not give to it's recip" in {
-    assert(Rules.giveeNotRecip("RinSta", "JohLen", 0, beatlesPlusPM))
-    assert(!Rules.giveeNotRecip("RinSta", "KarLav", 0, beatlesPlusPM))
+    assert(Rules.rulesGiveeNotRecip("RinSta", "JohLen", 0, beatlesPlusPM))
+    assert(!Rules.rulesGiveeNotRecip("RinSta", "KarLav", 0, beatlesPlusPM))
   }
 
   it should "not repeat for three years" in {
-    assert(!Rules.giveeNotRepeat("RinSta", "JohLen", 2, beatlesPlus4))
-    assert(!Rules.giveeNotRepeat("RinSta", "GeoHar", 2, beatlesPlus4))
-    assert(Rules.giveeNotRepeat("RinSta", "KarLav", 2, beatlesPlus4))
-    assert(Rules.giveeNotRepeat("RinSta", "JohLen", 5, beatlesPlus4))
-    assert(Rules.giveeNotRepeat("RinSta", "GeoHar", 5, beatlesPlus4))
-    assert(!Rules.giveeNotRepeat("RinSta", "PauMcc", 5, beatlesPlus4))
-    assert(!Rules.giveeNotRepeat("RinSta", "EriTob", 5, beatlesPlus4))
-    assert(!Rules.giveeNotRepeat("RinSta", "KarLav", 5, beatlesPlus4))
+    assert(!Rules.rulesGiveeNotRepeat("RinSta", "JohLen", 2, beatlesPlus4))
+    assert(!Rules.rulesGiveeNotRepeat("RinSta", "GeoHar", 2, beatlesPlus4))
+    assert(Rules.rulesGiveeNotRepeat("RinSta", "KarLav", 2, beatlesPlus4))
+    assert(Rules.rulesGiveeNotRepeat("RinSta", "JohLen", 5, beatlesPlus4))
+    assert(Rules.rulesGiveeNotRepeat("RinSta", "GeoHar", 5, beatlesPlus4))
+    assert(!Rules.rulesGiveeNotRepeat("RinSta", "PauMcc", 5, beatlesPlus4))
+    assert(!Rules.rulesGiveeNotRepeat("RinSta", "EriTob", 5, beatlesPlus4))
+    assert(!Rules.rulesGiveeNotRepeat("RinSta", "KarLav", 5, beatlesPlus4))
   }
 }

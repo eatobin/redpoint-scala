@@ -1,15 +1,15 @@
 package com.eatobin.redpointscala
 
 object Hats {
-  def makeHat(players: Map[String, Player]): Set[String] =
+  def hatsMakeHat(players: Map[String, Player]): Set[String] =
     players.keySet
 
-  def removePuck(playerKey: JsonString, hat: Set[JsonString]): Set[String] =
+  def hatsRemovePuck(playerKey: String, hat: Set[String]): Set[String] =
     hat - playerKey
 
-  def discardGivee(givee: JsonString, discards: Set[JsonString]): Set[String] =
+  def hatsDiscardGivee(givee: String, discards: Set[String]): Set[String] =
     discards + givee
 
-  def returnDiscards(discards: Set[JsonString], geHat: Set[JsonString]): Set[String] =
+  def hatsReturnDiscards(discards: Set[String], geHat: Set[String]): Set[String] =
     geHat ++ discards
 }

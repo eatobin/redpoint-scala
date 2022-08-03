@@ -1,6 +1,6 @@
 package com.eatobin.redpointscala
 
-import com.eatobin.redpointscala.Player.{jsonStringToPlayer, playerToJsonString, playerUpdateGiftHistory}
+import com.eatobin.redpointscala.Player.{playerJsonStringToPlayer, playerPlayerToJsonString, playerUpdateGiftHistory}
 import io.circe.Error
 import org.scalatest.flatspec.AnyFlatSpec
 
@@ -15,12 +15,12 @@ class PlayerSpec extends AnyFlatSpec {
   }
 
   it should "convert from JSON" in {
-    val plrJson: Either[Error, Player] = jsonStringToPlayer(jsonStringPlr)
+    val plrJson: Either[Error, Player] = playerJsonStringToPlayer(jsonStringPlr)
     assert(plrJson == Right(player))
   }
 
   it should "convert to JSON" in {
-    val plrJson: JsonString = playerToJsonString(player)
+    val plrJson: JsonString = playerPlayerToJsonString(player)
     assert(plrJson == jsonStringPlr)
   }
 }

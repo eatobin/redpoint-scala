@@ -17,19 +17,19 @@ class HatSpec extends AnyFlatSpec {
 
 
   "A Hat" should "make itself given players" in {
-    assert(makeHat(players) == testHat)
+    assert(hatsMakeHat(players) == testHat)
   }
 
   it should "remove a puck" in {
-    assert(removePuck("RinSta", testHat) == Set("JohLen", "GeoHar", "PauMcc"))
-    assert(removePuck("RinStaX", Set()) == Set())
+    assert(hatsRemovePuck("RinSta", testHat) == Set("JohLen", "GeoHar", "PauMcc"))
+    assert(hatsRemovePuck("RinStaX", Set()) == Set())
   }
 
   it should "discard a puck" in {
-    assert(discardGivee("JohLen", Set("PauMcc")) == Set("PauMcc", "JohLen"))
+    assert(hatsDiscardGivee("JohLen", Set("PauMcc")) == Set("PauMcc", "JohLen"))
   }
 
   it should "return discarded givees" in {
-    assert(returnDiscards(Set("GeoHar"), Set("PauMcc", "JohLen")) == Set("JohLen", "PauMcc", "GeoHar"))
+    assert(hatsReturnDiscards(Set("GeoHar"), Set("PauMcc", "JohLen")) == Set("JohLen", "PauMcc", "GeoHar"))
   }
 }
