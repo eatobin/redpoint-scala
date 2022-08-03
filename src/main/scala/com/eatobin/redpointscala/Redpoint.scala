@@ -151,20 +151,18 @@ object Redpoint {
         println("%s is buying for %s".format(playerName, giveeName))
       }
     }
+    if (redpointErrors().nonEmpty) {
+      println()
+      println("There is a logic error in this year's pairings.")
+      println("Do you see how it occurs?")
+      println("If not... call me and I'll explain!")
+    }
   }
 
   def redpointPrintStringGivingRoster(rName: String, rYear: Int): Unit = {
     println()
     println("%s - Year %d Gifts:".format(rName, rYear + agYear))
     println()
-    if (redpointErrors().nonEmpty) {
-      println()
-      println("There is a logic error in this year's pairings.")
-      println("Do you see it?")
-      println("If not... call me and I'll explain!")
-      println()
-      println()
-    }
     redpointPrintResults()
   }
 
