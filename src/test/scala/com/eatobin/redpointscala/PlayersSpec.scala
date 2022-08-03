@@ -33,11 +33,11 @@ class PlayersSpec extends AnyFlatSpec {
     Map("RinSta" -> rinSta, "JohLen" -> johLen, "GeoHar" -> geoHarGiver, "PauMcc" -> pauMcc)
 
   "Players" should "return an updated player" in {
-    assert(Players.updatePlayer("RinSta")(Player("New Bee", Vector(GiftPair("NewBee", "NewBee"))))(players) == newBeePlayers)
+    assert(Players.updatePlayer("RinSta", Player("New Bee", Vector(GiftPair("NewBee", "NewBee"))), players) == newBeePlayers)
   }
 
   it should "return a player name" in {
-    assert(Players.getPlayerName("PauMcc")(players) == "Paul McCartney")
+    assert(Players.getPlayerName("PauMcc", players) == "Paul McCartney")
   }
 
   it should "add a new year" in {
@@ -45,13 +45,13 @@ class PlayersSpec extends AnyFlatSpec {
   }
 
   it should "return a givee and a giver" in {
-    assert(Players.getGivee("GeoHar")(0)(players) == "RinSta")
-    assert(Players.getGiver("GeoHar")(0)(players) == "PauMcc")
+    assert(Players.getGivee("GeoHar", 0, players) == "RinSta")
+    assert(Players.getGiver("GeoHar", 0, players) == "PauMcc")
   }
 
   it should "update a givee and a giver" in {
-    assert(Players.updateGivee("GeoHar")(0)("you")(players) == playersGivee)
-    assert(Players.updateGiver("GeoHar")(0)("you")(players) == playersGiver)
+    assert(Players.updateGivee("GeoHar", 0, "you", players) == playersGivee)
+    assert(Players.updateGiver("GeoHar", 0, "you", players) == playersGiver)
   }
 
   it should "convert from JSON" in {

@@ -63,7 +63,7 @@ class RedpointSpec extends AnyFlatSpec {
     Redpoint.maybeGivee = None
     Redpoint.rosterOrQuit(filePath)
     Redpoint.startNewYear()
-    Redpoint.aDiscards = Hats.discardGivee("GeoHar")(Redpoint.aDiscards)
+    Redpoint.aDiscards = Hats.discardGivee("GeoHar", Redpoint.aDiscards)
     assert(Redpoint.aDiscards.size == 1)
     Redpoint.selectNewGiver()
     assert(Redpoint.agrHat.size == 3)
@@ -79,8 +79,8 @@ class RedpointSpec extends AnyFlatSpec {
     val givee = Redpoint.maybeGivee.get
     val giver = Redpoint.maybeGiver.get
     Redpoint.giveeIsSuccess()
-    assert(Players.getGivee(giver)(Redpoint.agYear)(Redpoint.aPlayers) == givee)
-    assert(Players.getGiver(givee)(Redpoint.agYear)(Redpoint.aPlayers) == giver)
+    assert(Players.getGivee(giver, Redpoint.agYear, Redpoint.aPlayers) == givee)
+    assert(Players.getGiver(givee, Redpoint.agYear, Redpoint.aPlayers) == giver)
     assert(!Redpoint.ageHat.contains(givee))
   }
 
@@ -105,9 +105,9 @@ class RedpointSpec extends AnyFlatSpec {
   it should "print" in {
     Redpoint.agYear = 0
     Redpoint.rosterOrQuit(filePath)
-    Redpoint.printStringGivingRoster("The Beatles")(2021)
+    Redpoint.printStringGivingRoster("The Beatles", 2021)
 
     Redpoint.aPlayers = playersWeird
-    Redpoint.printStringGivingRoster("The Weird Beatles")(2050)
+    Redpoint.printStringGivingRoster("The Weird Beatles", 2050)
   }
 }

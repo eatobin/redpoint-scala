@@ -9,8 +9,8 @@ class GiftPairSpec extends AnyFlatSpec {
   private val giftPair: GiftPair = GiftPair("GeoHar", "JohLen")
 
   "A GiftPair" should "update a giver/givee" in {
-    assert(GiftPair.updateGivee("NewBee")(giftPair) == GiftPair("NewBee", "JohLen"))
-    assert(GiftPair.updateGiver("NewBee")(giftPair) == GiftPair("GeoHar", "NewBee"))
+    assert(GiftPair.updateGivee("NewBee", giftPair) == GiftPair("NewBee", "JohLen"))
+    assert(GiftPair.updateGiver("NewBee", giftPair) == GiftPair("GeoHar", "NewBee"))
   }
 
   it should "convert from JSON" in {

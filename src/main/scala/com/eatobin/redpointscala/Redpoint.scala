@@ -17,7 +17,7 @@ object Redpoint {
 
   def main(args: Array[String]): Unit = {
     rosterOrQuit(filePath)
-    while (printAndAsk(aRosterName)(aRosterYear).toLowerCase != "q") {
+    while (printAndAsk(aRosterName, aRosterYear).toLowerCase != "q") {
       startNewYear()
       while (maybeGiver.isDefined) {
         while (maybeGivee.isDefined) {
@@ -93,8 +93,8 @@ object Redpoint {
 
   def selectNewGiver(): Unit = {
     val giver: String = maybeGiver.get
-    agrHat = Hats.removePuck(giver)(agrHat)
-    ageHat = Hats.returnDiscards(aDiscards)(ageHat)
+    agrHat = Hats.removePuck(giver, agrHat)
+    ageHat = Hats.returnDiscards(aDiscards, ageHat)
     aDiscards = Set()
     maybeGiver = drawPuck(agrHat)
     maybeGivee = drawPuck(ageHat)
@@ -103,16 +103,16 @@ object Redpoint {
   def giveeIsSuccess(): Unit = {
     val giver: String = maybeGiver.get
     val givee: String = maybeGivee.get
-    aPlayers = Players.updateGivee(giver)(agYear)(givee)(aPlayers)
-    aPlayers = Players.updateGiver(givee)(agYear)(giver)(aPlayers)
-    ageHat = Hats.removePuck(givee)(ageHat)
+    aPlayers = Players.updateGivee(giver, agYear, givee, aPlayers)
+    aPlayers = Players.updateGiver(givee, agYear, giver, aPlayers)
+    ageHat = Hats.removePuck(givee, ageHat)
     maybeGivee = None
   }
 
   def giveeIsFailure(): Unit = {
     val givee: String = maybeGivee.get
-    ageHat = Hats.removePuck(givee)(ageHat)
-    aDiscards = Hats.discardGivee(givee)(aDiscards)
+    ageHat = Hats.removePuck(givee, ageHat)
+    aDiscards = Hats.discardGivee(givee, aDiscards)
     maybeGivee = drawPuck(ageHat)
   }
 
@@ -121,8 +121,8 @@ object Redpoint {
     val plrErrors = {
       for {
         plrSym <- plrKeys
-        giverCode = Players.getGiver(plrSym)(agYear)(aPlayers)
-        giveeCode = Players.getGivee(plrSym)(agYear)(aPlayers)
+        giverCode = Players.getGiver(plrSym, agYear, aPlayers)
+        giveeCode = Players.getGivee(plrSym, agYear, aPlayers)
         if plrSym == giverCode || plrSym == giveeCode
       } yield plrSym
     }
@@ -132,10 +132,10 @@ object Redpoint {
   def printResults(): Unit = {
     val plrKeys: Seq[String] = aPlayers.keys.toSeq.sorted
     for (plrSym <- plrKeys) yield {
-      val playerName = Players.getPlayerName(plrSym)(aPlayers)
-      val giveeCode = Players.getGivee(plrSym)(agYear)(aPlayers)
-      val giveeName = Players.getPlayerName(giveeCode)(aPlayers)
-      val giverCode = Players.getGiver(plrSym)(agYear)(aPlayers)
+      val playerName = Players.getPlayerName(plrSym, aPlayers)
+      val giveeCode = Players.getGivee(plrSym, agYear, aPlayers)
+      val giveeName = Players.getPlayerName(giveeCode, aPlayers)
+      val giverCode = Players.getGiver(plrSym, agYear, aPlayers)
 
       if (plrSym == giveeCode && plrSym == giverCode) {
         println("%s is **buying** for nor **receiving** from anyone - **ERROR**".format(playerName))
@@ -149,7 +149,7 @@ object Redpoint {
     }
   }
 
-  def printStringGivingRoster(rName: String)(rYear: Int): Unit = {
+  def printStringGivingRoster(rName: JsonString, rYear: Int): Unit = {
     println()
     println("%s - Year %d Gifts:".format(rName, rYear + agYear))
     println()
@@ -164,8 +164,8 @@ object Redpoint {
     printResults()
   }
 
-  def printAndAsk(rName: String)(rYear: Int): String = {
-    printStringGivingRoster(rName)(rYear)
+  def printAndAsk(rName: JsonString, rYear: Int): String = {
+    printStringGivingRoster(rName, rYear)
     println()
     readLine("Continue? ('q' to quit): ")
   }

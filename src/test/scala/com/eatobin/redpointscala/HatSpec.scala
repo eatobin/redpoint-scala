@@ -1,7 +1,7 @@
 package com.eatobin.redpointscala
 
+import com.eatobin.redpointscala.Hats._
 import org.scalatest.flatspec.AnyFlatSpec
-import redpoint.Hats._
 
 class HatSpec extends AnyFlatSpec {
 
@@ -21,15 +21,15 @@ class HatSpec extends AnyFlatSpec {
   }
 
   it should "remove a puck" in {
-    assert(removePuck("RinSta")(testHat) == Set("JohLen", "GeoHar", "PauMcc"))
-    assert(removePuck("RinStaX")(Set()) == Set())
+    assert(removePuck("RinSta", testHat) == Set("JohLen", "GeoHar", "PauMcc"))
+    assert(removePuck("RinStaX", Set()) == Set())
   }
 
   it should "discard a puck" in {
-    assert(discardGivee("JohLen")(Set("PauMcc")) == Set("PauMcc", "JohLen"))
+    assert(discardGivee("JohLen", Set("PauMcc")) == Set("PauMcc", "JohLen"))
   }
 
   it should "return discarded givees" in {
-    assert(returnDiscards(Set("GeoHar"))(Set("PauMcc", "JohLen")) == Set("JohLen", "PauMcc", "GeoHar"))
+    assert(returnDiscards(Set("GeoHar"), Set("PauMcc", "JohLen")) == Set("JohLen", "PauMcc", "GeoHar"))
   }
 }
