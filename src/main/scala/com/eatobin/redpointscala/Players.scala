@@ -1,5 +1,7 @@
 package com.eatobin.redpointscala
 
+import com.eatobin.redpointscala.GiftHistory.{giftHistoryAddYear, giftHistoryUpdateGiftHistory}
+import com.eatobin.redpointscala.Player.playerUpdateGiftHistory
 import io.circe.Error
 import io.circe.generic.auto._
 import io.circe.parser._
@@ -14,8 +16,8 @@ object Players {
   def addYear(players: Map[String, Player]): Map[String, Player] = {
     val nplrs = for ((playerKey, player) <- players) yield {
       val gh = player.giftHistory
-      val ngh = GiftHistory.addYear(playerKey, gh)
-      val nplr = Player.updateGiftHistory(ngh, player)
+      val ngh = giftHistoryAddYear(playerKey, gh)
+      val nplr = playerUpdateGiftHistory(ngh, player)
       playerKey -> nplr
     }
     nplrs
@@ -28,8 +30,8 @@ object Players {
     players(selfKey).giftHistory(giftYear).giver
 
   private def setGiftPair(playerKey: JsonString, giftYear: Int, giftPair: GiftPair, players: Map[JsonString, Player]): Map[String, Player] = {
-    val ngh = GiftHistory.updateGiftHistory(giftYear, giftPair, players(playerKey).giftHistory)
-    val nplr = Player.updateGiftHistory(ngh, players(playerKey))
+    val ngh = giftHistoryUpdateGiftHistory(giftYear, giftPair, players(playerKey).giftHistory)
+    val nplr = playerUpdateGiftHistory(ngh, players(playerKey))
     updatePlayer(playerKey, nplr, players)
   }
 
