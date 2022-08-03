@@ -73,7 +73,7 @@ object Redpoint {
   }
 
   private def redpointRandom(s: Set[String]): String = {
-    val n = util.Random.nextInt(s.size)
+    val n: Int = util.Random.nextInt(s.size)
     s.iterator.drop(n).next()
   }
 
