@@ -1,6 +1,10 @@
 package com.eatobin.redpointscala
 
-import scala.io.Source
+import com.eatobin.redpointscala.Hats.{hatsDiscardGivee, hatsMakeHat, hatsRemovePuck, hatsReturnDiscards}
+import com.eatobin.redpointscala.Players._
+import com.eatobin.redpointscala.Rules.{rulesGiveeNotRecip, rulesGiveeNotRepeat, rulesGiveeNotSelf}
+
+import scala.io.Source._
 import scala.io.StdIn.readLine
 
 object Redpoint {
@@ -16,20 +20,20 @@ object Redpoint {
   val filePath: String = "src/main/resources/blackhawks.json"
 
   def main(args: Array[String]): Unit = {
-    rosterOrQuit(filePath)
-    while (printAndAsk(aRosterName, aRosterYear).toLowerCase != "q") {
-      startNewYear()
+    redpointRosterOrQuit(filePath)
+    while (redpointPrintAndAsk(aRosterName, aRosterYear).toLowerCase != "q") {
+      redpointStartNewYear()
       while (maybeGiver.isDefined) {
         while (maybeGivee.isDefined) {
-          if (Rules.rulesGiveeNotSelf(maybeGiver.get, maybeGivee.get) &&
-            Rules.rulesGiveeNotRecip(maybeGiver.get, maybeGivee.get, agYear, aPlayers) &&
-            Rules.rulesGiveeNotRepeat(maybeGiver.get, maybeGivee.get, agYear, aPlayers)) {
-            giveeIsSuccess()
+          if (rulesGiveeNotSelf(maybeGiver.get, maybeGivee.get) &&
+            rulesGiveeNotRecip(maybeGiver.get, maybeGivee.get, agYear, aPlayers) &&
+            rulesGiveeNotRepeat(maybeGiver.get, maybeGivee.get, agYear, aPlayers)) {
+            redpointGiveeIsSuccess()
           } else {
-            giveeIsFailure()
+            redpointGiveeIsFailure()
           }
         }
-        selectNewGiver()
+        redpointSelectNewGiver()
       }
     }
     println()
@@ -39,9 +43,9 @@ object Redpoint {
     println()
   }
 
-  def readFileIntoJsonString(fp: String): Either[ErrorString, JsonString] =
+  def redpointReadFileIntoJsonString(fp: String): Either[ErrorString, JsonString] =
     try {
-      val bufferedSource = Source.fromFile(fp)
+      val bufferedSource = fromFile(fp)
       val js = bufferedSource.getLines().mkString
       bufferedSource.close
       Right(js)
@@ -50,8 +54,8 @@ object Redpoint {
         Left(e.getMessage)
     }
 
-  def rosterOrQuit(fp: String): Unit = {
-    val rosterStringEither = readFileIntoJsonString(fp)
+  def redpointRosterOrQuit(fp: String): Unit = {
+    val rosterStringEither = redpointReadFileIntoJsonString(fp)
     rosterStringEither match {
       case Right(rs) =>
         val rosterEither: Either[ErrorString, Roster] = Roster.rosterJsonStringToRoster(Right(rs))
@@ -68,74 +72,74 @@ object Redpoint {
     }
   }
 
-  private def random(s: Set[String]): String = {
+  private def redpointRandom(s: Set[String]): String = {
     val n = util.Random.nextInt(s.size)
     s.iterator.drop(n).next()
   }
 
-  def drawPuck(hat: Set[String]): Option[String] = {
+  def redpointDrawPuck(hat: Set[String]): Option[String] = {
     if (hat.nonEmpty) {
-      Some(random(hat))
+      Some(redpointRandom(hat))
     } else {
       None
     }
   }
 
-  def startNewYear(): Unit = {
+  def redpointStartNewYear(): Unit = {
     agYear = agYear + 1
-    aPlayers = Players.playersAddYear(aPlayers)
-    agrHat = Hats.hatsMakeHat(aPlayers)
-    ageHat = Hats.hatsMakeHat(aPlayers)
-    maybeGiver = drawPuck(agrHat)
-    maybeGivee = drawPuck(ageHat)
+    aPlayers = playersAddYear(aPlayers)
+    agrHat = hatsMakeHat(aPlayers)
+    ageHat = hatsMakeHat(aPlayers)
+    maybeGiver = redpointDrawPuck(agrHat)
+    maybeGivee = redpointDrawPuck(ageHat)
     aDiscards = Set()
   }
 
-  def selectNewGiver(): Unit = {
+  def redpointSelectNewGiver(): Unit = {
     val giver: String = maybeGiver.get
-    agrHat = Hats.hatsRemovePuck(giver, agrHat)
-    ageHat = Hats.hatsReturnDiscards(aDiscards, ageHat)
+    agrHat = hatsRemovePuck(giver, agrHat)
+    ageHat = hatsReturnDiscards(aDiscards, ageHat)
     aDiscards = Set()
-    maybeGiver = drawPuck(agrHat)
-    maybeGivee = drawPuck(ageHat)
+    maybeGiver = redpointDrawPuck(agrHat)
+    maybeGivee = redpointDrawPuck(ageHat)
   }
 
-  def giveeIsSuccess(): Unit = {
+  def redpointGiveeIsSuccess(): Unit = {
     val giver: String = maybeGiver.get
     val givee: String = maybeGivee.get
-    aPlayers = Players.playersUpdateGivee(giver, agYear, givee, aPlayers)
-    aPlayers = Players.playersUpdateGiver(givee, agYear, giver, aPlayers)
-    ageHat = Hats.hatsRemovePuck(givee, ageHat)
+    aPlayers = playersUpdateGivee(giver, agYear, givee, aPlayers)
+    aPlayers = playersUpdateGiver(givee, agYear, giver, aPlayers)
+    ageHat = hatsRemovePuck(givee, ageHat)
     maybeGivee = None
   }
 
-  def giveeIsFailure(): Unit = {
+  def redpointGiveeIsFailure(): Unit = {
     val givee: String = maybeGivee.get
-    ageHat = Hats.hatsRemovePuck(givee, ageHat)
-    aDiscards = Hats.hatsDiscardGivee(givee, aDiscards)
-    maybeGivee = drawPuck(ageHat)
+    ageHat = hatsRemovePuck(givee, ageHat)
+    aDiscards = hatsDiscardGivee(givee, aDiscards)
+    maybeGivee = redpointDrawPuck(ageHat)
   }
 
-  def errors(): Seq[String] = {
+  def redpointErrors(): Seq[String] = {
     val plrKeys: Seq[String] = aPlayers.keys.toSeq
     val plrErrors = {
       for {
         plrSym <- plrKeys
-        giverCode = Players.playersGetGiver(plrSym, agYear, aPlayers)
-        giveeCode = Players.playersGetGivee(plrSym, agYear, aPlayers)
+        giverCode = playersGetGiver(plrSym, agYear, aPlayers)
+        giveeCode = playersGetGivee(plrSym, agYear, aPlayers)
         if plrSym == giverCode || plrSym == giveeCode
       } yield plrSym
     }
     plrErrors.sorted
   }
 
-  def printResults(): Unit = {
+  def redpointPrintResults(): Unit = {
     val plrKeys: Seq[String] = aPlayers.keys.toSeq.sorted
     for (plrSym <- plrKeys) yield {
-      val playerName = Players.playersGetPlayerName(plrSym, aPlayers)
-      val giveeCode = Players.playersGetGivee(plrSym, agYear, aPlayers)
-      val giveeName = Players.playersGetPlayerName(giveeCode, aPlayers)
-      val giverCode = Players.playersGetGiver(plrSym, agYear, aPlayers)
+      val playerName = playersGetPlayerName(plrSym, aPlayers)
+      val giveeCode = playersGetGivee(plrSym, agYear, aPlayers)
+      val giveeName = playersGetPlayerName(giveeCode, aPlayers)
+      val giverCode = playersGetGiver(plrSym, agYear, aPlayers)
 
       if (plrSym == giveeCode && plrSym == giverCode) {
         println("%s is **buying** for nor **receiving** from anyone - **ERROR**".format(playerName))
@@ -149,11 +153,11 @@ object Redpoint {
     }
   }
 
-  def printStringGivingRoster(rName: JsonString, rYear: Int): Unit = {
+  def redpointPrintStringGivingRoster(rName: String, rYear: Int): Unit = {
     println()
     println("%s - Year %d Gifts:".format(rName, rYear + agYear))
     println()
-    if (errors().nonEmpty) {
+    if (redpointErrors().nonEmpty) {
       println()
       println("There is a logic error in this year's pairings.")
       println("Do you see it?")
@@ -161,11 +165,11 @@ object Redpoint {
       println()
       println()
     }
-    printResults()
+    redpointPrintResults()
   }
 
-  def printAndAsk(rName: JsonString, rYear: Int): String = {
-    printStringGivingRoster(rName, rYear)
+  def redpointPrintAndAsk(rName: String, rYear: Int): String = {
+    redpointPrintStringGivingRoster(rName, rYear)
     println()
     readLine("Continue? ('q' to quit): ")
   }
