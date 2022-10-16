@@ -142,7 +142,7 @@ object Redpoint {
       val giverCode = playersGetGiver(plrSym, agYear, aPlayers)
 
       if (plrSym == giveeCode && plrSym == giverCode) {
-        println("%s is **buying** for nor **receiving** from anyone - **ERROR**".format(playerName))
+        println("%s is neither **buying** for nor **receiving** from anyone - **ERROR**".format(playerName))
       } else if (plrSym == giverCode) {
         println("%s is **receiving** from no one - **ERROR**".format(playerName))
       } else if (plrSym == giveeCode) {
