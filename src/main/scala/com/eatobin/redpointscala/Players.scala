@@ -37,12 +37,12 @@ object Players {
   }
 
   def playersUpdateGivee(selfKey: String, giftYear: Int, givee: String, players: Map[JsonString, Player]): Map[String, Player] = {
-    val ngp = GiftPair.giftPairUpdateGivee(givee, players(selfKey).giftHistory(giftYear))
+    val ngp = GiftPair.giftPairUpdateGivee(givee)(players(selfKey).giftHistory(giftYear))
     playersSetGiftPair(selfKey, giftYear, ngp, players)
   }
 
   def playersUpdateGiver(selfKey: String, giftYear: Int, giver: String, players: Map[String, Player]): Map[String, Player] = {
-    val ngp = GiftPair.giftPairUpdateGiver(giver, players(selfKey).giftHistory(giftYear))
+    val ngp = GiftPair.giftPairUpdateGiver(giver)(players(selfKey).giftHistory(giftYear))
     playersSetGiftPair(selfKey, giftYear, ngp, players)
   }
 

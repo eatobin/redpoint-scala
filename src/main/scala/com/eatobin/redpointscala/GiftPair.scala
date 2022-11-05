@@ -14,9 +14,9 @@ object GiftPair {
   type Giver = PlayerSymbol
   type JsonString = String
 
-  def giftPairUpdateGivee(givee: Givee, giftPair: GiftPair): GiftPair = giftPair.copy(givee = givee)
+  def giftPairUpdateGivee(givee: Givee)(giftPair: GiftPair): GiftPair = giftPair.copy(givee = givee)
 
-  def giftPairUpdateGiver(giver: Giver, giftPair: GiftPair): GiftPair = giftPair.copy(giver = giver)
+  def giftPairUpdateGiver(giver: Giver)(giftPair: GiftPair): GiftPair = giftPair.copy(giver = giver)
 
   def giftPairJsonStringToGiftPair(jsonString: JsonString): Either[Error, GiftPair] =
     decode[GiftPair](jsonString)
