@@ -1,11 +1,12 @@
 package com.eatobin.redpointscala
 
+import com.eatobin.redpointscala.GiftPair.{Givee, Giver}
 import io.circe.Error
 import io.circe.generic.auto._
 import io.circe.parser._
 import io.circe.syntax._
 
-case class GiftPair(givee: String, giver: String)
+case class GiftPair(givee: Givee, giver: Giver)
 
 object GiftPair {
   type PlayerSymbol = String
