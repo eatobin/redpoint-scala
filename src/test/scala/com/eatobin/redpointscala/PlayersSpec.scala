@@ -1,5 +1,6 @@
 package com.eatobin.redpointscala
 
+import com.eatobin.redpointscala.GiftPair.JsonString
 import com.eatobin.redpointscala.Players._
 import io.circe.Error
 import org.scalatest.flatspec.AnyFlatSpec

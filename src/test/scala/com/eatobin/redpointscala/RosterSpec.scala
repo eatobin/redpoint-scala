@@ -1,5 +1,6 @@
 package com.eatobin.redpointscala
 
+import com.eatobin.redpointscala.GiftPair.JsonString
 import org.scalatest.flatspec.AnyFlatSpec
 
 class RosterSpec extends AnyFlatSpec {

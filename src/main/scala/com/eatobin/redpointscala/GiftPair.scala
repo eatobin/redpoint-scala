@@ -8,13 +8,18 @@ import io.circe.syntax._
 case class GiftPair(givee: String, giver: String)
 
 object GiftPair {
-  def giftPairUpdateGivee(newGivee: String, giftPair: GiftPair): GiftPair = giftPair.copy(givee = newGivee)
+  type PlayerSymbol = String
+  type Givee = PlayerSymbol
+  type Giver = PlayerSymbol
+  type JsonString = String
 
-  def giftPairUpdateGiver(newGiver: String, giftPair: GiftPair): GiftPair = giftPair.copy(giver = newGiver)
+  def giftPairUpdateGivee(gee: Givee, giftPair: GiftPair): GiftPair = giftPair.copy(givee = gee)
 
-  def giftPairJsonStringToGiftPair(gpJsonString: JsonString): Either[Error, GiftPair] =
-    decode[GiftPair](gpJsonString)
+  def giftPairUpdateGiver(ger: Giver, giftPair: GiftPair): GiftPair = giftPair.copy(giver = ger)
 
-  def giftPairGiftPairToJsonString(giftPair: GiftPair): JsonString =
-    giftPair.asJson.noSpaces
+  def giftPairJsonStringToGiftPair(js: JsonString): Either[Error, GiftPair] =
+    decode[GiftPair](js)
+
+  def giftPairGiftPairToJsonString(gp: GiftPair): JsonString =
+    gp.asJson.noSpaces
 }

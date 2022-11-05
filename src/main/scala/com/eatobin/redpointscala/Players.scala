@@ -1,6 +1,7 @@
 package com.eatobin.redpointscala
 
 import com.eatobin.redpointscala.GiftHistory.{giftHistoryAddYear, giftHistoryUpdateGiftHistory}
+import com.eatobin.redpointscala.GiftPair.JsonString
 import com.eatobin.redpointscala.Player.playerUpdateGiftHistory
 import io.circe.Error
 import io.circe.generic.auto._

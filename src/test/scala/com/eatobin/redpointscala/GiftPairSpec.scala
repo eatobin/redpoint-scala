@@ -1,6 +1,6 @@
 package com.eatobin.redpointscala
 
-import com.eatobin.redpointscala.GiftPair.{giftPairGiftPairToJsonString, giftPairUpdateGivee, giftPairUpdateGiver, giftPairJsonStringToGiftPair}
+import com.eatobin.redpointscala.GiftPair._
 import io.circe.Error
 import org.scalatest.flatspec.AnyFlatSpec
 
