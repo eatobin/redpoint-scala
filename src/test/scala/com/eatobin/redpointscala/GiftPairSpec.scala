@@ -6,7 +6,7 @@ import org.scalatest.flatspec.AnyFlatSpec
 
 class GiftPairSpec extends AnyFlatSpec {
 
-  private val jsonStringGP: JsonString = "{\"givee\":\"GeoHar\",\"giver\":\"JohLen\"}"
+  private val jsonString: JsonString = "{\"givee\":\"GeoHar\",\"giver\":\"JohLen\"}"
   private val giftPair: GiftPair = GiftPair("GeoHar", "JohLen")
 
   "A GiftPair" should "update a giver/givee" in {
@@ -15,12 +15,12 @@ class GiftPairSpec extends AnyFlatSpec {
   }
 
   it should "convert from JSON" in {
-    val gpJson: Either[Error, GiftPair] = giftPairJsonStringToGiftPair(jsonStringGP)
+    val gpJson: Either[Error, GiftPair] = giftPairJsonStringToGiftPair(jsonString)
     assert(gpJson == Right(giftPair))
   }
 
   it should "convert to JSON" in {
     val gpJson: JsonString = giftPairGiftPairToJsonString(giftPair)
-    assert(gpJson == jsonStringGP)
+    assert(gpJson == jsonString)
   }
 }

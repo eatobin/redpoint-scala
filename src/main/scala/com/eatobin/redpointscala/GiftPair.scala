@@ -13,13 +13,13 @@ object GiftPair {
   type Giver = PlayerSymbol
   type JsonString = String
 
-  def giftPairUpdateGivee(gee: Givee, giftPair: GiftPair): GiftPair = giftPair.copy(givee = gee)
+  def giftPairUpdateGivee(givee: Givee, giftPair: GiftPair): GiftPair = giftPair.copy(givee = givee)
 
-  def giftPairUpdateGiver(ger: Giver, giftPair: GiftPair): GiftPair = giftPair.copy(giver = ger)
+  def giftPairUpdateGiver(giver: Giver, giftPair: GiftPair): GiftPair = giftPair.copy(giver = giver)
 
-  def giftPairJsonStringToGiftPair(js: JsonString): Either[Error, GiftPair] =
-    decode[GiftPair](js)
+  def giftPairJsonStringToGiftPair(jsonString: JsonString): Either[Error, GiftPair] =
+    decode[GiftPair](jsonString)
 
-  def giftPairGiftPairToJsonString(gp: GiftPair): JsonString =
-    gp.asJson.noSpaces
+  def giftPairGiftPairToJsonString(giftPair: GiftPair): JsonString =
+    giftPair.asJson.noSpaces
 }
