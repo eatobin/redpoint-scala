@@ -16,8 +16,8 @@ object GiftHistory {
   def giftHistoryUpdateGiftHistory(giftYear: GiftYear)(giftPair: GiftPair)(giftHistory: GiftHistory): GiftHistory =
     giftHistory.updated(giftYear, giftPair)
 
-  def giftHistoryJsonStringToGiftHistory(ghJsonString: String): Either[Error, GiftHistory] =
-    decode[Vector[GiftPair]](ghJsonString)
+  def giftHistoryJsonStringToGiftHistory(jsonString: String): Either[Error, GiftHistory] =
+    decode[Vector[GiftPair]](jsonString)
 
   def giftHistoryGiftHistoryToJsonString(giftHistory: GiftHistory): JsonString =
     giftHistory.asJson.noSpaces
