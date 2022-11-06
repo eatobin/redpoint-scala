@@ -31,7 +31,7 @@ object Players {
     players(selfKey).giftHistory(giftYear).giver
 
   private def playersSetGiftPair(playerKey: String, giftYear: Int, giftPair: GiftPair, players: Map[String, Player]): Map[String, Player] = {
-    val ngh = giftHistoryUpdateGiftHistory(giftYear, giftPair, players(playerKey).giftHistory)
+    val ngh = giftHistoryUpdateGiftHistory(giftYear)(giftPair)(players(playerKey).giftHistory)
     val nplr = playerUpdateGiftHistory(ngh, players(playerKey))
     playersUpdatePlayer(playerKey, nplr, players)
   }

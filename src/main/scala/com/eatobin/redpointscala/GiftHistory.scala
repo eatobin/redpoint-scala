@@ -13,7 +13,7 @@ object GiftHistory {
   def giftHistoryAddYear(playerKey: PlayerSymbol)(giftHistory: GiftHistory): GiftHistory =
     giftHistory :+ GiftPair(playerKey, playerKey)
 
-  def giftHistoryUpdateGiftHistory(giftYear: GiftYear, giftPair: GiftPair, giftHistory: GiftHistory): GiftHistory =
+  def giftHistoryUpdateGiftHistory(giftYear: GiftYear)(giftPair: GiftPair)(giftHistory: GiftHistory): GiftHistory =
     giftHistory.updated(giftYear, giftPair)
 
   def giftHistoryJsonStringToGiftHistory(ghJsonString: String): Either[Error, GiftHistory] =

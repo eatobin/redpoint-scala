@@ -14,7 +14,7 @@ class GiftHistorySpec extends AnyFlatSpec {
   }
 
   it should "return an updated giftHistory" in {
-    assert(GiftHistory.giftHistoryUpdateGiftHistory(0, GiftPair("me", "you"), giftHistory) == Vector(GiftPair("me", "you")))
+    assert(GiftHistory.giftHistoryUpdateGiftHistory(0)(GiftPair("me", "you"))(giftHistory) == Vector(GiftPair("me", "you")))
   }
 
   it should "convert from JSON" in {
