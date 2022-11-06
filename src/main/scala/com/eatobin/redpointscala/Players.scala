@@ -17,7 +17,7 @@ object Players {
   def playersAddYear(players: Map[String, Player]): Map[String, Player] = {
     val nplrs = for ((playerKey, player) <- players) yield {
       val gh = player.giftHistory
-      val ngh = giftHistoryAddYear(playerKey, gh)
+      val ngh = giftHistoryAddYear(playerKey)(gh)
       val nplr = playerUpdateGiftHistory(ngh, player)
       playerKey -> nplr
     }

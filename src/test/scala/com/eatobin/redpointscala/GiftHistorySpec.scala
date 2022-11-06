@@ -10,7 +10,7 @@ class GiftHistorySpec extends AnyFlatSpec {
   private val giftHistory: Vector[GiftPair] = Vector(GiftPair("GeoHar", "JohLen"))
 
   "A GiftHistory" should "add a new year" in {
-    assert(GiftHistory.giftHistoryAddYear("NewBee", giftHistory) == Vector(GiftPair("GeoHar", "JohLen"), GiftPair("NewBee", "NewBee")))
+    assert(GiftHistory.giftHistoryAddYear("NewBee")(giftHistory) == Vector(GiftPair("GeoHar", "JohLen"), GiftPair("NewBee", "NewBee")))
   }
 
   it should "return an updated giftHistory" in {
