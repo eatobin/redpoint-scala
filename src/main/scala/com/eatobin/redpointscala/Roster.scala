@@ -8,6 +8,8 @@ import io.circe.parser._
 case class Roster(rosterName: String, rosterYear: Int, players: Map[String, Player])
 
 object Roster {
+  type ErrorString = String
+
   def rosterJsonStringToRoster(s: Either[ErrorString, JsonString]): Either[ErrorString, Roster] = {
     s match {
       case Right(rFile) =>

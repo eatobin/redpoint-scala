@@ -3,6 +3,7 @@ package com.eatobin.redpointscala
 import com.eatobin.redpointscala.GiftPair.JsonString
 import com.eatobin.redpointscala.Hats.{hatsDiscardGivee, hatsMakeHat, hatsRemovePuck, hatsReturnDiscards}
 import com.eatobin.redpointscala.Players._
+import com.eatobin.redpointscala.Roster.ErrorString
 import com.eatobin.redpointscala.Rules.{rulesGiveeNotRecip, rulesGiveeNotRepeat, rulesGiveeNotSelf}
 
 import scala.io.Source._

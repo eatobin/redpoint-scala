@@ -2,6 +2,6 @@ package com.eatobin
 
 package object redpointscala {
 
-  type ErrorString = String
+//  type ErrorStringXXX = String
 
 }
