@@ -7,7 +7,7 @@ import org.scalatest.flatspec.AnyFlatSpec
 
 class PlayerSpec extends AnyFlatSpec {
 
-  private val jsonStringPlr: JsonString = "{\"playerName\":\"Paul McCartney\",\"giftHistory\":[{\"givee\":\"GeoHar\",\"giver\":\"JohLen\"}]}"
+  private val jsonString: JsonString = "{\"playerName\":\"Paul McCartney\",\"giftHistory\":[{\"givee\":\"GeoHar\",\"giver\":\"JohLen\"}]}"
   private val player: Player = Player("Paul McCartney", Vector(GiftPair("GeoHar", "JohLen")))
 
   "A Player" should "return an updated giftHistory" in {
@@ -16,12 +16,12 @@ class PlayerSpec extends AnyFlatSpec {
   }
 
   it should "convert from JSON" in {
-    val plrJson: Either[Error, Player] = playerJsonStringToPlayer(jsonStringPlr)
+    val plrJson: Either[Error, Player] = playerJsonStringToPlayer(jsonString)
     assert(plrJson == Right(player))
   }
 
   it should "convert to JSON" in {
     val plrJson: JsonString = playerPlayerToJsonString(player)
-    assert(plrJson == jsonStringPlr)
+    assert(plrJson == jsonString)
   }
 }
