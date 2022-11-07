@@ -13,8 +13,8 @@ case class Player(playerName: PlayerName, giftHistory: GiftHistory)
 object Player {
   type PlayerName = String
 
-  def playerUpdateGiftHistory(giftHistory: GiftHistory, player: Player): Player =
-    player.copy(giftHistory = giftHistory)
+  def playerUpdateGiftHistory(giftHistory1: GiftHistory, player: Player): Player =
+    player.copy(giftHistory = giftHistory1)
 
   def playerJsonStringToPlayer(jsonString: String): Either[Error, Player] =
     decode[Player](jsonString)
