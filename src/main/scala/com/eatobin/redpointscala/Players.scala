@@ -1,17 +1,20 @@
 package com.eatobin.redpointscala
 
 import com.eatobin.redpointscala.GiftHistory.{giftHistoryAddYear, giftHistoryUpdateGiftHistory}
-import com.eatobin.redpointscala.GiftPair.JsonString
+import com.eatobin.redpointscala.GiftPair.{JsonString, PlayerSymbol}
 import com.eatobin.redpointscala.Player.playerUpdateGiftHistory
 import io.circe.Error
 import io.circe.generic.auto._
 import io.circe.parser._
 
 object Players {
-  def playersUpdatePlayer(playerKey: String, player: Player, players: Map[String, Player]): Map[String, Player] =
+  type SelfKey = PlayerSymbol
+  type Players = Map[String, Player]
+
+  def playersUpdatePlayer(playerKey: PlayerSymbol, player: Player, players: Map[String, Player]): Map[String, Player] =
     players.updated(playerKey, player)
 
-  def playersGetPlayerName(playerKey: String, players: Map[String, Player]): String =
+  def playersGetPlayerName(playerKey: PlayerSymbol, players: Map[String, Player]): String =
     players(playerKey).playerName
 
   def playersAddYear(players: Map[String, Player]): Map[String, Player] = {
@@ -24,13 +27,13 @@ object Players {
     nplrs
   }
 
-  def playersGetGivee(selfKey: String, giftYear: Int, players: Map[String, Player]): String =
+  def playersGetGivee(selfKey: SelfKey, giftYear: Int, players: Map[String, Player]): String =
     players(selfKey).giftHistory(giftYear).givee
 
-  def playersGetGiver(selfKey: String, giftYear: Int, players: Map[String, Player]): String =
+  def playersGetGiver(selfKey: SelfKey, giftYear: Int, players: Map[String, Player]): String =
     players(selfKey).giftHistory(giftYear).giver
 
-  private def playersSetGiftPair(playerKey: String, giftYear: Int, giftPair: GiftPair, players: Map[String, Player]): Map[String, Player] = {
+  private def playersSetGiftPair(playerKey: PlayerSymbol, giftYear: Int, giftPair: GiftPair, players: Map[String, Player]): Map[String, Player] = {
     val ngh = giftHistoryUpdateGiftHistory(giftYear)(giftPair)(players(playerKey).giftHistory)
     val nplr = playerUpdateGiftHistory(ngh)(players(playerKey))
     playersUpdatePlayer(playerKey, nplr, players)
