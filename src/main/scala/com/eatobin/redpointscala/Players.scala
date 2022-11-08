@@ -1,23 +1,22 @@
 package com.eatobin.redpointscala
 
-import com.eatobin.redpointscala.GiftHistory.{giftHistoryAddYear, giftHistoryUpdateGiftHistory}
-import com.eatobin.redpointscala.GiftPair.{JsonString, PlayerKey}
-import com.eatobin.redpointscala.Player.playerUpdateGiftHistory
+import com.eatobin.redpointscala.GiftHistory.{GiftYear, giftHistoryAddYear, giftHistoryUpdateGiftHistory}
+import com.eatobin.redpointscala.GiftPair._
+import com.eatobin.redpointscala.Player.{PlayerName, playerUpdateGiftHistory}
 import io.circe.Error
 import io.circe.generic.auto._
 import io.circe.parser._
 
 object Players {
-  type SelfKey = PlayerKey
-  type Players = Map[String, Player]
+  type Players = Map[PlayerKey, Player]
 
-  def playersUpdatePlayer(playerKey: PlayerKey, player: Player, players: Map[String, Player]): Map[String, Player] =
+  def playersUpdatePlayer(playerKey: PlayerKey, player: Player, players: Players): Players =
     players.updated(playerKey, player)
 
-  def playersGetPlayerName(playerKey: PlayerKey, players: Map[String, Player]): String =
+  def playersGetPlayerName(playerKey: PlayerKey, players: Players): PlayerName =
     players(playerKey).playerName
 
-  def playersAddYear(players: Map[String, Player]): Map[String, Player] = {
+  def playersAddYear(players: Players): Players = {
     val nplrs = for ((playerKey, player) <- players) yield {
       val gh = player.giftHistory
       val ngh = giftHistoryAddYear(playerKey)(gh)
@@ -27,28 +26,28 @@ object Players {
     nplrs
   }
 
-  def playersGetGivee(selfKey: SelfKey, giftYear: Int, players: Map[String, Player]): String =
+  def playersGetMyGivee(selfKey: PlayerKey, giftYear: GiftYear, players: Players): Givee =
     players(selfKey).giftHistory(giftYear).givee
 
-  def playersGetGiver(selfKey: SelfKey, giftYear: Int, players: Map[String, Player]): String =
+  def playersGetMyGiver(selfKey: PlayerKey, giftYear: GiftYear, players: Players): Giver =
     players(selfKey).giftHistory(giftYear).giver
 
-  private def playersSetGiftPair(playerKey: PlayerKey, giftYear: Int, giftPair: GiftPair, players: Map[String, Player]): Map[String, Player] = {
+  private def playersSetGiftPair(playerKey: PlayerKey, giftYear: GiftYear, giftPair: GiftPair, players: Players): Players = {
     val ngh = giftHistoryUpdateGiftHistory(giftYear)(giftPair)(players(playerKey).giftHistory)
     val nplr = playerUpdateGiftHistory(ngh)(players(playerKey))
     playersUpdatePlayer(playerKey, nplr, players)
   }
 
-  def playersUpdateGivee(selfKey: String, giftYear: Int, givee: String, players: Map[JsonString, Player]): Map[String, Player] = {
-    val ngp = GiftPair.giftPairUpdateGivee(givee)(players(selfKey).giftHistory(giftYear))
+  def playersUpdateMyGivee(selfKey: PlayerKey, giftYear: GiftYear, givee: Givee, players: Players): Players = {
+    val ngp = giftPairUpdateGivee(givee)(players(selfKey).giftHistory(giftYear))
     playersSetGiftPair(selfKey, giftYear, ngp, players)
   }
 
-  def playersUpdateGiver(selfKey: String, giftYear: Int, giver: String, players: Map[String, Player]): Map[String, Player] = {
-    val ngp = GiftPair.giftPairUpdateGiver(giver)(players(selfKey).giftHistory(giftYear))
+  def playersUpdateMyGiver(selfKey: PlayerKey, giftYear: GiftYear, giver: Giver, players: Players): Players = {
+    val ngp = giftPairUpdateGiver(giver)(players(selfKey).giftHistory(giftYear))
     playersSetGiftPair(selfKey, giftYear, ngp, players)
   }
 
-  def playersJsonStringToPlayers(plrsJsonString: JsonString): Either[Error, Map[String, Player]] =
-    decode[Map[String, Player]](plrsJsonString)
+  def playersJsonStringToPlayers(jsonString: JsonString): Either[Error, Players] =
+    decode[Players](jsonString)
 }

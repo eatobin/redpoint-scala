@@ -14,13 +14,13 @@ class RulesSpec extends AnyFlatSpec {
     Map("RinSta" -> rinSta, "JohLen" -> johLen, "GeoHar" -> geoHar, "PauMcc" -> pauMcc, "EriTob" -> eriTob, "KarLav" -> karLav)
 
   private var beatlesPlus4 = Players.playersAddYear(beatlesPlusPM)
-  beatlesPlus4 = Players.playersUpdateGivee("RinSta", 1, "GeoHar", beatlesPlus4)
+  beatlesPlus4 = Players.playersUpdateMyGivee("RinSta", 1, "GeoHar", beatlesPlus4)
   beatlesPlus4 = Players.playersAddYear(beatlesPlus4)
-  beatlesPlus4 = Players.playersUpdateGivee("RinSta", 2, "PauMcc", beatlesPlus4)
+  beatlesPlus4 = Players.playersUpdateMyGivee("RinSta", 2, "PauMcc", beatlesPlus4)
   beatlesPlus4 = Players.playersAddYear(beatlesPlus4)
-  beatlesPlus4 = Players.playersUpdateGivee("RinSta", 3, "EriTob", beatlesPlus4)
+  beatlesPlus4 = Players.playersUpdateMyGivee("RinSta", 3, "EriTob", beatlesPlus4)
   beatlesPlus4 = Players.playersAddYear(beatlesPlus4)
-  beatlesPlus4 = Players.playersUpdateGivee("RinSta", 4, "KarLav", beatlesPlus4)
+  beatlesPlus4 = Players.playersUpdateMyGivee("RinSta", 4, "KarLav", beatlesPlus4)
 
   "A Player" should "not give to itself" in {
     assert(Rules.rulesGiveeNotSelf("RinSta", "GeoHar"))

@@ -47,13 +47,13 @@ class PlayersSpec extends AnyFlatSpec {
   }
 
   it should "return a givee and a giver" in {
-    assert(playersGetGivee("GeoHar", 0, players) == "RinSta")
-    assert(playersGetGiver("GeoHar", 0, players) == "PauMcc")
+    assert(playersGetMyGivee("GeoHar", 0, players) == "RinSta")
+    assert(playersGetMyGiver("GeoHar", 0, players) == "PauMcc")
   }
 
   it should "update a givee and a giver" in {
-    assert(playersUpdateGivee("GeoHar", 0, "you", players) == playersGivee)
-    assert(playersUpdateGiver("GeoHar", 0, "you", players) == playersGiver)
+    assert(playersUpdateMyGivee("GeoHar", 0, "you", players) == playersGivee)
+    assert(playersUpdateMyGiver("GeoHar", 0, "you", players) == playersGiver)
   }
 
   it should "convert from JSON" in {

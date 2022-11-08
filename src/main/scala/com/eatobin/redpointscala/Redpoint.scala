@@ -109,8 +109,8 @@ object Redpoint {
   def redpointGiveeIsSuccess(): Unit = {
     val giver: String = maybeGiver.get
     val givee: String = maybeGivee.get
-    aPlayers = playersUpdateGivee(giver, agYear, givee, aPlayers)
-    aPlayers = playersUpdateGiver(givee, agYear, giver, aPlayers)
+    aPlayers = playersUpdateMyGivee(giver, agYear, givee, aPlayers)
+    aPlayers = playersUpdateMyGiver(givee, agYear, giver, aPlayers)
     ageHat = hatsRemovePuck(givee, ageHat)
     maybeGivee = None
   }
@@ -127,8 +127,8 @@ object Redpoint {
     val plrErrors = {
       for {
         plrSym <- plrKeys
-        giverCode = playersGetGiver(plrSym, agYear, aPlayers)
-        giveeCode = playersGetGivee(plrSym, agYear, aPlayers)
+        giverCode = playersGetMyGiver(plrSym, agYear, aPlayers)
+        giveeCode = playersGetMyGivee(plrSym, agYear, aPlayers)
         if plrSym == giverCode || plrSym == giveeCode
       } yield plrSym
     }
@@ -139,9 +139,9 @@ object Redpoint {
     val plrKeys: Seq[String] = aPlayers.keys.toSeq.sorted
     for (plrSym <- plrKeys) yield {
       val playerName = playersGetPlayerName(plrSym, aPlayers)
-      val giveeCode = playersGetGivee(plrSym, agYear, aPlayers)
+      val giveeCode = playersGetMyGivee(plrSym, agYear, aPlayers)
       val giveeName = playersGetPlayerName(giveeCode, aPlayers)
-      val giverCode = playersGetGiver(plrSym, agYear, aPlayers)
+      val giverCode = playersGetMyGiver(plrSym, agYear, aPlayers)
 
       if (plrSym == giveeCode && plrSym == giverCode) {
         println("%s is neither **buying** for nor **receiving** from anyone - **ERROR**".format(playerName))
