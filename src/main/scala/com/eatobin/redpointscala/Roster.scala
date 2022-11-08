@@ -1,13 +1,17 @@
 package com.eatobin.redpointscala
 
 import com.eatobin.redpointscala.GiftPair.JsonString
+import com.eatobin.redpointscala.Players.Players
+import com.eatobin.redpointscala.Roster.{RosterName, RosterYear}
 import io.circe.Error
 import io.circe.generic.auto._
 import io.circe.parser._
 
-case class Roster(rosterName: String, rosterYear: Int, players: Map[String, Player])
+case class Roster(rosterName: RosterName, rosterYear: RosterYear, players: Players)
 
 object Roster {
+  type RosterName = String
+  type RosterYear = Int
   type ErrorString = String
 
   def rosterJsonStringToRoster(s: Either[ErrorString, JsonString]): Either[ErrorString, Roster] = {
