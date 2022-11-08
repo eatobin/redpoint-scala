@@ -1,6 +1,6 @@
 package com.eatobin.redpointscala
 
-import com.eatobin.redpointscala.Hats._
+import com.eatobin.redpointscala.Hat._
 import org.scalatest.flatspec.AnyFlatSpec
 
 class HatSpec extends AnyFlatSpec {
@@ -17,19 +17,19 @@ class HatSpec extends AnyFlatSpec {
 
 
   "A Hat" should "make itself given players" in {
-    assert(hatsMakeHat(players) == testHat)
+    assert(hatMakeHat(players) == testHat)
   }
 
   it should "remove a puck" in {
-    assert(hatsRemovePuck("RinSta", testHat) == Set("JohLen", "GeoHar", "PauMcc"))
-    assert(hatsRemovePuck("RinStaX", Set()) == Set())
+    assert(hatRemovePuck("RinSta", testHat) == Set("JohLen", "GeoHar", "PauMcc"))
+    assert(hatRemovePuck("RinStaX", Set()) == Set())
   }
 
   it should "discard a puck" in {
-    assert(hatsDiscardGivee("JohLen", Set("PauMcc")) == Set("PauMcc", "JohLen"))
+    assert(hatDiscardGivee("JohLen", Set("PauMcc")) == Set("PauMcc", "JohLen"))
   }
 
   it should "return discarded givees" in {
-    assert(hatsReturnDiscards(Set("GeoHar"), Set("PauMcc", "JohLen")) == Set("JohLen", "PauMcc", "GeoHar"))
+    assert(hatReturnDiscards(Set("GeoHar"), Set("PauMcc", "JohLen")) == Set("JohLen", "PauMcc", "GeoHar"))
   }
 }

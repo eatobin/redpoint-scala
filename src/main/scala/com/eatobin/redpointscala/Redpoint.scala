@@ -1,7 +1,7 @@
 package com.eatobin.redpointscala
 
 import com.eatobin.redpointscala.GiftPair.JsonString
-import com.eatobin.redpointscala.Hats.{hatsDiscardGivee, hatsMakeHat, hatsRemovePuck, hatsReturnDiscards}
+import com.eatobin.redpointscala.Hat.{hatDiscardGivee, hatMakeHat, hatRemovePuck, hatReturnDiscards}
 import com.eatobin.redpointscala.Players._
 import com.eatobin.redpointscala.Roster.ErrorString
 import com.eatobin.redpointscala.Rules.{rulesGiveeNotRecip, rulesGiveeNotRepeat, rulesGiveeNotSelf}
@@ -90,8 +90,8 @@ object Redpoint {
   def redpointStartNewYear(): Unit = {
     agYear = agYear + 1
     aPlayers = playersAddYear(aPlayers)
-    agrHat = hatsMakeHat(aPlayers)
-    ageHat = hatsMakeHat(aPlayers)
+    agrHat = hatMakeHat(aPlayers)
+    ageHat = hatMakeHat(aPlayers)
     maybeGiver = redpointDrawPuck(agrHat)
     maybeGivee = redpointDrawPuck(ageHat)
     aDiscards = Set()
@@ -99,8 +99,8 @@ object Redpoint {
 
   def redpointSelectNewGiver(): Unit = {
     val giver: String = maybeGiver.get
-    agrHat = hatsRemovePuck(giver, agrHat)
-    ageHat = hatsReturnDiscards(aDiscards, ageHat)
+    agrHat = hatRemovePuck(giver, agrHat)
+    ageHat = hatReturnDiscards(aDiscards, ageHat)
     aDiscards = Set()
     maybeGiver = redpointDrawPuck(agrHat)
     maybeGivee = redpointDrawPuck(ageHat)
@@ -111,14 +111,14 @@ object Redpoint {
     val givee: String = maybeGivee.get
     aPlayers = playersUpdateMyGivee(giver)(agYear)(givee)(aPlayers)
     aPlayers = playersUpdateMyGiver(givee)(agYear)(giver)(aPlayers)
-    ageHat = hatsRemovePuck(givee, ageHat)
+    ageHat = hatRemovePuck(givee, ageHat)
     maybeGivee = None
   }
 
   def redpointGiveeIsFailure(): Unit = {
     val givee: String = maybeGivee.get
-    ageHat = hatsRemovePuck(givee, ageHat)
-    aDiscards = hatsDiscardGivee(givee, aDiscards)
+    ageHat = hatRemovePuck(givee, ageHat)
+    aDiscards = hatDiscardGivee(givee, aDiscards)
     maybeGivee = redpointDrawPuck(ageHat)
   }
 
