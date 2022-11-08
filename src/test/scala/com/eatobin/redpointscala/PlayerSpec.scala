@@ -16,12 +16,10 @@ class PlayerSpec extends AnyFlatSpec {
   }
 
   it should "convert from JSON" in {
-    val plrJson: Either[Error, Player] = playerJsonStringToPlayer(jsonString)
-    assert(plrJson == Right(player))
+    assert(playerJsonStringToPlayer(jsonString) == Right(player))
   }
 
   it should "convert to JSON" in {
-    val plrJson: JsonString = playerPlayerToJsonString(player)
-    assert(plrJson == jsonString)
+    assert(playerPlayerToJsonString(player) == jsonString)
   }
 }
