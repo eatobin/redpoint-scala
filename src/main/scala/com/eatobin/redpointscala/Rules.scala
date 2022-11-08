@@ -9,8 +9,8 @@ object Rules {
     selfKey != givee
 
   def rulesGiveeNotRecip(selfKey: PlayerKey, givee: Givee, giftYear: GiftYear, players: Players): Boolean = {
-    val recip = playersGetMyGivee(givee)(giftYear)(players)
-    selfKey != recip
+    val giveeIsGivingTo = playersGetMyGivee(givee)(giftYear)(players)
+    selfKey != giveeIsGivingTo
   }
 
   def rulesGiveeNotRepeat(selfKey: PlayerKey, givee: Givee, giftYear: GiftYear, players: Players): Boolean = {
