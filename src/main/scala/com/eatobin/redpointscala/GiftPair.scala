@@ -9,9 +9,9 @@ import io.circe.syntax._
 case class GiftPair(givee: Givee, giver: Giver)
 
 object GiftPair {
-  type PlayerSymbol = String
-  type Givee = PlayerSymbol
-  type Giver = PlayerSymbol
+  type PlayerKey = String
+  type Givee = PlayerKey
+  type Giver = PlayerKey
   type JsonString = String
 
   def giftPairUpdateGivee(givee1: Givee)(giftPair: GiftPair): GiftPair = giftPair.copy(givee = givee1)
