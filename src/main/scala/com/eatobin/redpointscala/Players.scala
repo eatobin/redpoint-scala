@@ -18,7 +18,7 @@ object Players {
     val nplrs = for ((playerKey, player) <- players) yield {
       val gh = player.giftHistory
       val ngh = giftHistoryAddYear(playerKey)(gh)
-      val nplr = playerUpdateGiftHistory(ngh, player)
+      val nplr = playerUpdateGiftHistory(ngh)(player)
       playerKey -> nplr
     }
     nplrs
@@ -32,7 +32,7 @@ object Players {
 
   private def playersSetGiftPair(playerKey: String, giftYear: Int, giftPair: GiftPair, players: Map[String, Player]): Map[String, Player] = {
     val ngh = giftHistoryUpdateGiftHistory(giftYear)(giftPair)(players(playerKey).giftHistory)
-    val nplr = playerUpdateGiftHistory(ngh, players(playerKey))
+    val nplr = playerUpdateGiftHistory(ngh)(players(playerKey))
     playersUpdatePlayer(playerKey, nplr, players)
   }
 
