@@ -80,8 +80,8 @@ class RedpointSpec extends AnyFlatSpec {
     val givee = maybeGivee.get
     val giver = maybeGiver.get
     redpointGiveeIsSuccess()
-    assert(Players.playersGetMyGivee(giver, agYear, aPlayers) == givee)
-    assert(Players.playersGetMyGiver(givee, agYear, aPlayers) == giver)
+    assert(Players.playersGetMyGivee(giver)(agYear)(aPlayers) == givee)
+    assert(Players.playersGetMyGiver(givee)(agYear)(aPlayers) == giver)
     assert(!ageHat.contains(givee))
   }
 

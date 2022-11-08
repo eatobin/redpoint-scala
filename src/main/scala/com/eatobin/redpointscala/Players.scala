@@ -10,10 +10,10 @@ import io.circe.parser._
 object Players {
   type Players = Map[PlayerKey, Player]
 
-  def playersUpdatePlayer(playerKey: PlayerKey, player: Player, players: Players): Players =
+  def playersUpdatePlayer(playerKey: PlayerKey)(player: Player)(players: Players): Players =
     players.updated(playerKey, player)
 
-  def playersGetPlayerName(playerKey: PlayerKey, players: Players): PlayerName =
+  def playersGetPlayerName(playerKey: PlayerKey)(players: Players): PlayerName =
     players(playerKey).playerName
 
   def playersAddYear(players: Players): Players = {
@@ -26,26 +26,26 @@ object Players {
     nplrs
   }
 
-  def playersGetMyGivee(selfKey: PlayerKey, giftYear: GiftYear, players: Players): Givee =
+  def playersGetMyGivee(selfKey: PlayerKey)(giftYear: GiftYear)(players: Players): Givee =
     players(selfKey).giftHistory(giftYear).givee
 
-  def playersGetMyGiver(selfKey: PlayerKey, giftYear: GiftYear, players: Players): Giver =
+  def playersGetMyGiver(selfKey: PlayerKey)(giftYear: GiftYear)(players: Players): Giver =
     players(selfKey).giftHistory(giftYear).giver
 
-  private def playersSetGiftPair(playerKey: PlayerKey, giftYear: GiftYear, giftPair: GiftPair, players: Players): Players = {
+  private def playersSetGiftPair(playerKey: PlayerKey)(giftYear: GiftYear)(giftPair: GiftPair)(players: Players) = {
     val ngh = giftHistoryUpdateGiftHistory(giftYear)(giftPair)(players(playerKey).giftHistory)
     val nplr = playerUpdateGiftHistory(ngh)(players(playerKey))
-    playersUpdatePlayer(playerKey, nplr, players)
+    playersUpdatePlayer(playerKey)(nplr)(players)
   }
 
-  def playersUpdateMyGivee(selfKey: PlayerKey, giftYear: GiftYear, givee: Givee, players: Players): Players = {
+  def playersUpdateMyGivee(selfKey: PlayerKey)(giftYear: GiftYear)(givee: Givee)(players: Players): Players = {
     val ngp = giftPairUpdateGivee(givee)(players(selfKey).giftHistory(giftYear))
-    playersSetGiftPair(selfKey, giftYear, ngp, players)
+    playersSetGiftPair(selfKey)(giftYear)(ngp)(players)
   }
 
-  def playersUpdateMyGiver(selfKey: PlayerKey, giftYear: GiftYear, giver: Giver, players: Players): Players = {
+  def playersUpdateMyGiver(selfKey: PlayerKey)(giftYear: GiftYear)(giver: Giver)(players: Players): Players = {
     val ngp = giftPairUpdateGiver(giver)(players(selfKey).giftHistory(giftYear))
-    playersSetGiftPair(selfKey, giftYear, ngp, players)
+    playersSetGiftPair(selfKey)(giftYear)(ngp)(players)
   }
 
   def playersJsonStringToPlayers(jsonString: JsonString): Either[Error, Players] =
