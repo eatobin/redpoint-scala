@@ -46,65 +46,65 @@ class RedpointSpec extends AnyFlatSpec {
   }
 
   it should "start a new year" in {
-    agYear = 0
-    maybeGiver = None
-    maybeGivee = None
+    aGiftYear = 0
+    aMaybeGiver = None
+    aMaybeGivee = None
     redpointRosterOrQuit(filePath)
     redpointStartNewYear()
-    assert(agYear == 1)
-    assert(maybeGiver.isDefined)
-    assert(maybeGivee.isDefined)
+    assert(aGiftYear == 1)
+    assert(aMaybeGiver.isDefined)
+    assert(aMaybeGivee.isDefined)
     assert(rinStaPlus == aPlayers("RinSta"))
     assert(aDiscards.isEmpty)
   }
 
   it should "select a new giver" in {
-    agYear = 0
-    maybeGiver = None
-    maybeGivee = None
+    aGiftYear = 0
+    aMaybeGiver = None
+    aMaybeGivee = None
     redpointRosterOrQuit(filePath)
     redpointStartNewYear()
     aDiscards = Hat.hatDiscardGivee("GeoHar", aDiscards)
     assert(aDiscards.size == 1)
     redpointSelectNewGiver()
-    assert(agrHat.size == 3)
+    assert(aGiverHat.size == 3)
     assert(aDiscards.isEmpty)
   }
 
   it should "have a successful givee" in {
-    agYear = 0
-    maybeGiver = None
-    maybeGivee = None
+    aGiftYear = 0
+    aMaybeGiver = None
+    aMaybeGivee = None
     redpointRosterOrQuit(filePath)
     redpointStartNewYear()
-    val givee = maybeGivee.get
-    val giver = maybeGiver.get
+    val givee = aMaybeGivee.get
+    val giver = aMaybeGiver.get
     redpointGiveeIsSuccess()
-    assert(Players.playersGetMyGivee(giver)(agYear)(aPlayers) == givee)
-    assert(Players.playersGetMyGiver(givee)(agYear)(aPlayers) == giver)
-    assert(!ageHat.contains(givee))
+    assert(Players.playersGetMyGivee(giver)(aGiftYear)(aPlayers) == givee)
+    assert(Players.playersGetMyGiver(givee)(aGiftYear)(aPlayers) == giver)
+    assert(!aGiveeHat.contains(givee))
   }
 
   it should "have a failing givee" in {
-    agYear = 0
-    maybeGiver = None
-    maybeGivee = None
+    aGiftYear = 0
+    aMaybeGiver = None
+    aMaybeGivee = None
     redpointRosterOrQuit(filePath)
     redpointStartNewYear()
-    val givee = maybeGivee.get
+    val givee = aMaybeGivee.get
     redpointGiveeIsFailure()
     assert(aDiscards.contains(givee))
-    assert(!ageHat.contains(givee))
+    assert(!aGiveeHat.contains(givee))
   }
 
   it should "report player errors" in {
-    agYear = 0
+    aGiftYear = 0
     aPlayers = playersWeird
     assert(redpointErrors() == Seq("GeoHar", "PauMcc"))
   }
 
   it should "print" in {
-    agYear = 0
+    aGiftYear = 0
     redpointRosterOrQuit(filePath)
     redpointPrintStringGivingRoster("The Beatles", 2021)
 
