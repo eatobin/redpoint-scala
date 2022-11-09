@@ -1,10 +1,10 @@
 package com.eatobin.redpointscala
 
-import com.eatobin.redpointscala.Redpoint._
+import com.eatobin.redpointscala.Main._
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers.{a, convertToAnyShouldWrapper}
 
-class RedpointSpec extends AnyFlatSpec {
+class MainSpec extends AnyFlatSpec {
 
   private val filePath: String = "src/test/resources/beatles.json"
   private val badFilePath: String = "nope.json"

@@ -9,7 +9,7 @@ import com.eatobin.redpointscala.Rules.{rulesGiveeNotRecip, rulesGiveeNotRepeat,
 import scala.io.Source._
 import scala.io.StdIn.readLine
 
-object Redpoint {
+object Main {
   type FilePath = String
   var aGiftYear: Int = 0
   var aMaybeGiver: Option[Giver] = None
