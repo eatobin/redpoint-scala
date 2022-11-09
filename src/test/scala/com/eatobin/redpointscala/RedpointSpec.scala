@@ -106,9 +106,9 @@ class RedpointSpec extends AnyFlatSpec {
   it should "print" in {
     aGiftYear = 0
     redpointRosterOrQuit(filePath)
-    redpointPrintStringGivingRoster("The Beatles", 2021)
+    redpointPrintStringGivingRoster("The Beatles")(2021)
 
     aPlayers = playersWeird
-    redpointPrintStringGivingRoster("The Weird Beatles", 2050)
+    redpointPrintStringGivingRoster("The Weird Beatles")(2050)
   }
 }

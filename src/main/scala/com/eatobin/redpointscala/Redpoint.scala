@@ -24,7 +24,7 @@ object Redpoint {
 
   def main(args: Array[String]): Unit = {
     redpointRosterOrQuit(filePath)
-    while (redpointPrintAndAsk(aRosterName, aRosterYear).toLowerCase != "q") {
+    while (redpointPrintAndAsk(aRosterName)(aRosterYear).toLowerCase != "q") {
       redpointStartNewYear()
       while (aMaybeGiver.isDefined) {
         while (aMaybeGivee.isDefined) {
@@ -162,15 +162,15 @@ object Redpoint {
     }
   }
 
-  def redpointPrintStringGivingRoster(rName: String, rYear: Int): Unit = {
+  def redpointPrintStringGivingRoster(rosterName: RosterName)(rosterYear: RosterYear): Unit = {
     println()
-    println("%s - Year %d Gifts:".format(rName, rYear + aGiftYear))
+    println("%s - Year %d Gifts:".format(rosterName, rosterYear + aGiftYear))
     println()
     redpointPrintResults()
   }
 
-  def redpointPrintAndAsk(rName: String, rYear: Int): String = {
-    redpointPrintStringGivingRoster(rName, rYear)
+  def redpointPrintAndAsk(rosterName: RosterName)(rosterYear: RosterYear): String = {
+    redpointPrintStringGivingRoster(rosterName)(rosterYear)
     println()
     readLine("Continue? ('q' to quit): ")
   }
