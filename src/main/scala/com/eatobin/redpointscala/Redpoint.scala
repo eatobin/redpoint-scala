@@ -49,9 +49,9 @@ object Redpoint {
   def redpointReadFileIntoJsonString(filepath: FilePath): Either[ErrorString, JsonString] =
     try {
       val bufferedSource = fromFile(filepath)
-      val js = bufferedSource.getLines().mkString
+      val jsonString = bufferedSource.getLines().mkString
       bufferedSource.close
-      Right(js)
+      Right(jsonString)
     } catch {
       case e: Exception =>
         Left(e.getMessage)
