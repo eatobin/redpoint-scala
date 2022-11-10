@@ -4,7 +4,7 @@ import com.eatobin.redpointscala.GiftPair.{Givee, Giver, JsonString, PlayerKey}
 import com.eatobin.redpointscala.Hat.{Hat, hatDiscardGivee, hatMakeHat, hatRemovePuck, hatReturnDiscards}
 import com.eatobin.redpointscala.Players._
 import com.eatobin.redpointscala.Roster.{ErrorString, RosterName, RosterYear}
-//import com.eatobin.redpointscala.Main._
+
 import scala.io.Source._
 import scala.io.StdIn.readLine
 
@@ -21,7 +21,7 @@ object Helpers {
   var aRosterYear: RosterYear = 0
   val filePath: FilePath = "src/main/resources/blackhawks.json"
 
-  def redpointReadFileIntoJsonString(filepath: FilePath): Either[ErrorString, JsonString] =
+  def helpersReadFileIntoJsonString(filepath: FilePath): Either[ErrorString, JsonString] =
     try {
       val bufferedSource = fromFile(filepath)
       val jsonString = bufferedSource.getLines().mkString
@@ -32,8 +32,8 @@ object Helpers {
         Left(e.getMessage)
     }
 
-  def redpointRosterOrQuit(filepath: FilePath): Unit = {
-    val rosterStringEither = redpointReadFileIntoJsonString(filepath)
+  def helpersRosterOrQuit(filepath: FilePath): Unit = {
+    val rosterStringEither = helpersReadFileIntoJsonString(filepath)
     rosterStringEither match {
       case Right(rs) =>
         val rosterEither: Either[ErrorString, Roster] = Roster.rosterJsonStringToRoster(Right(rs))
@@ -50,39 +50,39 @@ object Helpers {
     }
   }
 
-  private def redpointRandom(hat: Hat): PlayerKey = {
+  private def helpersRandom(hat: Hat): PlayerKey = {
     val n: Int = util.Random.nextInt(hat.size)
     hat.iterator.drop(n).next()
   }
 
-  def redpointDrawPuck(hat: Hat): Option[PlayerKey] = {
+  def helpersDrawPuck(hat: Hat): Option[PlayerKey] = {
     if (hat.nonEmpty) {
-      Some(redpointRandom(hat))
+      Some(helpersRandom(hat))
     } else {
       None
     }
   }
 
-  def redpointStartNewYear(): Unit = {
+  def helpersStartNewYear(): Unit = {
     aGiftYear = aGiftYear + 1
     aPlayers = playersAddYear(aPlayers)
     aGiverHat = hatMakeHat(aPlayers)
     aGiveeHat = hatMakeHat(aPlayers)
-    aMaybeGiver = redpointDrawPuck(aGiverHat)
-    aMaybeGivee = redpointDrawPuck(aGiveeHat)
+    aMaybeGiver = helpersDrawPuck(aGiverHat)
+    aMaybeGivee = helpersDrawPuck(aGiveeHat)
     aDiscards = Set()
   }
 
-  def redpointSelectNewGiver(): Unit = {
+  def helpersSelectNewGiver(): Unit = {
     val giver: Giver = aMaybeGiver.get
     aGiverHat = hatRemovePuck(giver, aGiverHat)
     aGiveeHat = hatReturnDiscards(aDiscards, aGiveeHat)
     aDiscards = Set()
-    aMaybeGiver = redpointDrawPuck(aGiverHat)
-    aMaybeGivee = redpointDrawPuck(aGiveeHat)
+    aMaybeGiver = helpersDrawPuck(aGiverHat)
+    aMaybeGivee = helpersDrawPuck(aGiveeHat)
   }
 
-  def redpointGiveeIsSuccess(): Unit = {
+  def helpersGiveeIsSuccess(): Unit = {
     val giver: Giver = aMaybeGiver.get
     val givee: Givee = aMaybeGivee.get
     aPlayers = playersUpdateMyGivee(giver)(aGiftYear)(givee)(aPlayers)
@@ -91,14 +91,14 @@ object Helpers {
     aMaybeGivee = None
   }
 
-  def redpointGiveeIsFailure(): Unit = {
+  def helpersGiveeIsFailure(): Unit = {
     val givee: Givee = aMaybeGivee.get
     aGiveeHat = hatRemovePuck(givee, aGiveeHat)
     aDiscards = hatDiscardGivee(givee, aDiscards)
-    aMaybeGivee = redpointDrawPuck(aGiveeHat)
+    aMaybeGivee = helpersDrawPuck(aGiveeHat)
   }
 
-  def redpointErrors(): Seq[PlayerKey] = {
+  def helpersErrors(): Seq[PlayerKey] = {
     val playerKeys: Seq[PlayerKey] = aPlayers.keys.toSeq
     val playerErrors = {
       for {
@@ -111,7 +111,7 @@ object Helpers {
     playerErrors.sorted
   }
 
-  def redpointPrintResults(): Unit = {
+  def helpersPrintResults(): Unit = {
     val playerKeys: Seq[PlayerKey] = aPlayers.keys.toSeq.sorted
     for (playerKey <- playerKeys) yield {
       val playerName = playersGetPlayerName(playerKey)(aPlayers)
@@ -129,7 +129,7 @@ object Helpers {
         println("%s is buying for %s".format(playerName, giveeName))
       }
     }
-    if (redpointErrors().nonEmpty) {
+    if (helpersErrors().nonEmpty) {
       println()
       println("There is a logic error in this year's pairings.")
       println("Do you see how it occurs?")
@@ -137,15 +137,15 @@ object Helpers {
     }
   }
 
-  def redpointPrintStringGivingRoster(rosterName: RosterName)(rosterYear: RosterYear): Unit = {
+  def helpersPrintStringGivingRoster(rosterName: RosterName)(rosterYear: RosterYear): Unit = {
     println()
     println("%s - Year %d Gifts:".format(rosterName, rosterYear + aGiftYear))
     println()
-    redpointPrintResults()
+    helpersPrintResults()
   }
 
-  def redpointPrintAndAsk(rosterName: RosterName)(rosterYear: RosterYear): String = {
-    redpointPrintStringGivingRoster(rosterName)(rosterYear)
+  def helpersPrintAndAsk(rosterName: RosterName)(rosterYear: RosterYear): String = {
+    helpersPrintStringGivingRoster(rosterName)(rosterYear)
     println()
     readLine("Continue? ('q' to quit): ")
   }
