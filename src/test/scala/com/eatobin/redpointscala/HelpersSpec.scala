@@ -1,10 +1,10 @@
 package com.eatobin.redpointscala
 
-import com.eatobin.redpointscala.Main._
+import com.eatobin.redpointscala.Helpers._
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers.{a, convertToAnyShouldWrapper}
 
-class MainSpec extends AnyFlatSpec {
+class HelpersSpec extends AnyFlatSpec {
 
   private val filePath: String = "src/test/resources/beatles.json"
   private val badFilePath: String = "nope.json"
@@ -26,31 +26,31 @@ class MainSpec extends AnyFlatSpec {
   private val testHat: Set[String] = Set("RinSta")
 
   "Redpoint" should "build a Roster" in {
-    redpointRosterOrQuit(filePath)
+    helpersRosterOrQuit(filePath)
     assert(aRosterName == "The Beatles")
     assert(aRosterYear == 2014)
     assert(aPlayers == players)
   }
 
   it should "detect a bad file path" in {
-    redpointRosterOrQuit(badFilePath) shouldBe a[Unit]
+    helpersRosterOrQuit(badFilePath) shouldBe a[Unit]
   }
 
   it should "detect a bad JSON parse" in {
-    redpointRosterOrQuit(badJsonFile) shouldBe a[Unit]
+    helpersRosterOrQuit(badJsonFile) shouldBe a[Unit]
   }
 
   it should "draw a puck" in {
-    assert(redpointDrawPuck(testHat).contains("RinSta"))
-    assert(redpointDrawPuck(Set()).isEmpty)
+    assert(helpersDrawPuck(testHat).contains("RinSta"))
+    assert(helpersDrawPuck(Set()).isEmpty)
   }
 
   it should "start a new year" in {
     aGiftYear = 0
     aMaybeGiver = None
     aMaybeGivee = None
-    redpointRosterOrQuit(filePath)
-    redpointStartNewYear()
+    helpersRosterOrQuit(filePath)
+    helpersStartNewYear()
     assert(aGiftYear == 1)
     assert(aMaybeGiver.isDefined)
     assert(aMaybeGivee.isDefined)
@@ -62,11 +62,11 @@ class MainSpec extends AnyFlatSpec {
     aGiftYear = 0
     aMaybeGiver = None
     aMaybeGivee = None
-    redpointRosterOrQuit(filePath)
-    redpointStartNewYear()
+    helpersRosterOrQuit(filePath)
+    helpersStartNewYear()
     aDiscards = Hat.hatDiscardGivee("GeoHar", aDiscards)
     assert(aDiscards.size == 1)
-    redpointSelectNewGiver()
+    helpersSelectNewGiver()
     assert(aGiverHat.size == 3)
     assert(aDiscards.isEmpty)
   }
@@ -75,11 +75,11 @@ class MainSpec extends AnyFlatSpec {
     aGiftYear = 0
     aMaybeGiver = None
     aMaybeGivee = None
-    redpointRosterOrQuit(filePath)
-    redpointStartNewYear()
+    helpersRosterOrQuit(filePath)
+    helpersStartNewYear()
     val givee = aMaybeGivee.get
     val giver = aMaybeGiver.get
-    redpointGiveeIsSuccess()
+    helpersGiveeIsSuccess()
     assert(Players.playersGetMyGivee(giver)(aGiftYear)(aPlayers) == givee)
     assert(Players.playersGetMyGiver(givee)(aGiftYear)(aPlayers) == giver)
     assert(!aGiveeHat.contains(givee))
@@ -89,10 +89,10 @@ class MainSpec extends AnyFlatSpec {
     aGiftYear = 0
     aMaybeGiver = None
     aMaybeGivee = None
-    redpointRosterOrQuit(filePath)
-    redpointStartNewYear()
+    helpersRosterOrQuit(filePath)
+    helpersStartNewYear()
     val givee = aMaybeGivee.get
-    redpointGiveeIsFailure()
+    helpersGiveeIsFailure()
     assert(aDiscards.contains(givee))
     assert(!aGiveeHat.contains(givee))
   }
@@ -100,15 +100,15 @@ class MainSpec extends AnyFlatSpec {
   it should "report player errors" in {
     aGiftYear = 0
     aPlayers = playersWeird
-    assert(redpointErrors() == Seq("GeoHar", "PauMcc"))
+    assert(helpersErrors() == Seq("GeoHar", "PauMcc"))
   }
 
   it should "print" in {
     aGiftYear = 0
-    redpointRosterOrQuit(filePath)
-    redpointPrintStringGivingRoster("The Beatles")(2021)
+    helpersRosterOrQuit(filePath)
+    helpersPrintStringGivingRoster("The Beatles")(2021)
 
     aPlayers = playersWeird
-    redpointPrintStringGivingRoster("The Weird Beatles")(2050)
+    helpersPrintStringGivingRoster("The Weird Beatles")(2050)
   }
 }
