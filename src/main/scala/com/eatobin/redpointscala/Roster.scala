@@ -1,13 +1,16 @@
 package com.eatobin.redpointscala
 
-import com.eatobin.redpointscala.GiftPair.JsonString
+import com.eatobin.redpointscala.GiftHistory.GiftYear
+import com.eatobin.redpointscala.GiftPair.{Givee, Giver, JsonString}
+import com.eatobin.redpointscala.Hat.Hat
 import com.eatobin.redpointscala.Players.Players
 import com.eatobin.redpointscala.Roster.{RosterName, RosterYear}
 import io.circe.Error
 import io.circe.generic.auto._
 import io.circe.parser._
+import io.circe.syntax._
 
-case class Roster(rosterName: RosterName, rosterYear: RosterYear, players: Players)
+case class Roster(rosterName: RosterName, rosterYear: RosterYear, players: Players, giftYear: GiftYear, giveeHat: Hat, giverHat: Hat, maybeGivee: Option[Givee], maybeGiver: Option[Giver], discards: Hat)
 
 object Roster {
   type RosterName = String
@@ -26,4 +29,7 @@ object Roster {
         Left(lFile)
     }
   }
+
+  def rosterRosterToJsonString(roster: Roster): JsonString =
+    roster.asJson.noSpaces
 }
