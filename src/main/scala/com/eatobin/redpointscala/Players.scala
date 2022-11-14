@@ -6,6 +6,7 @@ import com.eatobin.redpointscala.Player.{PlayerName, playerUpdateGiftHistory}
 import io.circe.Error
 import io.circe.generic.auto._
 import io.circe.parser._
+import io.circe.syntax._
 
 object Players {
   type Players = Map[PlayerKey, Player]
@@ -50,4 +51,7 @@ object Players {
 
   def playersJsonStringToPlayers(jsonString: JsonString): Either[Error, Players] =
     decode[Players](jsonString)
+
+  def playersPlayersToJsonString(players: Players): JsonString =
+    players.asJson.noSpaces
 }
