@@ -40,9 +40,9 @@
     }
   },
   "giftYear": 0,
-  "giveeHat": null,
-  "giverHat": null,
+  "giveeHat": [],
+  "giverHat": [],
   "maybeGivee": null,
   "maybeGiver": null,
-  "discards": null
+  "discards": []
 }
