@@ -2,7 +2,7 @@ package com.eatobin.redpointscala
 
 import com.eatobin.redpointscala.GiftPair.JsonString
 import com.eatobin.redpointscala.Player.{playerJsonStringToPlayer, playerPlayerToJsonString, playerUpdateGiftHistory}
-import io.circe.Error
+//import io.circe.Error
 import org.scalatest.flatspec.AnyFlatSpec
 
 class PlayerSpec extends AnyFlatSpec {
