@@ -49,28 +49,10 @@
 //  //    }
 //  //  }
 //  //
-//  //  private def helpersRandom(hat: Hat): PlayerKey = {
-//  //    val n: Int = util.Random.nextInt(hat.size)
-//  //    hat.iterator.drop(n).next()
-//  //  }
+
 //  //
-//  //  def helpersDrawPuck(hat: Hat): Option[PlayerKey] = {
-//  //    if (hat.nonEmpty) {
-//  //      Some(helpersRandom(hat))
-//  //    } else {
-//  //      None
-//  //    }
-//  //  }
-//  //
-//  //  def helpersStartNewYear(): Unit = {
-//  //    aGiftYear = aGiftYear + 1
-//  //    aPlayers = playersAddYear(aPlayers)
-//  //    aGiverHat = hatMakeHat(aPlayers)
-//  //    aGiveeHat = hatMakeHat(aPlayers)
-//  //    aMaybeGiver = helpersDrawPuck(aGiverHat)
-//  //    aMaybeGivee = helpersDrawPuck(aGiveeHat)
-//  //    aDiscards = Set()
-//  //  }
+
+
 //  //
 //  //  def helpersSelectNewGiver(): Unit = {
 //  //    val giver: Giver = aMaybeGiver.get

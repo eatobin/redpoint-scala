@@ -1,10 +1,36 @@
 package com.eatobin.redpointscala
 
 import com.eatobin.redpointscala.GiftHistory.GiftYear
-import com.eatobin.redpointscala.GiftPair.{Givee, Giver}
-import com.eatobin.redpointscala.Hat.Hat
-import com.eatobin.redpointscala.Players.Players
+import com.eatobin.redpointscala.GiftPair.{Givee, Giver, PlayerKey}
+import com.eatobin.redpointscala.Hat.{Hat, hatMakeHat}
+import com.eatobin.redpointscala.Players.{Players, playersAddYear}
 import com.eatobin.redpointscala.Roster.{RosterName, RosterYear}
 
 case class State(rosterName: RosterName, rosterYear: RosterYear, players: Players, giftYear: GiftYear, giveeHat: Hat, giverHat: Hat, maybeGivee: Option[Givee], maybeGiver: Option[Giver], discards: Hat)
-//  private val roster: Roster = Roster("The Beatles", 2014, players, 0, emptyHat, emptyHat, None, None, emptyHat)
+
+private def stateRandom(hat: Hat): PlayerKey = {
+  val n: Int = util.Random.nextInt(hat.size)
+  hat.iterator.drop(n).next()
+}
+
+def stateDrawPuck(hat: Hat): Option[PlayerKey] = {
+  if (hat.nonEmpty) {
+    Some(stateRandom(hat))
+  } else {
+    None
+  }
+}
+
+def stateStartNewYear(state: State): State = {
+  val newState: State = State(
+    rosterName = state.rosterName,
+    rosterYear = state.rosterYear, players = playersAddYear(state.players),
+    giftYear = state.giftYear + 1,
+    giveeHat = hatMakeHat(state.players),
+    giverHat = hatMakeHat(state.players),
+    maybeGivee = stateDrawPuck(hatMakeHat(state.players)),
+    maybeGiver = stateDrawPuck(hatMakeHat(state.players)),
+    discards = Set()
+  )
+  newState
+}
