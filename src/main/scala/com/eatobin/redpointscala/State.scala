@@ -24,7 +24,8 @@ def stateDrawPuck(hat: Hat): Option[PlayerKey] = {
 def stateStartNewYear(state: State): State = {
   val newState: State = State(
     rosterName = state.rosterName,
-    rosterYear = state.rosterYear, players = playersAddYear(state.players),
+    rosterYear = state.rosterYear,
+    players = playersAddYear(state.players),
     giftYear = state.giftYear + 1,
     giveeHat = hatMakeHat(state.players),
     giverHat = hatMakeHat(state.players),
