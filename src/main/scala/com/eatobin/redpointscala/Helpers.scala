@@ -48,20 +48,7 @@
 //  //        println(fe)
 //  //    }
 //  //  }
-//  //
 
-//  //
-
-
-//  //  def helpersGiveeIsSuccess(): Unit = {
-//  //    val giver: Giver = aMaybeGiver.get
-//  //    val givee: Givee = aMaybeGivee.get
-//  //    aPlayers = playersUpdateMyGivee(giver)(aGiftYear)(givee)(aPlayers)
-//  //    aPlayers = playersUpdateMyGiver(givee)(aGiftYear)(giver)(aPlayers)
-//  //    aGiveeHat = hatRemovePuck(givee, aGiveeHat)
-//  //    aMaybeGivee = None
-//  //  }
-//  //
 //  //  def helpersGiveeIsFailure(): Unit = {
 //  //    val givee: Givee = aMaybeGivee.get
 //  //    aGiveeHat = hatRemovePuck(givee, aGiveeHat)
