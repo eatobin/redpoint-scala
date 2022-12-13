@@ -53,16 +53,6 @@
 //  //
 
 
-//  //
-//  //  def helpersSelectNewGiver(): Unit = {
-//  //    val giver: Giver = aMaybeGiver.get
-//  //    aGiverHat = hatRemovePuck(giver, aGiverHat)
-//  //    aGiveeHat = hatReturnDiscards(aDiscards, aGiveeHat)
-//  //    aDiscards = Set()
-//  //    aMaybeGiver = helpersDrawPuck(aGiverHat)
-//  //    aMaybeGivee = helpersDrawPuck(aGiveeHat)
-//  //  }
-//  //
 //  //  def helpersGiveeIsSuccess(): Unit = {
 //  //    val giver: Giver = aMaybeGiver.get
 //  //    val givee: Givee = aMaybeGivee.get

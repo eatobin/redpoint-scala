@@ -2,7 +2,7 @@ package com.eatobin.redpointscala
 
 import com.eatobin.redpointscala.GiftHistory.GiftYear
 import com.eatobin.redpointscala.GiftPair.{Givee, Giver, PlayerKey}
-import com.eatobin.redpointscala.Hat.{Hat, hatMakeHat}
+import com.eatobin.redpointscala.Hat.{Hat, hatMakeHat, hatRemovePuck, hatReturnDiscards}
 import com.eatobin.redpointscala.Players.{Players, playersAddYear}
 import com.eatobin.redpointscala.Roster.{RosterName, RosterYear}
 
@@ -29,6 +29,22 @@ def stateStartNewYear(state: State): State = {
     giftYear = state.giftYear + 1,
     giveeHat = hatMakeHat(state.players),
     giverHat = hatMakeHat(state.players),
+    maybeGivee = stateDrawPuck(hatMakeHat(state.players)),
+    maybeGiver = stateDrawPuck(hatMakeHat(state.players)),
+    discards = Set()
+  )
+  newState
+}
+
+def stateSelectNewGiver(state: State): State = {
+  val giver: Giver = state.maybeGiver.get
+  val newState: State = State(
+    rosterName = state.rosterName,
+    rosterYear = state.rosterYear,
+    players = state.players,
+    giftYear = state.giftYear,
+    giveeHat = hatReturnDiscards(state.discards, state.giveeHat),
+    giverHat = hatRemovePuck(giver, state.giverHat),
     maybeGivee = stateDrawPuck(hatMakeHat(state.players)),
     maybeGiver = stateDrawPuck(hatMakeHat(state.players)),
     discards = Set()
