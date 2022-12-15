@@ -16,7 +16,7 @@ object State {
     hat.iterator.drop(n).next()
   }
 
-  def stateDrawPuck(hat: Hat): Option[PlayerKey] = {
+  private def stateDrawPuck(hat: Hat): Option[PlayerKey] = {
     if (hat.nonEmpty) {
       Some(stateRandom(hat))
     } else {
@@ -93,7 +93,7 @@ object State {
     newState
   }
 
-  def stateErrors(state: State): Seq[PlayerKey] = {
+  private def stateErrors(state: State): Seq[PlayerKey] = {
     val playerKeys: Seq[PlayerKey] = state.players.keys.toSeq
     val playerErrors = {
       for {
@@ -139,7 +139,7 @@ object State {
     statePrintResults(state)
   }
 
-  def helpersPrintAndAsk(state: State): String = {
+  def statePrintAndAsk(state: State): String = {
     statePrintStringGivingRoster(state)
     println()
     readLine("Continue? ('q' to quit): ")
