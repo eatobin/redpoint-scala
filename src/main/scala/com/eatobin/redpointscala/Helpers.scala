@@ -49,13 +49,7 @@
 //  //    }
 //  //  }
 
-//  //  def helpersGiveeIsFailure(): Unit = {
-//  //    val givee: Givee = aMaybeGivee.get
-//  //    aGiveeHat = hatRemovePuck(givee, aGiveeHat)
-//  //    aDiscards = hatDiscardGivee(givee, aDiscards)
-//  //    aMaybeGivee = helpersDrawPuck(aGiveeHat)
-//  //  }
-//  //
+
 //  //  def helpersErrors(): Seq[PlayerKey] = {
 //  //    val playerKeys: Seq[PlayerKey] = aPlayers.keys.toSeq
 //  //    val playerErrors = {
