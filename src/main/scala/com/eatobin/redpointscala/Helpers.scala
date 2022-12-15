@@ -48,21 +48,3 @@
 //  //        println(fe)
 //  //    }
 //  //  }
-
-
-
-
-//  //
-//  //  def helpersPrintStringGivingRoster(rosterName: RosterName)(rosterYear: RosterYear): Unit = {
-//  //    println()
-//  //    println("%s - Year %d Gifts:".format(rosterName, rosterYear + aGiftYear))
-//  //    println()
-//  //    helpersPrintResults()
-//  //  }
-//  //
-//  //  def helpersPrintAndAsk(rosterName: RosterName)(rosterYear: RosterYear): String = {
-//  //    helpersPrintStringGivingRoster(rosterName)(rosterYear)
-//  //    println()
-//  //    readLine("Continue? ('q' to quit): ")
-//  //  }
-//}
