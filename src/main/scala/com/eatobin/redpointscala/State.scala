@@ -3,9 +3,10 @@ package com.eatobin.redpointscala
 import com.eatobin.redpointscala.GiftHistory.GiftYear
 import com.eatobin.redpointscala.GiftPair.{Givee, Giver, PlayerKey}
 import com.eatobin.redpointscala.Hat.{Hat, hatDiscardGivee, hatMakeHat, hatRemovePuck, hatReturnDiscards}
-import com.eatobin.redpointscala.Players.{Players, playersAddYear, playersGetMyGivee, playersGetMyGiver, playersUpdateMyGivee, playersUpdateMyGiver}
+import com.eatobin.redpointscala.Players.{Players, playersAddYear, playersGetMyGivee, playersGetMyGiver, playersGetPlayerName, playersUpdateMyGivee, playersUpdateMyGiver}
 import com.eatobin.redpointscala.Roster.{RosterName, RosterYear}
-import com.eatobin.redpointscala.State.stateDrawPuck
+
+import scala.io.StdIn.readLine
 
 case class State(rosterName: RosterName, rosterYear: RosterYear, players: Players, giftYear: GiftYear, giveeHat: Hat, giverHat: Hat, maybeGivee: Option[Givee], maybeGiver: Option[Giver], discards: Hat)
 
@@ -103,5 +104,44 @@ object State {
       } yield playerKeyMe
     }
     playerErrors.sorted
+  }
+
+  def statePrintResults(state: State): Unit = {
+    val playerKeys: Seq[PlayerKey] = state.players.keys.toSeq.sorted
+    for (playerKey <- playerKeys) yield {
+      val playerName = playersGetPlayerName(playerKey)(state.players)
+      val giveeKey = playersGetMyGivee(playerKey)(state.giftYear)(state.players)
+      val giveeName = playersGetPlayerName(giveeKey)(state.players)
+      val giverKey = playersGetMyGiver(playerKey)(state.giftYear)(state.players)
+
+      if (playerKey == giveeKey && playerKey == giverKey) {
+        println("%s is neither **buying** for nor **receiving** from anyone - **ERROR**".format(playerName))
+      } else if (playerKey == giverKey) {
+        println("%s is **receiving** from no one - **ERROR**".format(playerName))
+      } else if (playerKey == giveeKey) {
+        println("%s is **buying** for no one - **ERROR**".format(playerName))
+      } else {
+        println("%s is buying for %s".format(playerName, giveeName))
+      }
+    }
+    if (stateErrors(state).nonEmpty) {
+      println()
+      println("There is a logic error in this year's pairings.")
+      println("Do you see how it occurs?")
+      println("If not... call me and I'll explain!")
+    }
+  }
+
+  def statePrintStringGivingRoster(state: State): Unit = {
+    println()
+    println("%s - Year %d Gifts:".format(state.rosterName, state.rosterYear + state.giftYear))
+    println()
+    statePrintResults(state)
+  }
+
+  def helpersPrintAndAsk(state: State): String = {
+    statePrintStringGivingRoster(state)
+    println()
+    readLine("Continue? ('q' to quit): ")
   }
 }

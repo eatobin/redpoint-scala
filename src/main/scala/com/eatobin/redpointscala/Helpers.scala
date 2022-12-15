@@ -50,44 +50,8 @@
 //  //  }
 
 
-//  //  def helpersErrors(): Seq[PlayerKey] = {
-//  //    val playerKeys: Seq[PlayerKey] = aPlayers.keys.toSeq
-//  //    val playerErrors = {
-//  //      for {
-//  //        playerKeyMe <- playerKeys
-//  //        myGiverKey = playersGetMyGiver(playerKeyMe)(aGiftYear)(aPlayers)
-//  //        myGiveeKey = playersGetMyGivee(playerKeyMe)(aGiftYear)(aPlayers)
-//  //        if playerKeyMe == myGiverKey || playerKeyMe == myGiveeKey
-//  //      } yield playerKeyMe
-//  //    }
-//  //    playerErrors.sorted
-//  //  }
-//  //
-//  //  def helpersPrintResults(): Unit = {
-//  //    val playerKeys: Seq[PlayerKey] = aPlayers.keys.toSeq.sorted
-//  //    for (playerKey <- playerKeys) yield {
-//  //      val playerName = playersGetPlayerName(playerKey)(aPlayers)
-//  //      val giveeKey = playersGetMyGivee(playerKey)(aGiftYear)(aPlayers)
-//  //      val giveeName = playersGetPlayerName(giveeKey)(aPlayers)
-//  //      val giverKey = playersGetMyGiver(playerKey)(aGiftYear)(aPlayers)
-//  //
-//  //      if (playerKey == giveeKey && playerKey == giverKey) {
-//  //        println("%s is neither **buying** for nor **receiving** from anyone - **ERROR**".format(playerName))
-//  //      } else if (playerKey == giverKey) {
-//  //        println("%s is **receiving** from no one - **ERROR**".format(playerName))
-//  //      } else if (playerKey == giveeKey) {
-//  //        println("%s is **buying** for no one - **ERROR**".format(playerName))
-//  //      } else {
-//  //        println("%s is buying for %s".format(playerName, giveeName))
-//  //      }
-//  //    }
-//  //    if (helpersErrors().nonEmpty) {
-//  //      println()
-//  //      println("There is a logic error in this year's pairings.")
-//  //      println("Do you see how it occurs?")
-//  //      println("If not... call me and I'll explain!")
-//  //    }
-//  //  }
+
+
 //  //
 //  //  def helpersPrintStringGivingRoster(rosterName: RosterName)(rosterYear: RosterYear): Unit = {
 //  //    println()
