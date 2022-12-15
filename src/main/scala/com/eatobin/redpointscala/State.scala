@@ -16,7 +16,7 @@ object State {
     hat.iterator.drop(n).next()
   }
 
-  private def stateDrawPuck(hat: Hat): Option[PlayerKey] = {
+  def stateDrawPuck(hat: Hat): Option[PlayerKey] = {
     if (hat.nonEmpty) {
       Some(stateRandom(hat))
     } else {
