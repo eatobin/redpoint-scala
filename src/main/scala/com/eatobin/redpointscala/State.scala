@@ -3,7 +3,7 @@ package com.eatobin.redpointscala
 import com.eatobin.redpointscala.GiftHistory.GiftYear
 import com.eatobin.redpointscala.GiftPair.{Givee, Giver, PlayerKey}
 import com.eatobin.redpointscala.Hat.{Hat, hatDiscardGivee, hatMakeHat, hatRemovePuck, hatReturnDiscards}
-import com.eatobin.redpointscala.Players.{Players, playersAddYear, playersUpdateMyGivee, playersUpdateMyGiver}
+import com.eatobin.redpointscala.Players.{Players, playersAddYear, playersGetMyGivee, playersGetMyGiver, playersUpdateMyGivee, playersUpdateMyGiver}
 import com.eatobin.redpointscala.Roster.{RosterName, RosterYear}
 import com.eatobin.redpointscala.State.stateDrawPuck
 
@@ -90,5 +90,18 @@ object State {
       discards = hatDiscardGivee(givee, state.discards)
     )
     newState
+  }
+
+  def stateErrors(state: State): Seq[PlayerKey] = {
+    val playerKeys: Seq[PlayerKey] = state.players.keys.toSeq
+    val playerErrors = {
+      for {
+        playerKeyMe: PlayerKey <- playerKeys
+        myGiverKey: Giver = playersGetMyGiver(playerKeyMe)(state.giftYear)(state.players)
+        myGiveeKey: Givee = playersGetMyGivee(playerKeyMe)(state.giftYear)(state.players)
+        if playerKeyMe == myGiverKey || playerKeyMe == myGiveeKey
+      } yield playerKeyMe
+    }
+    playerErrors.sorted
   }
 }
