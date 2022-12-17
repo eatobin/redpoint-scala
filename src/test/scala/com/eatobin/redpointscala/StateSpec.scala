@@ -19,27 +19,35 @@ class StateSpec extends AnyFlatSpec {
   private val playersWeird: Map[String, Player] =
     Map("RinSta" -> rinSta, "JohLen" -> johLen, "GeoHar" -> geoWhoops, "PauMcc" -> pauYikes)
 
+  private val state: State = State(
+    rosterName = "The Beatles",
+    rosterYear = 2014,
+    players = players,
+    giftYear = 0,
+    giveeHat = Set(),
+    giverHat = Set(),
+    maybeGivee = None,
+    maybeGiver = None,
+    discards = Set()
+  )
+
   private val rinStaPlus: Player = Player("Ringo Starr", Vector(GiftPair("JohLen", "GeoHar"), GiftPair("RinSta", "RinSta")))
   private val testHat: Hat = Set("RinSta")
 
-  "Redpoint" should "draw a puck" in {
+  "State" should "draw a puck" in {
     assert(stateDrawPuck(testHat).contains("RinSta"))
     assert(stateDrawPuck(Set()).isEmpty)
   }
-  //  //
-  //  //  it should "start a new year" in {
-  //  //    aGiftYear = 0
-  //  //    aMaybeGiver = None
-  //  //    aMaybeGivee = None
-  //  //    helpersRosterOrQuit(filePath)
-  //  //    helpersStartNewYear()
-  //  //    assert(aGiftYear == 1)
-  //  //    assert(aMaybeGiver.isDefined)
-  //  //    assert(aMaybeGivee.isDefined)
-  //  //    assert(rinStaPlus == aPlayers("RinSta"))
-  //  //    assert(aDiscards.isEmpty)
-  //  //  }
-  //  //
+
+  it should "start a new year" in {
+    val newState = stateStartNewYear(state)
+    assert(newState.giftYear == 1)
+    assert(newState.maybeGiver.isDefined)
+    assert(newState.maybeGivee.isDefined)
+    assert(rinStaPlus == newState.players("RinSta"))
+    assert(newState.discards.isEmpty)
+  }
+  //
   //  //  it should "select a new giver" in {
   //  //    aGiftYear = 0
   //  //    aMaybeGiver = None
