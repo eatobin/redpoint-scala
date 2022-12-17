@@ -1,6 +1,6 @@
 package com.eatobin.redpointscala
 
-import com.eatobin.redpointscala.Hat.Hat
+import com.eatobin.redpointscala.Hat.{Hat, hatDiscardGivee}
 import com.eatobin.redpointscala.State._
 import org.scalatest.flatspec.AnyFlatSpec
 
@@ -47,19 +47,15 @@ class StateSpec extends AnyFlatSpec {
     assert(rinStaPlus == newState.players("RinSta"))
     assert(newState.discards.isEmpty)
   }
-  //
-  //  //  it should "select a new giver" in {
-  //  //    aGiftYear = 0
-  //  //    aMaybeGiver = None
-  //  //    aMaybeGivee = None
-  //  //    helpersRosterOrQuit(filePath)
-  //  //    helpersStartNewYear()
-  //  //    aDiscards = Hat.hatDiscardGivee("GeoHar", aDiscards)
-  //  //    assert(aDiscards.size == 1)
-  //  //    helpersSelectNewGiver()
-  //  //    assert(aGiverHat.size == 3)
-  //  //    assert(aDiscards.isEmpty)
-  //  //  }
+
+  it should "select a new giver" in {
+    val newState = stateStartNewYear(state)
+    val newDiscards = hatDiscardGivee("GeoHar", newState.discards)
+    assert(newDiscards.size == 1)
+    val secondState = stateSelectNewGiver(newState)
+    assert(secondState.giverHat.size == 3)
+    assert(secondState.discards.isEmpty)
+  }
   //  //
   //  //  it should "have a successful givee" in {
   //  //    aGiftYear = 0
