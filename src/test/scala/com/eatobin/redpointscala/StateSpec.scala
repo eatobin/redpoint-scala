@@ -68,18 +68,14 @@ class StateSpec extends AnyFlatSpec {
     assert(!secondState.giveeHat.contains(givee))
   }
 
-  //  //  it should "have a failing givee" in {
-  //  //    aGiftYear = 0
-  //  //    aMaybeGiver = None
-  //  //    aMaybeGivee = None
-  //  //    helpersRosterOrQuit(filePath)
-  //  //    helpersStartNewYear()
-  //  //    val givee = aMaybeGivee.get
-  //  //    helpersGiveeIsFailure()
-  //  //    assert(aDiscards.contains(givee))
-  //  //    assert(!aGiveeHat.contains(givee))
-  //  //  }
-  //  //
+  it should "have a failing givee" in {
+    val newState = stateStartNewYear(state)
+    val givee = newState.maybeGivee.get
+    val secondState = stateGiveeIsFailure(newState)
+    assert(secondState.discards.contains(givee))
+    assert(!secondState.giveeHat.contains(givee))
+  }
+
   //  //  it should "report player errors" in {
   //  //    aGiftYear = 0
   //  //    aPlayers = playersWeird
