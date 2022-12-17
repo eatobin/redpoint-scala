@@ -93,7 +93,7 @@ object State {
     newState
   }
 
-  private def stateErrors(state: State): Seq[PlayerKey] = {
+  def stateErrors(state: State): Seq[PlayerKey] = {
     val playerKeys: Seq[PlayerKey] = state.players.keys.toSeq
     val playerErrors = {
       for {

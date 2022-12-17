@@ -32,6 +32,18 @@ class StateSpec extends AnyFlatSpec {
     discards = Set()
   )
 
+  private val weirdState: State = State(
+    rosterName = "The Beatles",
+    rosterYear = 2014,
+    players = playersWeird,
+    giftYear = 0,
+    giveeHat = Set(),
+    giverHat = Set(),
+    maybeGivee = None,
+    maybeGiver = None,
+    discards = Set()
+  )
+
   private val rinStaPlus: Player = Player("Ringo Starr", Vector(GiftPair("JohLen", "GeoHar"), GiftPair("RinSta", "RinSta")))
   private val testHat: Hat = Set("RinSta")
 
@@ -76,12 +88,10 @@ class StateSpec extends AnyFlatSpec {
     assert(!secondState.giveeHat.contains(givee))
   }
 
-  //  //  it should "report player errors" in {
-  //  //    aGiftYear = 0
-  //  //    aPlayers = playersWeird
-  //  //    assert(helpersErrors() == Seq("GeoHar", "PauMcc"))
-  //  //  }
-  //  //
+  it should "report player errors" in {
+    assert(stateErrors(weirdState) == Seq("GeoHar", "PauMcc"))
+  }
+
   //  //  it should "print" in {
   //  //    aGiftYear = 0
   //  //    helpersRosterOrQuit(filePath)
