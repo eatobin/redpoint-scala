@@ -92,12 +92,8 @@ class StateSpec extends AnyFlatSpec {
     assert(stateErrors(weirdState) == Seq("GeoHar", "PauMcc"))
   }
 
-  //  //  it should "print" in {
-  //  //    aGiftYear = 0
-  //  //    helpersRosterOrQuit(filePath)
-  //  //    helpersPrintStringGivingRoster("The Beatles")(2021)
-  //  //
-  //  //    aPlayers = playersWeird
-  //  //    helpersPrintStringGivingRoster("The Weird Beatles")(2050)
-  //  //  }
+  it should "print" in {
+    statePrintStringGivingRoster(state)
+    statePrintStringGivingRoster(weirdState)
+  }
 }
