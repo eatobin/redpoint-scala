@@ -1,6 +1,7 @@
 package com.eatobin.redpointscala
 
 import com.eatobin.redpointscala.Hat.{Hat, hatDiscardGivee}
+import com.eatobin.redpointscala.Players.{playersGetMyGivee, playersGetMyGiver}
 import com.eatobin.redpointscala.State._
 import org.scalatest.flatspec.AnyFlatSpec
 
@@ -56,21 +57,17 @@ class StateSpec extends AnyFlatSpec {
     assert(secondState.giverHat.size == 3)
     assert(secondState.discards.isEmpty)
   }
-  //  //
-  //  //  it should "have a successful givee" in {
-  //  //    aGiftYear = 0
-  //  //    aMaybeGiver = None
-  //  //    aMaybeGivee = None
-  //  //    helpersRosterOrQuit(filePath)
-  //  //    helpersStartNewYear()
-  //  //    val givee = aMaybeGivee.get
-  //  //    val giver = aMaybeGiver.get
-  //  //    helpersGiveeIsSuccess()
-  //  //    assert(Players.playersGetMyGivee(giver)(aGiftYear)(aPlayers) == givee)
-  //  //    assert(Players.playersGetMyGiver(givee)(aGiftYear)(aPlayers) == giver)
-  //  //    assert(!aGiveeHat.contains(givee))
-  //  //  }
-  //  //
+
+  it should "have a successful givee" in {
+    val newState = stateStartNewYear(state)
+    val givee = newState.maybeGivee.get
+    val giver = newState.maybeGiver.get
+    val secondState = stateGiveeIsSuccess(newState)
+    assert(playersGetMyGivee(giver)(secondState.giftYear)(secondState.players) == givee)
+    assert(playersGetMyGiver(givee)(secondState.giftYear)(secondState.players) == giver)
+    assert(!secondState.giveeHat.contains(givee))
+  }
+
   //  //  it should "have a failing givee" in {
   //  //    aGiftYear = 0
   //  //    aMaybeGiver = None
