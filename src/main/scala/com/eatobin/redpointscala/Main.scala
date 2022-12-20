@@ -1,30 +1,37 @@
-//package com.eatobin.redpointscala
-//
-//import com.eatobin.redpointscala.Helpers._
-//import com.eatobin.redpointscala.Rules.{rulesGiveeNotRecip, rulesGiveeNotRepeat, rulesGiveeNotSelf}
-//
-//object Main {
-//  def main(args: Array[String]): Unit = {
-////    helpersRosterOrQuit(filePath)
-////    while (helpersPrintAndAsk(aRosterName)(aRosterYear).toLowerCase != "q") {
-////      helpersStartNewYear()
-////      while (aMaybeGiver.isDefined) {
-////        while (aMaybeGivee.isDefined) {
-////          if (rulesGiveeNotSelf(aMaybeGiver.get, aMaybeGivee.get) &&
-////            rulesGiveeNotRecip(aMaybeGiver.get, aMaybeGivee.get, aGiftYear, aPlayers) &&
-////            rulesGiveeNotRepeat(aMaybeGiver.get, aMaybeGivee.get, aGiftYear, aPlayers)) {
-////            helpersGiveeIsSuccess()
-////          } else {
-////            helpersGiveeIsFailure()
-////          }
-////        }
-////        helpersSelectNewGiver()
-////      }
-////    }
-////    println()
-//    println("This was fun!")
-//    println("Talk about a position with Redpoint?")
-//    println("Please call: Eric Tobin 773-679-6617")
-//    println()
-//  }
-//}
+package com.eatobin.redpointscala
+
+import com.eatobin.redpointscala.Rules.{rulesGiveeNotRecip, rulesGiveeNotRepeat, rulesGiveeNotSelf}
+
+object Main {
+  private val troBro: Player = Player("Troy Brouwer", Vector(GiftPair("DavBol", "JoeQue")))
+  private val joeQue: Player = Player("Joel Quenneville", Vector(GiftPair("TroBro", "AndLad")))
+  private val adaBur: Player = Player("Adam Burish", Vector(GiftPair("DunKei", "JonToe")))
+  private val andLad: Player = Player("Andrew Ladd", Vector(GiftPair("JoeQue", "KriVer")))
+  // TODO keep adding players from blackhawks.json!!
+  private val players: Map[String, Player] =
+    Map("TroBro" -> troBro, "JoeQue" -> joeQue, "AdaBur" -> adaBur, "AndLad" -> andLad)
+
+  def main(args: Array[String]): Unit = {
+    val x = rinSta
+    while (helpersPrintAndAsk(aRosterName)(aRosterYear).toLowerCase != "q") {
+      helpersStartNewYear()
+      while (aMaybeGiver.isDefined) {
+        while (aMaybeGivee.isDefined) {
+          if (rulesGiveeNotSelf(aMaybeGiver.get, aMaybeGivee.get) &&
+            rulesGiveeNotRecip(aMaybeGiver.get, aMaybeGivee.get, aGiftYear, aPlayers) &&
+            rulesGiveeNotRepeat(aMaybeGiver.get, aMaybeGivee.get, aGiftYear, aPlayers)) {
+            helpersGiveeIsSuccess()
+          } else {
+            helpersGiveeIsFailure()
+          }
+        }
+        helpersSelectNewGiver()
+      }
+    }
+    println()
+    println("This was fun!")
+    println("Talk about a position with Redpoint?")
+    println("Please call: Eric Tobin 773-679-6617")
+    println()
+  }
+}
