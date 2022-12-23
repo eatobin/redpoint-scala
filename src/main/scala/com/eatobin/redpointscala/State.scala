@@ -1,16 +1,19 @@
 package com.eatobin.redpointscala
 
 import com.eatobin.redpointscala.GiftHistory.GiftYear
-import com.eatobin.redpointscala.GiftPair.{Givee, Giver, PlayerKey}
+import com.eatobin.redpointscala.GiftPair.{Givee, Giver, JsonString, PlayerKey}
 import com.eatobin.redpointscala.Hat.{Hat, hatDiscardGivee, hatMakeHat, hatRemovePuck, hatReturnDiscards}
 import com.eatobin.redpointscala.Players.{Players, playersAddYear, playersGetMyGivee, playersGetMyGiver, playersGetPlayerName, playersUpdateMyGivee, playersUpdateMyGiver}
 import com.eatobin.redpointscala.Roster.{RosterName, RosterYear}
 
 import scala.io.StdIn.readLine
+import io.circe.Error
+import io.circe.parser._
 
 case class State(rosterName: RosterName, rosterYear: RosterYear, players: Players, giftYear: GiftYear, giveeHat: Hat, giverHat: Hat, maybeGivee: Option[Givee], maybeGiver: Option[Giver], discards: Hat)
 
 object State {
+
   private def stateRandom(hat: Hat): PlayerKey = {
     val n: Int = util.Random.nextInt(hat.size)
     hat.iterator.drop(n).next()
@@ -144,4 +147,7 @@ object State {
     println()
     readLine("Continue? ('q' to quit): ")
   }
+
+  def stateJsonStringToState(jsonString: JsonString): Either[Error, State] =
+    decode[State](jsonString)
 }

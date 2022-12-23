@@ -3,6 +3,9 @@ package com.eatobin.redpointscala
 import com.eatobin.redpointscala.GiftHistory.{GiftYear, giftHistoryAddYear, giftHistoryUpdateGiftHistory}
 import com.eatobin.redpointscala.GiftPair._
 import com.eatobin.redpointscala.Player.{PlayerName, playerUpdateGiftHistory}
+import io.circe.Error
+import io.circe.generic.auto._
+import io.circe.parser._
 
 object Players {
   type Players = Map[PlayerKey, Player]
@@ -44,4 +47,7 @@ object Players {
     val ngp = giftPairUpdateGiver(giver)(players(selfKey).giftHistory(giftYear))
     playersSetGiftPair(selfKey)(giftYear)(ngp)(players)
   }
+
+  def playersJsonStringToPlayers(jsonString: JsonString): Either[Error, Players] =
+    decode[Players](jsonString)
 }
