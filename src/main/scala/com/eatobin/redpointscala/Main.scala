@@ -37,3 +37,15 @@ object Main {
     }
   }
 }
+
+// tail-recursive solution
+//def sum(list: List[Int]): Int = {
+//  @tailrec
+//  def sumWithAccumulator(list: List[Int], currentSum: Int): Int = {
+//    list match {
+//      case Nil => currentSum
+//      case x :: xs => sumWithAccumulator(xs, currentSum + x)
+//    }
+//  }
+//  sumWithAccumulator(list, 0)
+//}
