@@ -1,10 +1,13 @@
 package com.eatobin.redpointscala
 
 import com.eatobin.redpointscala.GiftHistory._
+import com.eatobin.redpointscala.GiftPair.JsonString
+import io.circe.Error
 import org.scalatest.flatspec.AnyFlatSpec
 
 class GiftHistorySpec extends AnyFlatSpec {
 
+  private val jsonString: JsonString = "[{\"givee\":\"GeoHar\",\"giver\":\"JohLen\"}]"
   private val giftHistory: GiftHistory = Vector(GiftPair("GeoHar", "JohLen"))
 
   "A GiftHistory" should "add a new year" in {
@@ -13,5 +16,10 @@ class GiftHistorySpec extends AnyFlatSpec {
 
   it should "return an updated giftHistory" in {
     assert(giftHistoryUpdateGiftHistory(0)(GiftPair("me", "you"))(giftHistory) == Vector(GiftPair("me", "you")))
+  }
+
+  it should "convert from JSON" in {
+    val ghJson: Either[Error, Vector[GiftPair]] = giftHistoryJsonStringToGiftHistory(jsonString)
+    assert(ghJson == Right(giftHistory))
   }
 }

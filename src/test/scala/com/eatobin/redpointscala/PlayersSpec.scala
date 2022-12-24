@@ -1,9 +1,13 @@
 package com.eatobin.redpointscala
 
+import com.eatobin.redpointscala.GiftPair.JsonString
 import com.eatobin.redpointscala.Players._
+import io.circe.Error
 import org.scalatest.flatspec.AnyFlatSpec
 
 class PlayersSpec extends AnyFlatSpec {
+
+  private val jsonString: JsonString = "{\"PauMcc\":{\"playerName\":\"Paul McCartney\",\"giftHistory\":[{\"givee\":\"GeoHar\",\"giver\":\"JohLen\"}]},\"GeoHar\":{\"playerName\":\"George Harrison\",\"giftHistory\":[{\"givee\":\"RinSta\",\"giver\":\"PauMcc\"}]},\"JohLen\":{\"playerName\":\"John Lennon\",\"giftHistory\":[{\"givee\":\"PauMcc\",\"giver\":\"RinSta\"}]},\"RinSta\":{\"playerName\":\"Ringo Starr\",\"giftHistory\":[{\"givee\":\"JohLen\",\"giver\":\"GeoHar\"}]}}"
 
   private val rinSta: Player = Player("Ringo Starr", Vector(GiftPair("JohLen", "GeoHar")))
   private val johLen: Player = Player("John Lennon", Vector(GiftPair("PauMcc", "RinSta")))
@@ -50,5 +54,9 @@ class PlayersSpec extends AnyFlatSpec {
   it should "update a givee and a giver" in {
     assert(playersUpdateMyGivee("GeoHar")(0)("you")(players) == playersGivee)
     assert(playersUpdateMyGiver("GeoHar")(0)("you")(players) == playersGiver)
+  }
+  it should "convert from JSON" in {
+    val plrsJson: Either[Error, Map[String, Player]] = playersJsonStringToPlayers(jsonString)
+    assert(plrsJson == Right(players))
   }
 }
