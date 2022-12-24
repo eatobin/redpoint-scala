@@ -6,6 +6,8 @@ import com.eatobin.redpointscala.Players.{playersGetMyGivee, playersGetMyGiver}
 import com.eatobin.redpointscala.State._
 import org.scalatest.flatspec.AnyFlatSpec
 
+import scala.collection.immutable.HashMap
+
 class StateSpec extends AnyFlatSpec {
 
 
@@ -21,7 +23,7 @@ class StateSpec extends AnyFlatSpec {
   private val playersWeird: Map[String, Player] =
     Map("RinSta" -> rinSta, "JohLen" -> johLen, "GeoHar" -> geoWhoops, "PauMcc" -> pauYikes)
 
-  private val state: State = State(
+  private val beatlesState: State = State(
     rosterName = "The Beatles",
     rosterYear = 2014,
     players = players,
@@ -32,8 +34,12 @@ class StateSpec extends AnyFlatSpec {
     maybeGiver = None,
     discards = Set()
   )
+  private val hawksState: State = State(
+    "Blackhawks", 2010, HashMap("TroBro" -> Player("Troy Brouwer", Vector(GiftPair("DavBol", "JoeQue"))), "PatKan" -> Player("Patrick Kane", Vector(GiftPair("BryBic", "CriHue"))), "JoeQue" -> Player("Joel Quenneville", Vector(GiftPair("TroBro", "AndLad"))), "NikHja" -> Player("Niklas Hjalmarsson", Vector(GiftPair("BreSea", "BriCam"))), "TomKop" -> Player("Tomas Kopecky", Vector(GiftPair("CriHue", "DunKei"))), "BryBic" -> Player("Bryan Bickell", Vector(GiftPair("MarHos", "PatKan"))), "AntNie" -> Player("Antti Niemi", Vector(GiftPair("JonToe", "MarHos"))), "PatSha" -> Player("Patrick Sharp", Vector(GiftPair("BriCam", "DavBol"))), "DunKei" -> Player("Duncan Keith", Vector(GiftPair("TomKop", "AdaBur"))), "BriCam" -> Player("Brian Campbell", Vector(GiftPair("NikHja", "PatSha"))), "BreSea" -> Player("Brent Seabrook", Vector(GiftPair("KriVer", "NikHja"))), "KriVer" -> Player("Kris Versteeg", Vector(GiftPair("AndLad", "BreSea"))), "MarHos" -> Player("Marian Hossa", Vector(GiftPair("AntNie", "BryBic"))), "AndLad" -> Player("Andrew Ladd", Vector(GiftPair("JoeQue", "KriVer"))), "DavBol" -> Player("Dave Bolland", Vector(GiftPair("PatSha", "TroBro"))), "CriHue" -> Player("Cristobal Huet", Vector(GiftPair("PatKan", "TomKop"))), "JonToe" -> Player("Jonathan Toews", Vector(GiftPair("AdaBur", "AntNie"))), "AdaBur" -> Player("Adam Burish", Vector(GiftPair("DunKei", "JonToe")))), 0, Set(), Set(), None, None, Set()
+  )
 
-  private val jsonString: JsonString = """{"rosterName":"The Beatles","rosterYear":2014,"players":{"RinSta":{"playerName":"Ringo Starr","giftHistory":[{"givee":"JohLen","giver":"GeoHar"}]},"JohLen":{"playerName":"John Lennon","giftHistory":[{"givee":"PauMcc","giver":"RinSta"}]},"GeoHar":{"playerName":"George Harrison","giftHistory":[{"givee":"RinSta","giver":"PauMcc"}]},"PauMcc":{"playerName":"Paul McCartney","giftHistory":[{"givee":"GeoHar","giver":"JohLen"}]}},"giftYear":0,"giveeHat":[],"giverHat":[],"maybeGivee":null,"maybeGiver":null,"discards":[]}"""
+  private val beatlesJson: JsonString = """{"rosterName":"The Beatles","rosterYear":2014,"players":{"RinSta":{"playerName":"Ringo Starr","giftHistory":[{"givee":"JohLen","giver":"GeoHar"}]},"JohLen":{"playerName":"John Lennon","giftHistory":[{"givee":"PauMcc","giver":"RinSta"}]},"GeoHar":{"playerName":"George Harrison","giftHistory":[{"givee":"RinSta","giver":"PauMcc"}]},"PauMcc":{"playerName":"Paul McCartney","giftHistory":[{"givee":"GeoHar","giver":"JohLen"}]}},"giftYear":0,"giveeHat":[],"giverHat":[],"maybeGivee":null,"maybeGiver":null,"discards":[]}"""
+  private val hawksJson: JsonString = """{"rosterName":"Blackhawks","rosterYear":2010,"players":{"TroBro":{"playerName":"Troy Brouwer","giftHistory":[{"givee":"DavBol","giver":"JoeQue"}]},"PatKan":{"playerName":"Patrick Kane","giftHistory":[{"givee":"BryBic","giver":"CriHue"}]},"JoeQue":{"playerName":"Joel Quenneville","giftHistory":[{"givee":"TroBro","giver":"AndLad"}]},"NikHja":{"playerName":"Niklas Hjalmarsson","giftHistory":[{"givee":"BreSea","giver":"BriCam"}]},"TomKop":{"playerName":"Tomas Kopecky","giftHistory":[{"givee":"CriHue","giver":"DunKei"}]},"BryBic":{"playerName":"Bryan Bickell","giftHistory":[{"givee":"MarHos","giver":"PatKan"}]},"AntNie":{"playerName":"Antti Niemi","giftHistory":[{"givee":"JonToe","giver":"MarHos"}]},"PatSha":{"playerName":"Patrick Sharp","giftHistory":[{"givee":"BriCam","giver":"DavBol"}]},"DunKei":{"playerName":"Duncan Keith","giftHistory":[{"givee":"TomKop","giver":"AdaBur"}]},"BriCam":{"playerName":"Brian Campbell","giftHistory":[{"givee":"NikHja","giver":"PatSha"}]},"BreSea":{"playerName":"Brent Seabrook","giftHistory":[{"givee":"KriVer","giver":"NikHja"}]},"KriVer":{"playerName":"Kris Versteeg","giftHistory":[{"givee":"AndLad","giver":"BreSea"}]},"MarHos":{"playerName":"Marian Hossa","giftHistory":[{"givee":"AntNie","giver":"BryBic"}]},"AndLad":{"playerName":"Andrew Ladd","giftHistory":[{"givee":"JoeQue","giver":"KriVer"}]},"DavBol":{"playerName":"Dave Bolland","giftHistory":[{"givee":"PatSha","giver":"TroBro"}]},"CriHue":{"playerName":"Cristobal Huet","giftHistory":[{"givee":"PatKan","giver":"TomKop"}]},"JonToe":{"playerName":"Jonathan Toews","giftHistory":[{"givee":"AdaBur","giver":"AntNie"}]},"AdaBur":{"playerName":"Adam Burish","giftHistory":[{"givee":"DunKei","giver":"JonToe"}]}},"giftYear":0,"giveeHat":[],"giverHat":[],"maybeGivee":null,"maybeGiver":null,"discards":[]}"""
 
   private val weirdState: State = State(
     rosterName = "The Beatles",
@@ -56,7 +62,7 @@ class StateSpec extends AnyFlatSpec {
   }
 
   it should "start a new year" in {
-    val newState = stateStartNewYear(state)
+    val newState = stateStartNewYear(beatlesState)
     assert(newState.giftYear == 1)
     assert(newState.maybeGiver.isDefined)
     assert(newState.maybeGivee.isDefined)
@@ -65,7 +71,7 @@ class StateSpec extends AnyFlatSpec {
   }
 
   it should "select a new giver" in {
-    val newState = stateStartNewYear(state)
+    val newState = stateStartNewYear(beatlesState)
     val newDiscards = hatDiscardGivee("GeoHar", newState.discards)
     assert(newDiscards.size == 1)
     val secondState = stateSelectNewGiver(newState)
@@ -74,7 +80,7 @@ class StateSpec extends AnyFlatSpec {
   }
 
   it should "have a successful givee" in {
-    val newState = stateStartNewYear(state)
+    val newState = stateStartNewYear(beatlesState)
     val givee = newState.maybeGivee.get
     val giver = newState.maybeGiver.get
     val secondState = stateGiveeIsSuccess(newState)
@@ -84,7 +90,7 @@ class StateSpec extends AnyFlatSpec {
   }
 
   it should "have a failing givee" in {
-    val newState = stateStartNewYear(state)
+    val newState = stateStartNewYear(beatlesState)
     val givee = newState.maybeGivee.get
     val secondState = stateGiveeIsFailure(newState)
     assert(secondState.discards.contains(givee))
@@ -96,16 +102,25 @@ class StateSpec extends AnyFlatSpec {
   }
 
   it should "print" in {
-    statePrintStringGivingRoster(state)
+    statePrintStringGivingRoster(beatlesState)
     statePrintStringGivingRoster(weirdState)
   }
 
-  it should "convert to JSON" in {
-    val stateJson: JsonString = stateStateToJsonString(state)
-    assert(stateJson == jsonString)
+  it should "convert to JSON-Beatles" in {
+    val stateJson: JsonString = stateStateToJsonString(beatlesState)
+    assert(stateJson == beatlesJson)
   }
 
-  it should "convert from JSON" in {
-    assert(stateJsonStringToState(jsonString) == Right(state))
+  it should "convert from JSON-Beatles" in {
+    assert(stateJsonStringToState(beatlesJson) == Right(beatlesState))
+  }
+
+  it should "convert to JSON-Hawks" in {
+    val stateJson: JsonString = stateStateToJsonString(hawksState)
+    assert(stateJson == hawksJson)
+  }
+
+  it should "convert from JSON-Hawks" in {
+    assert(stateJsonStringToState(hawksJson) == Right(hawksState))
   }
 }

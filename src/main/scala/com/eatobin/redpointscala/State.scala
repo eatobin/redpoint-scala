@@ -110,7 +110,7 @@ object State {
     playerErrors.sorted
   }
 
-  def statePrintResults(state: State): Unit = {
+  private def statePrintResults(state: State): Unit = {
     val playerKeys: Seq[PlayerKey] = state.players.keys.toSeq.sorted
     for (playerKey <- playerKeys) yield {
       val playerName = playersGetPlayerName(playerKey)(state.players)
