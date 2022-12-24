@@ -1,7 +1,8 @@
 package com.eatobin.redpointscala
 
 import com.eatobin.redpointscala.GiftPair.JsonString
-import com.eatobin.redpointscala.State.stateJsonStringToState
+import com.eatobin.redpointscala.Rules.{rulesGiveeNotRecip, rulesGiveeNotRepeat, rulesGiveeNotSelf}
+import com.eatobin.redpointscala.State._
 import io.circe.Error
 
 object Main {
@@ -11,28 +12,28 @@ object Main {
     val rightState: Either[Error, State] = stateJsonStringToState(hawksJson)
     rightState match {
       case Left(e) => println(s"Error is: $e")
-      case Right(state) => println(s"State is: $state")
+      case Right(valState) =>
+        var varState: State = valState
+        while (statePrintAndAsk(varState).toLowerCase != "q") {
+          varState = stateStartNewYear(varState)
+          while (varState.maybeGiver.isDefined) {
+            while (varState.maybeGivee.isDefined) {
+              if (rulesGiveeNotSelf(varState.maybeGiver.get, varState.maybeGivee.get) &&
+                rulesGiveeNotRecip(varState.maybeGiver.get, varState.maybeGivee.get, varState.giftYear, varState.players) &&
+                rulesGiveeNotRepeat(varState.maybeGiver.get, varState.maybeGivee.get, varState.giftYear, varState.players)) {
+                varState = stateGiveeIsSuccess(varState)
+              } else {
+                varState = stateGiveeIsFailure(varState)
+              }
+            }
+            varState = stateSelectNewGiver(varState)
+          }
+        }
+        println()
+        println("This was fun!")
+        println("Talk about a position with Redpoint?")
+        println("Please call: Eric Tobin 773-679-6617")
+        println()
     }
-
-    //    while (helpersPrintAndAsk(aRosterName)(aRosterYear).toLowerCase != "q") {
-    //      helpersStartNewYear()
-    //      while (aMaybeGiver.isDefined) {
-    //        while (aMaybeGivee.isDefined) {
-    //          if (rulesGiveeNotSelf(aMaybeGiver.get, aMaybeGivee.get) &&
-    //            rulesGiveeNotRecip(aMaybeGiver.get, aMaybeGivee.get, aGiftYear, aPlayers) &&
-    //            rulesGiveeNotRepeat(aMaybeGiver.get, aMaybeGivee.get, aGiftYear, aPlayers)) {
-    //            helpersGiveeIsSuccess()
-    //          } else {
-    //            helpersGiveeIsFailure()
-    //          }
-    //        }
-    //        helpersSelectNewGiver()
-    //      }
-    //    }
-    //    println()
-    //    println("This was fun!")
-    //    println("Talk about a position with Redpoint?")
-    //    println("Please call: Eric Tobin 773-679-6617")
-    //    println()
   }
 }
