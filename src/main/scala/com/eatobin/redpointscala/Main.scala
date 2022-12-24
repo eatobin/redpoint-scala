@@ -11,7 +11,7 @@ object Main {
     val rightState: Either[Error, State] = stateJsonStringToState(hawksJson)
     rightState match {
       case Left(e) => println(s"Error is: $e")
-      case Right(s) => println(s"State is: $s")
+      case Right(state) => println(s"State is: $state")
     }
 
     //    while (helpersPrintAndAsk(aRosterName)(aRosterYear).toLowerCase != "q") {
@@ -34,6 +34,5 @@ object Main {
     //    println("Talk about a position with Redpoint?")
     //    println("Please call: Eric Tobin 773-679-6617")
     //    println()
-    //  }
   }
 }
