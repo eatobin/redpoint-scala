@@ -1,10 +1,12 @@
 package com.eatobin.redpointscala
 
+import com.eatobin.redpointscala.GiftPair.JsonString
 import com.eatobin.redpointscala.Hat._
 import org.scalatest.flatspec.AnyFlatSpec
 
 class HatSpec extends AnyFlatSpec {
 
+  private val jsonString: JsonString = "[\"RinSta\",\"JohLen\",\"GeoHar\",\"PauMcc\"]"
   private val testHat: Set[String] = Set("RinSta", "JohLen", "GeoHar", "PauMcc")
 
   private val rinSta: Player = Player("Ringo Starr", Vector(GiftPair("JohLen", "GeoHar")))
@@ -31,5 +33,10 @@ class HatSpec extends AnyFlatSpec {
 
   it should "return discarded givees" in {
     assert(hatReturnDiscards(Set("GeoHar"), Set("PauMcc", "JohLen")) == Set("JohLen", "PauMcc", "GeoHar"))
+  }
+
+  it should "convert from JSON" in {
+    val hatHat = hatJsonStringToHat(jsonString)
+    assert(hatHat == Right(testHat))
   }
 }

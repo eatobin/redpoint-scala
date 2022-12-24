@@ -1,4 +1,4 @@
- package com.eatobin.redpointscala
+package com.eatobin.redpointscala
 
 import com.eatobin.redpointscala.GiftPair.{Givee, JsonString, PlayerKey}
 import com.eatobin.redpointscala.Players.Players
