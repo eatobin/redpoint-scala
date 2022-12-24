@@ -1,5 +1,6 @@
 package com.eatobin.redpointscala
 
+import com.eatobin.redpointscala.GiftPair.JsonString
 import com.eatobin.redpointscala.Hat.{Hat, hatDiscardGivee}
 import com.eatobin.redpointscala.Players.{playersGetMyGivee, playersGetMyGiver}
 import com.eatobin.redpointscala.State._
@@ -31,6 +32,8 @@ class StateSpec extends AnyFlatSpec {
     maybeGiver = None,
     discards = Set()
   )
+
+  private val jsonString: JsonString = """{"rosterName":"The Beatles","rosterYear":2014,"players":{"RinSta":{"playerName":"Ringo Starr","giftHistory":[{"givee":"JohLen","giver":"GeoHar"}]},"JohLen":{"playerName":"John Lennon","giftHistory":[{"givee":"PauMcc","giver":"RinSta"}]},"GeoHar":{"playerName":"George Harrison","giftHistory":[{"givee":"RinSta","giver":"PauMcc"}]},"PauMcc":{"playerName":"Paul McCartney","giftHistory":[{"givee":"GeoHar","giver":"JohLen"}]}},"giftYear":0,"giveeHat":[],"giverHat":[],"maybeGivee":null,"maybeGiver":null,"discards":[]}"""
 
   private val weirdState: State = State(
     rosterName = "The Beatles",
@@ -95,5 +98,14 @@ class StateSpec extends AnyFlatSpec {
   it should "print" in {
     statePrintStringGivingRoster(state)
     statePrintStringGivingRoster(weirdState)
+  }
+
+  it should "convert to JSON" in {
+    val stateJson: JsonString = stateStateToJsonString(state)
+    assert(stateJson == jsonString)
+  }
+
+  it should "convert from JSON" in {
+    assert(stateJsonStringToState(jsonString) == Right(state))
   }
 }

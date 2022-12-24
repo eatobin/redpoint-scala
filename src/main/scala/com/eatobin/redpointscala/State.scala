@@ -6,8 +6,9 @@ import com.eatobin.redpointscala.Hat.{Hat, hatDiscardGivee, hatMakeHat, hatRemov
 import com.eatobin.redpointscala.Players.{Players, playersAddYear, playersGetMyGivee, playersGetMyGiver, playersGetPlayerName, playersUpdateMyGivee, playersUpdateMyGiver}
 import com.eatobin.redpointscala.Roster.{RosterName, RosterYear}
 import io.circe.Error
-import io.circe.generic.codec.DerivedAsObjectCodec.deriveCodec
+import io.circe.generic.auto._
 import io.circe.parser._
+import io.circe.syntax._
 
 import scala.io.StdIn.readLine
 
@@ -150,4 +151,7 @@ object State {
 
   def stateJsonStringToState(jsonString: JsonString): Either[Error, State] =
     decode[State](jsonString)
+
+  def stateStateToJsonString(state: State): JsonString =
+    state.asJson.noSpaces
 }
