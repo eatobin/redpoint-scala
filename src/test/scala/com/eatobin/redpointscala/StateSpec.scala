@@ -106,18 +106,8 @@ class StateSpec extends AnyFlatSpec {
     statePrintStringGivingRoster(weirdState)
   }
 
-  it should "convert to JSON-Beatles" in {
-    val stateJson: JsonString = stateStateToJsonString(beatlesState)
-    assert(stateJson == beatlesJson)
-  }
-
   it should "convert from JSON-Beatles" in {
     assert(stateJsonStringToState(beatlesJson) == Right(beatlesState))
-  }
-
-  it should "convert to JSON-Hawks" in {
-    val stateJson: JsonString = stateStateToJsonString(hawksState)
-    assert(stateJson == hawksJson)
   }
 
   it should "convert from JSON-Hawks" in {

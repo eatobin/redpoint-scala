@@ -8,7 +8,6 @@ import com.eatobin.redpointscala.Roster.{RosterName, RosterYear}
 import io.circe.Error
 import io.circe.generic.auto._
 import io.circe.parser._
-import io.circe.syntax._
 
 import scala.io.StdIn.readLine
 
@@ -151,7 +150,4 @@ object State {
 
   def stateJsonStringToState(jsonString: JsonString): Either[Error, State] =
     decode[State](jsonString)
-
-  def stateStateToJsonString(state: State): JsonString =
-    state.asJson.noSpaces
 }
