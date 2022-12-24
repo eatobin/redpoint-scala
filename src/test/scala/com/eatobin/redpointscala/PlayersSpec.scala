@@ -55,6 +55,7 @@ class PlayersSpec extends AnyFlatSpec {
     assert(playersUpdateMyGivee("GeoHar")(0)("you")(players) == playersGivee)
     assert(playersUpdateMyGiver("GeoHar")(0)("you")(players) == playersGiver)
   }
+
   it should "convert from JSON" in {
     val plrsJson: Either[Error, Map[String, Player]] = playersJsonStringToPlayers(jsonString)
     assert(plrsJson == Right(players))
