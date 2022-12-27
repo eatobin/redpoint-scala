@@ -1,7 +1,6 @@
 package com.eatobin.redpointscala
 
 import com.eatobin.redpointscala.GiftPair.JsonString
-import com.eatobin.redpointscala.Rules.{rulesGiveeNotRecip, rulesGiveeNotRepeat, rulesGiveeNotSelf}
 import com.eatobin.redpointscala.State._
 import io.circe.Error
 
@@ -18,13 +17,7 @@ object Main {
           varState = stateStartNewYear(varState)
           while (varState.maybeGiver.isDefined) {
             while (varState.maybeGivee.isDefined) {
-              if (rulesGiveeNotSelf(varState.maybeGiver.get, varState.maybeGivee.get) &&
-                rulesGiveeNotRecip(varState.maybeGiver.get, varState.maybeGivee.get, varState.giftYear, varState.players) &&
-                rulesGiveeNotRepeat(varState.maybeGiver.get, varState.maybeGivee.get, varState.giftYear, varState.players)) {
-                varState = stateGiveeIsSuccess(varState)
-              } else {
-                varState = stateGiveeIsFailure(varState)
-              }
+              varState = stateGiveeIsSuccessOrFailure(varState)
             }
             varState = stateSelectNewGiver(varState)
           }

@@ -5,6 +5,7 @@ import com.eatobin.redpointscala.GiftPair.{Givee, Giver, JsonString, PlayerKey}
 import com.eatobin.redpointscala.Hat.{Hat, hatDiscardGivee, hatMakeHat, hatRemovePuck, hatReturnDiscards}
 import com.eatobin.redpointscala.Players.{Players, playersAddYear, playersGetMyGivee, playersGetMyGiver, playersGetPlayerName, playersUpdateMyGivee, playersUpdateMyGiver}
 import com.eatobin.redpointscala.Roster.{RosterName, RosterYear}
+import com.eatobin.redpointscala.Rules.{rulesGiveeNotRecip, rulesGiveeNotRepeat, rulesGiveeNotSelf}
 import io.circe.Error
 import io.circe.generic.auto._
 import io.circe.parser._
@@ -94,6 +95,16 @@ object State {
       discards = hatDiscardGivee(givee, state.discards)
     )
     newState
+  }
+
+  def stateGiveeIsSuccessOrFailure(state: State): State = {
+    if (rulesGiveeNotSelf(state.maybeGiver.get, state.maybeGivee.get) &&
+      rulesGiveeNotRecip(state.maybeGiver.get, state.maybeGivee.get, state.giftYear, state.players) &&
+      rulesGiveeNotRepeat(state.maybeGiver.get, state.maybeGivee.get, state.giftYear, state.players)) {
+      stateGiveeIsSuccess(state)
+    } else {
+      stateGiveeIsFailure(state)
+    }
   }
 
   def stateErrors(state: State): Seq[PlayerKey] = {
