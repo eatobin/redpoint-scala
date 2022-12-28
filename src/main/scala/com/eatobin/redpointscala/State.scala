@@ -153,10 +153,10 @@ object State {
     statePrintResults(state)
   }
 
-  def statePrintAndAsk(state: State): String = {
+  def statePrintAndAsk(state: State): (State, String) = {
     statePrintStringGivingRoster(state)
     println()
-    readLine("Continue? ('q' to quit): ")
+    (state, readLine("Continue? ('q' to quit): "))
   }
 
   def stateJsonStringToState(jsonString: JsonString): Either[Error, State] =
