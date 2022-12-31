@@ -3,7 +3,7 @@ package com.eatobin.redpointscala
 import com.eatobin.redpointscala.GiftPair.JsonString
 import com.eatobin.redpointscala.Hat.{Hat, hatDiscardGivee}
 import com.eatobin.redpointscala.Players.{playersGetMyGivee, playersGetMyGiver}
-import com.eatobin.redpointscala.State._
+import com.eatobin.redpointscala.State.*
 import org.scalatest.flatspec.AnyFlatSpec
 
 import scala.collection.immutable.HashMap
@@ -38,6 +38,18 @@ class StateSpec extends AnyFlatSpec {
   private val beatlesState2020: State = State(
     rosterName = "The Beatles",
     rosterYear = 2020,
+    players = players,
+    giftYear = 0,
+    giveeHat = Set(),
+    giverHat = Set(),
+    maybeGivee = None,
+    maybeGiver = None,
+    discards = Set()
+  )
+
+  private val beatlesState20: State = State(
+    rosterName = "The Beatles",
+    rosterYear = 20,
     players = players,
     giftYear = 0,
     giveeHat = Set(),
@@ -129,5 +141,9 @@ class StateSpec extends AnyFlatSpec {
 
   it should "count up to 2020" in {
     assert(stateUpTo2020(beatlesState) == beatlesState2020)
+  }
+
+  it should "count down to 20" in {
+    assert(stateTo20(beatlesState) == beatlesState20)
   }
 }
