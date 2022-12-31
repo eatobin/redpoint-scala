@@ -7,8 +7,8 @@ import com.eatobin.redpointscala.Players.{Players, playersAddYear, playersGetMyG
 import com.eatobin.redpointscala.Roster.{RosterName, RosterYear}
 import com.eatobin.redpointscala.Rules.{rulesGiveeNotRecip, rulesGiveeNotRepeat, rulesGiveeNotSelf}
 import io.circe.Error
-import io.circe.generic.auto._
-import io.circe.parser._
+import io.circe.generic.auto.*
+import io.circe.parser.*
 
 import scala.io.StdIn.readLine
 
@@ -153,10 +153,10 @@ object State {
     statePrintResults(state)
   }
 
-  def statePrintAndAsk(state: State): (State, String) = {
+  def statePrintAndAsk(state: State): String = {
     statePrintStringGivingRoster(state)
     println()
-    (state, readLine("Continue? ('q' to quit): "))
+    readLine("Continue? ('q' to quit): ")
   }
 
   def stateJsonStringToState(jsonString: JsonString): Either[Error, State] =
