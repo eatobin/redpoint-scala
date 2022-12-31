@@ -10,6 +10,7 @@ import io.circe.Error
 import io.circe.generic.auto.*
 import io.circe.parser.*
 
+import scala.annotation.tailrec
 import scala.io.StdIn.readLine
 
 case class State(rosterName: RosterName, rosterYear: RosterYear, players: Players, giftYear: GiftYear, giveeHat: Hat, giverHat: Hat, maybeGivee: Option[Givee], maybeGiver: Option[Giver], discards: Hat)
@@ -161,4 +162,14 @@ object State {
 
   def stateJsonStringToState(jsonString: JsonString): Either[Error, State] =
     decode[State](jsonString)
+
+  private def stateIncrementer(state: State): State = state.copy(rosterYear = state.rosterYear + 1)
+
+  @tailrec
+  def stateUpTo2020(state: State): State = {
+    state.rosterYear match {
+      case 2020 => state
+      case _ => stateUpTo2020(stateIncrementer(state))
+    }
+  }
 }

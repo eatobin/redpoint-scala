@@ -34,6 +34,19 @@ class StateSpec extends AnyFlatSpec {
     maybeGiver = None,
     discards = Set()
   )
+
+  private val beatlesState2020: State = State(
+    rosterName = "The Beatles",
+    rosterYear = 2020,
+    players = players,
+    giftYear = 0,
+    giveeHat = Set(),
+    giverHat = Set(),
+    maybeGivee = None,
+    maybeGiver = None,
+    discards = Set()
+  )
+
   private val hawksState: State = State(
     "Blackhawks", 2010, HashMap("TroBro" -> Player("Troy Brouwer", Vector(GiftPair("DavBol", "JoeQue"))), "PatKan" -> Player("Patrick Kane", Vector(GiftPair("BryBic", "CriHue"))), "JoeQue" -> Player("Joel Quenneville", Vector(GiftPair("TroBro", "AndLad"))), "NikHja" -> Player("Niklas Hjalmarsson", Vector(GiftPair("BreSea", "BriCam"))), "TomKop" -> Player("Tomas Kopecky", Vector(GiftPair("CriHue", "DunKei"))), "BryBic" -> Player("Bryan Bickell", Vector(GiftPair("MarHos", "PatKan"))), "AntNie" -> Player("Antti Niemi", Vector(GiftPair("JonToe", "MarHos"))), "PatSha" -> Player("Patrick Sharp", Vector(GiftPair("BriCam", "DavBol"))), "DunKei" -> Player("Duncan Keith", Vector(GiftPair("TomKop", "AdaBur"))), "BriCam" -> Player("Brian Campbell", Vector(GiftPair("NikHja", "PatSha"))), "BreSea" -> Player("Brent Seabrook", Vector(GiftPair("KriVer", "NikHja"))), "KriVer" -> Player("Kris Versteeg", Vector(GiftPair("AndLad", "BreSea"))), "MarHos" -> Player("Marian Hossa", Vector(GiftPair("AntNie", "BryBic"))), "AndLad" -> Player("Andrew Ladd", Vector(GiftPair("JoeQue", "KriVer"))), "DavBol" -> Player("Dave Bolland", Vector(GiftPair("PatSha", "TroBro"))), "CriHue" -> Player("Cristobal Huet", Vector(GiftPair("PatKan", "TomKop"))), "JonToe" -> Player("Jonathan Toews", Vector(GiftPair("AdaBur", "AntNie"))), "AdaBur" -> Player("Adam Burish", Vector(GiftPair("DunKei", "JonToe")))), 0, Set(), Set(), None, None, Set()
   )
@@ -112,5 +125,9 @@ class StateSpec extends AnyFlatSpec {
 
   it should "convert from JSON-Hawks" in {
     assert(stateJsonStringToState(hawksJson) == Right(hawksState))
+  }
+
+  it should "count up to 2020" in {
+    assert(stateUpTo2020(beatlesState) == beatlesState2020)
   }
 }
