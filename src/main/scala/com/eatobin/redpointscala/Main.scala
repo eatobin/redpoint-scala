@@ -29,6 +29,19 @@ object Main {
         println()
     }
   }
+
+  @tailrec
+  def stateTo20XXX(state: State): State = {
+    if (state.rosterYear != 20) {
+      if (state.rosterYear != 2020) {
+        stateTo20(stateUpTo2020(state))
+      } else {
+        stateTo20(stateDownTo20(state))
+      }
+    } else {
+      state
+    }
+  }
 }
 
 // tail-recursive solution
