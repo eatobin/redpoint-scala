@@ -161,10 +161,17 @@ object State {
     statePrintResults(state)
   }
 
-  def statePrintAndAsk(state: State): String = {
+  //  def statePrintAndAsk(state: State): String = {
+  //    statePrintStringGivingRoster(state)
+  //    println()
+  //    readLine("Continue? ('q' to quit): ")
+  //  }
+
+  def statePrintAndAsk(state: State): State = {
     statePrintStringGivingRoster(state)
     println()
-    readLine("Continue? ('q' to quit): ")
+    val reply: String = readLine("Continue? ('q' to quit): ")
+    state.copy(continue = reply)
   }
 
   def stateJsonStringToState(jsonString: JsonString): Either[Error, State] =

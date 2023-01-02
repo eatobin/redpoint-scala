@@ -15,7 +15,7 @@ object Main {
       case Left(e) => println(s"Error is: $e")
       case Right(valState) =>
         var varState: State = valState
-        while (statePrintAndAsk(varState).toLowerCase != "q") {
+        while (statePrintAndAsk(varState).continue.toLowerCase != "q") {
           varState = stateStartNewYear(varState)
           while (varState.maybeGiver.isDefined) {
             while (varState.maybeGivee.isDefined) {
