@@ -202,15 +202,4 @@ object State {
       state
     }
   }
-
-  //  @tailrec
-  //  def stateMaybeGivee(state: State): State = {
-  //    state.maybeGivee match {
-  //      case None => state
-  //      case Some(_) =>
-  //        def c = stateGiveeIsSuccessOrFailure(state)
-  //
-  //        stateMaybeGivee(c)
-  //    }
-  //  }
 }
