@@ -81,7 +81,7 @@ object State {
       giverHat = state.giverHat,
       maybeGivee = None,
       maybeGiver = state.maybeGiver,
-      discards = Set(),
+      discards = state.discards,
       continue = state.continue
     )
     newState
