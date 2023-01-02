@@ -170,5 +170,6 @@
   "giverHat": [],
   "maybeGivee": null,
   "maybeGiver": null,
-  "discards": []
+  "discards": [],
+  "continue": "n"
 }

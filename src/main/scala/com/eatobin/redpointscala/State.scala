@@ -6,6 +6,7 @@ import com.eatobin.redpointscala.Hat.{Hat, hatDiscardGivee, hatMakeHat, hatRemov
 import com.eatobin.redpointscala.Players.{Players, playersAddYear, playersGetMyGivee, playersGetMyGiver, playersGetPlayerName, playersUpdateMyGivee, playersUpdateMyGiver}
 import com.eatobin.redpointscala.Roster.{RosterName, RosterYear}
 import com.eatobin.redpointscala.Rules.{rulesGiveeNotRecip, rulesGiveeNotRepeat, rulesGiveeNotSelf}
+import com.eatobin.redpointscala.State.Continue
 import io.circe.Error
 import io.circe.generic.auto.*
 import io.circe.parser.*
@@ -13,9 +14,11 @@ import io.circe.parser.*
 import scala.annotation.tailrec
 import scala.io.StdIn.readLine
 
-case class State(rosterName: RosterName, rosterYear: RosterYear, players: Players, giftYear: GiftYear, giveeHat: Hat, giverHat: Hat, maybeGivee: Option[Givee], maybeGiver: Option[Giver], discards: Hat)
+case class State(rosterName: RosterName, rosterYear: RosterYear, players: Players, giftYear: GiftYear, giveeHat: Hat, giverHat: Hat, maybeGivee: Option[Givee], maybeGiver: Option[Giver], discards: Hat, continue: Continue)
 
 object State {
+  type Continue = String
+
   private def stateRandom(hat: Hat): PlayerKey = {
     val n: Int = util.Random.nextInt(hat.size)
     hat.iterator.drop(n).next()
@@ -40,7 +43,8 @@ object State {
       giverHat = hatMakeHat(newPlayers),
       maybeGivee = stateDrawPuck(hatMakeHat(newPlayers)),
       maybeGiver = stateDrawPuck(hatMakeHat(newPlayers)),
-      discards = Set()
+      discards = Set(),
+      continue = state.continue
     )
     newState
   }
@@ -58,7 +62,8 @@ object State {
       giverHat = newGiverHat,
       maybeGivee = stateDrawPuck(newGiveeHat),
       maybeGiver = stateDrawPuck(newGiverHat),
-      discards = Set()
+      discards = Set(),
+      continue = state.continue
     )
     newState
   }
@@ -76,7 +81,8 @@ object State {
       giverHat = state.giverHat,
       maybeGivee = None,
       maybeGiver = state.maybeGiver,
-      discards = state.discards
+      discards = Set(),
+      continue = state.continue
     )
     newState
   }
@@ -93,7 +99,8 @@ object State {
       giverHat = state.giverHat,
       maybeGivee = stateDrawPuck(newGiveeHat),
       maybeGiver = state.maybeGiver,
-      discards = hatDiscardGivee(givee, state.discards)
+      discards = hatDiscardGivee(givee, state.discards),
+      continue = state.continue
     )
     newState
   }
