@@ -3,7 +3,7 @@ package com.eatobin.redpointscala
 import com.eatobin.redpointscala.GiftPair.JsonString
 import com.eatobin.redpointscala.Hat.{Hat, hatDiscardGivee}
 import com.eatobin.redpointscala.Players.{playersGetMyGivee, playersGetMyGiver}
-import com.eatobin.redpointscala.State.*
+import com.eatobin.redpointscala.State._
 import org.scalatest.flatspec.AnyFlatSpec
 
 import scala.collection.immutable.HashMap
