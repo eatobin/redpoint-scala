@@ -38,8 +38,13 @@ object Main {
     if (state.continue.toLowerCase == "q") {
       state
     } else {
-      val newState: State = statePrintAndAsk(state)
-      mainPrintAndAsk(newState)
+      val startingState: State = stateStartNewYear(state)
+      if (false) {
+        startingState
+      } else {
+        val recurState: State = statePrintAndAsk(state)
+        mainPrintAndAsk(recurState)
+      }
     }
   }
 }
