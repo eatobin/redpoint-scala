@@ -39,8 +39,12 @@ object Main {
       println("I'm done!!!")
     } else {
       val startingState: State = stateStartNewYear(state)
-      if (false) {
-        println("I'm NOT done!!!")
+      if (startingState.maybeGiver.isDefined) {
+        if (startingState.maybeGivee.isDefined) {
+          println("both defined")
+        } else {
+          println("2")
+        }
       } else {
         val recurState: State = statePrintAndAsk(state)
         mainPrintAndAsk(recurState)
