@@ -33,6 +33,25 @@ object Main {
     }
   }
 
+//  @tailrec
+//  private def mainPrintAndAsk(state: State): Unit = {
+//    if (state.continue.toLowerCase == "q") {
+//      println("I'm done!!!")
+//    } else {
+//      val startingState: State = stateStartNewYear(state)
+//      if (startingState.maybeGiver.isDefined) {
+//        if (startingState.maybeGivee.isDefined) {
+//          println("both defined")
+//        } else {
+//          println("2")
+//        }
+//      } else {
+//        val recurState: State = statePrintAndAsk(state)
+//        mainPrintAndAsk(recurState)
+//      }
+//    }
+//  }
+
   @tailrec
   private def mainPrintAndAsk(state: State): Unit = {
     if (state.continue.toLowerCase == "q") {
@@ -52,28 +71,3 @@ object Main {
     }
   }
 }
-
-// tail-recursive solution
-//def sum(list: List[Int]): Int = {
-//  @tailrec
-//  def sumWithAccumulator(list: List[Int], currentSum: Int): Int = {
-//    list match {
-//      case Nil => currentSum
-//      case x :: xs => sumWithAccumulator(xs, currentSum + x)
-//    }
-//  }
-//  sumWithAccumulator(list, 0)
-//}
-
-//  @tailrec
-//  def stateTo20XXX(state: State): State = {
-//    if (state.rosterYear != 20) {
-//      if (state.rosterYear != 2020) {
-//        stateTo20(stateUpTo2020(state))
-//      } else {
-//        stateTo20(stateDownTo20(state))
-//      }
-//    } else {
-//      state
-//    }
-//  }
