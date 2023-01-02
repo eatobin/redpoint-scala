@@ -34,13 +34,13 @@ object Main {
   }
 
   @tailrec
-  private def mainPrintAndAsk(state: State): State = {
+  private def mainPrintAndAsk(state: State): Unit = {
     if (state.continue.toLowerCase == "q") {
-      state
+      println("I'm done!!!")
     } else {
       val startingState: State = stateStartNewYear(state)
       if (false) {
-        startingState
+        println("I'm NOT done!!!")
       } else {
         val recurState: State = statePrintAndAsk(state)
         mainPrintAndAsk(recurState)
