@@ -115,9 +115,29 @@ object State {
   //    }
   //  }
 
+  //  @tailrec
+  //  def stateGiveeIsSuccessOrFailure(state: State): State = {
+  //    if (state.maybeGivee.isEmpty || state.maybeGiver.isEmpty) {
+  //      state
+  //    } else {
+  //      if (rulesGiveeNotSelf(state.maybeGiver.get, state.maybeGivee.get) &&
+  //        rulesGiveeNotRecip(state.maybeGiver.get, state.maybeGivee.get, state.giftYear, state.players) &&
+  //        rulesGiveeNotRepeat(state.maybeGiver.get, state.maybeGivee.get, state.giftYear, state.players)) {
+  //        stateGiveeIsSuccessOrFailure(stateGiveeIsSuccess(state))
+  //      } else {
+  //        stateGiveeIsSuccessOrFailure(stateGiveeIsFailure(state))
+  //      }
+  //    }
+  //  }
+
+
+//  def stateRecurrGiver(state: State): State = {
+  //
+  //  }
+
   @tailrec
   def stateGiveeIsSuccessOrFailure(state: State): State = {
-    if (state.maybeGivee.isEmpty || state.maybeGiver.isEmpty) {
+    if (state.maybeGivee.isEmpty) {
       state
     } else {
       if (rulesGiveeNotSelf(state.maybeGiver.get, state.maybeGivee.get) &&
