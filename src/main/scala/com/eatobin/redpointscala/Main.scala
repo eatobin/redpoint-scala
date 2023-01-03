@@ -13,15 +13,9 @@ object Main {
       case Left(e) => println(s"Error is: $e")
       case Right(valState) =>
         //        mainPrintAndAsk(valState)
-        var varState: State = valState
-        while (statePrintAndAsk(varState).continue.toLowerCase != "q") {
-          varState = stateStartNewYear(varState)
-          while (varState.maybeGiver.isDefined) {
-            while (varState.maybeGivee.isDefined) {
-              varState = stateGiveeIsSuccessOrFailure(varState)
-            }
-            varState = stateSelectNewGiver(varState)
-          }
+        //        var varState: State = valState
+        while (statePrintAndAsk(valState).continue.toLowerCase != "q") {
+          stateStartNewYear(stateRecurrGiver(valState))
         }
         println()
         println("This was fun!")

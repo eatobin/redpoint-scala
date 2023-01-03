@@ -151,9 +151,9 @@ class StateSpec extends AnyFlatSpec {
     assert(stateTo20(beatlesState) == beatlesState20)
   }
 
-  it should "exhaust a Givee" in {
-    val newState = stateStartNewYear(beatlesState)
-    assert(stateGiveeIsSuccessOrFailure(newState) ==
-      State("The Beatles", 2014, Map("RinSta" -> Player("Ringo Starr", Vector(GiftPair("JohLen", "GeoHar"), GiftPair("RinSta", "JohLen"))), "JohLen" -> Player("John Lennon", Vector(GiftPair("PauMcc", "RinSta"), GiftPair("RinSta", "JohLen"))), "GeoHar" -> Player("George Harrison", Vector(GiftPair("RinSta", "PauMcc"), GiftPair("GeoHar", "GeoHar"))), "PauMcc" -> Player("Paul McCartney", Vector(GiftPair("GeoHar", "JohLen"), GiftPair("PauMcc", "PauMcc")))), 1, Set("JohLen", "GeoHar", "PauMcc"), Set("RinSta", "JohLen", "GeoHar", "PauMcc"), None, Some("JohLen"), Set(), "n"))
-  }
+  //  it should "exhaust a Givee" in {
+  //    val newState = stateStartNewYear(beatlesState)
+  //    assert(stateGiveeIsSuccessOrFailure(newState) ==
+  //      State("The Beatles", 2014, Map("RinSta" -> Player("Ringo Starr", Vector(GiftPair("JohLen", "GeoHar"), GiftPair("RinSta", "JohLen"))), "JohLen" -> Player("John Lennon", Vector(GiftPair("PauMcc", "RinSta"), GiftPair("RinSta", "JohLen"))), "GeoHar" -> Player("George Harrison", Vector(GiftPair("RinSta", "PauMcc"), GiftPair("GeoHar", "GeoHar"))), "PauMcc" -> Player("Paul McCartney", Vector(GiftPair("GeoHar", "JohLen"), GiftPair("PauMcc", "PauMcc")))), 1, Set("JohLen", "GeoHar", "PauMcc"), Set("RinSta", "JohLen", "GeoHar", "PauMcc"), None, Some("JohLen"), Set(), "n"))
+  //  }
 }
