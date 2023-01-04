@@ -14,7 +14,18 @@ import io.circe.parser._
 import scala.annotation.tailrec
 import scala.io.StdIn.readLine
 
-case class State(rosterName: RosterName, rosterYear: RosterYear, players: Players, giftYear: GiftYear, giveeHat: Hat, giverHat: Hat, maybeGivee: Option[Givee], maybeGiver: Option[Giver], discards: Hat, continue: Continue)
+case class State(
+                  rosterName: RosterName,
+                  rosterYear: RosterYear,
+                  players: Players,
+                  giftYear: GiftYear,
+                  giveeHat: Hat,
+                  giverHat: Hat,
+                  maybeGivee: Option[Givee],
+                  maybeGiver: Option[Giver],
+                  discards: Hat,
+                  continue: Continue
+                )
 
 object State {
   type Continue = String
