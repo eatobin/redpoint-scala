@@ -165,20 +165,20 @@ object State {
   }
 
 
-  //  @tailrec
-  //  def stateGiveeIsSuccessOrFailure(state: State): State = {
-  //    if (state.maybeGivee.isEmpty) {
-  //      state
-  //    } else {
-  //      if (rulesGiveeNotSelf(state.maybeGiver.get, state.maybeGivee.get) &&
-  //        rulesGiveeNotRecip(state.maybeGiver.get, state.maybeGivee.get, state.giftYear, state.players) &&
-  //        rulesGiveeNotRepeat(state.maybeGiver.get, state.maybeGivee.get, state.giftYear, state.players)) {
-  //        stateGiveeIsSuccessOrFailure(stateGiveeIsSuccess(state))
-  //      } else {
-  //        stateGiveeIsSuccessOrFailure(stateGiveeIsFailure(state))
-  //      }
-  //    }
-  //  }
+   @tailrec
+   def stateGiveeIsSuccessOrFailure(state: State): State = {
+     if (state.maybeGivee.isEmpty) {
+       state
+     } else {
+       if (rulesGiveeNotSelf(state.maybeGiver.get, state.maybeGivee.get) &&
+         rulesGiveeNotRecip(state.maybeGiver.get, state.maybeGivee.get, state.giftYear, state.players) &&
+         rulesGiveeNotRepeat(state.maybeGiver.get, state.maybeGivee.get, state.giftYear, state.players)) {
+         stateGiveeIsSuccess(state)
+       } else {
+         stateGiveeIsSuccessOrFailure(stateGiveeIsFailure(state))
+       }
+     }
+   }
 
 
   def stateErrors(state: State): Seq[PlayerKey] = {
