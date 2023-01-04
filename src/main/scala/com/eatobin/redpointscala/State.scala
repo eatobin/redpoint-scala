@@ -116,70 +116,20 @@ object State {
     newState
   }
 
-  //  def stateGiveeIsSuccessOrFailure(state: State): State = {
-  //    if (rulesGiveeNotSelf(state.maybeGiver.get, state.maybeGivee.get) &&
-  //      rulesGiveeNotRecip(state.maybeGiver.get, state.maybeGivee.get, state.giftYear, state.players) &&
-  //      rulesGiveeNotRepeat(state.maybeGiver.get, state.maybeGivee.get, state.giftYear, state.players)) {
-  //      stateGiveeIsSuccess(state)
-  //    } else {
-  //      stateGiveeIsFailure(state)
-  //    }
-  //  }
-
-  //  @tailrec
-  //  def stateGiveeIsSuccessOrFailure(state: State): State = {
-  //    if (state.maybeGivee.isEmpty || state.maybeGiver.isEmpty) {
-  //      state
-  //    } else {
-  //      if (rulesGiveeNotSelf(state.maybeGiver.get, state.maybeGivee.get) &&
-  //        rulesGiveeNotRecip(state.maybeGiver.get, state.maybeGivee.get, state.giftYear, state.players) &&
-  //        rulesGiveeNotRepeat(state.maybeGiver.get, state.maybeGivee.get, state.giftYear, state.players)) {
-  //        stateGiveeIsSuccessOrFailure(stateGiveeIsSuccess(state))
-  //      } else {
-  //        stateGiveeIsSuccessOrFailure(stateGiveeIsFailure(state))
-  //      }
-  //    }
-  //  }
-
-  def stateRecurrGiver(state: State): State = {
-    if (state.maybeGiver.isEmpty) {
+  @tailrec
+  def stateGiveeIsSuccessOrFailure(state: State): State = {
+    if (state.maybeGivee.isEmpty) {
       state
     } else {
-      @tailrec
-      def stateGiveeIsSuccessOrFailure(state: State): State = {
-        if (state.maybeGivee.isEmpty) {
-          stateRecurrGiver(stateSelectNewGiver(state))
-        } else {
-          if (rulesGiveeNotSelf(state.maybeGiver.get, state.maybeGivee.get) &&
-            rulesGiveeNotRecip(state.maybeGiver.get, state.maybeGivee.get, state.giftYear, state.players) &&
-            rulesGiveeNotRepeat(state.maybeGiver.get, state.maybeGivee.get, state.giftYear, state.players)) {
-            stateGiveeIsSuccessOrFailure(stateGiveeIsSuccess(state))
-          } else {
-            stateGiveeIsSuccessOrFailure(stateGiveeIsFailure(state))
-          }
-        }
+      if (rulesGiveeNotSelf(state.maybeGiver.get, state.maybeGivee.get) &&
+        rulesGiveeNotRecip(state.maybeGiver.get, state.maybeGivee.get, state.giftYear, state.players) &&
+        rulesGiveeNotRepeat(state.maybeGiver.get, state.maybeGivee.get, state.giftYear, state.players)) {
+        stateGiveeIsSuccess(state)
+      } else {
+        stateGiveeIsSuccessOrFailure(stateGiveeIsFailure(state))
       }
-
-      stateGiveeIsSuccessOrFailure(state)
     }
   }
-
-
-   @tailrec
-   def stateGiveeIsSuccessOrFailure(state: State): State = {
-     if (state.maybeGivee.isEmpty) {
-       state
-     } else {
-       if (rulesGiveeNotSelf(state.maybeGiver.get, state.maybeGivee.get) &&
-         rulesGiveeNotRecip(state.maybeGiver.get, state.maybeGivee.get, state.giftYear, state.players) &&
-         rulesGiveeNotRepeat(state.maybeGiver.get, state.maybeGivee.get, state.giftYear, state.players)) {
-         stateGiveeIsSuccess(state)
-       } else {
-         stateGiveeIsSuccessOrFailure(stateGiveeIsFailure(state))
-       }
-     }
-   }
-
 
   def stateErrors(state: State): Seq[PlayerKey] = {
     val playerKeys: Seq[PlayerKey] = state.players.keys.toSeq
@@ -226,12 +176,6 @@ object State {
     println()
     statePrintResults(state)
   }
-
-  //  def statePrintAndAsk(state: State): String = {
-  //    statePrintStringGivingRoster(state)
-  //    println()
-  //    readLine("Continue? ('q' to quit): ")
-  //  }
 
   def statePrintAndAsk(state: State): State = {
     statePrintStringGivingRoster(state)

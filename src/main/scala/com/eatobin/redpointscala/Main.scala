@@ -12,10 +12,15 @@ object Main {
     rightState match {
       case Left(e) => println(s"Error is: $e")
       case Right(valState) =>
-        //        mainPrintAndAsk(valState)
-        //        var varState: State = valState
-        while (statePrintAndAsk(valState).continue.toLowerCase != "q") {
-          stateStartNewYear(stateRecurrGiver(valState))
+        var varState: State = valState
+        while (statePrintAndAsk(varState).continue.toLowerCase != "q") {
+          varState = stateStartNewYear(varState)
+          while (varState.maybeGiver.isDefined) {
+            while (varState.maybeGivee.isDefined) {
+              varState = stateGiveeIsSuccessOrFailure(varState)
+            }
+            varState = stateSelectNewGiver(varState)
+          }
         }
         println()
         println("This was fun!")
@@ -24,45 +29,4 @@ object Main {
         println()
     }
   }
-
-  //  @tailrec
-  //  private def mainPrintAndAsk(state: State): Unit = {
-  //    if (state.continue.toLowerCase == "q") {
-  //      println("I'm done!!!")
-  //    } else {
-  //      val startingState: State = stateStartNewYear(state)
-  //      if (startingState.maybeGiver.isDefined) {
-  //        if (startingState.maybeGivee.isDefined) {
-  //          println("both defined")
-  //        } else {
-  //          println("2")
-  //        }
-  //      } else {
-  //        val recurState: State = statePrintAndAsk(state)
-  //        mainPrintAndAsk(recurState)
-  //      }
-  //    }
-  //  }
-
-  //  @tailrec
-  //  private def mainPrintAndAsk(state: State): Unit = {
-  //    if (state.continue.toLowerCase == "q") {
-  //      println("I'm done!!!")
-  //    } else {
-  //      val startingState: State = stateStartNewYear(state)
-  //      val exhaustedGivee: State = stateGiveeIsDefined(startingState)
-  //      if (startingState.maybeGiver.isDefined) {
-  //        if (startingState.maybeGivee.isDefined) {
-  //
-  //          val exhaustedGiver: State = stateGiveeIsDefined(stateSelectNewGiver(exhaustedGivee))
-  //        } else {
-  //          val recurState: State = statePrintAndAsk(exhaustedGiver)
-  //          mainPrintAndAsk(recurState)
-  //        }
-  //      } else {
-  //        val recurState: State = statePrintAndAsk(state)
-  //        mainPrintAndAsk(recurState)
-  //      }
-  //    }
-  //  }
 }
