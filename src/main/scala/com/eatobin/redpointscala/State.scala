@@ -6,7 +6,7 @@ import com.eatobin.redpointscala.Hat.{Hat, hatDiscardGivee, hatMakeHat, hatRemov
 import com.eatobin.redpointscala.Players.{Players, playersAddYear, playersGetMyGivee, playersGetMyGiver, playersGetPlayerName, playersUpdateMyGivee, playersUpdateMyGiver}
 import com.eatobin.redpointscala.Roster.{RosterName, RosterYear}
 import com.eatobin.redpointscala.Rules.{rulesGiveeNotRecip, rulesGiveeNotRepeat, rulesGiveeNotSelf}
-import com.eatobin.redpointscala.State.Continue
+import com.eatobin.redpointscala.State.Quit
 import io.circe.Error
 import io.circe.generic.auto._
 import io.circe.parser._
@@ -24,11 +24,11 @@ case class State(
                   maybeGivee: Option[Givee],
                   maybeGiver: Option[Giver],
                   discards: Hat,
-                  continue: Continue
+                  continue: Quit
                 )
 
 object State {
-  type Continue = String
+  type Quit = String
 
   private def stateRandom(hat: Hat): PlayerKey = {
     val n: Int = util.Random.nextInt(hat.size)
