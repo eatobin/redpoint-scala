@@ -82,11 +82,11 @@ object State {
   def stateGiveeIsSuccess(state: State): State = {
     val giver: Giver = state.maybeGiver.get
     val givee: Givee = state.maybeGivee.get
-    val tempPlayers = playersUpdateMyGivee(giver)(state.giftYear)(givee)(state.players)
+    val updateGivee: Players = playersUpdateMyGivee(giver)(state.giftYear)(givee)(state.players)
     val newState: State = State(
       rosterName = state.rosterName,
       rosterYear = state.rosterYear,
-      players = playersUpdateMyGiver(givee)(state.giftYear)(giver)(tempPlayers),
+      players = playersUpdateMyGiver(givee)(state.giftYear)(giver)(updateGivee),
       giftYear = state.giftYear,
       giveeHat = hatRemovePuck(givee, state.giveeHat),
       giverHat = state.giverHat,
@@ -100,15 +100,15 @@ object State {
 
   def stateGiveeIsFailure(state: State): State = {
     val givee: Givee = state.maybeGivee.get
-    val newGiveeHat: Hat = hatRemovePuck(givee, state.giveeHat)
+    val diminishedGiveeHat: Hat = hatRemovePuck(givee, state.giveeHat)
     val newState: State = State(
       rosterName = state.rosterName,
       rosterYear = state.rosterYear,
       players = state.players,
       giftYear = state.giftYear,
-      giveeHat = newGiveeHat,
+      giveeHat = diminishedGiveeHat,
       giverHat = state.giverHat,
-      maybeGivee = stateDrawPuck(newGiveeHat),
+      maybeGivee = stateDrawPuck(diminishedGiveeHat),
       maybeGiver = state.maybeGiver,
       discards = hatDiscardGivee(givee, state.discards),
       quit = state.quit
