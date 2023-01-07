@@ -24,7 +24,7 @@ case class State(
                   maybeGivee: Option[Givee],
                   maybeGiver: Option[Giver],
                   discards: Hat,
-                  continue: Quit
+                  quit: Quit
                 )
 
 object State {
@@ -55,7 +55,7 @@ object State {
       maybeGivee = stateDrawPuck(hatMakeHat(newPlayers)),
       maybeGiver = stateDrawPuck(hatMakeHat(newPlayers)),
       discards = Set(),
-      continue = state.continue
+      quit = state.quit
     )
     newState
   }
@@ -74,7 +74,7 @@ object State {
       maybeGivee = stateDrawPuck(newGiveeHat),
       maybeGiver = stateDrawPuck(newGiverHat),
       discards = Set(),
-      continue = state.continue
+      quit = state.quit
     )
     newState
   }
@@ -93,7 +93,7 @@ object State {
       maybeGivee = None,
       maybeGiver = state.maybeGiver,
       discards = state.discards,
-      continue = state.continue
+      quit = state.quit
     )
     newState
   }
@@ -111,7 +111,7 @@ object State {
       maybeGivee = stateDrawPuck(newGiveeHat),
       maybeGiver = state.maybeGiver,
       discards = hatDiscardGivee(givee, state.discards),
-      continue = state.continue
+      quit = state.quit
     )
     newState
   }
@@ -181,7 +181,7 @@ object State {
     statePrintStringGivingRoster(state)
     println()
     val reply: String = readLine("Continue? ('q' to quit): ")
-    state.copy(continue = reply)
+    state.copy(quit = reply)
   }
 
   def stateJsonStringToState(jsonString: JsonString): Either[Error, State] =

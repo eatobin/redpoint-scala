@@ -171,5 +171,5 @@
   "maybeGivee": null,
   "maybeGiver": null,
   "discards": [],
-  "continue": "n"
+  "quit": "n"
 }
