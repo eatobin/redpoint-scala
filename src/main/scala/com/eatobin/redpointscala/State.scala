@@ -8,8 +8,8 @@ import com.eatobin.redpointscala.Roster.{RosterName, RosterYear}
 import com.eatobin.redpointscala.Rules.{rulesGiveeNotRecip, rulesGiveeNotRepeat, rulesGiveeNotSelf}
 import com.eatobin.redpointscala.State.Quit
 import io.circe.Error
-import io.circe.generic.auto._
-import io.circe.parser._
+import io.circe.generic.auto.*
+import io.circe.parser.*
 
 import scala.annotation.tailrec
 import scala.io.StdIn.readLine
@@ -44,16 +44,16 @@ object State {
   }
 
   def stateStartNewYear(state: State): State = {
-    val newPlayers: Players = playersAddYear(state.players)
+    val freshHat: Hat = hatMakeHat(state.players)
     val newState: State = State(
       rosterName = state.rosterName,
       rosterYear = state.rosterYear,
-      players = newPlayers,
+      players = playersAddYear(state.players),
       giftYear = state.giftYear + 1,
-      giveeHat = hatMakeHat(newPlayers),
-      giverHat = hatMakeHat(newPlayers),
-      maybeGivee = stateDrawPuck(hatMakeHat(newPlayers)),
-      maybeGiver = stateDrawPuck(hatMakeHat(newPlayers)),
+      giveeHat = freshHat,
+      giverHat = freshHat,
+      maybeGivee = stateDrawPuck(freshHat),
+      maybeGiver = stateDrawPuck(freshHat),
       discards = Set(),
       quit = state.quit
     )
