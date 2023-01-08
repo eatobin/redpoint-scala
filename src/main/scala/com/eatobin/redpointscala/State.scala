@@ -8,8 +8,8 @@ import com.eatobin.redpointscala.Roster.{RosterName, RosterYear}
 import com.eatobin.redpointscala.Rules.{rulesGiveeNotRecip, rulesGiveeNotRepeat, rulesGiveeNotSelf}
 import com.eatobin.redpointscala.State.Quit
 import io.circe.Error
-import io.circe.generic.auto.*
-import io.circe.parser.*
+import io.circe.generic.auto._
+import io.circe.parser._
 
 import scala.annotation.tailrec
 import scala.io.StdIn.readLine
