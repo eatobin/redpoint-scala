@@ -118,9 +118,7 @@ object State {
 
   @tailrec
   def stateGiveeIsSuccessOrFailure(state: State): State = {
-    if (state.maybeGivee.isEmpty) {
-      state
-    } else {
+    if (state.maybeGivee.isDefined) {
       if (rulesGiveeNotSelf(state.maybeGiver.get, state.maybeGivee.get) &&
         rulesGiveeNotRecip(state.maybeGiver.get, state.maybeGivee.get, state.giftYear, state.players) &&
         rulesGiveeNotRepeat(state.maybeGiver.get, state.maybeGivee.get, state.giftYear, state.players)) {
@@ -128,8 +126,18 @@ object State {
       } else {
         stateGiveeIsSuccessOrFailure(stateGiveeIsFailure(state))
       }
+    } else {
+      state
     }
   }
+
+  //  def stateGiverIsSuccessOrFailure(state: State): State = {
+  //    if (state.maybeGiver.isEmpty) {
+  //      state
+  //    } else {
+  //      stateGiveeIsSuccessOrFailure(state)
+  //    }
+  //  }
 
   def stateErrors(state: State): Seq[PlayerKey] = {
     val playerKeys: Seq[PlayerKey] = state.players.keys.toSeq
