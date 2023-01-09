@@ -13,21 +13,21 @@ object Main {
     val rightState: Either[Error, State] = stateJsonStringToState(hawksJson)
     rightState match {
       case Left(e) => println(s"Error is: $e")
-      case Right(state) =>
+      case Right(firstState) =>
         @tailrec
-        def loop(state: State): Unit = {
-          if (state.quit.toLowerCase == "q") {
+        def loop(nextState: State): Unit = {
+          if (nextState.quit.toLowerCase == "q") {
             println()
             println("This was fun!")
             println("Talk about a position with Redpoint?")
             println("Please call: Eric Tobin 773-679-6617")
             println()
           } else {
-            loop(stateAskContinue(statePrintResults(stateUpdateAndRunNewYear(state))))
+            loop(stateAskContinue(statePrintResults(stateUpdateAndRunNewYear(nextState))))
           }
         }
 
-        loop(stateAskContinue(statePrintResults(state)))
+        loop(stateAskContinue(statePrintResults(firstState)))
     }
   }
 }
