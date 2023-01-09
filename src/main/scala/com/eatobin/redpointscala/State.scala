@@ -155,7 +155,11 @@ object State {
     playerErrors.sorted
   }
 
-  private def statePrintResults(state: State): Unit = {
+  def statePrintResults(state: State): State = {
+    println()
+    println("%s - Year %d Gifts:".format(state.rosterName, state.rosterYear + state.giftYear))
+    println()
+
     val playerKeys: Seq[PlayerKey] = state.players.keys.toSeq.sorted
     for (playerKey <- playerKeys) yield {
       val playerName = playersGetPlayerName(playerKey)(state.players)
@@ -179,13 +183,7 @@ object State {
       println("Do you see how it occurs?")
       println("If not... call me and I'll explain!")
     }
-  }
-
-  def statePrintStringGivingRoster(state: State): Unit = {
-    println()
-    println("%s - Year %d Gifts:".format(state.rosterName, state.rosterYear + state.giftYear))
-    println()
-    statePrintResults(state)
+    state
   }
 
   def stateAskContinue(state: State): State = {

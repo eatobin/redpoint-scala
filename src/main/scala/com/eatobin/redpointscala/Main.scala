@@ -12,7 +12,7 @@ object Main {
     rightState match {
       case Left(e) => println(s"Error is: $e")
       case Right(state) =>
-        statePrintStringGivingRoster(state)
+        statePrintResults(state)
         if (state.quit.toLowerCase == "q") {
           println()
           println("This was fun!")
@@ -20,7 +20,7 @@ object Main {
           println("Please call: Eric Tobin 773-679-6617")
           println()
         } else {
-          statePrintStringGivingRoster(stateUpdateAndRunNewYear(state))
+          stateAskContinue(statePrintResults(stateUpdateAndRunNewYear(state)))
         }
 
 
