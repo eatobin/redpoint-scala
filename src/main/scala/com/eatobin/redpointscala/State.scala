@@ -118,26 +118,22 @@ object State {
 
   @tailrec
   def stateGiveeIsSuccessOrFailure(state: State): State = {
-    if (state.maybeGivee.isDefined) {
-      if (rulesGiveeNotSelf(state.maybeGiver.get, state.maybeGivee.get) &&
-        rulesGiveeNotRecip(state.maybeGiver.get, state.maybeGivee.get, state.giftYear, state.players) &&
-        rulesGiveeNotRepeat(state.maybeGiver.get, state.maybeGivee.get, state.giftYear, state.players)) {
-        stateGiveeIsSuccess(state)
+    if (state.maybeGiver.isDefined) {
+      if (state.maybeGivee.isDefined) {
+        if (rulesGiveeNotSelf(state.maybeGiver.get, state.maybeGivee.get) &&
+          rulesGiveeNotRecip(state.maybeGiver.get, state.maybeGivee.get, state.giftYear, state.players) &&
+          rulesGiveeNotRepeat(state.maybeGiver.get, state.maybeGivee.get, state.giftYear, state.players)) {
+          stateGiveeIsSuccessOrFailure(stateGiveeIsSuccess(state))
+        } else {
+          stateGiveeIsSuccessOrFailure(stateGiveeIsFailure(state))
+        }
       } else {
-        stateGiveeIsSuccessOrFailure(stateGiveeIsFailure(state))
+        stateGiveeIsSuccessOrFailure(stateSelectNewGiver(state))
       }
     } else {
       state
     }
   }
-
-  //  def stateGiverIsSuccessOrFailure(state: State): State = {
-  //    if (state.maybeGiver.isEmpty) {
-  //      state
-  //    } else {
-  //      stateGiveeIsSuccessOrFailure(state)
-  //    }
-  //  }
 
   def stateErrors(state: State): Seq[PlayerKey] = {
     val playerKeys: Seq[PlayerKey] = state.players.keys.toSeq
@@ -185,8 +181,7 @@ object State {
     statePrintResults(state)
   }
 
-  def statePrintAndAsk(state: State): State = {
-    statePrintStringGivingRoster(state)
+  def stateAskContinue(state: State): State = {
     println()
     val reply: String = readLine("Continue? ('q' to quit): ")
     state.copy(quit = reply)
