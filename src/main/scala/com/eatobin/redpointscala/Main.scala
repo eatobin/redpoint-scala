@@ -12,7 +12,7 @@ object Main {
     rightState match {
       case Left(e) => println(s"Error is: $e")
       case Right(state) =>
-        statePrintResults(state)
+        stateAskContinue(statePrintResults(state))
         if (state.quit.toLowerCase == "q") {
           println()
           println("This was fun!")
