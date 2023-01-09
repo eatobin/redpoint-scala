@@ -194,37 +194,4 @@ object State {
 
   def stateJsonStringToState(jsonString: JsonString): Either[Error, State] =
     decode[State](jsonString)
-
-  private def stateIncrement(state: State): State = state.copy(rosterYear = state.rosterYear + 1)
-
-  private def stateDecrement(state: State): State = state.copy(rosterYear = state.rosterYear - 2000)
-
-  @tailrec
-  def stateUpTo2020(state: State): State = {
-    state.rosterYear match {
-      case 2020 => state
-      case _ => stateUpTo2020(stateIncrement(state))
-    }
-  }
-
-  @tailrec
-  private def stateDownTo20(state: State): State = {
-    state.rosterYear match {
-      case 20 => state
-      case _ => stateDownTo20(stateDecrement(state))
-    }
-  }
-
-  @tailrec
-  def stateTo20(state: State): State = {
-    if (state.rosterYear != 20) {
-      if (state.rosterYear != 2020) {
-        stateTo20(stateUpTo2020(state))
-      } else {
-        stateTo20(stateDownTo20(state))
-      }
-    } else {
-      state
-    }
-  }
 }
