@@ -116,23 +116,30 @@ object State {
     newState
   }
 
-  @tailrec
-  def stateGiveeIsSuccessOrFailure(state: State): State = {
-    if (state.maybeGiver.isDefined) {
-      if (state.maybeGivee.isDefined) {
-        if (rulesGiveeNotSelf(state.maybeGiver.get, state.maybeGivee.get) &&
-          rulesGiveeNotRecip(state.maybeGiver.get, state.maybeGivee.get, state.giftYear, state.players) &&
-          rulesGiveeNotRepeat(state.maybeGiver.get, state.maybeGivee.get, state.giftYear, state.players)) {
-          stateGiveeIsSuccessOrFailure(stateGiveeIsSuccess(state))
+
+  def stateUpdateAndRunNewYear(state: State): State = {
+    val newYearState: State = stateStartNewYear(state)
+
+    @tailrec
+    def loop(state: State): State = {
+      if (state.maybeGiver.isDefined) {
+        if (state.maybeGivee.isDefined) {
+          if (rulesGiveeNotSelf(state.maybeGiver.get, state.maybeGivee.get) &&
+            rulesGiveeNotRecip(state.maybeGiver.get, state.maybeGivee.get, state.giftYear, state.players) &&
+            rulesGiveeNotRepeat(state.maybeGiver.get, state.maybeGivee.get, state.giftYear, state.players)) {
+            loop(stateGiveeIsSuccess(state))
+          } else {
+            loop(stateGiveeIsFailure(state))
+          }
         } else {
-          stateGiveeIsSuccessOrFailure(stateGiveeIsFailure(state))
+          loop(stateSelectNewGiver(state))
         }
       } else {
-        stateGiveeIsSuccessOrFailure(stateSelectNewGiver(state))
+        state
       }
-    } else {
-      state
     }
+
+    loop(newYearState)
   }
 
   def stateErrors(state: State): Seq[PlayerKey] = {
