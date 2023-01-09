@@ -121,21 +121,21 @@ object State {
     val newYearState: State = stateStartNewYear(state)
 
     @tailrec
-    def loop(state: State): State = {
-      if (state.maybeGiver.isDefined) {
-        if (state.maybeGivee.isDefined) {
-          if (rulesGiveeNotSelf(state.maybeGiver.get, state.maybeGivee.get) &&
-            rulesGiveeNotRecip(state.maybeGiver.get, state.maybeGivee.get, state.giftYear, state.players) &&
-            rulesGiveeNotRepeat(state.maybeGiver.get, state.maybeGivee.get, state.giftYear, state.players)) {
-            loop(stateGiveeIsSuccess(state))
+    def loop(alteredState: State): State = {
+      if (alteredState.maybeGiver.isDefined) {
+        if (alteredState.maybeGivee.isDefined) {
+          if (rulesGiveeNotSelf(alteredState.maybeGiver.get, alteredState.maybeGivee.get) &&
+            rulesGiveeNotRecip(alteredState.maybeGiver.get, alteredState.maybeGivee.get, alteredState.giftYear, alteredState.players) &&
+            rulesGiveeNotRepeat(alteredState.maybeGiver.get, alteredState.maybeGivee.get, alteredState.giftYear, alteredState.players)) {
+            loop(stateGiveeIsSuccess(alteredState))
           } else {
-            loop(stateGiveeIsFailure(state))
+            loop(stateGiveeIsFailure(alteredState))
           }
         } else {
-          loop(stateSelectNewGiver(state))
+          loop(stateSelectNewGiver(alteredState))
         }
       } else {
-        state
+        alteredState
       }
     }
 
