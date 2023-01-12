@@ -7,6 +7,7 @@ import io.circe.parser._
 
 object Hat {
   type Hat = Set[PlayerKey]
+  type Discards = Set[PlayerKey]
 
   def hatMakeHat(players: Players): Hat =
     players.keySet
@@ -14,10 +15,10 @@ object Hat {
   def hatRemovePuck(playerKey: PlayerKey, hat: Hat): Hat =
     hat - playerKey
 
-  def hatDiscardGivee(givee: Givee, discards: Hat): Hat =
+  def hatDiscardGivee(givee: Givee, discards: Discards): Hat =
     discards + givee
 
-  def hatReturnDiscards(discards: Hat, geHat: Hat): Hat =
+  def hatReturnDiscards(discards: Discards, geHat: Hat): Hat =
     geHat ++ discards
 
   def hatJsonStringToHat(jsonString: JsonString): Either[Error, Hat] =
