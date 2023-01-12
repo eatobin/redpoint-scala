@@ -7,7 +7,7 @@ import io.circe.parser._
 
 object Hat {
   type Hat = Set[PlayerKey]
-  type Discards = Set[PlayerKey]
+  type Discards = Hat
 
   def hatMakeHat(players: Players): Hat =
     players.keySet
