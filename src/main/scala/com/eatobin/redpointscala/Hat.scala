@@ -6,7 +6,7 @@ import io.circe.Error
 import io.circe.parser._
 
 object Hat {
-  type Hat = Set[String]
+  type Hat = Set[PlayerKey]
 
   def hatMakeHat(players: Players): Hat =
     players.keySet
