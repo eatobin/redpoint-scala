@@ -30,16 +30,12 @@ case class State(
 object State {
   type Quit = String
 
-  private def stateRandom(hat: Hat): PlayerKey = {
-    val n: Int = util.Random.nextInt(hat.size)
-    hat.iterator.drop(n).next()
-  }
-
   def stateDrawPuck(hat: Hat): Option[PlayerKey] = {
-    if (hat.nonEmpty) {
-      Some(stateRandom(hat))
-    } else {
+    if (hat.isEmpty) {
       None
+    } else {
+      val i: Int = util.Random.nextInt(hat.size)
+      Some(hat.iterator.drop(i).next())
     }
   }
 

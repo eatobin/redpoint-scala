@@ -10,6 +10,7 @@ import scala.collection.immutable.HashMap
 
 class StateSpec extends AnyFlatSpec {
 
+  private val testHat: Hat = Set("RinSta")
 
   private val rinSta: Player = Player("Ringo Starr", Vector(GiftPair("JohLen", "GeoHar")))
   private val johLen: Player = Player("John Lennon", Vector(GiftPair("PauMcc", "RinSta")))
@@ -57,7 +58,6 @@ class StateSpec extends AnyFlatSpec {
   )
 
   private val rinStaPlus: Player = Player("Ringo Starr", Vector(GiftPair("JohLen", "GeoHar"), GiftPair("RinSta", "RinSta")))
-  private val testHat: Hat = Set("RinSta")
 
   "State" should "draw a puck" in {
     assert(stateDrawPuck(testHat).contains("RinSta"))
