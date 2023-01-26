@@ -26,10 +26,10 @@ object Players {
     nplrs
   }
 
-  def playersGetMyGivee(selfKey: PlayerKey)(giftYear: GiftYear)(players: Players): Givee =
+  def playersGetMyGivee(selfKey: PlayerKey)(players: Players)(giftYear: GiftYear): Givee =
     players(selfKey).giftHistory(giftYear).givee
 
-  def playersGetMyGiver(selfKey: PlayerKey)(giftYear: GiftYear)(players: Players): Giver =
+  def playersGetMyGiver(selfKey: PlayerKey)(players: Players)(giftYear: GiftYear): Giver =
     players(selfKey).giftHistory(giftYear).giver
 
   private def playersSetGiftPair(playerKey: PlayerKey)(giftYear: GiftYear)(giftPair: GiftPair)(players: Players): Players = {

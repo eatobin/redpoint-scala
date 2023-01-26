@@ -143,8 +143,8 @@ object State {
     val playerErrors = {
       for {
         playerKeyMe: PlayerKey <- playerKeys
-        myGiverKey: Giver = playersGetMyGiver(playerKeyMe)(state.giftYear)(state.players)
-        myGiveeKey: Givee = playersGetMyGivee(playerKeyMe)(state.giftYear)(state.players)
+        myGiverKey: Giver = playersGetMyGiver(playerKeyMe)(state.players)(state.giftYear)
+        myGiveeKey: Givee = playersGetMyGivee(playerKeyMe)(state.players)(state.giftYear)
         if playerKeyMe == myGiverKey || playerKeyMe == myGiveeKey
       } yield playerKeyMe
     }
@@ -159,9 +159,9 @@ object State {
     val playerKeys: Seq[PlayerKey] = state.players.keys.toSeq.sorted
     for (playerKey <- playerKeys) yield {
       val playerName = playersGetPlayerName(playerKey)(state.players)
-      val giveeKey = playersGetMyGivee(playerKey)(state.giftYear)(state.players)
+      val giveeKey = playersGetMyGivee(playerKey)(state.players)(state.giftYear)
       val giveeName = playersGetPlayerName(giveeKey)(state.players)
-      val giverKey = playersGetMyGiver(playerKey)(state.giftYear)(state.players)
+      val giverKey = playersGetMyGiver(playerKey)(state.players)(state.giftYear)
 
       if (playerKey == giveeKey && playerKey == giverKey) {
         println("%s is neither **buying** for nor **receiving** from anyone - **ERROR**".format(playerName))

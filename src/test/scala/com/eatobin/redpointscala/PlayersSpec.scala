@@ -47,8 +47,8 @@ class PlayersSpec extends AnyFlatSpec {
   }
 
   it should "return a givee and a giver" in {
-    assert(playersGetMyGivee("GeoHar")(0)(players) == "RinSta")
-    assert(playersGetMyGiver("GeoHar")(0)(players) == "PauMcc")
+    assert(playersGetMyGivee("GeoHar")(players)(0) == "RinSta")
+    assert(playersGetMyGiver("GeoHar")(players)(0) == "PauMcc")
   }
 
   it should "update a givee and a giver" in {

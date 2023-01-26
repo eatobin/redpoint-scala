@@ -87,8 +87,8 @@ class StateSpec extends AnyFlatSpec {
     val givee = newState.maybeGivee.get
     val giver = newState.maybeGiver.get
     val secondState = stateGiveeIsSuccess(newState)
-    assert(playersGetMyGivee(giver)(secondState.giftYear)(secondState.players) == givee)
-    assert(playersGetMyGiver(givee)(secondState.giftYear)(secondState.players) == giver)
+    assert(playersGetMyGivee(giver)(secondState.players)(secondState.giftYear) == givee)
+    assert(playersGetMyGiver(givee)(secondState.players)(secondState.giftYear) == giver)
     assert(!secondState.giveeHat.contains(givee))
   }
 
