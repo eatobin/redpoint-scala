@@ -38,12 +38,12 @@ object Players {
     playersUpdatePlayer(playerKey)(nplr)(players)
   }
 
-  def playersUpdateMyGivee(selfKey: PlayerKey)(giftYear: GiftYear)(givee: Givee)(players: Players): Players = {
+  def playersUpdateMyGivee(selfKey: PlayerKey)(givee: Givee)(giftYear: GiftYear)(players: Players): Players = {
     val ngp = giftPairUpdateGivee(givee)(players(selfKey).giftHistory(giftYear))
     playersSetGiftPair(selfKey)(giftYear)(ngp)(players)
   }
 
-  def playersUpdateMyGiver(selfKey: PlayerKey)(giftYear: GiftYear)(giver: Giver)(players: Players): Players = {
+  def playersUpdateMyGiver(selfKey: PlayerKey)(giver: Giver)(giftYear: GiftYear)(players: Players): Players = {
     val ngp = giftPairUpdateGiver(giver)(players(selfKey).giftHistory(giftYear))
     playersSetGiftPair(selfKey)(giftYear)(ngp)(players)
   }
