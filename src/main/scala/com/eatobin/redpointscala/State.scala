@@ -112,30 +112,28 @@ object State {
     newState
   }
 
-
   def stateUpdateAndRunNewYear(state: State): State = {
     val newYearState: State = stateStartNewYear(state)
+    stateLoop(newYearState)
+  }
 
-    @tailrec
-    def loop(alteredState: State): State = {
-      if (alteredState.maybeGiver.isDefined) {
-        if (alteredState.maybeGivee.isDefined) {
-          if (rulesGiveeNotSelf(alteredState.maybeGiver.get, alteredState.maybeGivee.get) &&
-            rulesGiveeNotRecip(alteredState.maybeGiver.get, alteredState.maybeGivee.get, alteredState.giftYear, alteredState.players) &&
-            rulesGiveeNotRepeat(alteredState.maybeGiver.get, alteredState.maybeGivee.get, alteredState.giftYear, alteredState.players)) {
-            loop(stateGiveeIsSuccess(alteredState))
-          } else {
-            loop(stateGiveeIsFailure(alteredState))
-          }
+  @tailrec
+  private def stateLoop(alteredState: State): State = {
+    if (alteredState.maybeGiver.isDefined) {
+      if (alteredState.maybeGivee.isDefined) {
+        if (rulesGiveeNotSelf(alteredState.maybeGiver.get, alteredState.maybeGivee.get) &&
+          rulesGiveeNotRecip(alteredState.maybeGiver.get, alteredState.maybeGivee.get, alteredState.giftYear, alteredState.players) &&
+          rulesGiveeNotRepeat(alteredState.maybeGiver.get, alteredState.maybeGivee.get, alteredState.giftYear, alteredState.players)) {
+          stateLoop(stateGiveeIsSuccess(alteredState))
         } else {
-          loop(stateSelectNewGiver(alteredState))
+          stateLoop(stateGiveeIsFailure(alteredState))
         }
       } else {
-        alteredState
+        stateLoop(stateSelectNewGiver(alteredState))
       }
+    } else {
+      alteredState
     }
-
-    loop(newYearState)
   }
 
   def stateErrors(state: State): Seq[PlayerKey] = {
