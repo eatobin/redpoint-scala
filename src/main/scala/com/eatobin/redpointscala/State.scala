@@ -78,11 +78,11 @@ object State {
   def stateGiveeIsSuccess(state: State): State = {
     val giver: Giver = state.maybeGiver.get
     val givee: Givee = state.maybeGivee.get
-    val updateGivee: Players = playersUpdateMyGivee(giver)(state.giftYear)(givee)(state.players)
+    val updatedGiveePlayers: Players = playersUpdateMyGivee(giver)(state.giftYear)(givee)(state.players)
     val newState: State = State(
       rosterName = state.rosterName,
       rosterYear = state.rosterYear,
-      players = playersUpdateMyGiver(givee)(state.giftYear)(giver)(updateGivee),
+      players = playersUpdateMyGiver(givee)(state.giftYear)(giver)(updatedGiveePlayers),
       giftYear = state.giftYear,
       giveeHat = hatRemovePuck(givee, state.giveeHat),
       giverHat = state.giverHat,
