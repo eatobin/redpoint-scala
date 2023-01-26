@@ -57,9 +57,9 @@ object State {
   }
 
   def stateSelectNewGiver(state: State): State = {
-    val giver: Giver = state.maybeGiver.get
+    val giverToRemove: Giver = state.maybeGiver.get
     val replenishedGiveeHat: Hat = hatReturnDiscards(state.discards, state.giveeHat)
-    val diminishedGiverHat: Hat = hatRemovePuck(giver, state.giverHat)
+    val diminishedGiverHat: Hat = hatRemovePuck(giverToRemove, state.giverHat)
     val newState: State = State(
       rosterName = state.rosterName,
       rosterYear = state.rosterYear,
