@@ -150,6 +150,7 @@ object State {
   }
 
   def statePrintResults(state: State): State = {
+    print(stateErrors(state))
     println()
     println("%s - Year %d Gifts:".format(state.rosterName, state.rosterYear + state.giftYear))
     println()
