@@ -145,8 +145,7 @@ object State {
         playerKeyMe: PlayerKey <- playerKeys
         myGiverKey: Giver = playersGetMyGiver(playerKeyMe)(state.players)(state.giftYear)
         myGiveeKey: Givee = playersGetMyGivee(playerKeyMe)(state.players)(state.giftYear)
-        if playerKeyMe == myGiverKey || playerKeyMe == myGiveeKey
-      } yield playerKeyMe
+      } yield playerKeyMe + "-" + myGiveeKey + "-" + myGiverKey
     }
     playerErrors.sorted
   }
