@@ -4,14 +4,14 @@ import com.eatobin.redpointscala.GiftHistory.GiftYear
 import com.eatobin.redpointscala.GiftPair.{Givee, Giver, JsonString, PlayerKey}
 import com.eatobin.redpointscala.Hat.{Discards, Hat, hatDiscardGivee, hatMakeHat, hatRemovePuck, hatReturnDiscards}
 import com.eatobin.redpointscala.Players.{Players, playersAddYear, playersGetMyGivee, playersGetMyGiver, playersGetPlayerName, playersUpdateMyGivee, playersUpdateMyGiver}
-import com.eatobin.redpointscala.Roster.{RosterName, RosterYear}
 import com.eatobin.redpointscala.Rules.{rulesGiveeNotRecip, rulesGiveeNotRepeat, rulesGiveeNotSelf}
-import com.eatobin.redpointscala.State.Quit
+import com.eatobin.redpointscala.State.{Quit, RosterName, RosterYear}
 import io.circe.Error
 import io.circe.generic.auto._
 import io.circe.parser._
 
 import scala.annotation.tailrec
+import scala.collection.immutable.SortedSet
 import scala.io.StdIn.readLine
 
 case class State(
@@ -29,6 +29,8 @@ case class State(
 
 object State {
   type Quit = String
+  type RosterName = String
+  type RosterYear = Int
 
   def stateDrawPuck(hat: Hat): Option[PlayerKey] = {
     if (hat.isEmpty) {
@@ -50,7 +52,7 @@ object State {
       giverHat = freshHat,
       maybeGivee = stateDrawPuck(freshHat),
       maybeGiver = stateDrawPuck(freshHat),
-      discards = Set(),
+      discards = SortedSet(),
       quit = state.quit
     )
     newState
@@ -69,7 +71,7 @@ object State {
       giverHat = diminishedGiverHat,
       maybeGivee = stateDrawPuck(replenishedGiveeHat),
       maybeGiver = stateDrawPuck(diminishedGiverHat),
-      discards = Set(),
+      discards = SortedSet(),
       quit = state.quit
     )
     newState

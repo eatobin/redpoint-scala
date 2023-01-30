@@ -2,6 +2,8 @@ package com.eatobin.redpointscala
 
 import org.scalatest.flatspec.AnyFlatSpec
 
+import scala.collection.immutable.SortedMap
+
 class RulesSpec extends AnyFlatSpec {
 
   private val rinSta: Player = Player("Ringo Starr", Vector(GiftPair(giver = "KarLav", givee = "JohLen")))
@@ -10,8 +12,8 @@ class RulesSpec extends AnyFlatSpec {
   private val pauMcc: Player = Player("Paul McCartney", Vector(GiftPair(giver = "GeoHar", givee = "EriTob")))
   private val eriTob: Player = Player("Eric Tobin", Vector(GiftPair(giver = "PauMcc", givee = "KarLav")))
   private val karLav: Player = Player("Karen Lavengood", Vector(GiftPair(giver = "EriTob", givee = "RinSta")))
-  private val beatlesPlusPM: Map[String, Player] =
-    Map("RinSta" -> rinSta, "JohLen" -> johLen, "GeoHar" -> geoHar, "PauMcc" -> pauMcc, "EriTob" -> eriTob, "KarLav" -> karLav)
+  private val beatlesPlusPM: SortedMap[String, Player] =
+    SortedMap("RinSta" -> rinSta, "JohLen" -> johLen, "GeoHar" -> geoHar, "PauMcc" -> pauMcc, "EriTob" -> eriTob, "KarLav" -> karLav)
 
   private var beatlesPlus4 = Players.playersAddYear(beatlesPlusPM)
   beatlesPlus4 = Players.playersUpdateMyGivee("RinSta")("GeoHar")(1)(beatlesPlus4)

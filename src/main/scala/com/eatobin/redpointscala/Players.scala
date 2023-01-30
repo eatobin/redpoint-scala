@@ -7,8 +7,10 @@ import io.circe.Error
 import io.circe.generic.auto._
 import io.circe.parser._
 
+import scala.collection.immutable.SortedMap
+
 object Players {
-  type Players = Map[PlayerKey, Player]
+  type Players = SortedMap[PlayerKey, Player]
 
   def playersUpdatePlayer(playerKey: PlayerKey)(player: Player)(players: Players): Players =
     players.updated(playerKey, player)

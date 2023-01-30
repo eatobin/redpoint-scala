@@ -5,8 +5,10 @@ import com.eatobin.redpointscala.Players.Players
 import io.circe.Error
 import io.circe.parser._
 
+import scala.collection.immutable.SortedSet
+
 object Hat {
-  type Hat = Set[PlayerKey]
+  type Hat = SortedSet[PlayerKey]
   type Discards = Hat
 
   def hatMakeHat(players: Players): Hat =
