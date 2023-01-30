@@ -5,7 +5,7 @@ import com.eatobin.redpointscala.GiftPair.{Givee, Giver, JsonString, PlayerKey}
 import com.eatobin.redpointscala.Hat.{Discards, Hat, hatDiscardGivee, hatMakeHat, hatRemovePuck, hatReturnDiscards}
 import com.eatobin.redpointscala.Players.{Players, playersAddYear, playersGetMyGivee, playersGetMyGiver, playersGetPlayerName, playersUpdateMyGivee, playersUpdateMyGiver}
 import com.eatobin.redpointscala.Rules.{rulesGiveeNotRecip, rulesGiveeNotRepeat, rulesGiveeNotSelf}
-import com.eatobin.redpointscala.State.{Quit, RosterName, RosterYear}
+import com.eatobin.redpointscala.State.{RosterName, RosterYear, Quit}
 import io.circe.Error
 import io.circe.generic.auto._
 import io.circe.parser._
@@ -28,9 +28,9 @@ case class State(
                 )
 
 object State {
-  type Quit = String
   type RosterName = String
   type RosterYear = Int
+  type Quit = String
 
   def stateDrawPuck(hat: Hat): Option[PlayerKey] = {
     if (hat.isEmpty) {
