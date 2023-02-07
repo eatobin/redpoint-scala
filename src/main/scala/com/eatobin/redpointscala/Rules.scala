@@ -14,7 +14,7 @@ object Rules {
   }
 
   def rulesGiveeNotRepeat(selfKey: PlayerKey, givee: Givee, giftYear: GiftYear, players: Players): Boolean = {
-    val past: Vector[GiftYear] = (giftYear - 1).to(giftYear - 3).by(-1).toVector.filterNot(y => y < 0)
+    val past: Vector[GiftYear] = (giftYear - 1).to(giftYear - 4).by(-1).toVector.filterNot(y => y < 0)
     val giveeInYear: GiftYear => Givee = (giftYear: GiftYear) => playersGetMyGivee(selfKey)(players)(giftYear)
     val giveesInYears: Vector[Givee] = past.map(gy => giveeInYear(gy))
     !giveesInYears.contains(givee)
