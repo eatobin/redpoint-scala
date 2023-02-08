@@ -5,7 +5,7 @@ import com.eatobin.redpointscala.GiftPair.{Givee, Giver, JsonString, PlayerKey}
 import com.eatobin.redpointscala.Hat.{Discards, Hat, hatDiscardGivee, hatMakeHat, hatRemovePuck, hatReturnDiscards}
 import com.eatobin.redpointscala.Players.{Players, playersAddYear, playersGetMyGivee, playersGetMyGiver, playersGetPlayerName, playersUpdateMyGivee, playersUpdateMyGiver}
 import com.eatobin.redpointscala.Rules.{rulesGiveeNotRecip, rulesGiveeNotRepeat, rulesGiveeNotSelf}
-import com.eatobin.redpointscala.State.{RosterName, RosterYear, Quit}
+import com.eatobin.redpointscala.State.{Quit, RosterName, RosterYear}
 import io.circe.Error
 import io.circe.generic.auto._
 import io.circe.parser._
@@ -145,7 +145,9 @@ object State {
         playerKeyMe: PlayerKey <- playerKeys
         myGiverKey: Giver = playersGetMyGiver(playerKeyMe)(state.players)(state.giftYear)
         myGiveeKey: Givee = playersGetMyGivee(playerKeyMe)(state.players)(state.giftYear)
-      } yield playerKeyMe + "-" + myGiveeKey + "-" + myGiverKey
+        if playerKeyMe == myGiverKey || playerKeyMe == myGiveeKey
+      } yield playerKeyMe
+      //      } yield playerKeyMe + "-" + myGiveeKey + "-" + myGiverKey
     }
     playerErrors.sorted
   }
