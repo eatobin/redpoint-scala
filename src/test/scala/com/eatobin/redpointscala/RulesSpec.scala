@@ -17,33 +17,37 @@ class RulesSpec extends AnyFlatSpec {
   private val beatlesPlusPM: SortedMap[String, Player] =
     SortedMap("RinSta" -> rinSta, "JohLen" -> johLen, "GeoHar" -> geoHar, "PauMcc" -> pauMcc, "EriTob" -> eriTob, "SusSmi" -> susSmi, "DonDuc" -> donDuc, "MicMou" -> micMou)
 
-  private var beatlesPlus4 = Players.playersAddYear(beatlesPlusPM)
-  beatlesPlus4 = Players.playersUpdateMyGivee("RinSta")("GeoHar")(1)(beatlesPlus4)
-  beatlesPlus4 = Players.playersAddYear(beatlesPlus4)
-  beatlesPlus4 = Players.playersUpdateMyGivee("RinSta")("PauMcc")(2)(beatlesPlus4)
-  beatlesPlus4 = Players.playersAddYear(beatlesPlus4)
-  beatlesPlus4 = Players.playersUpdateMyGivee("RinSta")("EriTob")(3)(beatlesPlus4)
-  beatlesPlus4 = Players.playersAddYear(beatlesPlus4)
-  beatlesPlus4 = Players.playersUpdateMyGivee("RinSta")("SusSmi")(4)(beatlesPlus4)
+  private var beatlesPlus6 = Players.playersAddYear(beatlesPlusPM)
+  beatlesPlus6 = Players.playersUpdateMyGivee("RinSta")("GeoHar")(1)(beatlesPlus6)
+  beatlesPlus6 = Players.playersAddYear(beatlesPlus6)
+  beatlesPlus6 = Players.playersUpdateMyGivee("RinSta")("PauMcc")(2)(beatlesPlus6)
+  beatlesPlus6 = Players.playersAddYear(beatlesPlus6)
+  beatlesPlus6 = Players.playersUpdateMyGivee("RinSta")("EriTob")(3)(beatlesPlus6)
+  beatlesPlus6 = Players.playersAddYear(beatlesPlus6)
+  beatlesPlus6 = Players.playersUpdateMyGivee("RinSta")("SusSmi")(4)(beatlesPlus6)
+  beatlesPlus6 = Players.playersAddYear(beatlesPlus6)
+  beatlesPlus6 = Players.playersUpdateMyGivee("RinSta")("DonDuc")(5)(beatlesPlus6)
+  beatlesPlus6 = Players.playersAddYear(beatlesPlus6)
+  beatlesPlus6 = Players.playersUpdateMyGivee("RinSta")("MicMou")(6)(beatlesPlus6)
 
   "A Player" should "not give to itself" in {
     assert(Rules.rulesGiveeNotSelf("RinSta", "GeoHar"))
     assert(!Rules.rulesGiveeNotSelf("RinSta", "RinSta"))
   }
 
-//  it should "not give to it's recip" in {
-//    assert(Rules.rulesGiveeNotRecip("RinSta", "JohLen", 0, beatlesPlusPM))
-//    assert(!Rules.rulesGiveeNotRecip("RinSta", "SusSmi", 0, beatlesPlusPM))
-//  }
+  it should "not give to it's recip" in {
+    assert(Rules.rulesGiveeNotRecip("RinSta", "JohLen", 0, beatlesPlusPM))
+    assert(!Rules.rulesGiveeNotRecip("RinSta", "EriTob", 0, beatlesPlusPM))
+  }
 
-//  it should "not repeat for four years" in {
-//    assert(!Rules.rulesGiveeNotRepeat("RinSta", "JohLen", 2, beatlesPlus4))
-//    assert(!Rules.rulesGiveeNotRepeat("RinSta", "GeoHar", 2, beatlesPlus4))
-//    assert(Rules.rulesGiveeNotRepeat("RinSta", "SusSmi", 2, beatlesPlus4))
-//    assert(Rules.rulesGiveeNotRepeat("RinSta", "JohLen", 5, beatlesPlus4))
-//    //    assert(Rules.rulesGiveeNotRepeat("RinSta", "GeoHar", 5, beatlesPlus4))
-//    //    assert(!Rules.rulesGiveeNotRepeat("RinSta", "PauMcc", 5, beatlesPlus4))
-//    //    assert(!Rules.rulesGiveeNotRepeat("RinSta", "EriTob", 5, beatlesPlus4))
-//    //    assert(!Rules.rulesGiveeNotRepeat("RinSta", "SusSmi", 5, beatlesPlus4))
-//  }
+  //  it should "not repeat for four years" in {
+  //    assert(!Rules.rulesGiveeNotRepeat("RinSta", "JohLen", 2, beatlesPlus6))
+  //    assert(!Rules.rulesGiveeNotRepeat("RinSta", "GeoHar", 2, beatlesPlus6))
+  //    assert(Rules.rulesGiveeNotRepeat("RinSta", "SusSmi", 2, beatlesPlus6))
+  //    assert(Rules.rulesGiveeNotRepeat("RinSta", "JohLen", 5, beatlesPlus6))
+  //    //    assert(Rules.rulesGiveeNotRepeat("RinSta", "GeoHar", 5, beatlesPlus6))
+  //    //    assert(!Rules.rulesGiveeNotRepeat("RinSta", "PauMcc", 5, beatlesPlus6))
+  //    //    assert(!Rules.rulesGiveeNotRepeat("RinSta", "EriTob", 5, beatlesPlus6))
+  //    //    assert(!Rules.rulesGiveeNotRepeat("RinSta", "SusSmi", 5, beatlesPlus6))
+  //  }
 }
