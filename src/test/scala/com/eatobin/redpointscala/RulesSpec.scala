@@ -40,14 +40,15 @@ class RulesSpec extends AnyFlatSpec {
     assert(!Rules.rulesGiveeNotRecip("RinSta", "EriTob", 0, beatlesPlusPM))
   }
 
-  it should "not repeat for four years" in {
+  it should "not repeat for past four years" in {
     assert(Rules.rulesGiveeNotRepeat("RinSta", "DonDuc", 2, beatlesPlus6))
     assert(Rules.rulesGiveeNotRepeat("RinSta", "PauMcc", 2, beatlesPlus6))
     assert(!Rules.rulesGiveeNotRepeat("RinSta", "EriTob", 2, beatlesPlus6))
     assert(!Rules.rulesGiveeNotRepeat("RinSta", "GeoHar", 2, beatlesPlus6))
-
-    //    assert(Rules.rulesGiveeNotRepeat("RinSta", "JohLen", 5, beatlesPlus6))
-    //    //    assert(Rules.rulesGiveeNotRepeat("RinSta", "GeoHar", 5, beatlesPlus6))
+    assert(Rules.rulesGiveeNotRepeat("RinSta", "MicMou", 6, beatlesPlus6))
+    assertResult(false) {
+      Rules.rulesGiveeNotRepeat("RinSta", "MicMou", 7, beatlesPlus6)
+    }
     //    //    assert(!Rules.rulesGiveeNotRepeat("RinSta", "PauMcc", 5, beatlesPlus6))
     //    //    assert(!Rules.rulesGiveeNotRepeat("RinSta", "EriTob", 5, beatlesPlus6))
     //    //    assert(!Rules.rulesGiveeNotRepeat("RinSta", "SusSmi", 5, beatlesPlus6))
