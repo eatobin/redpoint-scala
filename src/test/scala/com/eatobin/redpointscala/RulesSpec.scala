@@ -12,8 +12,10 @@ class RulesSpec extends AnyFlatSpec {
   private val pauMcc: Player = Player("Paul McCartney", Vector(GiftPair(giver = "GeoHar", givee = "EriTob")))
   private val eriTob: Player = Player("Eric Tobin", Vector(GiftPair(giver = "PauMcc", givee = "SusSmi")))
   private val susSmi: Player = Player("Susan Smith", Vector(GiftPair(giver = "EriTob", givee = "RinSta")))
+  private val donDuc: Player = Player("Donald Duck", Vector(GiftPair(giver = "XXX", givee = "XXX")))
+  private val micMou: Player = Player("Mickey Mouse", Vector(GiftPair(giver = "XXX", givee = "XXX")))
   private val beatlesPlusPM: SortedMap[String, Player] =
-    SortedMap("RinSta" -> rinSta, "JohLen" -> johLen, "GeoHar" -> geoHar, "PauMcc" -> pauMcc, "EriTob" -> eriTob, "SusSmi" -> susSmi)
+    SortedMap("RinSta" -> rinSta, "JohLen" -> johLen, "GeoHar" -> geoHar, "PauMcc" -> pauMcc, "EriTob" -> eriTob, "SusSmi" -> susSmi, "DonDuc" -> donDuc, "MicMou" -> micMou)
 
   private var beatlesPlus4 = Players.playersAddYear(beatlesPlusPM)
   beatlesPlus4 = Players.playersUpdateMyGivee("RinSta")("GeoHar")(1)(beatlesPlus4)
@@ -39,9 +41,9 @@ class RulesSpec extends AnyFlatSpec {
     assert(!Rules.rulesGiveeNotRepeat("RinSta", "GeoHar", 2, beatlesPlus4))
     assert(Rules.rulesGiveeNotRepeat("RinSta", "SusSmi", 2, beatlesPlus4))
     assert(Rules.rulesGiveeNotRepeat("RinSta", "JohLen", 5, beatlesPlus4))
-//    assert(Rules.rulesGiveeNotRepeat("RinSta", "GeoHar", 5, beatlesPlus4))
-//    assert(!Rules.rulesGiveeNotRepeat("RinSta", "PauMcc", 5, beatlesPlus4))
-//    assert(!Rules.rulesGiveeNotRepeat("RinSta", "EriTob", 5, beatlesPlus4))
-//    assert(!Rules.rulesGiveeNotRepeat("RinSta", "SusSmi", 5, beatlesPlus4))
+    //    assert(Rules.rulesGiveeNotRepeat("RinSta", "GeoHar", 5, beatlesPlus4))
+    //    assert(!Rules.rulesGiveeNotRepeat("RinSta", "PauMcc", 5, beatlesPlus4))
+    //    assert(!Rules.rulesGiveeNotRepeat("RinSta", "EriTob", 5, beatlesPlus4))
+    //    assert(!Rules.rulesGiveeNotRepeat("RinSta", "SusSmi", 5, beatlesPlus4))
   }
 }
