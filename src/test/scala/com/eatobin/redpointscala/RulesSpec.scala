@@ -61,9 +61,6 @@ class RulesSpec extends AnyFlatSpec {
     assertResult(false) {
       Rules.rulesGiveeNotRepeat("RinSta", "GeoHar", 2, beatlesPlus6)
     }
-    assertResult(true) {
-      Rules.rulesGiveeNotRepeat("RinSta", "MicMou", 6, beatlesPlus6)
-    }
     assertResult(false) {
       Rules.rulesGiveeNotRepeat("RinSta", "MicMou", 7, beatlesPlus6)
     }
@@ -73,8 +70,8 @@ class RulesSpec extends AnyFlatSpec {
     assertResult(false) {
       Rules.rulesGiveeNotRepeat("RinSta", "PauMcc", 6, beatlesPlus6)
     }
-    //    //    assert(!Rules.rulesGiveeNotRepeat("RinSta", "PauMcc", 5, beatlesPlus6))
-    //    //    assert(!Rules.rulesGiveeNotRepeat("RinSta", "EriTob", 5, beatlesPlus6))
-    //    //    assert(!Rules.rulesGiveeNotRepeat("RinSta", "SusSmi", 5, beatlesPlus6))
+    assertResult(true) {
+      Rules.rulesGiveeNotRepeat("RinSta", "GeoHar", 6, beatlesPlus6)
+    }
   }
 }
