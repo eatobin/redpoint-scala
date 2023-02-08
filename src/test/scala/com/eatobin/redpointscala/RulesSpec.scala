@@ -70,6 +70,9 @@ class RulesSpec extends AnyFlatSpec {
     assertResult(true) {
       Rules.rulesGiveeNotRepeat("RinSta", "MicMou", 6, beatlesPlus6)
     }
+    assertResult(false) {
+      Rules.rulesGiveeNotRepeat("RinSta", "PauMcc", 6, beatlesPlus6)
+    }
     //    //    assert(!Rules.rulesGiveeNotRepeat("RinSta", "PauMcc", 5, beatlesPlus6))
     //    //    assert(!Rules.rulesGiveeNotRepeat("RinSta", "EriTob", 5, beatlesPlus6))
     //    //    assert(!Rules.rulesGiveeNotRepeat("RinSta", "SusSmi", 5, beatlesPlus6))
