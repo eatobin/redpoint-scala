@@ -24,7 +24,7 @@ class MyStateSpec extends AnyFlatSpec {
   private val playersWeird: SortedMap[String, Player] =
     SortedMap("RinSta" -> rinSta, "JohLen" -> johLen, "GeoHar" -> geoWhoops, "PauMcc" -> pauYikes)
 
-  private val beatlesState: MyState = MyState(
+  private val beatlesState0: MyState = MyState(
     rosterName = "The Beatles",
     rosterYear = 2014,
     players = players,
@@ -70,26 +70,27 @@ class MyStateSpec extends AnyFlatSpec {
   }
 
   it should "start a new year" in {
-    val newState = myStateStartNewYear(beatlesState)
-    assert(newState.giftYear == 1)
-    assert(newState.giveeHat == freshHat)
-    assert(newState.giverHat == freshHat)
-    assert(newState.maybeGiver.isDefined)
-    assert(newState.maybeGivee.isDefined)
-    assert(rinStaPlus == newState.players("RinSta"))
-    assert(newState.discards.isEmpty)
+    val beatlesState1 = myStateStartNewYear(beatlesState0)
+    assert(beatlesState1.giftYear == 1)
+    assert(beatlesState1.giveeHat == freshHat)
+    assert(beatlesState1.giverHat == freshHat)
+    assert(beatlesState1.maybeGiver.isDefined)
+    assert(beatlesState1.maybeGivee.isDefined)
+    assert(rinStaPlus == beatlesState1.players("RinSta"))
+    assert(beatlesState1.discards.isEmpty)
   }
 
   it should "have a failing givee" in {
-    val newState = myStateStartNewYear(beatlesState)
-    val givee = newState.maybeGivee.get
-    val secondState = myStateGiveeIsFailure(newState)
-    assert(secondState.discards.contains(givee))
-    assert(!secondState.giveeHat.contains(givee))
+    val beatlesState1 = myStateStartNewYear(beatlesState0)
+    val badGivee = beatlesState1.maybeGivee.get
+    val beatlesState2 = myStateGiveeIsFailure(beatlesState1)
+    assert(!beatlesState2.giveeHat.contains(badGivee))
+    assert(beatlesState2.maybeGivee.get != badGivee)
+    assert(beatlesState2.discards.contains(badGivee))
   }
 
   it should "have a successful givee" in {
-    val newState = myStateStartNewYear(beatlesState)
+    val newState = myStateStartNewYear(beatlesState0)
     val givee = newState.maybeGivee.get
     val giver = newState.maybeGiver.get
     val secondState = myStateGiveeIsSuccess(newState)
@@ -99,7 +100,7 @@ class MyStateSpec extends AnyFlatSpec {
   }
 
   it should "select a new giver" in {
-    val newState = myStateStartNewYear(beatlesState)
+    val newState = myStateStartNewYear(beatlesState0)
     val newDiscards = hatDiscardGivee("GeoHar", newState.discards)
     assert(newDiscards.size == 1)
     val secondState = myStateSelectNewGiver(newState)
@@ -112,12 +113,12 @@ class MyStateSpec extends AnyFlatSpec {
   }
 
   it should "print" in {
-    myStatePrintResults(beatlesState)
+    myStatePrintResults(beatlesState0)
     myStatePrintResults(weirdState)
   }
 
   it should "convert from JSON-Beatles" in {
-    assert(myStateJsonStringToState(beatlesJson) == Right(beatlesState))
+    assert(myStateJsonStringToState(beatlesJson) == Right(beatlesState0))
   }
 
   it should "convert from JSON-Hawks" in {
