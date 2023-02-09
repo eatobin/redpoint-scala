@@ -80,13 +80,12 @@ class MyStateSpec extends AnyFlatSpec {
     assert(newState.discards.isEmpty)
   }
 
-  it should "select a new giver" in {
+  it should "have a failing givee" in {
     val newState = myStateStartNewYear(beatlesState)
-    val newDiscards = hatDiscardGivee("GeoHar", newState.discards)
-    assert(newDiscards.size == 1)
-    val secondState = myStateSelectNewGiver(newState)
-    assert(secondState.giverHat.size == 3)
-    assert(secondState.discards.isEmpty)
+    val givee = newState.maybeGivee.get
+    val secondState = myStateGiveeIsFailure(newState)
+    assert(secondState.discards.contains(givee))
+    assert(!secondState.giveeHat.contains(givee))
   }
 
   it should "have a successful givee" in {
@@ -99,12 +98,13 @@ class MyStateSpec extends AnyFlatSpec {
     assert(!secondState.giveeHat.contains(givee))
   }
 
-  it should "have a failing givee" in {
+  it should "select a new giver" in {
     val newState = myStateStartNewYear(beatlesState)
-    val givee = newState.maybeGivee.get
-    val secondState = myStateGiveeIsFailure(newState)
-    assert(secondState.discards.contains(givee))
-    assert(!secondState.giveeHat.contains(givee))
+    val newDiscards = hatDiscardGivee("GeoHar", newState.discards)
+    assert(newDiscards.size == 1)
+    val secondState = myStateSelectNewGiver(newState)
+    assert(secondState.giverHat.size == 3)
+    assert(secondState.discards.isEmpty)
   }
 
   it should "report player errors" in {

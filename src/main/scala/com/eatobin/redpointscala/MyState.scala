@@ -58,6 +58,24 @@ object MyState {
     newState
   }
 
+  def myStateGiveeIsFailure(state: MyState): MyState = {
+    val givee: Givee = state.maybeGivee.get
+    val diminishedGiveeHat: Hat = hatRemovePuck(givee, state.giveeHat)
+    val newState: MyState = MyState(
+      rosterName = state.rosterName,
+      rosterYear = state.rosterYear,
+      players = state.players,
+      giftYear = state.giftYear,
+      giveeHat = diminishedGiveeHat,
+      giverHat = state.giverHat,
+      maybeGivee = myStateDrawPuck(diminishedGiveeHat),
+      maybeGiver = state.maybeGiver,
+      discards = hatDiscardGivee(givee, state.discards),
+      quit = state.quit
+    )
+    newState
+  }
+
   def myStateGiveeIsSuccess(state: MyState): MyState = {
     val giver: Giver = state.maybeGiver.get
     val givee: Givee = state.maybeGivee.get
@@ -72,24 +90,6 @@ object MyState {
       maybeGivee = None,
       maybeGiver = state.maybeGiver,
       discards = state.discards,
-      quit = state.quit
-    )
-    newState
-  }
-
-  def myStateGiveeIsFailure(state: MyState): MyState = {
-    val givee: Givee = state.maybeGivee.get
-    val diminishedGiveeHat: Hat = hatRemovePuck(givee, state.giveeHat)
-    val newState: MyState = MyState(
-      rosterName = state.rosterName,
-      rosterYear = state.rosterYear,
-      players = state.players,
-      giftYear = state.giftYear,
-      giveeHat = diminishedGiveeHat,
-      giverHat = state.giverHat,
-      maybeGivee = myStateDrawPuck(diminishedGiveeHat),
-      maybeGiver = state.maybeGiver,
-      discards = hatDiscardGivee(givee, state.discards),
       quit = state.quit
     )
     newState
