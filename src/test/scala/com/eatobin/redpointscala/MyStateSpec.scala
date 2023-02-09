@@ -90,13 +90,14 @@ class MyStateSpec extends AnyFlatSpec {
   }
 
   it should "have a successful givee" in {
-    val newState = myStateStartNewYear(beatlesState0)
-    val givee = newState.maybeGivee.get
-    val giver = newState.maybeGiver.get
-    val secondState = myStateGiveeIsSuccess(newState)
-    assert(playersGetMyGivee(giver)(secondState.players)(secondState.giftYear) == givee)
-    assert(playersGetMyGiver(givee)(secondState.players)(secondState.giftYear) == giver)
-    assert(!secondState.giveeHat.contains(givee))
+    val beatlesState1 = myStateStartNewYear(beatlesState0)
+    val goodGivee = beatlesState1.maybeGivee.get
+    val goodGiver = beatlesState1.maybeGiver.get
+    val beatlesState2 = myStateGiveeIsSuccess(beatlesState1)
+    assert(playersGetMyGivee(goodGiver)(beatlesState2.players)(beatlesState2.giftYear) == goodGivee)
+    assert(playersGetMyGiver(goodGivee)(beatlesState2.players)(beatlesState2.giftYear) == goodGiver)
+    assert(!beatlesState2.giveeHat.contains(goodGivee))
+    assert(beatlesState2.maybeGivee.isEmpty)
   }
 
   it should "select a new giver" in {
