@@ -15,17 +15,17 @@ import scala.collection.immutable.SortedSet
 import scala.io.StdIn.readLine
 
 case class MyState(
-                  rosterName: RosterName,
-                  rosterYear: RosterYear,
-                  players: Players,
-                  giftYear: GiftYear,
-                  giveeHat: Hat,
-                  giverHat: Hat,
-                  maybeGivee: Option[Givee],
-                  maybeGiver: Option[Giver],
-                  discards: Discards,
-                  quit: Quit
-                )
+                    rosterName: RosterName,
+                    rosterYear: RosterYear,
+                    players: Players,
+                    giftYear: GiftYear,
+                    giveeHat: Hat,
+                    giverHat: Hat,
+                    maybeGivee: Option[Givee],
+                    maybeGiver: Option[Giver],
+                    discards: Discards,
+                    quit: Quit
+                  )
 
 object MyState {
   type RosterName = String
@@ -52,25 +52,6 @@ object MyState {
       giverHat = freshHat,
       maybeGivee = myStateDrawPuck(freshHat),
       maybeGiver = myStateDrawPuck(freshHat),
-      discards = SortedSet(),
-      quit = state.quit
-    )
-    newState
-  }
-
-  def myStateSelectNewGiver(state: MyState): MyState = {
-    val giverToRemove: Giver = state.maybeGiver.get
-    val replenishedGiveeHat: Hat = hatReturnDiscards(state.discards, state.giveeHat)
-    val diminishedGiverHat: Hat = hatRemovePuck(giverToRemove, state.giverHat)
-    val newState: MyState = MyState(
-      rosterName = state.rosterName,
-      rosterYear = state.rosterYear,
-      players = state.players,
-      giftYear = state.giftYear,
-      giveeHat = replenishedGiveeHat,
-      giverHat = diminishedGiverHat,
-      maybeGivee = myStateDrawPuck(replenishedGiveeHat),
-      maybeGiver = myStateDrawPuck(diminishedGiverHat),
       discards = SortedSet(),
       quit = state.quit
     )
@@ -109,6 +90,25 @@ object MyState {
       maybeGivee = myStateDrawPuck(diminishedGiveeHat),
       maybeGiver = state.maybeGiver,
       discards = hatDiscardGivee(givee, state.discards),
+      quit = state.quit
+    )
+    newState
+  }
+
+  def myStateSelectNewGiver(state: MyState): MyState = {
+    val giverToRemove: Giver = state.maybeGiver.get
+    val replenishedGiveeHat: Hat = hatReturnDiscards(state.discards, state.giveeHat)
+    val diminishedGiverHat: Hat = hatRemovePuck(giverToRemove, state.giverHat)
+    val newState: MyState = MyState(
+      rosterName = state.rosterName,
+      rosterYear = state.rosterYear,
+      players = state.players,
+      giftYear = state.giftYear,
+      giveeHat = replenishedGiveeHat,
+      giverHat = diminishedGiverHat,
+      maybeGivee = myStateDrawPuck(replenishedGiveeHat),
+      maybeGiver = myStateDrawPuck(diminishedGiverHat),
+      discards = SortedSet(),
       quit = state.quit
     )
     newState
