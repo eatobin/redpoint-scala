@@ -1,7 +1,7 @@
 package com.eatobin.redpointscala
 
 import com.eatobin.redpointscala.GiftPair.JsonString
-import com.eatobin.redpointscala.Hat.{Hat, hatDiscardGivee}
+import com.eatobin.redpointscala.Hat.Hat
 import com.eatobin.redpointscala.MyState._
 import com.eatobin.redpointscala.Players.{playersGetMyGivee, playersGetMyGiver}
 import org.scalatest.flatspec.AnyFlatSpec
@@ -101,12 +101,19 @@ class MyStateSpec extends AnyFlatSpec {
   }
 
   it should "select a new giver" in {
-    val newState = myStateStartNewYear(beatlesState0)
-    val newDiscards = hatDiscardGivee("GeoHar", newState.discards)
-    assert(newDiscards.size == 1)
-    val secondState = myStateSelectNewGiver(newState)
-    assert(secondState.giverHat.size == 3)
-    assert(secondState.discards.isEmpty)
+    val beatlesState1 = myStateStartNewYear(beatlesState0)
+    val badGivee = beatlesState1.maybeGivee.get
+    val beatlesState2 = myStateGiveeIsFailure(beatlesState1)
+    val goodGivee = beatlesState2.maybeGivee.get
+    val goodGiver = beatlesState2.maybeGiver.get
+    val beatlesState3 = myStateGiveeIsSuccess(beatlesState2)
+    val beatlesState4 = myStateSelectNewGiver(beatlesState3)
+    assert(beatlesState4.giveeHat.contains(badGivee))
+    assert(!beatlesState4.giveeHat.contains(goodGivee))
+    assert(!beatlesState4.giverHat.contains(goodGiver))
+    assert(beatlesState4.maybeGivee.get != goodGivee)
+    assert(beatlesState4.maybeGiver.get != goodGiver)
+    assert(beatlesState4.discards.isEmpty)
   }
 
   it should "report player errors" in {
