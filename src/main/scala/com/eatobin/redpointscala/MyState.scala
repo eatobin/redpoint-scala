@@ -77,15 +77,15 @@ object MyState {
   }
 
   def myStateGiveeIsSuccess(state: MyState): MyState = {
-    val giver: Giver = state.maybeGiver.get
-    val givee: Givee = state.maybeGivee.get
-    val updatedGiveePlayers: Players = playersUpdateMyGivee(giver)(givee)(state.giftYear)(state.players)
+    val currentGiver: Giver = state.maybeGiver.get
+    val currentGivee: Givee = state.maybeGivee.get
+    val updatedGiveePlayers: Players = playersUpdateMyGivee(currentGiver)(currentGivee)(state.giftYear)(state.players)
     val newState: MyState = MyState(
       rosterName = state.rosterName,
       rosterYear = state.rosterYear,
-      players = playersUpdateMyGiver(givee)(giver)(state.giftYear)(updatedGiveePlayers),
+      players = playersUpdateMyGiver(currentGivee)(currentGiver)(state.giftYear)(updatedGiveePlayers),
       giftYear = state.giftYear,
-      giveeHat = hatRemovePuck(givee, state.giveeHat),
+      giveeHat = hatRemovePuck(currentGivee, state.giveeHat),
       giverHat = state.giverHat,
       maybeGivee = None,
       maybeGiver = state.maybeGiver,
