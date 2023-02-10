@@ -121,8 +121,8 @@ class MyStateSpec extends AnyFlatSpec {
   }
 
   it should "print itself" in {
-    myStatePrintResults(beatlesState0)
-    myStatePrintResults(weirdState)
+    assert(myStatePrintResults(beatlesState0) == beatlesState0)
+    assert(myStatePrintResults(weirdState) == weirdState)
   }
 
   it should "convert from JSON-Beatles" in {
