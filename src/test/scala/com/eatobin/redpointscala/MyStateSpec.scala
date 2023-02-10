@@ -120,7 +120,7 @@ class MyStateSpec extends AnyFlatSpec {
     assert(myStateErrors(weirdState) == Seq("GeoHar", "PauMcc"))
   }
 
-  it should "print" in {
+  it should "print itself" in {
     myStatePrintResults(beatlesState0)
     myStatePrintResults(weirdState)
   }
