@@ -19,8 +19,8 @@ class MyStateSpec extends AnyFlatSpec {
   private val players: SortedMap[String, Player] =
     SortedMap("RinSta" -> rinSta, "JohLen" -> johLen, "GeoHar" -> geoHar, "PauMcc" -> pauMcc)
 
-  private val geoWhoops: Player = Player("George Harrison", Vector(GiftPair("GeoHar", "PauMcc")))
-  private val pauYikes: Player = Player("Paul McCartney", Vector(GiftPair("GeoHar", "PauMcc")))
+  private val geoWhoops: Player = Player("geoWhoops", Vector(GiftPair("GeoHar", "PauMcc")))
+  private val pauYikes: Player = Player("pauYikes", Vector(GiftPair("GeoHar", "PauMcc")))
   private val playersWeird: SortedMap[String, Player] =
     SortedMap("RinSta" -> rinSta, "JohLen" -> johLen, "GeoHar" -> geoWhoops, "PauMcc" -> pauYikes)
 
