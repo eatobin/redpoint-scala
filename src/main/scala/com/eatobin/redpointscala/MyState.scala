@@ -147,7 +147,6 @@ object MyState {
         myGiveeKey: Givee = playersGetMyGivee(playerKeyMe)(state.players)(state.giftYear)
         if playerKeyMe == myGiverKey || playerKeyMe == myGiveeKey
       } yield playerKeyMe
-      //      } yield playerKeyMe + "-" + myGiveeKey + "-" + myGiverKey
     }
     playerErrors.sorted
   }
