@@ -59,8 +59,8 @@ object MyState {
   }
 
   def myStateGiveeIsFailure(state: MyState): MyState = {
-    val givee: Givee = state.maybeGivee.get
-    val diminishedGiveeHat: Hat = hatRemovePuck(givee, state.giveeHat)
+    val giveeToRemove: Givee = state.maybeGivee.get
+    val diminishedGiveeHat: Hat = hatRemovePuck(giveeToRemove, state.giveeHat)
     val newState: MyState = MyState(
       rosterName = state.rosterName,
       rosterYear = state.rosterYear,
@@ -70,7 +70,7 @@ object MyState {
       giverHat = state.giverHat,
       maybeGivee = myStateDrawPuck(diminishedGiveeHat),
       maybeGiver = state.maybeGiver,
-      discards = hatDiscardGivee(givee, state.discards),
+      discards = hatDiscardGivee(giveeToRemove, state.discards),
       quit = state.quit
     )
     newState
