@@ -114,30 +114,6 @@ object MyState {
     newState
   }
 
-  def myStateUpdateAndRunNewYear(state: MyState): MyState = {
-    val newYearState: MyState = myStateStartNewYear(state)
-    myStateLoop(newYearState)
-  }
-
-  @tailrec
-  private def myStateLoop(alteredState: MyState): MyState = {
-    if (alteredState.maybeGiver.isDefined) {
-      if (alteredState.maybeGivee.isDefined) {
-        if (rulesGiveeNotSelf(alteredState.maybeGiver.get, alteredState.maybeGivee.get) &&
-          rulesGiveeNotRecip(alteredState.maybeGiver.get, alteredState.maybeGivee.get, alteredState.giftYear, alteredState.players) &&
-          rulesGiveeNotRepeat(alteredState.maybeGiver.get, alteredState.maybeGivee.get, alteredState.giftYear, alteredState.players)) {
-          myStateLoop(myStateGiveeIsSuccess(alteredState))
-        } else {
-          myStateLoop(myStateGiveeIsFailure(alteredState))
-        }
-      } else {
-        myStateLoop(myStateSelectNewGiver(alteredState))
-      }
-    } else {
-      alteredState
-    }
-  }
-
   def myStateErrors(state: MyState): Seq[PlayerKey] = {
     val playerKeys: Seq[PlayerKey] = state.players.keys.toSeq
     val playerErrors = {
@@ -190,6 +166,30 @@ object MyState {
     state.copy(quit = reply)
   }
 
-  def myStateJsonStringToState(jsonString: JsonString): Either[Error, MyState] =
+  def myStateJsonStringToMyState(jsonString: JsonString): Either[Error, MyState] =
     decode[MyState](jsonString)
+
+  def myStateUpdateAndRunNewYear(state: MyState): MyState = {
+    val newYearState: MyState = myStateStartNewYear(state)
+    myStateLoop(newYearState)
+  }
+
+  @tailrec
+  private def myStateLoop(alteredState: MyState): MyState = {
+    if (alteredState.maybeGiver.isDefined) {
+      if (alteredState.maybeGivee.isDefined) {
+        if (rulesGiveeNotSelf(alteredState.maybeGiver.get, alteredState.maybeGivee.get) &&
+          rulesGiveeNotRecip(alteredState.maybeGiver.get, alteredState.maybeGivee.get, alteredState.giftYear, alteredState.players) &&
+          rulesGiveeNotRepeat(alteredState.maybeGiver.get, alteredState.maybeGivee.get, alteredState.giftYear, alteredState.players)) {
+          myStateLoop(myStateGiveeIsSuccess(alteredState))
+        } else {
+          myStateLoop(myStateGiveeIsFailure(alteredState))
+        }
+      } else {
+        myStateLoop(myStateSelectNewGiver(alteredState))
+      }
+    } else {
+      alteredState
+    }
+  }
 }
