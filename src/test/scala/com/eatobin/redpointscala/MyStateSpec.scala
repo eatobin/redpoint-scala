@@ -126,10 +126,10 @@ class MyStateSpec extends AnyFlatSpec {
   }
 
   it should "convert from JSON-Beatles" in {
-    assert(myStateJsonStringToState(beatlesJson) == Right(beatlesState0))
+    assert(myStateJsonStringToMyState(beatlesJson) == Right(beatlesState0))
   }
 
   it should "convert from JSON-Hawks" in {
-    assert(myStateJsonStringToState(hawksJson) == Right(hawksState))
+    assert(myStateJsonStringToMyState(hawksJson) == Right(hawksState))
   }
 }
