@@ -12,6 +12,9 @@ import scala.collection.immutable.SortedMap
 object Players {
   type Players = SortedMap[PlayerKey, Player]
 
+  def playersJsonStringToPlayers(jsonString: JsonString): Either[Error, Players] =
+    decode[Players](jsonString)
+
   def playersUpdatePlayer(playerKey: PlayerKey)(player: Player)(players: Players): Players =
     players.updated(playerKey, player)
 
@@ -49,7 +52,4 @@ object Players {
     val ngp = giftPairUpdateGiver(giver)(players(selfKey).giftHistory(giftYear))
     playersSetGiftPair(selfKey)(giftYear)(ngp)(players)
   }
-
-  def playersJsonStringToPlayers(jsonString: JsonString): Either[Error, Players] =
-    decode[Players](jsonString)
 }

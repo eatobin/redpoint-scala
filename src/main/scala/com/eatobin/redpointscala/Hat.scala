@@ -11,6 +11,9 @@ object Hat {
   type Hat = SortedSet[PlayerKey]
   type Discards = Hat
 
+  def hatJsonStringToHat(jsonString: JsonString): Either[Error, Hat] =
+    decode[Hat](jsonString)
+
   def hatMakeHat(players: Players): Hat =
     players.keySet
 
@@ -22,7 +25,4 @@ object Hat {
 
   def hatReturnDiscards(discards: Discards, geHat: Hat): Hat =
     geHat ++ discards
-
-  def hatJsonStringToHat(jsonString: JsonString): Either[Error, Hat] =
-    decode[Hat](jsonString)
 }

@@ -32,6 +32,9 @@ object MyState {
   type RosterYear = Int
   type Quit = String
 
+  def myStateJsonStringToMyState(jsonString: JsonString): Either[Error, MyState] =
+    decode[MyState](jsonString)
+
   def myStateDrawPuck(hat: Hat): Option[PlayerKey] = {
     if (hat.isEmpty) {
       None
@@ -165,9 +168,6 @@ object MyState {
     val reply: String = readLine("Continue? ('q' to quit): ")
     state.copy(quit = reply)
   }
-
-  def myStateJsonStringToMyState(jsonString: JsonString): Either[Error, MyState] =
-    decode[MyState](jsonString)
 
   def myStateUpdateAndRunNewYear(state: MyState): MyState = {
     val newYearState: MyState = myStateStartNewYear(state)
