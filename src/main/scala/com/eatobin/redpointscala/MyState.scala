@@ -3,7 +3,7 @@ package com.eatobin.redpointscala
 import com.eatobin.redpointscala.GiftHistory.GiftYearTA
 import com.eatobin.redpointscala.GiftPair.{GiveeTA, GiverTA, JsonStringTA, PlayerKeyTA}
 import com.eatobin.redpointscala.Hat.{DiscardsTA, HatTA, hatDiscardGivee, hatMakeHat, hatRemovePuck, hatReturnDiscards}
-import com.eatobin.redpointscala.MyState.{Quit, RosterName, RosterYear}
+import com.eatobin.redpointscala.MyState.{Quit, RosterNameTA, RosterYear}
 import com.eatobin.redpointscala.Players.{PlayersTA, playersAddYear, playersGetMyGivee, playersGetMyGiver, playersGetPlayerName, playersUpdateMyGivee, playersUpdateMyGiver}
 import com.eatobin.redpointscala.Rules.{rulesGiveeNotRecip, rulesGiveeNotRepeat, rulesGiveeNotSelf}
 import io.circe.Error
@@ -15,7 +15,7 @@ import scala.collection.immutable.SortedSet
 import scala.io.StdIn.readLine
 
 case class MyState(
-                    rosterName: RosterName,
+                    rosterName: RosterNameTA,
                     rosterYear: RosterYear,
                     players: PlayersTA,
                     giftYear: GiftYearTA,
@@ -28,7 +28,7 @@ case class MyState(
                   )
 
 object MyState {
-  type RosterName = String
+  type RosterNameTA = String
   type RosterYear = Int
   type Quit = String
 
