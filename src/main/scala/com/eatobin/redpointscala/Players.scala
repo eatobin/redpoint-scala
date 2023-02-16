@@ -2,7 +2,7 @@ package com.eatobin.redpointscala
 
 import com.eatobin.redpointscala.GiftHistory.{GiftYearTA, giftHistoryAddYear, giftHistoryUpdateGiftHistory}
 import com.eatobin.redpointscala.GiftPair._
-import com.eatobin.redpointscala.Player.{PlayerName, playerUpdateGiftHistory}
+import com.eatobin.redpointscala.Player.{PlayerNameTA, playerUpdateGiftHistory}
 import io.circe.Error
 import io.circe.generic.auto._
 import io.circe.parser._
@@ -18,7 +18,7 @@ object Players {
   def playersUpdatePlayer(playerKey: PlayerKeyTA)(player: Player)(players: Players): Players =
     players.updated(playerKey, player)
 
-  def playersGetPlayerName(playerKey: PlayerKeyTA)(players: Players): PlayerName =
+  def playersGetPlayerName(playerKey: PlayerKeyTA)(players: Players): PlayerNameTA =
     players(playerKey).playerName
 
   def playersAddYear(players: Players): Players = {
