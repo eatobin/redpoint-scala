@@ -1,6 +1,6 @@
 package com.eatobin.redpointscala
 
-import com.eatobin.redpointscala.GiftHistory.GiftYear
+import com.eatobin.redpointscala.GiftHistory.GiftYearTA
 import com.eatobin.redpointscala.GiftPair.{GiveeTA, GiverTA, JsonStringTA, PlayerKeyTA}
 import com.eatobin.redpointscala.Hat.{Discards, Hat, hatDiscardGivee, hatMakeHat, hatRemovePuck, hatReturnDiscards}
 import com.eatobin.redpointscala.MyState.{Quit, RosterName, RosterYear}
@@ -18,7 +18,7 @@ case class MyState(
                     rosterName: RosterName,
                     rosterYear: RosterYear,
                     players: Players,
-                    giftYear: GiftYear,
+                    giftYear: GiftYearTA,
                     giveeHat: Hat,
                     giverHat: Hat,
                     maybeGivee: Option[GiveeTA],

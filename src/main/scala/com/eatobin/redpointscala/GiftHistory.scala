@@ -7,7 +7,7 @@ import io.circe.parser._
 
 object GiftHistory {
   type GiftHistoryTA = Vector[GiftPair]
-  type GiftYear = Int
+  type GiftYearTA = Int
 
   def giftHistoryJsonStringToGiftHistory(jsonString: JsonStringTA): Either[Error, GiftHistoryTA] =
     decode[Vector[GiftPair]](jsonString)
@@ -15,6 +15,6 @@ object GiftHistory {
   def giftHistoryAddYear(playerKey: PlayerKeyTA)(giftHistory: GiftHistoryTA): GiftHistoryTA =
     giftHistory :+ GiftPair(playerKey, playerKey)
 
-  def giftHistoryUpdateGiftHistory(giftYear: GiftYear)(giftPair: GiftPair)(giftHistory: GiftHistoryTA): GiftHistoryTA =
+  def giftHistoryUpdateGiftHistory(giftYear: GiftYearTA)(giftPair: GiftPair)(giftHistory: GiftHistoryTA): GiftHistoryTA =
     giftHistory.updated(giftYear, giftPair)
 }
