@@ -8,9 +8,9 @@ import io.circe.parser._
 case class GiftPair(givee: Givee, giver: Giver)
 
 object GiftPair {
-  type PlayerKey = String
-  type Givee = PlayerKey
-  type Giver = PlayerKey
+  type PlayerKeyTA = String
+  type Givee = PlayerKeyTA
+  type Giver = PlayerKeyTA
   type JsonString = String
 
   def giftPairJsonStringToGiftPair(jsonString: JsonString): Either[Error, GiftPair] =

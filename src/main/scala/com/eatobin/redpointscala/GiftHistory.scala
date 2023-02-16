@@ -1,6 +1,6 @@
 package com.eatobin.redpointscala
 
-import com.eatobin.redpointscala.GiftPair.{JsonString, PlayerKey}
+import com.eatobin.redpointscala.GiftPair.{JsonString, PlayerKeyTA}
 import io.circe.Error
 import io.circe.generic.auto._
 import io.circe.parser._
@@ -12,7 +12,7 @@ object GiftHistory {
   def giftHistoryJsonStringToGiftHistory(jsonString: JsonString): Either[Error, GiftHistory] =
     decode[Vector[GiftPair]](jsonString)
 
-  def giftHistoryAddYear(playerKey: PlayerKey)(giftHistory: GiftHistory): GiftHistory =
+  def giftHistoryAddYear(playerKey: PlayerKeyTA)(giftHistory: GiftHistory): GiftHistory =
     giftHistory :+ GiftPair(playerKey, playerKey)
 
   def giftHistoryUpdateGiftHistory(giftYear: GiftYear)(giftPair: GiftPair)(giftHistory: GiftHistory): GiftHistory =

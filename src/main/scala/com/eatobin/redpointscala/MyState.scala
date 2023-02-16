@@ -1,7 +1,7 @@
 package com.eatobin.redpointscala
 
 import com.eatobin.redpointscala.GiftHistory.GiftYear
-import com.eatobin.redpointscala.GiftPair.{Givee, Giver, JsonString, PlayerKey}
+import com.eatobin.redpointscala.GiftPair.{Givee, Giver, JsonString, PlayerKeyTA}
 import com.eatobin.redpointscala.Hat.{Discards, Hat, hatDiscardGivee, hatMakeHat, hatRemovePuck, hatReturnDiscards}
 import com.eatobin.redpointscala.MyState.{Quit, RosterName, RosterYear}
 import com.eatobin.redpointscala.Players.{Players, playersAddYear, playersGetMyGivee, playersGetMyGiver, playersGetPlayerName, playersUpdateMyGivee, playersUpdateMyGiver}
@@ -35,7 +35,7 @@ object MyState {
   def myStateJsonStringToMyState(jsonString: JsonString): Either[Error, MyState] =
     decode[MyState](jsonString)
 
-  def myStateDrawPuck(hat: Hat): Option[PlayerKey] = {
+  def myStateDrawPuck(hat: Hat): Option[PlayerKeyTA] = {
     if (hat.isEmpty) {
       None
     } else {
@@ -117,11 +117,11 @@ object MyState {
     newState
   }
 
-  def myStateErrors(state: MyState): Seq[PlayerKey] = {
-    val playerKeys: Seq[PlayerKey] = state.players.keys.toSeq
+  def myStateErrors(state: MyState): Seq[PlayerKeyTA] = {
+    val playerKeys: Seq[PlayerKeyTA] = state.players.keys.toSeq
     val playerErrors = {
       for {
-        playerKeyMe: PlayerKey <- playerKeys
+        playerKeyMe: PlayerKeyTA <- playerKeys
         myGiverKey: Giver = playersGetMyGiver(playerKeyMe)(state.players)(state.giftYear)
         myGiveeKey: Givee = playersGetMyGivee(playerKeyMe)(state.players)(state.giftYear)
         if playerKeyMe == myGiverKey || playerKeyMe == myGiveeKey
@@ -135,7 +135,7 @@ object MyState {
     println("%s - Year %d Gifts:".format(state.rosterName, state.rosterYear + state.giftYear))
     println()
 
-    val playerKeys: Seq[PlayerKey] = state.players.keys.toSeq.sorted
+    val playerKeys: Seq[PlayerKeyTA] = state.players.keys.toSeq.sorted
     for (playerKey <- playerKeys) yield {
       val playerName = playersGetPlayerName(playerKey)(state.players)
       val giveeKey = playersGetMyGivee(playerKey)(state.players)(state.giftYear)
