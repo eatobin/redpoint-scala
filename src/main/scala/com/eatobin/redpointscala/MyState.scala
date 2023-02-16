@@ -4,7 +4,7 @@ import com.eatobin.redpointscala.GiftHistory.GiftYearTA
 import com.eatobin.redpointscala.GiftPair.{GiveeTA, GiverTA, JsonStringTA, PlayerKeyTA}
 import com.eatobin.redpointscala.Hat.{Discards, Hat, hatDiscardGivee, hatMakeHat, hatRemovePuck, hatReturnDiscards}
 import com.eatobin.redpointscala.MyState.{Quit, RosterName, RosterYear}
-import com.eatobin.redpointscala.Players.{Players, playersAddYear, playersGetMyGivee, playersGetMyGiver, playersGetPlayerName, playersUpdateMyGivee, playersUpdateMyGiver}
+import com.eatobin.redpointscala.Players.{PlayersTA, playersAddYear, playersGetMyGivee, playersGetMyGiver, playersGetPlayerName, playersUpdateMyGivee, playersUpdateMyGiver}
 import com.eatobin.redpointscala.Rules.{rulesGiveeNotRecip, rulesGiveeNotRepeat, rulesGiveeNotSelf}
 import io.circe.Error
 import io.circe.generic.auto._
@@ -17,7 +17,7 @@ import scala.io.StdIn.readLine
 case class MyState(
                     rosterName: RosterName,
                     rosterYear: RosterYear,
-                    players: Players,
+                    players: PlayersTA,
                     giftYear: GiftYearTA,
                     giveeHat: Hat,
                     giverHat: Hat,
@@ -82,7 +82,7 @@ object MyState {
   def myStateGiveeIsSuccess(state: MyState): MyState = {
     val currentGiver: GiverTA = state.maybeGiver.get
     val currentGivee: GiveeTA = state.maybeGivee.get
-    val updatedGiveePlayers: Players = playersUpdateMyGivee(currentGiver)(currentGivee)(state.giftYear)(state.players)
+    val updatedGiveePlayers: PlayersTA = playersUpdateMyGivee(currentGiver)(currentGivee)(state.giftYear)(state.players)
     val newState: MyState = MyState(
       rosterName = state.rosterName,
       rosterYear = state.rosterYear,

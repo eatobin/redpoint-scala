@@ -1,7 +1,7 @@
 package com.eatobin.redpointscala
 
 import com.eatobin.redpointscala.GiftPair.{GiveeTA, JsonStringTA, PlayerKeyTA}
-import com.eatobin.redpointscala.Players.Players
+import com.eatobin.redpointscala.Players.PlayersTA
 import io.circe.Error
 import io.circe.parser._
 
@@ -14,7 +14,7 @@ object Hat {
   def hatJsonStringToHat(jsonString: JsonStringTA): Either[Error, Hat] =
     decode[Hat](jsonString)
 
-  def hatMakeHat(players: Players): Hat =
+  def hatMakeHat(players: PlayersTA): Hat =
     players.keySet
 
   def hatRemovePuck(playerKey: PlayerKeyTA, hat: Hat): Hat =
