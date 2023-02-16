@@ -3,7 +3,7 @@ package com.eatobin.redpointscala
 import com.eatobin.redpointscala.GiftHistory.GiftYearTA
 import com.eatobin.redpointscala.GiftPair.{GiveeTA, GiverTA, JsonStringTA, PlayerKeyTA}
 import com.eatobin.redpointscala.Hat.{DiscardsTA, HatTA, hatDiscardGivee, hatMakeHat, hatRemovePuck, hatReturnDiscards}
-import com.eatobin.redpointscala.MyState.{Quit, RosterNameTA, RosterYear}
+import com.eatobin.redpointscala.MyState.{Quit, RosterNameTA, RosterYearTA}
 import com.eatobin.redpointscala.Players.{PlayersTA, playersAddYear, playersGetMyGivee, playersGetMyGiver, playersGetPlayerName, playersUpdateMyGivee, playersUpdateMyGiver}
 import com.eatobin.redpointscala.Rules.{rulesGiveeNotRecip, rulesGiveeNotRepeat, rulesGiveeNotSelf}
 import io.circe.Error
@@ -16,7 +16,7 @@ import scala.io.StdIn.readLine
 
 case class MyState(
                     rosterName: RosterNameTA,
-                    rosterYear: RosterYear,
+                    rosterYear: RosterYearTA,
                     players: PlayersTA,
                     giftYear: GiftYearTA,
                     giveeHat: HatTA,
@@ -29,7 +29,7 @@ case class MyState(
 
 object MyState {
   type RosterNameTA = String
-  type RosterYear = Int
+  type RosterYearTA = Int
   type Quit = String
 
   def myStateJsonStringToMyState(jsonString: JsonStringTA): Either[Error, MyState] =
