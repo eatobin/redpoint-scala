@@ -12,7 +12,7 @@ import scala.collection.immutable.SortedMap
 object Players {
   type Players = SortedMap[PlayerKey, Player]
 
-  def playersJsonStringToPlayers(jsonString: JsonString): Either[Error, Players] =
+  def playersJsonStringToPlayers(jsonString: JsonStringTA): Either[Error, Players] =
     decode[Players](jsonString)
 
   def playersUpdatePlayer(playerKey: PlayerKey)(player: Player)(players: Players): Players =
@@ -31,10 +31,10 @@ object Players {
     nplrs
   }
 
-  def playersGetMyGivee(selfKey: PlayerKey)(players: Players)(giftYear: GiftYear): Givee =
+  def playersGetMyGivee(selfKey: PlayerKey)(players: Players)(giftYear: GiftYear): GiveeTA =
     players(selfKey).giftHistory(giftYear).givee
 
-  def playersGetMyGiver(selfKey: PlayerKey)(players: Players)(giftYear: GiftYear): Giver =
+  def playersGetMyGiver(selfKey: PlayerKey)(players: Players)(giftYear: GiftYear): GiverTA =
     players(selfKey).giftHistory(giftYear).giver
 
   private def playersSetGiftPair(playerKey: PlayerKey)(giftYear: GiftYear)(giftPair: GiftPair)(players: Players): Players = {
@@ -43,12 +43,12 @@ object Players {
     playersUpdatePlayer(playerKey)(nplr)(players)
   }
 
-  def playersUpdateMyGivee(selfKey: PlayerKey)(givee: Givee)(giftYear: GiftYear)(players: Players): Players = {
+  def playersUpdateMyGivee(selfKey: PlayerKey)(givee: GiveeTA)(giftYear: GiftYear)(players: Players): Players = {
     val ngp = giftPairUpdateGivee(givee)(players(selfKey).giftHistory(giftYear))
     playersSetGiftPair(selfKey)(giftYear)(ngp)(players)
   }
 
-  def playersUpdateMyGiver(selfKey: PlayerKey)(giver: Giver)(giftYear: GiftYear)(players: Players): Players = {
+  def playersUpdateMyGiver(selfKey: PlayerKey)(giver: GiverTA)(giftYear: GiftYear)(players: Players): Players = {
     val ngp = giftPairUpdateGiver(giver)(players(selfKey).giftHistory(giftYear))
     playersSetGiftPair(selfKey)(giftYear)(ngp)(players)
   }
