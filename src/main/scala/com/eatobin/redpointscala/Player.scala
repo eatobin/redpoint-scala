@@ -1,19 +1,19 @@
 package com.eatobin.redpointscala
 
-import com.eatobin.redpointscala.GiftHistory.GiftHistoryTA
-import com.eatobin.redpointscala.Player.PlayerNameTA
+import com.eatobin.redpointscala.GiftHistory.GiftHistory
+import com.eatobin.redpointscala.Player.PlayerName
 import io.circe.Error
 import io.circe.generic.auto._
 import io.circe.parser._
 
-case class Player(playerName: PlayerNameTA, giftHistory: GiftHistoryTA)
+case class Player(playerName: PlayerName, giftHistory: GiftHistory)
 
 object Player {
-  type PlayerNameTA = String
+  type PlayerName = String
 
   def playerJsonStringToPlayer(jsonString: String): Either[Error, Player] =
     decode[Player](jsonString)
 
-  def playerUpdateGiftHistory(giftHistory1: GiftHistoryTA)(player: Player): Player =
+  def playerUpdateGiftHistory(giftHistory1: GiftHistory)(player: Player): Player =
     player.copy(giftHistory = giftHistory1)
 }

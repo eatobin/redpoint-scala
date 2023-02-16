@@ -1,6 +1,6 @@
 package com.eatobin.redpointscala
 
-import com.eatobin.redpointscala.GiftPair.JsonStringTA
+import com.eatobin.redpointscala.GiftPair.JsonString
 import com.eatobin.redpointscala.Hat._
 import org.scalatest.flatspec.AnyFlatSpec
 
@@ -8,7 +8,7 @@ import scala.collection.immutable.{SortedMap, SortedSet}
 
 class HatSpec extends AnyFlatSpec {
 
-  private val jsonString: JsonStringTA = "[\"RinSta\",\"JohLen\",\"GeoHar\",\"PauMcc\"]"
+  private val jsonString: JsonString = "[\"RinSta\",\"JohLen\",\"GeoHar\",\"PauMcc\"]"
   private val testHat: SortedSet[String] = SortedSet("RinSta", "JohLen", "GeoHar", "PauMcc")
 
   private val rinSta: Player = Player("Ringo Starr", Vector(GiftPair("JohLen", "GeoHar")))

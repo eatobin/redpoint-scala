@@ -1,7 +1,7 @@
 package com.eatobin.redpointscala
 
 import com.eatobin.redpointscala.GiftHistory.GiftYear
-import com.eatobin.redpointscala.GiftPair.{GiveeTA, GiverTA, JsonStringTA, PlayerKey}
+import com.eatobin.redpointscala.GiftPair.{Givee, Giver, JsonString, PlayerKey}
 import com.eatobin.redpointscala.Hat.{Discards, Hat, hatDiscardGivee, hatMakeHat, hatRemovePuck, hatReturnDiscards}
 import com.eatobin.redpointscala.MyState.{Quit, RosterName, RosterYear}
 import com.eatobin.redpointscala.Players.{Players, playersAddYear, playersGetMyGivee, playersGetMyGiver, playersGetPlayerName, playersUpdateMyGivee, playersUpdateMyGiver}
@@ -21,8 +21,8 @@ case class MyState(
                     giftYear: GiftYear,
                     giveeHat: Hat,
                     giverHat: Hat,
-                    maybeGivee: Option[GiveeTA],
-                    maybeGiver: Option[GiverTA],
+                    maybeGivee: Option[Givee],
+                    maybeGiver: Option[Giver],
                     discards: Discards,
                     quit: Quit
                   )
@@ -32,7 +32,7 @@ object MyState {
   type RosterYear = Int
   type Quit = String
 
-  def myStateJsonStringToMyState(jsonString: JsonStringTA): Either[Error, MyState] =
+  def myStateJsonStringToMyState(jsonString: JsonString): Either[Error, MyState] =
     decode[MyState](jsonString)
 
   def myStateDrawPuck(hat: Hat): Option[PlayerKey] = {
@@ -62,7 +62,7 @@ object MyState {
   }
 
   def myStateGiveeIsFailure(state: MyState): MyState = {
-    val giveeToRemove: GiveeTA = state.maybeGivee.get
+    val giveeToRemove: Givee = state.maybeGivee.get
     val diminishedGiveeHat: Hat = hatRemovePuck(giveeToRemove, state.giveeHat)
     val newState: MyState = MyState(
       rosterName = state.rosterName,
@@ -80,8 +80,8 @@ object MyState {
   }
 
   def myStateGiveeIsSuccess(state: MyState): MyState = {
-    val currentGiver: GiverTA = state.maybeGiver.get
-    val currentGivee: GiveeTA = state.maybeGivee.get
+    val currentGiver: Giver = state.maybeGiver.get
+    val currentGivee: Givee = state.maybeGivee.get
     val updatedGiveePlayers: Players = playersUpdateMyGivee(currentGiver)(currentGivee)(state.giftYear)(state.players)
     val newState: MyState = MyState(
       rosterName = state.rosterName,
@@ -99,7 +99,7 @@ object MyState {
   }
 
   def myStateSelectNewGiver(state: MyState): MyState = {
-    val giverToRemove: GiverTA = state.maybeGiver.get
+    val giverToRemove: Giver = state.maybeGiver.get
     val replenishedGiveeHat: Hat = hatReturnDiscards(state.discards, state.giveeHat)
     val diminishedGiverHat: Hat = hatRemovePuck(giverToRemove, state.giverHat)
     val newState: MyState = MyState(
@@ -122,8 +122,8 @@ object MyState {
     val playerErrors = {
       for {
         playerKeyMe: PlayerKey <- playerKeys
-        myGiverKey: GiverTA = playersGetMyGiver(playerKeyMe)(state.players)(state.giftYear)
-        myGiveeKey: GiveeTA = playersGetMyGivee(playerKeyMe)(state.players)(state.giftYear)
+        myGiverKey: Giver = playersGetMyGiver(playerKeyMe)(state.players)(state.giftYear)
+        myGiveeKey: Givee = playersGetMyGivee(playerKeyMe)(state.players)(state.giftYear)
         if playerKeyMe == myGiverKey || playerKeyMe == myGiveeKey
       } yield playerKeyMe
     }
