@@ -2,7 +2,7 @@ package com.eatobin.redpointscala
 
 import com.eatobin.redpointscala.GiftHistory.GiftYearTA
 import com.eatobin.redpointscala.GiftPair.{GiveeTA, GiverTA, JsonStringTA, PlayerKeyTA}
-import com.eatobin.redpointscala.Hat.{Discards, HatTA, hatDiscardGivee, hatMakeHat, hatRemovePuck, hatReturnDiscards}
+import com.eatobin.redpointscala.Hat.{DiscardsTA, HatTA, hatDiscardGivee, hatMakeHat, hatRemovePuck, hatReturnDiscards}
 import com.eatobin.redpointscala.MyState.{Quit, RosterName, RosterYear}
 import com.eatobin.redpointscala.Players.{PlayersTA, playersAddYear, playersGetMyGivee, playersGetMyGiver, playersGetPlayerName, playersUpdateMyGivee, playersUpdateMyGiver}
 import com.eatobin.redpointscala.Rules.{rulesGiveeNotRecip, rulesGiveeNotRepeat, rulesGiveeNotSelf}
@@ -23,7 +23,7 @@ case class MyState(
                     giverHat: HatTA,
                     maybeGivee: Option[GiveeTA],
                     maybeGiver: Option[GiverTA],
-                    discards: Discards,
+                    discards: DiscardsTA,
                     quit: Quit
                   )
 

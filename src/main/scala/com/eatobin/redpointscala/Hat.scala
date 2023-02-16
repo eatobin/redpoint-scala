@@ -9,7 +9,7 @@ import scala.collection.immutable.SortedSet
 
 object Hat {
   type HatTA = SortedSet[PlayerKeyTA]
-  type Discards = HatTA
+  type DiscardsTA = HatTA
 
   def hatJsonStringToHat(jsonString: JsonStringTA): Either[Error, HatTA] =
     decode[HatTA](jsonString)
@@ -20,9 +20,9 @@ object Hat {
   def hatRemovePuck(playerKey: PlayerKeyTA, hat: HatTA): HatTA =
     hat - playerKey
 
-  def hatDiscardGivee(givee: GiveeTA, discards: Discards): HatTA =
+  def hatDiscardGivee(givee: GiveeTA, discards: DiscardsTA): HatTA =
     discards + givee
 
-  def hatReturnDiscards(discards: Discards, geHat: HatTA): HatTA =
+  def hatReturnDiscards(discards: DiscardsTA, geHat: HatTA): HatTA =
     geHat ++ discards
 }
