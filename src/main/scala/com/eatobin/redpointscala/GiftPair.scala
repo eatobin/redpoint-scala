@@ -11,9 +11,9 @@ object GiftPair {
   type PlayerKeyTA = String
   type GiveeTA = PlayerKeyTA
   type GiverTA = PlayerKeyTA
-  type JsonString = String
+  type JsonStringTA = String
 
-  def giftPairJsonStringToGiftPair(jsonString: JsonString): Either[Error, GiftPair] =
+  def giftPairJsonStringToGiftPair(jsonString: JsonStringTA): Either[Error, GiftPair] =
     decode[GiftPair](jsonString)
 
   def giftPairUpdateGivee(givee1: GiveeTA)(giftPair: GiftPair): GiftPair = giftPair.copy(givee = givee1)

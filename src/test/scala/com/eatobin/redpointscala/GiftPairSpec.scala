@@ -6,7 +6,7 @@ import org.scalatest.flatspec.AnyFlatSpec
 
 class GiftPairSpec extends AnyFlatSpec {
 
-  private val jsonString: JsonString = "{\"givee\":\"GeoHar\",\"giver\":\"JohLen\"}"
+  private val jsonString: JsonStringTA = "{\"givee\":\"GeoHar\",\"giver\":\"JohLen\"}"
   private val giftPair: GiftPair = GiftPair("GeoHar", "JohLen")
 
   "A GiftPair" should "update a giver/givee" in {

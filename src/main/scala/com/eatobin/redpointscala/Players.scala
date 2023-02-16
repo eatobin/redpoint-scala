@@ -12,7 +12,7 @@ import scala.collection.immutable.SortedMap
 object Players {
   type Players = SortedMap[PlayerKeyTA, Player]
 
-  def playersJsonStringToPlayers(jsonString: JsonString): Either[Error, Players] =
+  def playersJsonStringToPlayers(jsonString: JsonStringTA): Either[Error, Players] =
     decode[Players](jsonString)
 
   def playersUpdatePlayer(playerKey: PlayerKeyTA)(player: Player)(players: Players): Players =

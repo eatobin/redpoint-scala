@@ -1,7 +1,7 @@
 package com.eatobin.redpointscala
 
 import com.eatobin.redpointscala.GiftHistory.GiftYear
-import com.eatobin.redpointscala.GiftPair.{GiveeTA, GiverTA, JsonString, PlayerKeyTA}
+import com.eatobin.redpointscala.GiftPair.{GiveeTA, GiverTA, JsonStringTA, PlayerKeyTA}
 import com.eatobin.redpointscala.Hat.{Discards, Hat, hatDiscardGivee, hatMakeHat, hatRemovePuck, hatReturnDiscards}
 import com.eatobin.redpointscala.MyState.{Quit, RosterName, RosterYear}
 import com.eatobin.redpointscala.Players.{Players, playersAddYear, playersGetMyGivee, playersGetMyGiver, playersGetPlayerName, playersUpdateMyGivee, playersUpdateMyGiver}
@@ -32,7 +32,7 @@ object MyState {
   type RosterYear = Int
   type Quit = String
 
-  def myStateJsonStringToMyState(jsonString: JsonString): Either[Error, MyState] =
+  def myStateJsonStringToMyState(jsonString: JsonStringTA): Either[Error, MyState] =
     decode[MyState](jsonString)
 
   def myStateDrawPuck(hat: Hat): Option[PlayerKeyTA] = {
