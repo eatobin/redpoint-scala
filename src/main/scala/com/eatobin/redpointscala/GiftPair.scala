@@ -1,16 +1,16 @@
 package com.eatobin.redpointscala
 
-import com.eatobin.redpointscala.GiftPair.{GiveeTA, Giver}
+import com.eatobin.redpointscala.GiftPair.{GiveeTA, GiverTA}
 import io.circe.Error
 import io.circe.generic.auto._
 import io.circe.parser._
 
-case class GiftPair(givee: GiveeTA, giver: Giver)
+case class GiftPair(givee: GiveeTA, giver: GiverTA)
 
 object GiftPair {
   type PlayerKeyTA = String
   type GiveeTA = PlayerKeyTA
-  type Giver = PlayerKeyTA
+  type GiverTA = PlayerKeyTA
   type JsonString = String
 
   def giftPairJsonStringToGiftPair(jsonString: JsonString): Either[Error, GiftPair] =
@@ -18,5 +18,5 @@ object GiftPair {
 
   def giftPairUpdateGivee(givee1: GiveeTA)(giftPair: GiftPair): GiftPair = giftPair.copy(givee = givee1)
 
-  def giftPairUpdateGiver(giver1: Giver)(giftPair: GiftPair): GiftPair = giftPair.copy(giver = giver1)
+  def giftPairUpdateGiver(giver1: GiverTA)(giftPair: GiftPair): GiftPair = giftPair.copy(giver = giver1)
 }
