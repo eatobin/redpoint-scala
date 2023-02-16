@@ -2,9 +2,9 @@ package com.eatobin.redpointscala
 
 import com.eatobin.redpointscala.GiftHistory.GiftYearTA
 import com.eatobin.redpointscala.GiftPair.{GiveeTA, GiverTA, JsonStringTA, PlayerKeyTA}
-import com.eatobin.redpointscala.Hat.{DiscardsTA, HatTA, hatDiscardGivee, hatMakeHat, hatRemovePuck, hatReturnDiscards}
+import com.eatobin.redpointscala.Hat._
 import com.eatobin.redpointscala.MyState.{QuitTA, RosterNameTA, RosterYearTA}
-import com.eatobin.redpointscala.Players.{PlayersTA, playersAddYear, playersGetMyGivee, playersGetMyGiver, playersGetPlayerName, playersUpdateMyGivee, playersUpdateMyGiver}
+import com.eatobin.redpointscala.Players._
 import com.eatobin.redpointscala.Rules.{rulesGiveeNotRecip, rulesGiveeNotRepeat, rulesGiveeNotSelf}
 import io.circe.Error
 import io.circe.generic.auto._
