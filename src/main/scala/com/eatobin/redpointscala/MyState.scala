@@ -1,7 +1,7 @@
 package com.eatobin.redpointscala
 
 import com.eatobin.redpointscala.GiftHistory.GiftYear
-import com.eatobin.redpointscala.GiftPair.{Givee, Giver, JsonString, PlayerKeyTA}
+import com.eatobin.redpointscala.GiftPair.{GiveeTA, Giver, JsonString, PlayerKeyTA}
 import com.eatobin.redpointscala.Hat.{Discards, Hat, hatDiscardGivee, hatMakeHat, hatRemovePuck, hatReturnDiscards}
 import com.eatobin.redpointscala.MyState.{Quit, RosterName, RosterYear}
 import com.eatobin.redpointscala.Players.{Players, playersAddYear, playersGetMyGivee, playersGetMyGiver, playersGetPlayerName, playersUpdateMyGivee, playersUpdateMyGiver}
@@ -21,7 +21,7 @@ case class MyState(
                     giftYear: GiftYear,
                     giveeHat: Hat,
                     giverHat: Hat,
-                    maybeGivee: Option[Givee],
+                    maybeGivee: Option[GiveeTA],
                     maybeGiver: Option[Giver],
                     discards: Discards,
                     quit: Quit
@@ -62,7 +62,7 @@ object MyState {
   }
 
   def myStateGiveeIsFailure(state: MyState): MyState = {
-    val giveeToRemove: Givee = state.maybeGivee.get
+    val giveeToRemove: GiveeTA = state.maybeGivee.get
     val diminishedGiveeHat: Hat = hatRemovePuck(giveeToRemove, state.giveeHat)
     val newState: MyState = MyState(
       rosterName = state.rosterName,
@@ -81,7 +81,7 @@ object MyState {
 
   def myStateGiveeIsSuccess(state: MyState): MyState = {
     val currentGiver: Giver = state.maybeGiver.get
-    val currentGivee: Givee = state.maybeGivee.get
+    val currentGivee: GiveeTA = state.maybeGivee.get
     val updatedGiveePlayers: Players = playersUpdateMyGivee(currentGiver)(currentGivee)(state.giftYear)(state.players)
     val newState: MyState = MyState(
       rosterName = state.rosterName,
@@ -123,7 +123,7 @@ object MyState {
       for {
         playerKeyMe: PlayerKeyTA <- playerKeys
         myGiverKey: Giver = playersGetMyGiver(playerKeyMe)(state.players)(state.giftYear)
-        myGiveeKey: Givee = playersGetMyGivee(playerKeyMe)(state.players)(state.giftYear)
+        myGiveeKey: GiveeTA = playersGetMyGivee(playerKeyMe)(state.players)(state.giftYear)
         if playerKeyMe == myGiverKey || playerKeyMe == myGiveeKey
       } yield playerKeyMe
     }
