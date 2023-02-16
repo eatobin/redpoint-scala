@@ -8,21 +8,21 @@ import io.circe.parser._
 import scala.collection.immutable.SortedSet
 
 object Hat {
-  type Hat = SortedSet[PlayerKeyTA]
-  type Discards = Hat
+  type HatTA = SortedSet[PlayerKeyTA]
+  type Discards = HatTA
 
-  def hatJsonStringToHat(jsonString: JsonStringTA): Either[Error, Hat] =
-    decode[Hat](jsonString)
+  def hatJsonStringToHat(jsonString: JsonStringTA): Either[Error, HatTA] =
+    decode[HatTA](jsonString)
 
-  def hatMakeHat(players: PlayersTA): Hat =
+  def hatMakeHat(players: PlayersTA): HatTA =
     players.keySet
 
-  def hatRemovePuck(playerKey: PlayerKeyTA, hat: Hat): Hat =
+  def hatRemovePuck(playerKey: PlayerKeyTA, hat: HatTA): HatTA =
     hat - playerKey
 
-  def hatDiscardGivee(givee: GiveeTA, discards: Discards): Hat =
+  def hatDiscardGivee(givee: GiveeTA, discards: Discards): HatTA =
     discards + givee
 
-  def hatReturnDiscards(discards: Discards, geHat: Hat): Hat =
+  def hatReturnDiscards(discards: Discards, geHat: HatTA): HatTA =
     geHat ++ discards
 }

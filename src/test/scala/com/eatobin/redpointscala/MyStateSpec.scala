@@ -1,7 +1,7 @@
 package com.eatobin.redpointscala
 
 import com.eatobin.redpointscala.GiftPair.JsonStringTA
-import com.eatobin.redpointscala.Hat.Hat
+import com.eatobin.redpointscala.Hat.HatTA
 import com.eatobin.redpointscala.MyState._
 import com.eatobin.redpointscala.Players.{playersGetMyGivee, playersGetMyGiver}
 import org.scalatest.flatspec.AnyFlatSpec
@@ -10,7 +10,7 @@ import scala.collection.immutable.{SortedMap, SortedSet}
 
 class MyStateSpec extends AnyFlatSpec {
 
-  private val testHat: Hat = SortedSet("RinSta")
+  private val testHat: HatTA = SortedSet("RinSta")
 
   private val rinSta: Player = Player("Ringo Starr", Vector(GiftPair("JohLen", "GeoHar")))
   private val johLen: Player = Player("John Lennon", Vector(GiftPair("PauMcc", "RinSta")))

@@ -2,7 +2,7 @@ package com.eatobin.redpointscala
 
 import com.eatobin.redpointscala.GiftHistory.GiftYearTA
 import com.eatobin.redpointscala.GiftPair.{GiveeTA, GiverTA, JsonStringTA, PlayerKeyTA}
-import com.eatobin.redpointscala.Hat.{Discards, Hat, hatDiscardGivee, hatMakeHat, hatRemovePuck, hatReturnDiscards}
+import com.eatobin.redpointscala.Hat.{Discards, HatTA, hatDiscardGivee, hatMakeHat, hatRemovePuck, hatReturnDiscards}
 import com.eatobin.redpointscala.MyState.{Quit, RosterName, RosterYear}
 import com.eatobin.redpointscala.Players.{PlayersTA, playersAddYear, playersGetMyGivee, playersGetMyGiver, playersGetPlayerName, playersUpdateMyGivee, playersUpdateMyGiver}
 import com.eatobin.redpointscala.Rules.{rulesGiveeNotRecip, rulesGiveeNotRepeat, rulesGiveeNotSelf}
@@ -19,8 +19,8 @@ case class MyState(
                     rosterYear: RosterYear,
                     players: PlayersTA,
                     giftYear: GiftYearTA,
-                    giveeHat: Hat,
-                    giverHat: Hat,
+                    giveeHat: HatTA,
+                    giverHat: HatTA,
                     maybeGivee: Option[GiveeTA],
                     maybeGiver: Option[GiverTA],
                     discards: Discards,
@@ -35,7 +35,7 @@ object MyState {
   def myStateJsonStringToMyState(jsonString: JsonStringTA): Either[Error, MyState] =
     decode[MyState](jsonString)
 
-  def myStateDrawPuck(hat: Hat): Option[PlayerKeyTA] = {
+  def myStateDrawPuck(hat: HatTA): Option[PlayerKeyTA] = {
     if (hat.isEmpty) {
       None
     } else {
@@ -45,7 +45,7 @@ object MyState {
   }
 
   def myStateStartNewYear(state: MyState): MyState = {
-    val freshHat: Hat = hatMakeHat(state.players)
+    val freshHat: HatTA = hatMakeHat(state.players)
     val newState: MyState = MyState(
       rosterName = state.rosterName,
       rosterYear = state.rosterYear,
@@ -63,7 +63,7 @@ object MyState {
 
   def myStateGiveeIsFailure(state: MyState): MyState = {
     val giveeToRemove: GiveeTA = state.maybeGivee.get
-    val diminishedGiveeHat: Hat = hatRemovePuck(giveeToRemove, state.giveeHat)
+    val diminishedGiveeHat: HatTA = hatRemovePuck(giveeToRemove, state.giveeHat)
     val newState: MyState = MyState(
       rosterName = state.rosterName,
       rosterYear = state.rosterYear,
@@ -100,8 +100,8 @@ object MyState {
 
   def myStateSelectNewGiver(state: MyState): MyState = {
     val giverToRemove: GiverTA = state.maybeGiver.get
-    val replenishedGiveeHat: Hat = hatReturnDiscards(state.discards, state.giveeHat)
-    val diminishedGiverHat: Hat = hatRemovePuck(giverToRemove, state.giverHat)
+    val replenishedGiveeHat: HatTA = hatReturnDiscards(state.discards, state.giveeHat)
+    val diminishedGiverHat: HatTA = hatRemovePuck(giverToRemove, state.giverHat)
     val newState: MyState = MyState(
       rosterName = state.rosterName,
       rosterYear = state.rosterYear,
