@@ -16,7 +16,7 @@ object GiftPair {
   def giftPairJsonStringToGiftPair(jsonString: JsonStringTA): Either[Error, GiftPair] =
     decode[GiftPair](jsonString)
 
-  def giftPairUpdateGivee(givee1: GiveeTA)(giftPair: GiftPair): GiftPair = giftPair.copy(givee = givee1)
+  def giftPairUpdateGivee(givee: GiveeTA)(giftPair: GiftPair): GiftPair = giftPair.copy(givee = givee)
 
-  def giftPairUpdateGiver(giver1: GiverTA)(giftPair: GiftPair): GiftPair = giftPair.copy(giver = giver1)
+  def giftPairUpdateGiver(giver: GiverTA)(giftPair: GiftPair): GiftPair = giftPair.copy(giver = giver)
 }
