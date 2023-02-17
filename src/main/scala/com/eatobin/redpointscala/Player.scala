@@ -15,6 +15,6 @@ object Player {
   def playerJsonStringToPlayer(jsonString: JsonStringTA): Either[Error, Player] =
     decode[Player](jsonString)
 
-  def playerUpdateGiftHistory(giftHistory1: GiftHistoryTA)(player: Player): Player =
-    player.copy(giftHistory = giftHistory1)
+  def playerUpdateGiftHistory(giftHistory: GiftHistoryTA)(player: Player): Player =
+    player.copy(giftHistory = giftHistory)
 }
