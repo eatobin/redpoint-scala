@@ -37,7 +37,7 @@ object Players {
   def playersGetMyGiver(selfKey: PlayerKeyTA)(players: PlayersTA)(giftYear: GiftYearTA): GiverTA =
     players(selfKey).giftHistory(giftYear).giver
 
-  private def playersSetGiftPair(playerKey: PlayerKeyTA)(giftYear: GiftYearTA)(giftPair: GiftPair)(players: PlayersTA): PlayersTA = {
+  private def setGiftPair(playerKey: PlayerKeyTA)(giftYear: GiftYearTA)(giftPair: GiftPair)(players: PlayersTA): PlayersTA = {
     val ngh = giftHistoryUpdateGiftHistory(giftYear)(giftPair)(players(playerKey).giftHistory)
     val nplr = playerUpdateGiftHistory(ngh)(players(playerKey))
     playersUpdatePlayer(playerKey)(nplr)(players)
@@ -45,11 +45,11 @@ object Players {
 
   def playersUpdateMyGivee(selfKey: PlayerKeyTA)(givee: GiveeTA)(giftYear: GiftYearTA)(players: PlayersTA): PlayersTA = {
     val ngp = giftPairUpdateGivee(givee)(players(selfKey).giftHistory(giftYear))
-    playersSetGiftPair(selfKey)(giftYear)(ngp)(players)
+    setGiftPair(selfKey)(giftYear)(ngp)(players)
   }
 
   def playersUpdateMyGiver(selfKey: PlayerKeyTA)(giver: GiverTA)(giftYear: GiftYearTA)(players: PlayersTA): PlayersTA = {
     val ngp = giftPairUpdateGiver(giver)(players(selfKey).giftHistory(giftYear))
-    playersSetGiftPair(selfKey)(giftYear)(ngp)(players)
+    setGiftPair(selfKey)(giftYear)(ngp)(players)
   }
 }
