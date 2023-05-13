@@ -7,19 +7,30 @@ import org.scalatest.flatspec.AnyFlatSpec
 
 class GiftHistorySpec extends AnyFlatSpec {
 
-  private val jsonString: JsonStringTA = "[{\"givee\":\"GeoHar\",\"giver\":\"JohLen\"}]"
+  private val jsonString: JsonStringTA =
+    "[{\"givee\":\"GeoHar\",\"giver\":\"JohLen\"}]"
   private val giftHistory: GiftHistoryTA = Vector(GiftPair("GeoHar", "JohLen"))
 
   "A GiftHistory" should "add a new year" in {
-    assert(giftHistoryAddYear("NewBee")(giftHistory) == Vector(GiftPair("GeoHar", "JohLen"), GiftPair("NewBee", "NewBee")))
+    assert(
+      giftHistoryAddYear("NewBee")(giftHistory) == Vector(
+        GiftPair("GeoHar", "JohLen"),
+        GiftPair("NewBee", "NewBee")
+      )
+    )
   }
 
   it should "return an updated giftHistory" in {
-    assert(giftHistoryUpdateGiftHistory(0)(GiftPair("me", "you"))(giftHistory) == Vector(GiftPair("me", "you")))
+    assert(
+      giftHistoryUpdateGiftHistory(0)(GiftPair("me", "you"))(
+        giftHistory
+      ) == Vector(GiftPair("me", "you"))
+    )
   }
 
   it should "convert from JSON" in {
-    val ghJson: Either[Error, Vector[GiftPair]] = giftHistoryJsonStringToGiftHistory(jsonString)
+    val ghJson: Either[Error, Vector[GiftPair]] =
+      giftHistoryJsonStringToGiftHistory(jsonString)
     assert(ghJson == Right(giftHistory))
   }
 }

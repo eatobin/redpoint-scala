@@ -9,12 +9,18 @@ object GiftHistory {
   type GiftHistoryTA = Vector[GiftPair]
   type GiftYearTA = Int
 
-  def giftHistoryJsonStringToGiftHistory(jsonString: JsonStringTA): Either[Error, GiftHistoryTA] =
+  def giftHistoryJsonStringToGiftHistory(
+      jsonString: JsonStringTA
+  ): Either[Error, GiftHistoryTA] =
     decode[Vector[GiftPair]](jsonString)
 
-  def giftHistoryAddYear(playerKey: PlayerKeyTA)(giftHistory: GiftHistoryTA): GiftHistoryTA =
+  def giftHistoryAddYear(playerKey: PlayerKeyTA)(
+      giftHistory: GiftHistoryTA
+  ): GiftHistoryTA =
     giftHistory :+ GiftPair(playerKey, playerKey)
 
-  def giftHistoryUpdateGiftHistory(giftYear: GiftYearTA)(giftPair: GiftPair)(giftHistory: GiftHistoryTA): GiftHistoryTA =
+  def giftHistoryUpdateGiftHistory(giftYear: GiftYearTA)(giftPair: GiftPair)(
+      giftHistory: GiftHistoryTA
+  ): GiftHistoryTA =
     giftHistory.updated(giftYear, giftPair)
 }

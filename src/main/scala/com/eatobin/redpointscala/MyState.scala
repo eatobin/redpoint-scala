@@ -15,24 +15,26 @@ import scala.collection.immutable.SortedSet
 import scala.io.StdIn.readLine
 
 case class MyState(
-                    rosterName: RosterNameTA,
-                    rosterYear: RosterYearTA,
-                    players: PlayersTA,
-                    giftYear: GiftYearTA,
-                    giveeHat: HatTA,
-                    giverHat: HatTA,
-                    maybeGivee: Option[GiveeTA],
-                    maybeGiver: Option[GiverTA],
-                    discards: DiscardsTA,
-                    quit: QuitTA
-                  )
+    rosterName: RosterNameTA,
+    rosterYear: RosterYearTA,
+    players: PlayersTA,
+    giftYear: GiftYearTA,
+    giveeHat: HatTA,
+    giverHat: HatTA,
+    maybeGivee: Option[GiveeTA],
+    maybeGiver: Option[GiverTA],
+    discards: DiscardsTA,
+    quit: QuitTA
+)
 
 object MyState {
   type RosterNameTA = String
   type RosterYearTA = Int
   type QuitTA = String
 
-  def myStateJsonStringToMyState(jsonString: JsonStringTA): Either[Error, MyState] =
+  def myStateJsonStringToMyState(
+      jsonString: JsonStringTA
+  ): Either[Error, MyState] =
     decode[MyState](jsonString)
 
   def myStateDrawPuck(hat: HatTA): Option[PlayerKeyTA] = {
@@ -82,11 +84,15 @@ object MyState {
   def myStateGiveeIsSuccess(state: MyState): MyState = {
     val currentGiver: GiverTA = state.maybeGiver.get
     val currentGivee: GiveeTA = state.maybeGivee.get
-    val updatedGiveePlayers: PlayersTA = playersUpdateMyGivee(currentGiver)(currentGivee)(state.giftYear)(state.players)
+    val updatedGiveePlayers: PlayersTA = playersUpdateMyGivee(currentGiver)(
+      currentGivee
+    )(state.giftYear)(state.players)
     val newState: MyState = MyState(
       rosterName = state.rosterName,
       rosterYear = state.rosterYear,
-      players = playersUpdateMyGiver(currentGivee)(currentGiver)(state.giftYear)(updatedGiveePlayers),
+      players = playersUpdateMyGiver(currentGivee)(currentGiver)(
+        state.giftYear
+      )(updatedGiveePlayers),
       giftYear = state.giftYear,
       giveeHat = hatRemovePuck(currentGivee, state.giveeHat),
       giverHat = state.giverHat,
@@ -100,7 +106,8 @@ object MyState {
 
   def myStateSelectNewGiver(state: MyState): MyState = {
     val giverToRemove: GiverTA = state.maybeGiver.get
-    val replenishedGiveeHat: HatTA = hatReturnDiscards(state.discards, state.giveeHat)
+    val replenishedGiveeHat: HatTA =
+      hatReturnDiscards(state.discards, state.giveeHat)
     val diminishedGiverHat: HatTA = hatRemovePuck(giverToRemove, state.giverHat)
     val newState: MyState = MyState(
       rosterName = state.rosterName,
@@ -122,8 +129,12 @@ object MyState {
     val playerErrors = {
       for {
         playerKeyMe: PlayerKeyTA <- playerKeys
-        myGiverKey: GiverTA = playersGetMyGiver(playerKeyMe)(state.players)(state.giftYear)
-        myGiveeKey: GiveeTA = playersGetMyGivee(playerKeyMe)(state.players)(state.giftYear)
+        myGiverKey: GiverTA = playersGetMyGiver(playerKeyMe)(state.players)(
+          state.giftYear
+        )
+        myGiveeKey: GiveeTA = playersGetMyGivee(playerKeyMe)(state.players)(
+          state.giftYear
+        )
         if playerKeyMe == myGiverKey || playerKeyMe == myGiveeKey
       } yield playerKeyMe
     }
@@ -132,7 +143,12 @@ object MyState {
 
   def myStatePrintResults(state: MyState): MyState = {
     println()
-    println("%s - Year %d Gifts:".format(state.rosterName, state.rosterYear + state.giftYear))
+    println(
+      "%s - Year %d Gifts:".format(
+        state.rosterName,
+        state.rosterYear + state.giftYear
+      )
+    )
     println()
 
     val playerKeys: Seq[PlayerKeyTA] = state.players.keys.toSeq.sorted
@@ -143,9 +159,14 @@ object MyState {
       val giverKey = playersGetMyGiver(playerKey)(state.players)(state.giftYear)
 
       if (playerKey == giveeKey && playerKey == giverKey) {
-        println("%s is neither **buying** for nor **receiving** from anyone - **ERROR**".format(playerName))
+        println(
+          "%s is neither **buying** for nor **receiving** from anyone - **ERROR**"
+            .format(playerName)
+        )
       } else if (playerKey == giverKey) {
-        println("%s is **receiving** from no one - **ERROR**".format(playerName))
+        println(
+          "%s is **receiving** from no one - **ERROR**".format(playerName)
+        )
       } else if (playerKey == giveeKey) {
         println("%s is **buying** for no one - **ERROR**".format(playerName))
       } else {
@@ -176,9 +197,24 @@ object MyState {
   private def myStateLoop(alteredState: MyState): MyState = {
     if (alteredState.maybeGiver.isDefined) {
       if (alteredState.maybeGivee.isDefined) {
-        if (rulesGiveeNotSelf(alteredState.maybeGiver.get, alteredState.maybeGivee.get) &&
-          rulesGiveeNotRecip(alteredState.maybeGiver.get, alteredState.maybeGivee.get, alteredState.giftYear, alteredState.players) &&
-          rulesGiveeNotRepeat(alteredState.maybeGiver.get, alteredState.maybeGivee.get, alteredState.giftYear, alteredState.players)) {
+        if (
+          rulesGiveeNotSelf(
+            alteredState.maybeGiver.get,
+            alteredState.maybeGivee.get
+          ) &&
+          rulesGiveeNotRecip(
+            alteredState.maybeGiver.get,
+            alteredState.maybeGivee.get,
+            alteredState.giftYear,
+            alteredState.players
+          ) &&
+          rulesGiveeNotRepeat(
+            alteredState.maybeGiver.get,
+            alteredState.maybeGivee.get,
+            alteredState.giftYear,
+            alteredState.players
+          )
+        ) {
           myStateLoop(myStateGiveeIsSuccess(alteredState))
         } else {
           myStateLoop(myStateGiveeIsFailure(alteredState))
