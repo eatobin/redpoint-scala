@@ -18,5 +18,6 @@ lazy val root = (project in file("."))
       "io.circe" %% "circe-generic",
       "io.circe" %% "circe-parser"
     ).map(_ % circeVersion),
-    scalacOptions += "-deprecation"
+    scalacOptions += "-deprecation",
+    assembly / assemblyJarName := "redpoint-scala-sbt-assembly-fatjar-1.0.jar"
   )
